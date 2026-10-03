@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <link rel="stylesheet" href="{{CSS_HREF}}">
+  <link rel="alternate" type="application/rss+xml" title="{{SITE_TITLE}}" href="{{FEED_HREF}}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="{{HOME_HREF}}">{{SITE_TITLE}}</a>
+    <p class="site-tagline">{{SITE_DESCRIPTION}}</p>
+  </header>
+  <main>
+{{CONTENT}}
+  </main>
+  <footer class="site-footer">
+    <p class="footer-links">
+      <a href="{{HOME_HREF}}">Start</a> ·
+      <a href="{{TAGS_HREF}}">Tags</a> ·
+      <a href="{{FEED_HREF}}">RSS</a>
+    </p>
+    <p class="copyright">© {{SITE_TITLE}}</p>
+  </footer>
+</body>
+</html>

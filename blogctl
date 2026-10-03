@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 import argparse
 import datetime
+import html
+import http.server
 import json
 import os
 import re
+import shutil
+import socketserver
 import sys
 
 try:
@@ -521,9 +525,494 @@ def cmd_check(args):
     return 0 if ok else 1
 
 
+# ---------------------------------------------------------------------------
+# Chunk 2: statische Site (build/serve)
+# ---------------------------------------------------------------------------
+
+TEMPLATES = os.path.join(CONTENT, "templates")
+SITE_JSON = os.path.join(CONTENT, "site.json")
+
+DEFAULT_SITE = {
+    "title": "Blog-System",
+    "description": "Notizen, News und Analysen.",
+    "base_url": "http://localhost:8080",
+    "author": "Blog-System",
+    "lang": "de",
+}
+
+TEMPLATE_FILES = ["base.html", "index.html", "post.html", "tag.html", "style.css"]
+
+WEEKDAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+CODE_SPAN_RE = re.compile(r"`([^`]+)`")
+IMG_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+INLINE_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+BOLD_RE = re.compile(r"\*\*(.+?)\*\*")
+ITALIC_RE = re.compile(r"\*(.+?)\*")
+
+
+def esc(text):
+    return html.escape(str(text), quote=True)
+
+
+def load_site():
+    data = dict(DEFAULT_SITE)
+    if os.path.isfile(SITE_JSON):
+        try:
+            with open(SITE_JSON, "r", encoding="utf-8") as handle:
+                loaded = json.load(handle)
+        except Exception as exc:
+            raise ValueError("content/site.json ist unlesbar: %s" % exc)
+        if isinstance(loaded, dict):
+            for key in DEFAULT_SITE:
+                if key in loaded and str(loaded[key]).strip():
+                    data[key] = str(loaded[key]).strip()
+    return data
+
+
+def load_templates():
+    tpl = {}
+    for name in TEMPLATE_FILES:
+        path = os.path.join(TEMPLATES, name)
+        if not os.path.isfile(path):
+            raise ValueError("Template fehlt: content/templates/%s" % name)
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                tpl[name] = handle.read()
+        except OSError as exc:
+            raise ValueError("Template nicht lesbar: content/templates/%s (%s)" % (name, exc))
+    return tpl
+
+
+def fill(template, mapping):
+    out = template
+    for key, value in mapping.items():
+        out = out.replace("{{" + key + "}}", value)
+    return out
+
+
+# --- Markdown ---------------------------------------------------------------
+
+def _render_inline_text(text):
+    text = esc(text)
+    text = IMG_RE.sub(
+        lambda m: '<img src="%s" alt="%s">' % (m.group(2), m.group(1)), text)
+    text = INLINE_LINK_RE.sub(
+        lambda m: '<a href="%s">%s</a>' % (m.group(2), m.group(1)), text)
+    text = BOLD_RE.sub(r"<strong>\1</strong>", text)
+    text = ITALIC_RE.sub(r"<em>\1</em>", text)
+    return text
+
+
+def render_inline(text):
+    text = str(text)
+    parts = []
+    pos = 0
+    for match in CODE_SPAN_RE.finditer(text):
+        if match.start() > pos:
+            parts.append(("text", text[pos:match.start()]))
+        parts.append(("code", match.group(1)))
+        pos = match.end()
+    if pos < len(text):
+        parts.append(("text", text[pos:]))
+    out = []
+    for kind, value in parts:
+        if kind == "code":
+            out.append("<code>%s</code>" % esc(value))
+        else:
+            out.append(_render_inline_text(value))
+    return "".join(out)
+
+
+def _is_hr(line):
+    return bool(re.match(r"^(-{3,}|\*{3,}|_{3,})$", line.strip()))
+
+
+def _list_kind(line):
+    stripped = line.strip()
+    if re.match(r"^[-*+]\s+", stripped):
+        return "ul"
+    if re.match(r"^\d+[.)]\s+", stripped):
+        return "ol"
+    return None
+
+
+def _is_block_start(line):
+    stripped = line.strip()
+    if stripped == "":
+        return True
+    if stripped.startswith("```"):
+        return True
+    if re.match(r"^#{1,6}\s+", stripped):
+        return True
+    if _is_hr(stripped):
+        return True
+    if stripped.startswith(">"):
+        return True
+    if _list_kind(stripped):
+        return True
+    return False
+
+
+def render_markdown(text):
+    if text is None:
+        return ""
+    text = str(text).replace("\r\n", "\n").replace("\r", "\n")
+    lines = text.split("\n")
+    out = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        stripped = lines[i].strip()
+        if stripped == "":
+            i += 1
+            continue
+        if stripped.startswith("```"):
+            lang = stripped[3:].strip()
+            i += 1
+            buf = []
+            while i < n and not lines[i].strip().startswith("```"):
+                buf.append(lines[i])
+                i += 1
+            if i < n:
+                i += 1
+            cls = ' class="language-%s"' % esc(slugify(lang)) if lang else ""
+            out.append("<pre><code%s>%s</code></pre>" % (
+                cls, esc("\n".join(buf))))
+            continue
+        heading = re.match(r"^(#{1,6})\s+(.*?)\s*#*\s*$", stripped)
+        if heading:
+            level = min(len(heading.group(1)), 6)
+            out.append("<h%d>%s</h%d>" % (
+                level, render_inline(heading.group(2)), level))
+            i += 1
+            continue
+        if _is_hr(stripped):
+            out.append("<hr>")
+            i += 1
+            continue
+        if stripped.startswith(">"):
+            buf = []
+            while i < n and lines[i].strip().startswith(">"):
+                buf.append(lines[i].strip()[1:].strip())
+                i += 1
+            out.append("<blockquote>%s</blockquote>" % render_inline(" ".join(buf)))
+            continue
+        kind = _list_kind(stripped)
+        if kind:
+            tag = "ul" if kind == "ul" else "ol"
+            items = []
+            while i < n:
+                cur = lines[i].strip()
+                if _list_kind(cur) != kind:
+                    break
+                content = re.sub(r"^([-*+]|\d+[.)])\s+", "", cur)
+                items.append("  <li>%s</li>" % render_inline(content))
+                i += 1
+            out.append("<%s>\n%s\n</%s>" % (tag, "\n".join(items), tag))
+            continue
+        buf = []
+        while i < n and lines[i].strip() != "" and not _is_block_start(lines[i]):
+            buf.append(lines[i].strip())
+            i += 1
+        if buf:
+            out.append("<p>%s</p>" % render_inline(" ".join(buf)))
+        else:
+            i += 1
+    if not out:
+        return ""
+    return "\n".join(out) + "\n"
+
+
+# --- Site-Helfer ------------------------------------------------------------
+
+def _as_list(value):
+    if value is None or value == "":
+        return []
+    if isinstance(value, list):
+        return [str(v) for v in value]
+    return [str(value)]
+
+
+def _tag_slug(tag):
+    return slugify(str(tag))
+
+
+def _tag_links_html(tags, prefix):
+    parts = []
+    for tag in tags:
+        parts.append('<a class="tag" href="%stag/%s.html">#%s</a>' % (
+            prefix, _tag_slug(tag), esc(tag)))
+    return " ".join(parts)
+
+
+def _post_list_html(posts, prefix):
+    if not posts:
+        return '<p class="empty">Noch keine Beiträge.</p>\n'
+    out = ['<ul class="post-list">']
+    for post in posts:
+        tags = _as_list(post.get("tags"))
+        meta_extra = ""
+        if tags:
+            meta_extra = ' · <span class="tags">%s</span>' % _tag_links_html(tags, prefix)
+        out.append('  <li class="post-item">')
+        out.append('    <h2 class="post-item-title"><a href="%s.html">%s</a></h2>' % (
+            prefix + post["id"], esc(post["title"])))
+        out.append('    <p class="meta"><time datetime="%s">%s</time>%s</p>' % (
+            esc(post["date"]), esc(post["date"]), meta_extra))
+        if post.get("summary"):
+            out.append('    <p class="summary">%s</p>' % esc(post["summary"]))
+        out.append('  </li>')
+    out.append('</ul>')
+    return "\n".join(out) + "\n"
+
+
+def render_base(tpl, site, prefix, title, description, content):
+    mapping = {
+        "LANG": esc(site["lang"]),
+        "TITLE": esc(title),
+        "DESCRIPTION": esc(description),
+        "SITE_TITLE": esc(site["title"]),
+        "SITE_DESCRIPTION": esc(site["description"]),
+        "CSS_HREF": prefix + "style.css",
+        "HOME_HREF": prefix + "index.html",
+        "FEED_HREF": prefix + "feed.xml",
+        "TAGS_HREF": prefix + "tags.html",
+        "CONTENT": content,
+    }
+    return fill(tpl["base.html"], mapping)
+
+
+# --- Feed / Sitemap ---------------------------------------------------------
+
+def rfc822_date(date_str):
+    try:
+        day = datetime.datetime.strptime(str(date_str), "%Y-%m-%d")
+    except Exception:
+        day = datetime.datetime(1970, 1, 1)
+    return "%s, %02d %s %04d 00:00:00 +0000" % (
+        WEEKDAY_NAMES[day.weekday()], day.day,
+        MONTH_NAMES[day.month - 1], day.year)
+
+
+def render_feed(site, posts):
+    base = site["base_url"].rstrip("/")
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+        '  <channel>',
+        '    <title>%s</title>' % esc(site["title"]),
+        '    <link>%s/</link>' % esc(base),
+        '    <description>%s</description>' % esc(site["description"]),
+        '    <language>%s</language>' % esc(site["lang"]),
+        '    <atom:link href="%s/feed.xml" rel="self" type="application/rss+xml"/>' % esc(base),
+    ]
+    for post in posts:
+        link = "%s/%s.html" % (base, post["id"])
+        lines.append('    <item>')
+        lines.append('      <title>%s</title>' % esc(post["title"]))
+        lines.append('      <link>%s</link>' % esc(link))
+        lines.append('      <guid isPermaLink="true">%s</guid>' % esc(link))
+        lines.append('      <pubDate>%s</pubDate>' % rfc822_date(post["date"]))
+        lines.append('      <description>%s</description>' % esc(post["summary"]))
+        lines.append('    </item>')
+    lines.append('  </channel>')
+    lines.append('</rss>')
+    return "\n".join(lines) + "\n"
+
+
+def render_sitemap(site, urls):
+    base = site["base_url"].rstrip("/")
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for loc, lastmod in urls:
+        lines.append('  <url>')
+        lines.append('    <loc>%s</loc>' % esc(base + "/" + loc))
+        if lastmod:
+            lines.append('    <lastmod>%s</lastmod>' % esc(lastmod))
+        lines.append('  </url>')
+    lines.append('</urlset>')
+    return "\n".join(lines) + "\n"
+
+
+# --- Build ------------------------------------------------------------------
+
+def _collect_posts():
+    posts = []
+    for item in list_articles("published"):
+        fm, body = read_article(item["path"])
+        tags = fm.get("tags") or []
+        posts.append({
+            "id": item["id"],
+            "title": fm.get("title") or item["id"],
+            "date": str(fm.get("date") or ""),
+            "summary": str(fm.get("summary") or ""),
+            "tags": tags,
+            "body": body,
+        })
+    posts.sort(key=lambda p: (p["date"], p["id"]), reverse=True)
+    return posts
+
+
+def do_build(out_arg):
+    site = load_site()
+    tpl = load_templates()
+    out_dir = os.path.abspath(out_arg or "dist")
+    posts = _collect_posts()
+
+    tag_map = {}
+    for post in posts:
+        for tag in _as_list(post["tags"]):
+            key = _tag_slug(tag)
+            if key not in tag_map:
+                tag_map[key] = tag
+    tag_items = sorted(tag_map.items(), key=lambda kv: (kv[1].lower(), kv[0]))
+
+    if os.path.isdir(out_dir):
+        shutil.rmtree(out_dir)
+    os.makedirs(out_dir)
+    os.makedirs(os.path.join(out_dir, "tag"))
+
+    def write(rel, content):
+        path = os.path.join(out_dir, rel)
+        parent = os.path.dirname(path)
+        if parent and not os.path.isdir(parent):
+            os.makedirs(parent)
+        with open(path, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(content)
+
+    write("style.css", tpl["style.css"])
+
+    latest = posts[0]["date"] if posts else ""
+    pages = 0
+
+    index_body = fill(tpl["index.html"], {"POST_LIST": _post_list_html(posts, "")})
+    write("index.html", render_base(
+        tpl, site, "", site["title"], site["description"], index_body))
+    pages += 1
+
+    for post in posts:
+        tags = _as_list(post["tags"])
+        tag_html = ""
+        if tags:
+            tag_html = ' · <span class="tags">%s</span>' % _tag_links_html(tags, "")
+        content = fill(tpl["post.html"], {
+            "POST_TITLE": esc(post["title"]),
+            "POST_DATE": esc(post["date"]),
+            "POST_TAGS": tag_html,
+            "POST_BODY": render_markdown(post["body"]),
+        })
+        title = "%s – %s" % (post["title"], site["title"])
+        write(post["id"] + ".html", render_base(
+            tpl, site, "", title, post["summary"] or site["description"], content))
+        pages += 1
+
+    overview = []
+    if tag_items:
+        overview.append('<ul class="tag-list">')
+        for key, name in tag_items:
+            count = sum(
+                1 for p in posts
+                if key in [_tag_slug(t) for t in _as_list(p["tags"])])
+            overview.append(
+                '  <li><a class="tag" href="tag/%s.html">#%s</a> '
+                '<span class="count">(%d)</span></li>' % (key, esc(name), count))
+        overview.append('</ul>')
+    else:
+        overview.append('<p class="empty">Noch keine Tags.</p>')
+    write("tags.html", render_base(
+        tpl, site, "", "Tags – " + site["title"], "Alle Tags",
+        fill(tpl["tag.html"], {
+            "TAG_NAME": "Tags",
+            "POST_LIST": "\n".join(overview) + "\n",
+        })))
+    pages += 1
+
+    for key, name in tag_items:
+        tagged = [
+            p for p in posts
+            if key in [_tag_slug(t) for t in _as_list(p["tags"])]]
+        content = fill(tpl["tag.html"], {
+            "TAG_NAME": "#" + esc(name),
+            "POST_LIST": _post_list_html(tagged, "../"),
+        })
+        write("tag/%s.html" % key, render_base(
+            tpl, site, "../", "%s – %s" % (name, site["title"]),
+            "Beiträge mit Tag %s" % name, content))
+        pages += 1
+
+    write("feed.xml", render_feed(site, posts))
+
+    urls = [("index.html", latest)]
+    for post in posts:
+        urls.append((post["id"] + ".html", post["date"]))
+    urls.append(("tags.html", latest))
+    for key, _name in tag_items:
+        urls.append(("tag/%s.html" % key, latest))
+    write("sitemap.xml", render_sitemap(site, urls))
+
+    return out_dir, pages
+
+
+def cmd_build(args):
+    out_arg = getattr(args, "out", None) or "dist"
+    _out_dir, pages = do_build(out_arg)
+    if getattr(args, "json", False):
+        emit_json({"ok": True, "out": out_arg, "pages": pages})
+    else:
+        sys.stdout.write("Site gebaut: %s (%d Seiten)\n" % (out_arg, pages))
+    return 0
+
+
+def _make_handler(directory):
+    class _Handler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=directory, **kwargs)
+
+        def log_message(self, fmt, *args):
+            sys.stdout.write("[serve] %s %s\n" % (self.address_string(), fmt % args))
+            sys.stdout.flush()
+
+    return _Handler
+
+
+class _Server(http.server.ThreadingHTTPServer):
+    allow_reuse_address = True
+
+    def server_bind(self):
+        # HTTPServer.server_bind() calls socket.getfqdn(), which can hang for a
+        # long time on macOS due to an mDNS reverse lookup. Bind directly.
+        socketserver.TCPServer.server_bind(self)
+        host, port = self.server_address[:2]
+        self.server_name = str(host)
+        self.server_port = int(port)
+
+
+def cmd_serve(args):
+    out_arg = getattr(args, "out", None) or "dist"
+    out_dir, pages = do_build(out_arg)
+    port = getattr(args, "port", None) or 8080
+    httpd = _Server(("127.0.0.1", port), _make_handler(out_dir))
+    sys.stdout.write("Vorschau unter http://127.0.0.1:%d/ (%s, %d Seiten)\n" % (
+        port, out_arg, pages))
+    sys.stdout.flush()
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        httpd.server_close()
+    sys.stdout.write("\nServer gestoppt.\n")
+    return 0
+
+
 def cmd_placeholder(args):
     sys.stderr.write(
-        "Fehler: '%s' ist noch nicht implementiert (Chunk 2/3)\n" % args.cmd)
+        "Fehler: '%s' ist noch nicht implementiert (Chunk 3)\n" % args.cmd)
     return 1
 
 
@@ -585,10 +1074,18 @@ def build_parser():
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_check)
 
-    for name in ("build", "serve", "scrape", "deploy"):
+    p = sub.add_parser("build")
+    p.add_argument("--out", default="dist")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_build)
+
+    p = sub.add_parser("serve")
+    p.add_argument("--out", default="dist")
+    p.add_argument("--port", type=int, default=8080)
+    p.set_defaults(func=cmd_serve)
+
+    for name in ("scrape", "deploy"):
         p = sub.add_parser(name)
-        p.add_argument("--out")
-        p.add_argument("--port", type=int)
         p.add_argument("--source")
         p.add_argument("--json", action="store_true")
         p.set_defaults(func=cmd_placeholder)
