@@ -29,6 +29,7 @@ ROOT = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, "content")
 DRAFTS = os.path.join(CONTENT, "drafts")
 POSTS = os.path.join(CONTENT, "posts")
+PAGES = os.path.join(CONTENT, "pages")
 ASSETS = os.path.join(ROOT, "assets")
 
 FIELD_ORDER = [
@@ -262,6 +263,39 @@ def list_articles(which):
                 "path": path,
             })
     items.sort(key=lambda x: (str(x["date"] or ""), x["id"]), reverse=True)
+    return items
+
+
+def _page_sort_key(page):
+    order = page.get("order")
+    if isinstance(order, bool) or not isinstance(order, (int, float)):
+        order = None
+    if order is None:
+        return (1, 0.0, page["title"].lower(), page["slug"])
+    return (0, float(order), page["title"].lower(), page["slug"])
+
+
+def list_pages():
+    items = []
+    if not os.path.isdir(PAGES):
+        return items
+    for name in sorted(os.listdir(PAGES)):
+        if not name.endswith(".md"):
+            continue
+        path = os.path.join(PAGES, name)
+        try:
+            fm, body = read_article(path)
+        except Exception:
+            fm, body = {}, ""
+        slug = str(fm.get("slug") or name[:-3])
+        items.append({
+            "slug": slug,
+            "title": str(fm.get("title") or ""),
+            "order": fm.get("order"),
+            "body": body,
+            "path": path,
+        })
+    items.sort(key=_page_sort_key)
     return items
 
 
@@ -522,6 +556,19 @@ def cmd_check(args):
             if find_article(stem):
                 continue
             errors.append("%s: interner Link zeigt ins Leere: %s" % (article_id, target))
+    seen_pages = {}
+    for page in list_pages():
+        slug = page["slug"]
+        if not page["title"]:
+            errors.append("%s: Pflichtfeld 'title' fehlt" % slug)
+        if not (page["body"] or "").strip():
+            errors.append("%s: leerer Body" % slug)
+        if slug in seen_ids:
+            errors.append("%s: slug kollidiert mit Artikel" % slug)
+        if slug in seen_pages:
+            errors.append("%s: doppelte Seiten-slug (auch in %s)" % (slug, seen_pages[slug]))
+        else:
+            seen_pages[slug] = page["path"]
     ok = not errors
     if args.json:
         emit_json({"ok": ok, "errors": errors, "warnings": warnings})
@@ -550,7 +597,7 @@ DEFAULT_SITE = {
     "lang": "de",
 }
 
-TEMPLATE_FILES = ["base.html", "index.html", "post.html", "tag.html", "style.css"]
+TEMPLATE_FILES = ["base.html", "index.html", "post.html", "tag.html", "page.html", "style.css"]
 
 WEEKDAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -790,6 +837,8 @@ def render_base(tpl, site, prefix, title, description, content):
         "HOME_HREF": prefix + "index.html",
         "FEED_HREF": prefix + "feed.xml",
         "TAGS_HREF": prefix + "tags.html",
+        "IMPRESSUM_HREF": prefix + "impressum.html",
+        "DATENSCHUTZ_HREF": prefix + "datenschutz.html",
         "CONTENT": content,
     }
     return fill(tpl["base.html"], mapping)
@@ -905,6 +954,17 @@ def do_build(out_arg):
         tpl, site, "", site["title"], site["description"], index_body))
     pages += 1
 
+    page_list = list_pages()
+    for page in page_list:
+        content = fill(tpl["page.html"], {
+            "PAGE_TITLE": esc(page["title"]),
+            "PAGE_BODY": render_markdown(page["body"]),
+        })
+        title = "%s – %s" % (page["title"], site["title"])
+        write(page["slug"] + ".html", render_base(
+            tpl, site, "", title, site["description"], content))
+        pages += 1
+
     for post in posts:
         tags = _as_list(post["tags"])
         tag_html = ""
@@ -958,6 +1018,8 @@ def do_build(out_arg):
     write("feed.xml", render_feed(site, posts))
 
     urls = [("index.html", latest)]
+    for page in page_list:
+        urls.append((page["slug"] + ".html", ""))
     for post in posts:
         urls.append((post["id"] + ".html", post["date"]))
     urls.append(("tags.html", latest))
