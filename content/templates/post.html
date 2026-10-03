@@ -1,9 +1,13 @@
 <article class="post">
+  <a class="back-link" href="{{HOME_HREF}}">← Alle Artikel</a>
   <header class="post-header">
     <h1>{{POST_TITLE}}</h1>
-    <p class="meta"><time datetime="{{POST_DATE}}">{{POST_DATE}}</time>{{POST_TAGS}}</p>
+    <p class="meta"><time datetime="{{POST_DATE}}">{{POST_DATE}}</time>{{POST_TAGS}}{{POST_SOURCE}}</p>
   </header>
   <div class="post-body">
 {{POST_BODY}}
   </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="{{HOME_HREF}}">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
 </article>

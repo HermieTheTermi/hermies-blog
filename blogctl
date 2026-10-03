@@ -911,6 +911,8 @@ def _collect_posts():
             "date": str(fm.get("date") or ""),
             "summary": str(fm.get("summary") or ""),
             "tags": tags,
+            "source_url": str(fm.get("source_url") or ""),
+            "source_name": str(fm.get("source_name") or ""),
             "body": body,
         })
     posts.sort(key=lambda p: (p["date"], p["id"]), reverse=True)
@@ -970,10 +972,17 @@ def do_build(out_arg):
         tag_html = ""
         if tags:
             tag_html = ' · <span class="tags">%s</span>' % _tag_links_html(tags, "")
+        source_html = ""
+        if post["source_url"]:
+            source_label = post["source_name"] or "Quelle"
+            source_html = ' · <a class="source" href="%s">%s</a>' % (
+                esc(post["source_url"]), esc(source_label))
         content = fill(tpl["post.html"], {
+            "HOME_HREF": "index.html",
             "POST_TITLE": esc(post["title"]),
             "POST_DATE": esc(post["date"]),
             "POST_TAGS": tag_html,
+            "POST_SOURCE": source_html,
             "POST_BODY": render_markdown(post["body"]),
         })
         title = "%s – %s" % (post["title"], site["title"])
