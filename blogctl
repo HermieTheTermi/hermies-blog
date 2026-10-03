@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import datetime
+import email.utils
 import html
 import http.server
 import json
@@ -8,7 +9,14 @@ import os
 import re
 import shutil
 import socketserver
+import subprocess
 import sys
+import tempfile
+import time
+import urllib.parse
+import urllib.request
+import xml.etree.ElementTree
+from html.parser import HTMLParser
 
 try:
     import yaml
@@ -1010,10 +1018,455 @@ def cmd_serve(args):
     return 0
 
 
-def cmd_placeholder(args):
-    sys.stderr.write(
-        "Fehler: '%s' ist noch nicht implementiert (Chunk 3)\n" % args.cmd)
-    return 1
+# ---------------------------------------------------------------------------
+# Chunk 3: Quellen scrapen (scrape) und Blog live bringen (deploy)
+# ---------------------------------------------------------------------------
+
+SOURCE_JSON = os.path.join(CONTENT, "sources.json")
+
+HTTP_TIMEOUT = 20
+DEFAULT_USER_AGENT = "blog-system/0.1 (+hermes agent)"
+DEFAULT_MAX_ITEMS = 10
+MIN_HOST_INTERVAL = 1.0
+EXCERPT_LIMIT = 500
+
+_last_fetch = {}
+
+
+def load_sources():
+    if not os.path.isfile(SOURCE_JSON):
+        return {"settings": {}, "sources": []}
+    try:
+        with open(SOURCE_JSON, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+    except Exception as exc:
+        raise ValueError("content/sources.json ist unlesbar: %s" % exc)
+    if not isinstance(data, dict):
+        return {"settings": {}, "sources": []}
+    settings = data.get("settings")
+    sources = data.get("sources")
+    if not isinstance(settings, dict):
+        settings = {}
+    if not isinstance(sources, list):
+        sources = []
+    return {"settings": settings, "sources": sources}
+
+
+def _localname(tag):
+    if isinstance(tag, str) and "}" in tag:
+        return tag.rsplit("}", 1)[1]
+    return tag
+
+
+def _child_text(elem, names):
+    for child in elem:
+        if _localname(child.tag) in names:
+            if child.text and child.text.strip():
+                return child.text.strip()
+    return ""
+
+
+def parse_feed(data):
+    root = xml.etree.ElementTree.fromstring(data)
+    entries = []
+    for elem in root.iter():
+        name = _localname(elem.tag)
+        if name == "item":
+            entries.append(_parse_rss_item(elem))
+        elif name == "entry":
+            entries.append(_parse_atom_entry(elem))
+    return entries
+
+
+def _parse_rss_item(item):
+    title = _child_text(item, ("title",))
+    link = _child_text(item, ("link",))
+    if not link:
+        link = _child_text(item, ("guid",))
+    summary = _child_text(item, ("description", "summary", "encoded", "content"))
+    date = _child_text(item, ("pubDate", "published", "updated", "date"))
+    return {"title": title, "link": link, "summary": summary, "date": date}
+
+
+def _parse_atom_entry(entry):
+    title = _child_text(entry, ("title",))
+    link = ""
+    fallback = ""
+    for child in entry:
+        if _localname(child.tag) == "link":
+            href = child.get("href") or ""
+            rel = child.get("rel") or "alternate"
+            if not fallback:
+                fallback = href
+            if rel == "alternate":
+                link = href
+                break
+    if not link:
+        link = fallback
+    summary = _child_text(entry, ("summary", "content"))
+    date = _child_text(entry, ("published", "updated", "pubDate"))
+    return {"title": title, "link": link, "summary": summary, "date": date}
+
+
+def parse_entry_date(value):
+    value = str(value or "").strip()
+    if not value:
+        return ""
+    try:
+        parsed = email.utils.parsedate_to_datetime(value)
+        if parsed is not None:
+            return parsed.date().isoformat()
+    except Exception:
+        pass
+    match = re.match(r"(\d{4})-(\d{2})-(\d{2})", value)
+    if match:
+        return "%s-%s-%s" % (match.group(1), match.group(2), match.group(3))
+    return ""
+
+
+def strip_html(value):
+    text = re.sub(r"<[^>]+>", " ", str(value or ""))
+    text = html.unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def excerpt_from_summary(value):
+    text = strip_html(value)
+    if len(text) > EXCERPT_LIMIT:
+        text = text[: EXCERPT_LIMIT - 3].rstrip() + "..."
+    return text
+
+
+class _LinkParser(HTMLParser):
+    def __init__(self):
+        HTMLParser.__init__(self)
+        self.links = []
+        self._href = None
+        self._text = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() == "a":
+            self._href = dict(attrs).get("href")
+            self._text = []
+
+    def handle_data(self, data):
+        if self._href is not None:
+            self._text.append(data)
+
+    def handle_endtag(self, tag):
+        if tag.lower() == "a" and self._href is not None:
+            text = " ".join("".join(self._text).split())
+            if text and self._href:
+                self.links.append((text, self._href))
+            self._href = None
+
+
+def parse_html_links(data, charset, base_url):
+    if isinstance(data, bytes):
+        text = data.decode(charset or "utf-8", errors="replace")
+    else:
+        text = data
+    parser = _LinkParser()
+    parser.feed(text)
+    entries = []
+    seen = set()
+    for text, href in parser.links:
+        link = urllib.parse.urljoin(base_url, href.strip())
+        parsed = urllib.parse.urlparse(link)
+        if parsed.scheme not in ("http", "https"):
+            continue
+        if link in seen:
+            continue
+        seen.add(link)
+        entries.append({"title": text, "link": link, "summary": "", "date": ""})
+    return entries
+
+
+def http_get(url, user_agent):
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise ValueError("Nur http/https erlaubt: %s" % url)
+    host = parsed.netloc
+    now = time.monotonic()
+    last = _last_fetch.get(host)
+    if last is not None and now - last < MIN_HOST_INTERVAL:
+        time.sleep(MIN_HOST_INTERVAL - (now - last))
+    request = urllib.request.Request(url, headers={"User-Agent": user_agent})
+    with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT) as response:
+        data = response.read()
+        charset = response.headers.get_content_charset() or "utf-8"
+    _last_fetch[host] = time.monotonic()
+    return data, charset
+
+
+def existing_source_urls():
+    urls = set()
+    for item in list_articles("all"):
+        try:
+            fm, _ = read_article(item["path"])
+        except Exception:
+            continue
+        source = fm.get("source_url")
+        if source:
+            urls.add(str(source).strip())
+    return urls
+
+
+def _unique_slug_with(base, reserved):
+    taken = set(reserved)
+    for directory in (DRAFTS, POSTS):
+        if os.path.isdir(directory):
+            for name in os.listdir(directory):
+                if name.endswith(".md"):
+                    taken.add(name[:-3])
+    if base not in taken:
+        return base
+    counter = 2
+    while base + "-" + str(counter) in taken:
+        counter += 1
+    return base + "-" + str(counter)
+
+
+def build_scraped_body(excerpt, link):
+    if excerpt:
+        return "> %s\n\nQuelle: %s\n" % (excerpt, link)
+    return "> Quelle: %s\n" % link
+
+
+def write_scraped_draft(entry, source, date, tags, reserved):
+    title = strip_html(entry.get("title")) or "Ohne Titel"
+    link = str(entry.get("link") or "").strip()
+    excerpt = excerpt_from_summary(entry.get("summary"))
+    slug = _unique_slug_with(slugify(title), reserved)
+    if isinstance(tags, (list, tuple)):
+        tag_list = [str(tag) for tag in tags if str(tag).strip()]
+    elif tags:
+        tag_list = [str(tags)]
+    else:
+        tag_list = []
+    fm = {
+        "title": title,
+        "slug": slug,
+        "date": date,
+        "status": "draft",
+        "tags": tag_list,
+        "summary": excerpt,
+        "cover": "",
+        "source_url": link,
+        "source_name": str(source.get("name") or ""),
+        "lang": "de",
+    }
+    body = build_scraped_body(excerpt, link)
+    path = os.path.join(DRAFTS, slug + ".md")
+    write_article(path, fm, body)
+    return slug
+
+
+def _older_than(date_str, days):
+    try:
+        entry_date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
+    except Exception:
+        return False
+    try:
+        cutoff = datetime.datetime.strptime(today_iso(), "%Y-%m-%d").date() - datetime.timedelta(days=days)
+    except Exception:
+        cutoff = datetime.date.today() - datetime.timedelta(days=days)
+    return entry_date < cutoff
+
+
+def cmd_scrape(args):
+    ensure_dirs()
+    config = load_sources()
+    settings = config["settings"]
+    sources = config["sources"]
+    user_agent = str(settings.get("user_agent") or DEFAULT_USER_AGENT)
+    try:
+        max_items = int(settings.get("max_items_per_run", DEFAULT_MAX_ITEMS))
+    except Exception:
+        max_items = DEFAULT_MAX_ITEMS
+    if args.limit is not None:
+        max_items = args.limit
+
+    selected = []
+    if args.source:
+        for source in sources:
+            if str(source.get("name")) == args.source:
+                selected.append(source)
+        if not selected:
+            message = "Quelle nicht gefunden: %s" % args.source
+            sys.stderr.write("Fehler: %s\n" % message)
+            if args.json:
+                emit_json({"ok": False, "created": [], "skipped": 0,
+                           "errors": [{"source": args.source, "message": message}]})
+            return 1
+    else:
+        for source in sources:
+            if source.get("enabled"):
+                selected.append(source)
+
+    existing = existing_source_urls()
+    created = []
+    skipped = 0
+    errors = []
+    attempted = 0
+    successes = 0
+    remaining = max_items
+    reserved = set()
+
+    for source in selected:
+        if remaining <= 0:
+            break
+        name = str(source.get("name") or source.get("url") or "(unbenannt)")
+        source_type = str(source.get("type") or "rss").lower()
+        url = str(source.get("url") or "")
+        attempted += 1
+        try:
+            if not url:
+                raise ValueError("url fehlt")
+            data, charset = http_get(url, user_agent)
+            if source_type == "rss":
+                entries = parse_feed(data)
+            elif source_type == "html":
+                entries = parse_html_links(data, charset, url)
+            else:
+                raise ValueError("unbekannter type: %s" % source_type)
+            successes += 1
+        except Exception as exc:
+            errors.append({"source": name, "message": str(exc)})
+            sys.stderr.write("Fehler (Quelle %s): %s\n" % (name, exc))
+            continue
+
+        entries = list(entries)[:remaining]
+        remaining -= len(entries)
+        tags = source.get("tags") or []
+        for entry in entries:
+            link = str(entry.get("link") or "").strip()
+            if not link:
+                continue
+            if link in existing or link in reserved:
+                skipped += 1
+                continue
+            entry_date = parse_entry_date(entry.get("date"))
+            if args.since_days is not None and entry_date and _older_than(entry_date, args.since_days):
+                skipped += 1
+                continue
+            date = entry_date or today_iso()
+            if args.dry_run:
+                title = strip_html(entry.get("title")) or "Ohne Titel"
+                draft_id = _unique_slug_with(slugify(title), reserved)
+                reserved.add(draft_id)
+                created.append(draft_id)
+                if not args.json:
+                    sys.stdout.write("[dry-run] wuerde anlegen: %s (%s)\n" % (draft_id, link))
+            else:
+                draft_id = write_scraped_draft(entry, source, date, tags, reserved)
+                reserved.add(draft_id)
+                created.append(draft_id)
+                if source.get("auto_publish"):
+                    _move([draft_id], POSTS, "published")
+                if not args.json:
+                    sys.stdout.write("Entwurf angelegt: %s\n" % draft_id)
+            existing.add(link)
+
+    ok = not (attempted > 0 and successes == 0)
+    if args.json:
+        emit_json({"ok": ok, "created": created, "skipped": skipped, "errors": errors})
+    else:
+        if not created and not errors:
+            sys.stdout.write("Keine neuen Eintraege.\n")
+        sys.stdout.write("scrape: %d neu, %d uebersprungen, %d Fehler\n" % (
+            len(created), skipped, len(errors)))
+    return 0 if ok else 1
+
+
+def _run_git(args, cwd=None, check=True):
+    command = ["git"] + [str(a) for a in args]
+    result = subprocess.run(command, cwd=cwd or ROOT,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            universal_newlines=True)
+    if check and result.returncode != 0:
+        message = (result.stderr or result.stdout or "").strip()
+        if not message:
+            message = "git %s fehlgeschlagen" % " ".join(str(a) for a in args)
+        raise RuntimeError(message)
+    return result
+
+
+def _check_result():
+    import io
+    buffer = io.StringIO()
+    old_stdout = sys.stdout
+    sys.stdout = buffer
+    try:
+        code = cmd_check(argparse.Namespace(json=False))
+    finally:
+        sys.stdout = old_stdout
+    return code, buffer.getvalue()
+
+
+def cmd_deploy(args):
+    code, check_output = _check_result()
+    if code != 0:
+        if check_output:
+            sys.stderr.write(check_output)
+            if not check_output.endswith("\n"):
+                sys.stderr.write("\n")
+        sys.stderr.write("Fehler: check fehlgeschlagen, deploy abgebrochen\n")
+        if args.json:
+            emit_json({"ok": False, "error": "check fehlgeschlagen"})
+        return 1
+
+    remotes = _run_git(["remote"]).stdout.split()
+    if "origin" not in remotes:
+        message = "Remote 'origin' existiert nicht"
+        sys.stderr.write("Fehler: %s\n" % message)
+        if args.json:
+            emit_json({"ok": False, "error": message})
+        return 1
+    origin_url = _run_git(["remote", "get-url", "origin"]).stdout.strip()
+
+    do_build("dist")
+
+    _run_git(["add", "-A"])
+    status = _run_git(["status", "--porcelain"]).stdout.strip()
+    commit = ""
+    if status:
+        _run_git(["commit", "-m", "Deploy: Blog veroeffentlichen"])
+        commit = _run_git(["rev-parse", "--short", "HEAD"]).stdout.strip()
+
+    branch = _run_git(["rev-parse", "--abbrev-ref", "HEAD"]).stdout.strip() or "main"
+    _run_git(["push", "origin", branch])
+
+    dist_dir = os.path.join(ROOT, "dist")
+    temp_dir = tempfile.mkdtemp(prefix="blogctl-gh-pages-")
+    try:
+        for name in os.listdir(dist_dir):
+            source = os.path.join(dist_dir, name)
+            target = os.path.join(temp_dir, name)
+            if os.path.isdir(source):
+                shutil.copytree(source, target)
+            else:
+                shutil.copy2(source, target)
+        with open(os.path.join(temp_dir, ".nojekyll"), "w", encoding="utf-8") as handle:
+            handle.write("")
+        _run_git(["init"], cwd=temp_dir)
+        _run_git(["add", "-A"], cwd=temp_dir)
+        _run_git(["-c", "user.name=blogctl", "-c", "user.email=blogctl@localhost",
+                  "commit", "-m", "Deploy: gh-pages build"], cwd=temp_dir)
+        _run_git(["remote", "add", "origin", origin_url], cwd=temp_dir)
+        _run_git(["push", "--force", "origin", "HEAD:gh-pages"], cwd=temp_dir)
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+    url = load_site()["base_url"]
+    if args.json:
+        emit_json({"ok": True, "commit": commit, "pushed_to": "gh-pages", "url": url})
+    else:
+        sys.stdout.write("Deployed: %s -> %s\n" % (branch, url))
+        if commit:
+            sys.stdout.write("Commit: %s\n" % commit)
+    return 0
 
 
 def build_parser():
@@ -1084,11 +1537,17 @@ def build_parser():
     p.add_argument("--port", type=int, default=8080)
     p.set_defaults(func=cmd_serve)
 
-    for name in ("scrape", "deploy"):
-        p = sub.add_parser(name)
-        p.add_argument("--source")
-        p.add_argument("--json", action="store_true")
-        p.set_defaults(func=cmd_placeholder)
+    p = sub.add_parser("scrape")
+    p.add_argument("--source")
+    p.add_argument("--limit", type=int)
+    p.add_argument("--since-days", dest="since_days", type=int)
+    p.add_argument("--dry-run", dest="dry_run", action="store_true")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_scrape)
+
+    p = sub.add_parser("deploy")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_deploy)
 
     return parser
 
