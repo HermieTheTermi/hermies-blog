@@ -41,7 +41,7 @@ dist/                   # Build-Ausgabe (nicht committen)
 | `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links | `{ok,errors:[],warnings:[]}` |
 | `build [--out dist]` | statische Site bauen | `{ok,out,pages}` |
 | `serve [--port 8080]` | Vorschau lokal | – |
-| `scrape [--source NAME]` | neue Items aus `content/sources.json` → Entwürfe | `{ok,created:[],skipped:N}` |
+| `scrape [--source NAME] [--per-source N] [--limit N] [--since-days D] [--dry-run]` | neue Items aus `content/sources.json` → Entwürfe (N je Quelle, Gesamtdeckel über `--limit`) | `{ok,created:[],skipped:N,errors:[]}` |
 | `deploy` | `build` + git commit + push (nur wenn Remote existiert) | `{ok,commit,pushed}` |
 
 ## Frontmatter
@@ -73,7 +73,7 @@ lang: de
 }
 ```
 
-`type`: `rss` (Atom/Feed) oder `html` (Seite mit Links). `auto_publish: true` nur für Quellen, denen der Nutzer ausdrücklich vertraut.
+`type`: `rss` (verarbeitet RSS 2.0 **und** Atom — auch bei Atom-Feeds `rss` eintragen, `atom` ist kein gültiger Wert) oder `html` (Seite ohne Feed, Links werden extrahiert). `auto_publish: true` nur für Quellen, denen der Nutzer ausdrücklich vertraut.
 
 ## Ablauf für den Agenten (Hermes)
 

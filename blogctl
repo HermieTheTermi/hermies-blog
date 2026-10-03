@@ -1162,24 +1162,62 @@ class _LinkParser(HTMLParser):
             self._href = None
 
 
+HTML_LINK_TEXT_BLOCKLIST = {
+    "contact", "products", "about", "about us", "careers", "jobs",
+    "we are hiring", "pricing", "plans", "blog", "news", "home",
+    "login", "log in", "sign up", "signup", "register", "privacy",
+    "privacy policy", "terms", "terms of service", "imprint", "impressum",
+    "cookies", "cookie settings", "newsletter", "subscribe", "demo",
+    "book a demo", "docs", "documentation", "company", "research",
+    "solutions", "customers", "partners", "security", "trust", "events",
+    "github", "x", "twitter", "linkedin", "youtube", "discord",
+    "read more", "learn more", "see all", "all posts",
+}
+HTML_LINK_MIN_TEXT = 15
+
+
+def _is_article_link(source_path, link_path):
+    source = (source_path or "/").rstrip("/")
+    link_path = link_path or "/"
+    if source == "":
+        return bool([seg for seg in link_path.split("/") if seg])
+    if not link_path.startswith(source + "/"):
+        return False
+    return bool(link_path[len(source):].strip("/"))
+
+
 def parse_html_links(data, charset, base_url):
     if isinstance(data, bytes):
-        text = data.decode(charset or "utf-8", errors="replace")
+        document = data.decode(charset or "utf-8", errors="replace")
     else:
-        text = data
+        document = data
     parser = _LinkParser()
-    parser.feed(text)
+    parser.feed(document)
+    source_path = urllib.parse.urlparse(base_url).path or "/"
     entries = []
     seen = set()
-    for text, href in parser.links:
-        link = urllib.parse.urljoin(base_url, href.strip())
+    for raw_text, href in parser.links:
+        href = str(href or "").strip()
+        if not href or href.startswith("#"):
+            continue
+        if href.lower().startswith(("javascript:", "mailto:", "tel:")):
+            continue
+        link = urllib.parse.urljoin(base_url, href)
         parsed = urllib.parse.urlparse(link)
         if parsed.scheme not in ("http", "https"):
             continue
+        if not _is_article_link(source_path, parsed.path or "/"):
+            continue
+        label = " ".join(str(raw_text).split())
+        if len(label) < HTML_LINK_MIN_TEXT:
+            continue
+        if label.casefold() in HTML_LINK_TEXT_BLOCKLIST:
+            continue
+        link = urllib.parse.urlunparse(parsed._replace(fragment=""))
         if link in seen:
             continue
         seen.add(link)
-        entries.append({"title": text, "link": link, "summary": "", "date": ""})
+        entries.append({"title": label, "link": link, "summary": "", "date": ""})
     return entries
 
 
@@ -1287,6 +1325,9 @@ def cmd_scrape(args):
         max_items = DEFAULT_MAX_ITEMS
     if args.limit is not None:
         max_items = args.limit
+    per_source = args.per_source if args.per_source is not None else 2
+    if per_source < 0:
+        per_source = 0
 
     selected = []
     if args.source:
@@ -1337,10 +1378,11 @@ def cmd_scrape(args):
             sys.stderr.write("Fehler (Quelle %s): %s\n" % (name, exc))
             continue
 
-        entries = list(entries)[:remaining]
-        remaining -= len(entries)
+        entries = list(entries)[:min(per_source, remaining)]
         tags = source.get("tags") or []
         for entry in entries:
+            if remaining <= 0:
+                break
             link = str(entry.get("link") or "").strip()
             if not link:
                 continue
@@ -1368,6 +1410,7 @@ def cmd_scrape(args):
                 if not args.json:
                     sys.stdout.write("Entwurf angelegt: %s\n" % draft_id)
             existing.add(link)
+            remaining -= 1
 
     ok = not (attempted > 0 and successes == 0)
     if args.json:
@@ -1539,6 +1582,7 @@ def build_parser():
 
     p = sub.add_parser("scrape")
     p.add_argument("--source")
+    p.add_argument("--per-source", dest="per_source", type=int, default=2)
     p.add_argument("--limit", type=int)
     p.add_argument("--since-days", dest="since_days", type=int)
     p.add_argument("--dry-run", dest="dry_run", action="store_true")

@@ -2,4 +2,5 @@ dist/
 .DS_Store
 __pycache__/
 *.pyc
-.opencode_task.md
+.opencode_task*.md
+.research/

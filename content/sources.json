@@ -1,8 +1,37 @@
 {
   "settings": {
-    "max_items_per_run": 10,
+    "max_items_per_run": 15,
     "auto_publish": false,
-    "user_agent": "blog-system/0.1 (+hermes agent)"
+    "user_agent": "Mozilla/5.0 (compatible; HermiesBlog/0.1; +https://hermiethetermi.github.io/hermies-blog/)"
   },
-  "sources": []
+  "sources": [
+    { "name": "OpenAI News", "type": "rss", "url": "https://openai.com/news/rss.xml", "tags": ["modelle", "labs"], "auto_publish": false, "enabled": true },
+    { "name": "Google DeepMind Blog", "type": "rss", "url": "https://deepmind.google/blog/rss.xml", "tags": ["modelle", "forschung"], "auto_publish": false, "enabled": true },
+    { "name": "Google KI-Blog", "type": "rss", "url": "https://blog.google/technology/ai/rss/", "tags": ["modelle", "labs"], "auto_publish": false, "enabled": true },
+    { "name": "Hugging Face Blog", "type": "rss", "url": "https://huggingface.co/blog/feed.xml", "tags": ["modelle", "open-weights"], "auto_publish": false, "enabled": true },
+    { "name": "Anthropic News", "type": "rss", "url": "https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml", "tags": ["modelle", "agenten"], "auto_publish": false, "enabled": true },
+    { "name": "Mistral News", "type": "html", "url": "https://mistral.ai/news/", "tags": ["modelle", "open-weights"], "auto_publish": false, "enabled": true },
+    { "name": "Meta AI Blog", "type": "html", "url": "https://ai.meta.com/blog/", "tags": ["modelle", "open-weights"], "auto_publish": false, "enabled": true },
+    { "name": "vLLM Blog", "type": "rss", "url": "https://vllm-project.github.io/feed.xml", "tags": ["inference", "performance"], "auto_publish": false, "enabled": true },
+    { "name": "Ollama Blog", "type": "rss", "url": "https://ollama.com/blog/rss.xml", "tags": ["local-llm", "runtime"], "auto_publish": false, "enabled": true },
+    { "name": "LangChain Blog", "type": "rss", "url": "https://www.langchain.com/blog/rss.xml", "tags": ["agenten", "frameworks"], "auto_publish": false, "enabled": true },
+    { "name": "Simon Willison", "type": "rss", "url": "https://simonwillison.net/atom/everything/", "tags": ["llm", "praxis"], "auto_publish": false, "enabled": true },
+    { "name": "The Decoder", "type": "rss", "url": "https://the-decoder.com/feed/", "tags": ["ki", "news"], "auto_publish": false, "enabled": true },
+    { "name": "Import AI", "type": "rss", "url": "https://importai.substack.com/feed", "tags": ["forschung", "politik"], "auto_publish": false, "enabled": true },
+    { "name": "Latent Space", "type": "rss", "url": "https://www.latent.space/feed", "tags": ["agenten", "praxis"], "auto_publish": false, "enabled": true },
+    { "name": "Interconnects", "type": "rss", "url": "https://www.interconnects.ai/feed", "tags": ["benchmarks", "open-weights"], "auto_publish": false, "enabled": true },
+    { "name": "Sebastian Raschka", "type": "rss", "url": "https://magazine.sebastianraschka.com/feed", "tags": ["llm", "technik"], "auto_publish": false, "enabled": true },
+    { "name": "AI News (smol.ai)", "type": "rss", "url": "https://news.smol.ai/rss.xml", "tags": ["digest"], "auto_publish": false, "enabled": true },
+    { "name": "arXiv cs.LG", "type": "rss", "url": "https://arxiv.org/rss/cs.LG", "tags": ["paper", "forschung"], "auto_publish": false, "enabled": true },
+    { "name": "Hacker News (LLM)", "type": "rss", "url": "https://hnrss.org/newest?q=LLM", "tags": ["diskussion"], "auto_publish": false, "enabled": true },
+    { "name": "Google News LLM/Agenten (EN)", "type": "rss", "url": "https://news.google.com/rss/search?q=LLM+OR+agents+OR+benchmark&hl=en-US&gl=US&ceid=US:en", "tags": ["news"], "auto_publish": false, "enabled": true },
+    { "name": "Google News Künstliche Intelligenz (DE)", "type": "rss", "url": "https://news.google.com/rss/search?q=K%C3%BCnstliche+Intelligenz&hl=de&gl=DE&ceid=DE:de", "tags": ["news", "de"], "auto_publish": false, "enabled": true },
+    { "name": "Google News KI Agenten (DE)", "type": "rss", "url": "https://news.google.com/rss/search?q=KI+Agenten&hl=de&gl=DE&ceid=DE:de", "tags": ["agenten", "de"], "auto_publish": false, "enabled": true },
+    { "name": "heise online", "type": "rss", "url": "https://www.heise.de/rss/heise-atom.xml", "tags": ["de", "news"], "auto_publish": false, "enabled": true },
+    { "name": "Golem", "type": "rss", "url": "https://www.golem.de/rss.php?feed=ATOM1.0", "tags": ["de", "news"], "auto_publish": false, "enabled": true },
+    { "name": "t3n", "type": "rss", "url": "https://t3n.de/rss.xml", "tags": ["de", "news"], "auto_publish": false, "enabled": true },
+    { "name": "netzpolitik.org", "type": "rss", "url": "https://netzpolitik.org/feed/", "tags": ["de", "regulierung"], "auto_publish": false, "enabled": true },
+    { "name": "TechCrunch AI", "type": "rss", "url": "https://techcrunch.com/category/artificial-intelligence/feed/", "tags": ["news", "wirtschaft"], "auto_publish": false, "enabled": true },
+    { "name": "MIT Technology Review", "type": "rss", "url": "https://www.technologyreview.com/feed/", "tags": ["news", "forschung"], "auto_publish": false, "enabled": true }
+  ]
 }
