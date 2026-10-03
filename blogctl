@@ -1580,6 +1580,38 @@ def cmd_deploy(args):
         commit = _run_git(["rev-parse", "--short", "HEAD"]).stdout.strip()
 
     branch = _run_git(["rev-parse", "--abbrev-ref", "HEAD"]).stdout.strip() or "main"
+
+    rebased = False
+    _run_git(["fetch", "origin"])
+    ancestor = _run_git(
+        ["merge-base", "--is-ancestor", "origin/%s" % branch, branch], check=False)
+    if ancestor.returncode != 0:
+        pull = _run_git(["pull", "--rebase", "origin", branch], check=False)
+        if pull.returncode != 0:
+            _run_git(["rebase", "--abort"], check=False)
+            message = (pull.stderr or pull.stdout or "").strip()
+            if not message:
+                message = "git pull --rebase origin %s fehlgeschlagen" % branch
+            sys.stderr.write("Fehler: Rebase fehlgeschlagen, deploy abgebrochen\n")
+            sys.stderr.write(message + "\n")
+            if args.json:
+                emit_json({"ok": False, "error": "Rebase fehlgeschlagen"})
+            return 1
+        rebased = True
+        if not args.json:
+            sys.stdout.write("Remote-Stand eingefügt (rebase)\n")
+        code, check_output = _check_result()
+        if code != 0:
+            if check_output:
+                sys.stderr.write(check_output)
+                if not check_output.endswith("\n"):
+                    sys.stderr.write("\n")
+            sys.stderr.write(
+                "Fehler: check nach Rebase fehlgeschlagen, deploy abgebrochen\n")
+            if args.json:
+                emit_json({"ok": False, "error": "check nach Rebase fehlgeschlagen"})
+            return 1
+
     _run_git(["push", "origin", branch])
 
     dist_dir = os.path.join(ROOT, "dist")
@@ -1605,7 +1637,8 @@ def cmd_deploy(args):
 
     url = load_site()["base_url"]
     if args.json:
-        emit_json({"ok": True, "commit": commit, "pushed_to": "gh-pages", "url": url})
+        emit_json({"ok": True, "commit": commit, "pushed_to": "gh-pages",
+                   "url": url, "rebased": rebased})
     else:
         sys.stdout.write("Deployed: %s -> %s\n" % (branch, url))
         if commit:
