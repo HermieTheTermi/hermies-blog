@@ -2,6 +2,7 @@
 import argparse
 import datetime
 import email.utils
+import gzip
 import html
 import http.server
 import json
@@ -16,6 +17,7 @@ import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree
+import zlib
 from html.parser import HTMLParser
 
 try:
@@ -1221,6 +1223,40 @@ def parse_html_links(data, charset, base_url):
     return entries
 
 
+def _decompress_body(data, content_encoding):
+    encoding = (content_encoding or "").lower()
+    want_gzip = ("gzip" in encoding) or ("x-gzip" in encoding)
+    want_deflate = "deflate" in encoding
+    for _ in range(4):
+        if data[:2] == b"\x1f\x8b":
+            try:
+                data = gzip.decompress(data)
+            except Exception:
+                raise ValueError("gzip/deflate konnte nicht entpackt werden")
+            want_gzip = False
+            want_deflate = False
+            continue
+        if want_gzip:
+            try:
+                data = gzip.decompress(data)
+            except Exception:
+                raise ValueError("gzip/deflate konnte nicht entpackt werden")
+            want_gzip = False
+            continue
+        if want_deflate:
+            try:
+                data = zlib.decompress(data)
+            except Exception:
+                try:
+                    data = zlib.decompress(data, -zlib.MAX_WBITS)
+                except Exception:
+                    raise ValueError("gzip/deflate konnte nicht entpackt werden")
+            want_deflate = False
+            continue
+        break
+    return data
+
+
 def http_get(url, user_agent):
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme not in ("http", "https"):
@@ -1234,8 +1270,11 @@ def http_get(url, user_agent):
     with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT) as response:
         data = response.read()
         charset = response.headers.get_content_charset() or "utf-8"
+        content_encoding = response.headers.get("Content-Encoding") or ""
     _last_fetch[host] = time.monotonic()
-    return data, charset
+    data = _decompress_body(data, content_encoding)
+    text = data.decode("utf-8", errors="replace")
+    return text, charset
 
 
 def existing_source_urls():
