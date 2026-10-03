@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "max_items_per_run": 10,
+    "auto_publish": false,
+    "user_agent": "blog-system/0.1 (+hermes agent)"
+  },
+  "sources": []
+}

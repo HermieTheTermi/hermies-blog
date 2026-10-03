@@ -1,0 +1,626 @@
+#!/usr/bin/env python3
+import argparse
+import datetime
+import json
+import os
+import re
+import sys
+
+try:
+    import yaml
+except Exception:
+    yaml = None
+
+ROOT = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
+CONTENT = os.path.join(ROOT, "content")
+DRAFTS = os.path.join(CONTENT, "drafts")
+POSTS = os.path.join(CONTENT, "posts")
+ASSETS = os.path.join(ROOT, "assets")
+
+FIELD_ORDER = [
+    "title", "slug", "date", "status", "tags", "summary",
+    "cover", "source_url", "source_name", "lang",
+]
+REQUIRED = ["title", "slug", "date", "status", "lang"]
+
+UMAP = {
+    "\u00e4": "ae", "\u00f6": "oe", "\u00fc": "ue", "\u00df": "ss",
+    "\u00c4": "ae", "\u00d6": "oe", "\u00dc": "ue",
+}
+
+LINK_RE = re.compile(r"\]\(([^)]+)\)")
+
+
+def ensure_dirs():
+    for path in (POSTS, DRAFTS, ASSETS):
+        os.makedirs(path, exist_ok=True)
+
+
+def today_iso():
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Berlin")).date().isoformat()
+    except Exception:
+        return datetime.date.today().isoformat()
+
+
+def slugify(text):
+    out = []
+    for ch in str(text).lower():
+        if ch in UMAP:
+            out.append(UMAP[ch])
+        elif ch.isascii() and ch.isalnum():
+            out.append(ch)
+        else:
+            out.append("-")
+    slug = re.sub(r"-+", "-", "".join(out)).strip("-")
+    return slug or "artikel"
+
+
+def _split_inline_list(inner):
+    parts = []
+    buf = []
+    quote = None
+    for ch in inner:
+        if quote:
+            buf.append(ch)
+            if ch == quote:
+                quote = None
+        elif ch in "\"'":
+            quote = ch
+            buf.append(ch)
+        elif ch == ",":
+            parts.append("".join(buf))
+            buf = []
+        else:
+            buf.append(ch)
+    if buf:
+        parts.append("".join(buf))
+    return parts
+
+
+def _unquote(value):
+    value = value.strip()
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        inner = value[1:-1]
+        if value[0] == '"':
+            inner = inner.replace('\\"', '"').replace("\\\\", "\\")
+        return inner
+    return value
+
+
+def _parse_scalar(value):
+    value = value.strip()
+    if value == "":
+        return ""
+    if value.startswith("[") and value.endswith("]"):
+        inner = value[1:-1].strip()
+        if inner == "":
+            return []
+        return [_unquote(p) for p in _split_inline_list(inner) if p.strip() != ""]
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+        return _unquote(value)
+    if re.match(r"^-?\d+$", value):
+        return int(value)
+    return value
+
+
+def parse_yaml_subset(text):
+    data = {}
+    for line in text.split("\n"):
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        if ":" not in line:
+            continue
+        key, _, value = line.partition(":")
+        data[key.strip()] = _parse_scalar(value)
+    return data
+
+
+def _normalize_fm(data):
+    out = {}
+    for key, value in data.items():
+        if isinstance(value, datetime.datetime):
+            out[key] = value.date().isoformat()
+        elif isinstance(value, datetime.date):
+            out[key] = value.isoformat()
+        else:
+            out[key] = value
+    return out
+
+
+def split_frontmatter(text):
+    lines = text.split("\n")
+    if not lines or lines[0].strip() != "---":
+        return {}, text
+    end = None
+    for i in range(1, len(lines)):
+        if lines[i].strip() == "---":
+            end = i
+            break
+    if end is None:
+        return {}, text
+    fm_text = "\n".join(lines[1:end])
+    body = "\n".join(lines[end + 1:])
+    if body.startswith("\n"):
+        body = body[1:]
+    fm = None
+    if yaml is not None:
+        try:
+            loaded = yaml.safe_load(fm_text)
+            if isinstance(loaded, dict):
+                fm = _normalize_fm(loaded)
+        except Exception:
+            fm = None
+    if fm is None:
+        fm = parse_yaml_subset(fm_text)
+    return fm, body
+
+
+def read_article(path):
+    with open(path, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    return split_frontmatter(text)
+
+
+def _quote(value):
+    return '"' + str(value).replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
+def format_frontmatter(fm):
+    lines = ["---"]
+    for key in FIELD_ORDER:
+        if key not in fm:
+            continue
+        value = fm[key]
+        if value is None or value == "" or value == []:
+            continue
+        if key == "tags":
+            if isinstance(value, list):
+                items = [str(x) for x in value]
+            else:
+                items = [x.strip() for x in str(value).split(",") if x.strip()]
+            if not items:
+                continue
+            lines.append("tags: [" + ", ".join(items) + "]")
+        elif key in ("date", "status", "lang") or isinstance(value, int):
+            lines.append("%s: %s" % (key, value))
+        else:
+            lines.append("%s: %s" % (key, _quote(value)))
+    lines.append("---")
+    return "\n".join(lines)
+
+
+def compose_article(fm, body):
+    text = format_frontmatter(fm) + "\n"
+    body = (body or "").rstrip("\n")
+    if body:
+        text += "\n" + body + "\n"
+    return text
+
+
+def write_article(path, fm, body):
+    with open(path, "w", encoding="utf-8") as handle:
+        handle.write(compose_article(fm, body))
+
+
+def find_article(article_id):
+    for directory in (DRAFTS, POSTS):
+        path = os.path.join(directory, article_id + ".md")
+        if os.path.isfile(path):
+            return path
+    return None
+
+
+def article_status_from_path(path):
+    if os.path.dirname(os.path.abspath(path)) == os.path.abspath(POSTS):
+        return "published"
+    return "draft"
+
+
+def list_articles(which):
+    targets = []
+    if which in ("draft", "all"):
+        targets.append((DRAFTS, "draft"))
+    if which in ("published", "all"):
+        targets.append((POSTS, "published"))
+    items = []
+    for directory, default_status in targets:
+        if not os.path.isdir(directory):
+            continue
+        for name in sorted(os.listdir(directory)):
+            if not name.endswith(".md"):
+                continue
+            article_id = name[:-3]
+            path = os.path.join(directory, name)
+            try:
+                fm, _ = read_article(path)
+            except Exception:
+                fm = {}
+            items.append({
+                "id": article_id,
+                "title": fm.get("title", ""),
+                "date": fm.get("date", ""),
+                "tags": fm.get("tags", []),
+                "status": fm.get("status", default_status),
+                "summary": fm.get("summary", ""),
+                "source_url": fm.get("source_url", ""),
+                "path": path,
+            })
+    items.sort(key=lambda x: (str(x["date"] or ""), x["id"]), reverse=True)
+    return items
+
+
+def unique_slug(base):
+    existing = set()
+    for directory in (DRAFTS, POSTS):
+        if os.path.isdir(directory):
+            for name in os.listdir(directory):
+                if name.endswith(".md"):
+                    existing.add(name[:-3])
+    if base not in existing:
+        return base
+    i = 2
+    while base + "-" + str(i) in existing:
+        i += 1
+    return base + "-" + str(i)
+
+
+def _stdin_has_data():
+    if sys.stdin.isatty():
+        return False
+    try:
+        import select
+        readable, _, _ = select.select([sys.stdin], [], [], 0)
+        return bool(readable)
+    except Exception:
+        return False
+
+
+def read_body(body_file):
+    if body_file:
+        if body_file == "-":
+            data = sys.stdin.read()
+        else:
+            with open(body_file, "r", encoding="utf-8") as handle:
+                data = handle.read()
+    elif _stdin_has_data():
+        data = sys.stdin.read()
+    else:
+        return None
+    if data.strip() == "":
+        return None
+    return data
+
+
+def emit_json(obj):
+    sys.stdout.write(json.dumps(obj, ensure_ascii=False, indent=2) + "\n")
+
+
+def relpath(path):
+    return os.path.relpath(path, ROOT)
+
+
+def cmd_new(args):
+    if not args.title or not args.title.strip():
+        raise ValueError("--title ist erforderlich")
+    date = args.date or today_iso()
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", date):
+        raise ValueError("--date muss ISO (YYYY-MM-DD) sein")
+    slug = unique_slug(slugify(args.slug) if args.slug else slugify(args.title))
+    tags = [t.strip() for t in (args.tags or "").split(",") if t.strip()]
+    fm = {
+        "title": args.title.strip(),
+        "slug": slug,
+        "date": date,
+        "status": "draft",
+        "tags": tags,
+        "summary": (args.summary or "").strip(),
+        "cover": "",
+        "source_url": (args.source_url or "").strip(),
+        "source_name": (args.source_name or "").strip(),
+        "lang": "de",
+    }
+    body = read_body(args.body_file)
+    if body is None:
+        if fm["summary"]:
+            body = "# " + fm["title"] + "\n\n" + fm["summary"] + "\n"
+        else:
+            body = "# " + fm["title"] + "\n\nInhalt folgt.\n"
+    path = os.path.join(DRAFTS, slug + ".md")
+    write_article(path, fm, body)
+    if args.json:
+        emit_json({"ok": True, "id": slug, "path": relpath(path), "status": "draft"})
+    else:
+        sys.stdout.write("Entwurf angelegt: %s -> %s\n" % (slug, relpath(path)))
+    return 0
+
+
+def cmd_list(args):
+    if args.drafts:
+        which = "draft"
+    elif args.posts:
+        which = "published"
+    else:
+        which = "all"
+    items = list_articles(which)
+    if args.limit is not None:
+        items = items[: args.limit]
+    if args.json:
+        keys = ("id", "title", "date", "tags", "status", "summary", "source_url")
+        emit_json({"posts": [dict((k, it[k]) for k in keys) for it in items]})
+    else:
+        if not items:
+            sys.stdout.write("Keine Artikel.\n")
+        for it in items:
+            tags = it["tags"] if isinstance(it["tags"], list) else [str(it["tags"])]
+            suffix = ("  #" + ",".join(tags)) if tags else ""
+            sys.stdout.write("[%-9s] %-24s %s  %s%s\n" % (
+                it["status"], it["id"], it["date"], it["title"], suffix))
+    return 0
+
+
+def cmd_show(args):
+    path = find_article(args.id)
+    if not path:
+        raise ValueError("Artikel nicht gefunden: %s" % args.id)
+    fm, body = read_article(path)
+    if args.json:
+        emit_json({"ok": True, "id": args.id, "frontmatter": fm, "body": body})
+    else:
+        for key in FIELD_ORDER:
+            if key in fm and fm[key] not in ("", None, []):
+                sys.stdout.write("%s: %s\n" % (key, fm[key]))
+        sys.stdout.write("\n" + body)
+        if not body.endswith("\n"):
+            sys.stdout.write("\n")
+    return 0
+
+
+def cmd_edit(args):
+    path = find_article(args.id)
+    if not path:
+        raise ValueError("Artikel nicht gefunden: %s" % args.id)
+    fm, body = read_article(path)
+    if args.title is not None:
+        fm["title"] = args.title.strip()
+    if args.summary is not None:
+        fm["summary"] = args.summary.strip()
+    if args.tags is not None:
+        fm["tags"] = [t.strip() for t in args.tags.split(",") if t.strip()]
+    if args.body_file is not None:
+        new_body = read_body(args.body_file)
+        if new_body is not None:
+            body = new_body
+    write_article(path, fm, body)
+    if args.json:
+        emit_json({"ok": True, "id": args.id, "path": relpath(path)})
+    else:
+        sys.stdout.write("Bearbeitet: %s\n" % args.id)
+    return 0
+
+
+def _move(ids, target_dir, status):
+    moved = []
+    for article_id in ids:
+        path = find_article(article_id)
+        if not path:
+            raise ValueError("Artikel nicht gefunden: %s" % article_id)
+        fm, body = read_article(path)
+        fm["status"] = status
+        dest = os.path.join(target_dir, article_id + ".md")
+        write_article(dest, fm, body)
+        if os.path.abspath(dest) != os.path.abspath(path):
+            os.remove(path)
+        moved.append(article_id)
+    return moved
+
+
+def cmd_publish(args):
+    published = _move(args.ids, POSTS, "published")
+    if args.json:
+        emit_json({"ok": True, "published": published})
+    else:
+        sys.stdout.write("Veroeffentlicht: %s\n" % ", ".join(published))
+    return 0
+
+
+def cmd_unpublish(args):
+    drafts = _move(args.ids, DRAFTS, "draft")
+    if args.json:
+        emit_json({"ok": True, "drafts": drafts})
+    else:
+        sys.stdout.write("Zurueck als Entwurf: %s\n" % ", ".join(drafts))
+    return 0
+
+
+def cmd_rm(args):
+    if not args.yes:
+        if args.json:
+            emit_json({"ok": False, "removed": []})
+        sys.stderr.write("Fehler: Abbruch, --yes fehlt\n")
+        return 1
+    path = find_article(args.id)
+    if not path:
+        raise ValueError("Artikel nicht gefunden: %s" % args.id)
+    os.remove(path)
+    if args.json:
+        emit_json({"ok": True, "removed": [args.id]})
+    else:
+        sys.stdout.write("Geloescht: %s\n" % args.id)
+    return 0
+
+
+def cmd_check(args):
+    errors = []
+    warnings = []
+    seen_ids = {}
+    seen_source = {}
+    articles = list_articles("all")
+    for it in articles:
+        article_id = it["id"]
+        path = it["path"]
+        fm, body = read_article(path)
+        expected_status = article_status_from_path(path)
+        for field in REQUIRED:
+            if field not in fm or fm[field] in ("", None, []):
+                errors.append("%s: Pflichtfeld '%s' fehlt" % (article_id, field))
+        if fm.get("slug") and fm.get("slug") != article_id:
+            errors.append("%s: slug '%s' passt nicht zum Dateinamen" % (article_id, fm.get("slug")))
+        if fm.get("status") and fm.get("status") != expected_status:
+            errors.append("%s: status '%s' passt nicht zum Ordner (%s)" % (
+                article_id, fm.get("status"), expected_status))
+        if fm.get("date"):
+            try:
+                datetime.datetime.strptime(str(fm["date"]), "%Y-%m-%d")
+            except Exception:
+                errors.append("%s: Datum '%s' ist kein ISO-Datum" % (article_id, fm["date"]))
+        if article_id in seen_ids:
+            errors.append("%s: doppelte id/slug (auch in %s)" % (article_id, seen_ids[article_id]))
+        else:
+            seen_ids[article_id] = path
+        source = fm.get("source_url")
+        if source:
+            if source in seen_source:
+                warnings.append("%s: doppelte source_url (%s)" % (article_id, source))
+            else:
+                seen_source[source] = article_id
+            if not fm.get("source_name"):
+                warnings.append("%s: source_url ohne source_name" % article_id)
+        if not fm.get("summary"):
+            warnings.append("%s: summary fehlt" % article_id)
+        if not fm.get("tags"):
+            warnings.append("%s: tags fehlen" % article_id)
+        base_dir = os.path.dirname(path)
+        for target in LINK_RE.findall(body):
+            clean = target.split("#")[0].split("?")[0].strip()
+            if clean == "" or clean.startswith(
+                    ("http://", "https://", "mailto:", "tel:", "/", "data:")):
+                continue
+            candidates = [
+                os.path.normpath(os.path.join(base_dir, clean)),
+                os.path.normpath(os.path.join(ROOT, clean)),
+                os.path.normpath(os.path.join(CONTENT, clean)),
+            ]
+            if any(os.path.exists(c) for c in candidates):
+                continue
+            stem = os.path.splitext(os.path.basename(clean))[0]
+            if find_article(stem):
+                continue
+            errors.append("%s: interner Link zeigt ins Leere: %s" % (article_id, target))
+    ok = not errors
+    if args.json:
+        emit_json({"ok": ok, "errors": errors, "warnings": warnings})
+    else:
+        for err in errors:
+            sys.stdout.write("FEHLER: %s\n" % err)
+        for warn in warnings:
+            sys.stdout.write("WARNUNG: %s\n" % warn)
+        sys.stdout.write("check: %s (%d Artikel, %d Fehler, %d Warnungen)\n" % (
+            "ok" if ok else "fehlgeschlagen", len(articles), len(errors), len(warnings)))
+    return 0 if ok else 1
+
+
+def cmd_placeholder(args):
+    sys.stderr.write(
+        "Fehler: '%s' ist noch nicht implementiert (Chunk 2/3)\n" % args.cmd)
+    return 1
+
+
+def build_parser():
+    parser = argparse.ArgumentParser(prog="blogctl", description="Blog-CLI")
+    sub = parser.add_subparsers(dest="cmd")
+
+    p = sub.add_parser("new")
+    p.add_argument("--title", required=True)
+    p.add_argument("--slug")
+    p.add_argument("--tags")
+    p.add_argument("--summary")
+    p.add_argument("--source-url", dest="source_url")
+    p.add_argument("--source-name", dest="source_name")
+    p.add_argument("--date")
+    p.add_argument("--body-file", dest="body_file")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_new)
+
+    p = sub.add_parser("list")
+    group = p.add_mutually_exclusive_group()
+    group.add_argument("--drafts", action="store_true")
+    group.add_argument("--posts", action="store_true")
+    p.add_argument("--limit", type=int)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_list)
+
+    p = sub.add_parser("show")
+    p.add_argument("id")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_show)
+
+    p = sub.add_parser("edit")
+    p.add_argument("id")
+    p.add_argument("--title")
+    p.add_argument("--tags")
+    p.add_argument("--summary")
+    p.add_argument("--body-file", dest="body_file")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_edit)
+
+    p = sub.add_parser("publish")
+    p.add_argument("ids", nargs="+")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_publish)
+
+    p = sub.add_parser("unpublish")
+    p.add_argument("ids", nargs="+")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_unpublish)
+
+    p = sub.add_parser("rm")
+    p.add_argument("id")
+    p.add_argument("--yes", action="store_true")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_rm)
+
+    p = sub.add_parser("check")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_check)
+
+    for name in ("build", "serve", "scrape", "deploy"):
+        p = sub.add_parser(name)
+        p.add_argument("--out")
+        p.add_argument("--port", type=int)
+        p.add_argument("--source")
+        p.add_argument("--json", action="store_true")
+        p.set_defaults(func=cmd_placeholder)
+
+    return parser
+
+
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv[1:]
+    parser = build_parser()
+    try:
+        args = parser.parse_args(argv)
+    except SystemExit as exc:
+        return 0 if exc.code in (0, None) else 1
+    if not getattr(args, "cmd", None):
+        parser.print_help(sys.stderr)
+        return 1
+    try:
+        ensure_dirs()
+        return args.func(args)
+    except ValueError as exc:
+        sys.stderr.write("Fehler: %s\n" % exc)
+        if getattr(args, "json", False):
+            emit_json({"ok": False, "error": str(exc)})
+        return 1
+    except Exception as exc:
+        sys.stderr.write("Fehler: %s\n" % exc)
+        if getattr(args, "json", False):
+            emit_json({"ok": False, "error": str(exc)})
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
