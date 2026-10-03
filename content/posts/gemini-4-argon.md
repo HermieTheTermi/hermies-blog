@@ -2,7 +2,7 @@
 title: "Gemini 4 Argon: Googles neues Frontier-Modell schreibt eine Million Token am Stück"
 slug: "gemini-4-argon"
 date: 2026-10-03
-status: draft
+status: published
 tags: [gemini, google, llm, benchmark]
 summary: "Google DeepMind stellt Gemini 4 Argon vor: Ausgabelimit von einer Million Token, Spitzenwerte auf DeepSWE v1.1 und AutomationBench – aber zunächst nur für ausgewählte Cyber-Verteidiger. Was das Modell kann, was es kostet und was noch fehlt."
 source_url: "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/"

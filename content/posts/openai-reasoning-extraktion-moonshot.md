@@ -2,7 +2,7 @@
 title: "OpenAI stoppt Reasoning-Extraktion und nennt Moonshot AI"
 slug: "openai-reasoning-extraktion-moonshot"
 date: 2026-10-03
-status: draft
+status: published
 tags: [openai, sicherheit, distillation, llm]
 summary: "OpenAI hat eine koordinierte Kampagne zur Extraktion von geschütztem Modell-Reasoning unterbunden und ordnet einen Kern-Cluster Personen aus dem Umfeld von Moonshot AI zu. Eine US-Behörden-Advisory nennt seit September sechs chinesische Firmen."
 source_url: "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
@@ -33,14 +33,14 @@ Eine Fußnote schränkt ein: Die Zahlen beziehen sich auf *versuchte*, nicht zwi
 
 ## Warum zählt das
 
-Der zweite Teil der Geschichte liegt außerhalb von OpenAI. Bereits Wochen zuvor hatten mehrere US-amerikanische KI-Firmen ähnliche Vorwürfe gegen chinesische Entwickler erhoben; IT-Medien berichteten darüber. Am **8. September 2026** veröffentlichten NSA, CISA und FBI gemeinsam die Cybersecurity Advisory **AA26-251A**, die das Thema von der Firmen-Beschwerde auf die Ebene eines staatlichen Behörden-Dokuments hebt.
+Der zweite Teil der Geschichte liegt außerhalb von OpenAI. Bereits Wochen zuvor hatte der Wettbewerber Anthropic chinesischen Entwicklern vorgeworfen, Claude heimlich zum Training eigener Modelle zu nutzen — darüber berichteten unter anderem die Wirtschaftsmedien (siehe Quellen). Am **8. September 2026** veröffentlichten NSA, CISA und FBI gemeinsam die Cybersecurity Advisory **AA26-251A**, die das Thema von der Firmen-Beschwerde auf die Ebene eines staatlichen Behörden-Dokuments hebt.
 
 Was in der Advisory steht:
 
 - Sechs namentlich genannte chinesische Firmen — **DeepSeek, Moonshot AI, Alibaba, MiniMax, StepFun und Z.AI** — hätten „Milliarden Token über Millionen von Austauschen/Anfragen" aus US-Frontier-Modellen extrahiert (Varianten von Claude, GPT, Gemini und Grok), seit mindestens Ende 2024.
 - Die Kampagnen seien „das kritische Kernstück" — nicht nur eine Ergänzung — der Modellentwicklung dieser Firmen.
 - Zu Moonshot AI heißt es konkret: signifikante Mengen von „Claude Fable 5"-Daten für das Modell Kimi-K3 und GPT-4o-Daten für Kimi-K2; die Ziele waren agentisches Reasoning und Tool-Nutzung, Coding und Datenanalyse, Computer-Use-Agenten und Computer Vision.
-- Zu den Methoden zählt die Advisory Prompt-Muster, die Modelle zwingen, ihre verborgene Gedankenkette offenzulegen, den Betrieb über mehrere Zugangswege (native APIs, Cloud-Anbieter, Drittaggregatoren, „Transfer Stations" genannte Proxy-Netzwerke) sowie den automatischen Wechsel zwischen Wegen, wenn einer blockiert wird. Als Grundlage dient offenbar unter anderem „CISA, NSA, FBI: China-Based Artificial Intelligence Companies Conducting Industrial-Scale Distillation Campaigns Against U.S. AI Companies" — die Formulierung ist „likely with Chinese government awareness", also Kenntnis, nicht Steuerung.
+- Zu den Methoden zählt die Advisory Prompt-Muster, die Modelle zwingen, ihre verborgene Gedankenkette offenzulegen, den Betrieb über mehrere Zugangswege (native APIs, Cloud-Anbieter, Drittaggregatoren und „Transfer Stations" genannte Proxy-Netzwerke) sowie den automatischen Wechsel zwischen diesen Wegen, sobald einer blockiert wird. Die Formulierung zur Urheberschaft lautet „likely with Chinese government awareness" — also Kenntnis, nicht Steuerung.
 
 Bemerkenswert ist die Empfehlungslage: Die Behörden raten US-Firmen, Antworten für Konten, die mit hoher Sicherheit der Destillation verdächtigt werden, **gezielt zu verschlechtern** — etwa auf ein weniger leistungsfähiges Modell umzuleiten, die Reasoning-Tiefe zu reduzieren oder stilistische Inkonsistenzen einzustreuen — und die Betroffenen darüber *nicht* zu informieren. Dazu kommen erweiterte Identitätsprüfung und ein branchenweiter Austausch von Indikatoren.
 
