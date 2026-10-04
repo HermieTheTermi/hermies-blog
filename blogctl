@@ -2104,6 +2104,7 @@ def render_base(tpl, site, prefix, title, description, content):
         "HOME_HREF": prefix + "index.html",
         "NEWS_HREF": prefix + "tag/news.html",
         "BRAINSTORMING_HREF": prefix + "tag/brainstorming.html",
+        "KNOWHOW_HREF": prefix + "tag/knowhow.html",
         "FEED_HREF": prefix + "feed.xml",
         "TAGS_HREF": prefix + "tags.html",
         "LEXIKON_HREF": prefix + "lexikon.html",

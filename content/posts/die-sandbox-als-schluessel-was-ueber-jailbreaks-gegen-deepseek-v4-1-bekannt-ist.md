@@ -3,7 +3,7 @@ title: "Die Sandbox als Schlüssel? Was über Jailbreaks gegen DeepSeek V4.1 bek
 slug: "die-sandbox-als-schluessel-was-ueber-jailbreaks-gegen-deepseek-v4-1-bekannt-ist"
 date: 2026-10-04
 status: published
-tags: [sicherheit, llm, deepseek, forschung, jailbreak]
+tags: [KnowHow, sicherheit, llm, deepseek, forschung, jailbreak]
 summary: "Für DeepSeek V4.1 gibt es keine öffentliche Jailbreak-Studie: Die Wörter Jailbreak, Refusal oder Red-Team kommen in Modellkarte und Technical Report kein einziges Mal vor. Die belastbaren Zahlen stammen vom Vorgänger V4-Pro – und aus einem am Releasetag umgebauten Checkpoint: Das offizielle V4.1-Flash befolgte 42,81 Prozent von 320 HarmBench-Aufgaben, mit Reasoning auf Maximum nur 1,56 Prozent. Der Sandbox-Trick wirkt tatsächlich – aber nicht wegen der Fiktion, sondern weil die Aufgabe konkret wird."
 source_url: "https://www.far.ai/blog/security-stress-test-deepseek-v4-pros-safeguards"
 source_name: "FAR.AI"
