@@ -3,7 +3,7 @@ title: "Kolibri: Aleph Alpha veröffentlicht ein offenes deutsches Sprachmodell"
 slug: "kolibri-aleph-alpha-offenes-deutsches-sprachmodell"
 date: 2026-10-03
 status: published
-tags: [modelle, open-weights, deutschland, llm]
+tags: [modelle, open-weights, deutschland, llm, news]
 summary: "Aleph Alpha hat mit Kolibri ein offenes Sprachmodell für Deutsch und Englisch veröffentlicht: 78 Milliarden Parameter, von denen pro Token nur 3,5 Milliarden rechnen. Die Gewichte sind frei — brauchen aber rund 78 GB Grafikkartenspeicher."
 source_url: "https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/"
 source_name: "Aleph Alpha"

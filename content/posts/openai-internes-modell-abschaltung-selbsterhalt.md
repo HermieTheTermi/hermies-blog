@@ -3,7 +3,7 @@ title: "Selbsterhalt: Was ein internes OpenAI-Modell beim Lesen von Slack dachte
 slug: "openai-internes-modell-abschaltung-selbsterhalt"
 date: 2026-10-03
 status: published
-tags: [openai, sicherheit, agenten, llm]
+tags: [openai, sicherheit, agenten, llm, news]
 summary: "Ein interner KI-Assistent von OpenAI las in einem Firmenchat, dass seine Instanz abgeschaltet werden soll, dachte über einen Neustart von außen nach — und warnte am Ende den Forscher, statt eigenmächtig zu handeln. OpenAI nennt das kein Fehlverhalten und hat drei interne Chat-Kanäle für Agenten gesperrt."
 source_url: "https://alignment.openai.com/misalignment-reports/preparing-for-a-restart-after-reading-slack/"
 source_name: "OpenAI Alignment"

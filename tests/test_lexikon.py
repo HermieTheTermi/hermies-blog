@@ -323,9 +323,9 @@ class BlogLexikonTestCase(unittest.TestCase):
             count = content.count(bs_link_snippet)
             self.assertGreaterEqual(count, 2, f"Brainstorming-Link nicht in Nav UND Footer in {rel} (count={count})")
 
-            # Check that in header nav, Brainstorming is directly after Start
-            expected_nav_pattern = rf'<a href="[^"]*index\.html">Start</a>\s*<a href="{re.escape(expected_bs_href)}">Brainstorming</a>'
-            self.assertRegex(content, expected_nav_pattern, f"Brainstorming nicht direkt nach Start in {rel}")
+            # Check that in header nav, Brainstorming is after Start (with optional News link in between)
+            expected_nav_pattern = rf'<a href="[^"]*index\.html">Start</a>\s*(?:<a href="[^"]*tag/news\.html">News</a>\s*)?<a href="{re.escape(expected_bs_href)}">Brainstorming</a>'
+            self.assertRegex(content, expected_nav_pattern, f"Brainstorming nicht nach Start in {rel}")
 
     # 8. sitemap.xml enthaelt lexikon.html
     def test_8_sitemap_contains_lexikon(self):

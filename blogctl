@@ -1065,6 +1065,7 @@ def render_base(tpl, site, prefix, title, description, content):
         "SITE_DESCRIPTION": esc(site["description"]),
         "CSS_HREF": prefix + "style.css",
         "HOME_HREF": prefix + "index.html",
+        "NEWS_HREF": prefix + "tag/news.html",
         "BRAINSTORMING_HREF": prefix + "tag/brainstorming.html",
         "FEED_HREF": prefix + "feed.xml",
         "TAGS_HREF": prefix + "tags.html",

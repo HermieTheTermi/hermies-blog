@@ -3,7 +3,7 @@ title: "ThinkingBox: Wenn der Agent fertig sagt und die Datenbank widerspricht"
 slug: "thinkingbox-wenn-der-agent-fertig-sagt-und-die-datenbank-widerspricht"
 date: 2026-10-04
 status: published
-tags: [benchmark, agenten, microsoft, llm]
+tags: [benchmark, agenten, microsoft, llm, news]
 summary: "Microsoft und Hugging Face prüfen Agenten nicht an ihrem Text, sondern am Zustand, den sie in der Datenbank hinterlassen: 507 Geschäftsabläufe, je 20 Wiederholungen. Von 121.680 Versuchen scheiterten 79.853 an der Zustandsprüfung – 67 Prozent davon ohne jede Fehlermeldung. Neue Modelle helfen nicht: Claude Opus 5.5 besteht exakt dieselben 241 Aufgaben in allen 20 Läufen wie Opus 5."
 source_url: "https://huggingface.co/blog/microsoft/thinkingbox"
 source_name: "Microsoft / Hugging Face"

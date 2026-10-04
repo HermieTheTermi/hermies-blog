@@ -3,7 +3,7 @@ title: "Googles KI-Monat September: Gemini 4 Argon, WeatherNext 3, AlphaGenome A
 slug: "the-latest-ai-news-we-announced-in-september-2026"
 date: 2026-10-02
 status: published
-tags: [sammlung, google, forschung]
+tags: [sammlung, google, forschung, news]
 summary: "Rundschau über Googles KI-Veröffentlichungen im September 2026 — vom Frontier-Modell bis zur Genom-Datenbank mit 9 Milliarden Varianten."
 source_url: "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/"
 source_name: "Google KI-Blog"

@@ -3,7 +3,7 @@ title: "Jev: Ein Modell, das keine Texte schreibt - und die Agenten-Werkzeuge er
 slug: "jev-ein-modell-das-keine-texte-schreibt-und-die-agenten-werkzeuge-erobert"
 date: 2026-10-04
 status: published
-tags: [modelle, agenten, langchain, ollama, benchmark]
+tags: [modelle, agenten, langchain, ollama, benchmark, news]
 summary: "TypeSafe AI veröffentlicht mit Jev ein Modell, das keine Texte generiert, sondern typisierte Entscheidungen mit Wahrscheinlichkeiten liefert – in Millisekunden und für 0,042 Dollar pro Million Eingabe-Token. Vercel, Ollama und LangChain haben es binnen Wochen eingebaut. Der Haken: Fast alles sind Herstellerangaben, und die eigene Dokumentation listet neun bekannte Schwächezonen."
 source_url: "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
 source_name: "TypeSafe AI"

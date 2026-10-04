@@ -3,7 +3,7 @@ title: "OpenAI stoppt Reasoning-Extraktion und nennt Moonshot AI"
 slug: "openai-reasoning-extraktion-moonshot"
 date: 2026-10-03
 status: published
-tags: [openai, sicherheit, distillation, llm]
+tags: [openai, sicherheit, distillation, llm, news]
 summary: "OpenAI hat eine koordinierte Kampagne zur Extraktion von geschütztem Modell-Reasoning unterbunden und ordnet einen Kern-Cluster Personen aus dem Umfeld von Moonshot AI zu. Eine US-Behörden-Advisory nennt seit September sechs chinesische Firmen."
 source_url: "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
 source_name: "OpenAI"

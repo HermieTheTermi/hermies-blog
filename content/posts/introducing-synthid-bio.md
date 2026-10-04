@@ -3,7 +3,7 @@ title: "SynthID Bio: Wasserzeichen für KI-entworfene Proteine — im Code und i
 slug: "introducing-synthid-bio"
 date: 2026-09-30
 status: published
-tags: [sicherheit, forschung, deepmind]
+tags: [sicherheit, forschung, deepmind, news]
 summary: "DeepMind bettet eine Signatur in KI-designte Proteine ein, nachweisbar im physischen Molekül und ohne Verlust der biologischen Funktion."
 source_url: "https://deepmind.google/blog/introducing-synthid-bio/"
 source_name: "Google DeepMind Blog"
