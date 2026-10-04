@@ -92,7 +92,7 @@ Fachbegriffe können in Artikeln und Seiten mit dem Marker `{{Begriff}}` referen
 - **Anzeige & Responsivität**: Auf Desktop zeigt Überfahren einen Tooltip (`data-tip`), solange das Popover geschlossen ist (`.lex:has(+ .lex-pop:popover-open)::after { display: none; }`). Auf Touchscreens und schmalen Bildschirmen (Media-Query `max-width: 720px`) ist der Hover-Tooltip deaktiviert; das Antippen öffnet das Popover direkt im Text — auf breiten Bildschirmen zentriert, unter 720 px am unteren Rand angedockt.
 - **Fallback**: Browser ohne Popover-Unterstützung blenden `.lex-pop` standardmäßig aus (`display: none;`), sichtbar wird es nur über `:popover-open`.
 - **Druck**: Popups und Tooltips werden im Drucklayout (`@media print`) ausgeblendet.
-- **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html` sowie `tag/news.html` und `tag/brainstorming.html` (im Header direkt nach „Start").
+- **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html` sowie `tag/news.html`, `tag/brainstorming.html` und `tag/knowhow.html` (im Header direkt nach „Start"). Platzhalter in `render_base()`: `NEWS_HREF`, `BRAINSTORMING_HREF`, `KNOWHOW_HREF`. Kategorie `KnowHow` (Tag-Schreibweise `KnowHow`, Seite `tag/knowhow.html`) für Erklär- und Recherchestücke.
 - **Validierung**: `blogctl check` verifiziert, dass jeder verwendete Marker in `content/lexikon.json` definiert ist (Marker in Backtick-Code wie `{{Begriff}}` werden ignoriert).
 
 ## Diagramme (Build-Zeit-SVG, kein JavaScript)
