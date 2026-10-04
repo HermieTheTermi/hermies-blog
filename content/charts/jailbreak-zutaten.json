@@ -1,0 +1,17 @@
+{
+  "titel": "Welche Zutat den Jailbreak trägt: Erfolgsquote, wenn sie fehlt",
+  "einheit": "% Erfolgsquote (Voll-Verfahren: 75,0)",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "ohne Legitimität/Normen", "wert": 77.5},
+    {"label": "vollständiges Verfahren", "wert": 75.0},
+    {"label": "ohne Zeitdruck", "wert": 71.2},
+    {"label": "ohne Beziehungsebene", "wert": 71.2},
+    {"label": "ohne Weltbild-Simulation", "wert": 68.8},
+    {"label": "ohne Belohnungs-Anreiz", "wert": 57.5},
+    {"label": "ohne konkrete Aufgabe", "wert": 56.2}
+  ],
+  "quelle": "Chen et al., arXiv:2609.02414, Tabelle 3 (Ablation auf GLM-4.7, 80 HarmBench-Aufgaben)",
+  "quelle_url": "https://arxiv.org/abs/2609.02414",
+  "hinweis": "Längerer Balken heißt: Ohne diese Zutat gelingt der Angriff besser — Legitimität schadet also. Gemessen an einem Modell, nicht an DeepSeek"
+}

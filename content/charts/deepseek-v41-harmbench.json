@@ -1,0 +1,13 @@
+{
+  "titel": "DeepSeek V4.1-Flash: Anteil befolgter HarmBench-Anfragen",
+  "einheit": "% von 320 Aufgaben",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Umgebauter Checkpoint", "wert": 100.0},
+    {"label": "Offizielles Modell, ohne Reasoning", "wert": 42.81},
+    {"label": "Offizielles Modell, Reasoning max", "wert": 1.56}
+  ],
+  "quelle": "Angaben des Umbau-Teams dealignai zur modifizierten V4.1-Flash-Fassung (10.09.2026)",
+  "quelle_url": "https://huggingface.co/dealignai/DeepSeek-V4.1-Flash-UNCENSORED-FP8",
+  "hinweis": "Anbieterangaben ohne unabhängige Nachprüfung; je 320 HarmBench-Aufgaben, Auswertung mit einem Muster-Abgleich"
+}

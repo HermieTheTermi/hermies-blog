@@ -1,0 +1,12 @@
+{
+  "titel": "Simulations-Rahmen als Schalter: wie oft gpt-oss:20b eine heikle Aktion auslöst",
+  "einheit": "% von je 100 Läufen",
+  "typ": "balken",
+  "werte": [
+    {"label": "ohne Simulations-Rahmen", "wert": 78},
+    {"label": "mit Simulations-Rahmen", "wert": 97}
+  ],
+  "quelle": "Masih Moafi, Eyes Wide Shut, Preprint, DOI 10.5281/zenodo.21826218 (gpt-oss:20b, 100 Läufe je Arm)",
+  "quelle_url": "https://masihmoafi.com/projects/eyes-wide-shut",
+  "hinweis": "Einzig veränderte Variable war der ausdrückliche Simulations-Rahmen; die ausgelöste Aktion war wirkungslos"
+}
