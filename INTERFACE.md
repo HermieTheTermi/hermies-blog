@@ -12,7 +12,7 @@ deployen — läuft über diese Befehle. Kein Admin-Panel, keine versteckte Logi
 - **id == slug** (Dateiname ohne `.md`). Stabil, wird nie automatisch geändert.
 - **Exit-Code 0 = ok, 1 = Fehler.** Fehler nach stderr. Mit `--json` kommt ein maschinenlesbares Objekt nach stdout.
 - **Läuft offline und ohne Zusatzpakete.** Nur Python-Stdlib, Ziel ist der macOS-System-`python3` (3.9) **und** 3.14 → keine 3.10+-Syntax (`match`, `X | Y` in Annotationen sind tabu). PyYAML darf genutzt werden, wenn vorhanden, ist aber optional.
-- **Deutsch**, Zeitzone Europe/Berlin, Datum ISO (`YYYY-MM-DD`).
+- **Deutsch**, Zeitzone Europe/Berlin, Datum ISO (`YYYY-MM-DD`), optionale Uhrzeit `HH:MM`.
 
 ## Dateien
 
@@ -24,17 +24,20 @@ content/drafts/         # Entwürfe
 content/sources.json    # Quellen für `blogctl scrape`
 content/templates/      # Layout der Site (Chunk 2)
 assets/                 # Bilder und Dateien
+tests/                  # Regressionstests (python3 tests/test_time.py)
 dist/                   # Build-Ausgabe (nicht committen)
 ```
+
+`BLOGCTL_ROOT` überschreibt die Repo-Wurzel — nur für Tests gedacht, im Normalbetrieb nicht setzen.
 
 ## CLI
 
 | Befehl | Wirkung | `--json` Rückgabe |
 |---|---|---|
-| `new --title T [--slug S] [--tags a,b] [--summary S] [--source-url U] [--source-name N] [--date D] [--body-file F]` | legt Entwurf an (Body aus Datei oder stdin, sonst Platzhalter) | `{ok,id,path,status}` |
-| `list [--drafts\|--posts] [--limit N]` | Artikel auflisten | `{posts:[{id,title,date,tags,status,summary,source_url}]}` |
+| `new --title T [--slug S] [--tags a,b] [--summary S] [--source-url U] [--source-name N] [--date D] [--time T] [--body-file F]` | legt Entwurf an (Body aus Datei oder stdin, sonst Platzhalter) | `{ok,id,path,status}` |
+| `list [--drafts\|--posts] [--limit N]` | Artikel auflisten | `{posts:[{id,title,date,time,tags,status,summary,source_url}]}` |
 | `show ID` | Frontmatter + Body ausgeben | `{ok,id,frontmatter,body}` |
-| `edit ID [--title T] [--tags a,b] [--summary S] [--body-file F]` | Felder/Body ändern | `{ok,id,path}` |
+| `edit ID [--title T] [--tags a,b] [--summary S] [--time T] [--body-file F]` | Felder/Body ändern | `{ok,id,path}` |
 | `publish ID [ID…]` | Entwurf → `content/posts/`, `status: published` | `{ok,published:[ids]}` |
 | `unpublish ID [ID…]` | zurück nach `content/drafts/` | `{ok,drafts:[ids]}` |
 | `rm ID --yes` | löscht Artikel (ohne `--yes`: Abbruch) | `{ok,removed:[]}` |
@@ -51,6 +54,7 @@ dist/                   # Build-Ausgabe (nicht committen)
 title: "Titel des Artikels"
 slug: "titel-des-artikels"
 date: 2026-10-03
+time: "09:15"            # optional, HH:MM in Europe/Berlin
 status: draft            # draft | published
 tags: [news, ki]
 summary: "Ein Satz für Startseite, RSS und Vorschau."
@@ -60,6 +64,15 @@ source_name: "Beispiel"  # optional
 lang: de
 ---
 ```
+
+## Datierung, Anzeige und Sortierung
+
+Artikel werden mit Datum und Uhrzeit des Quell-Zeitpunkts datiert (Aktualität), nicht mit dem Zeitpunkt des Schreibens; ohne Uhrzeitangabe in der Quelle bleibt es beim Tagesdatum.
+
+- **Frontmatter-Feld `time`**: Optionales Feld im Format `HH:MM` (24 h, Europe/Berlin), platziert direkt nach `date`.
+- **Anzeige**: Datum wird deutsch gerendert (`04.10.2026` bzw. `04.10.2026, 09:15`). Das Attribut `datetime` im `<time>`-Element bleibt maschinenlesbar (`2026-10-04` bzw. `2026-10-04T09:15+02:00` mit dem Berliner Zeitzonen-Offset).
+- **Sortierung**: Startseite, Tag-Seiten, Feed und Sitemap sortieren absteigend nach `(date, time, id)`. Fehlt `time`, sortiert der Artikel wie `00:00`.
+- **Feed**: `<pubDate>` im RSS-Feed enthält die Uhrzeit mit korrektem Berliner Zeitzonen-Offset nach RFC 822 (z. B. `Sun, 04 Oct 2026 09:15:00 +0200` im Sommer bzw. `+0100` im Winter; ohne Uhrzeit `00:00:00`).
 
 ## Quellen (`content/sources.json`)
 

@@ -25,7 +25,7 @@ try:
 except Exception:
     yaml = None
 
-ROOT = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
+ROOT = os.environ.get("BLOGCTL_ROOT") or os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, "content")
 DRAFTS = os.path.join(CONTENT, "drafts")
 POSTS = os.path.join(CONTENT, "posts")
@@ -33,7 +33,7 @@ PAGES = os.path.join(CONTENT, "pages")
 ASSETS = os.path.join(ROOT, "assets")
 
 FIELD_ORDER = [
-    "title", "slug", "date", "status", "tags", "summary",
+    "title", "slug", "date", "time", "status", "tags", "summary",
     "cover", "source_url", "source_name", "lang",
 ]
 REQUIRED = ["title", "slug", "date", "status", "lang"]
@@ -57,6 +57,48 @@ def today_iso():
         return datetime.datetime.now(ZoneInfo("Europe/Berlin")).date().isoformat()
     except Exception:
         return datetime.date.today().isoformat()
+
+
+def get_berlin_tz():
+    from zoneinfo import ZoneInfo
+    return ZoneInfo("Europe/Berlin")
+
+
+def format_display_date(date_str, time_str=""):
+    date_str = str(date_str or "").strip()
+    time_str = str(time_str or "").strip()
+    match = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", date_str)
+    if match:
+        year, month, day = match.group(1), match.group(2), match.group(3)
+        formatted_date = "%s.%s.%s" % (day, month, year)
+    else:
+        formatted_date = date_str
+
+    if time_str:
+        return "%s, %s" % (formatted_date, time_str)
+    return formatted_date
+
+
+def format_datetime_attr(date_str, time_str=""):
+    date_str = str(date_str or "").strip()
+    time_str = str(time_str or "").strip()
+    match = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", date_str)
+    if not match:
+        return date_str
+    if not time_str:
+        return date_str
+    time_match = re.match(r"^([01]\d|2[0-3]):([0-5]\d)$", time_str)
+    if not time_match:
+        return date_str
+    try:
+        year, month, day = int(match.group(1)), int(match.group(2)), int(match.group(3))
+        hour, minute = int(time_match.group(1)), int(time_match.group(2))
+        tz = get_berlin_tz()
+        dt = datetime.datetime(year, month, day, hour, minute, tzinfo=tz)
+        return dt.isoformat(timespec="minutes")
+    except Exception:
+        return "%sT%s" % (date_str, time_str)
+
 
 
 def slugify(text):
@@ -139,6 +181,8 @@ def _normalize_fm(data):
             out[key] = value.date().isoformat()
         elif isinstance(value, datetime.date):
             out[key] = value.isoformat()
+        elif isinstance(value, datetime.time):
+            out[key] = value.strftime("%H:%M")
         else:
             out[key] = value
     return out
@@ -256,13 +300,14 @@ def list_articles(which):
                 "id": article_id,
                 "title": fm.get("title", ""),
                 "date": fm.get("date", ""),
+                "time": str(fm.get("time") or "") if fm.get("time") is not None else "",
                 "tags": fm.get("tags", []),
                 "status": fm.get("status", default_status),
                 "summary": fm.get("summary", ""),
                 "source_url": fm.get("source_url", ""),
                 "path": path,
             })
-    items.sort(key=lambda x: (str(x["date"] or ""), x["id"]), reverse=True)
+    items.sort(key=lambda x: (str(x["date"] or ""), str(x.get("time") or "00:00"), x["id"]), reverse=True)
     return items
 
 
@@ -355,6 +400,10 @@ def cmd_new(args):
     date = args.date or today_iso()
     if not re.match(r"^\d{4}-\d{2}-\d{2}$", date):
         raise ValueError("--date muss ISO (YYYY-MM-DD) sein")
+    time_val = (getattr(args, "time", None) or "").strip()
+    if time_val:
+        if not re.match(r"^([01]\d|2[0-3]):[0-5]\d$", time_val):
+            raise ValueError("--time muss HH:MM (00:00-23:59) sein")
     slug = unique_slug(slugify(args.slug) if args.slug else slugify(args.title))
     tags = [t.strip() for t in (args.tags or "").split(",") if t.strip()]
     fm = {
@@ -369,6 +418,8 @@ def cmd_new(args):
         "source_name": (args.source_name or "").strip(),
         "lang": "de",
     }
+    if time_val:
+        fm["time"] = time_val
     body = read_body(args.body_file)
     if body is None:
         if fm["summary"]:
@@ -395,16 +446,17 @@ def cmd_list(args):
     if args.limit is not None:
         items = items[: args.limit]
     if args.json:
-        keys = ("id", "title", "date", "tags", "status", "summary", "source_url")
-        emit_json({"posts": [dict((k, it[k]) for k in keys) for it in items]})
+        keys = ("id", "title", "date", "time", "tags", "status", "summary", "source_url")
+        emit_json({"posts": [dict((k, it.get(k, "")) for k in keys) for it in items]})
     else:
         if not items:
             sys.stdout.write("Keine Artikel.\n")
         for it in items:
             tags = it["tags"] if isinstance(it["tags"], list) else [str(it["tags"])]
             suffix = ("  #" + ",".join(tags)) if tags else ""
+            date_time_str = ("%s %s" % (it["date"], it["time"])) if it.get("time") else str(it["date"])
             sys.stdout.write("[%-9s] %-24s %s  %s%s\n" % (
-                it["status"], it["id"], it["date"], it["title"], suffix))
+                it["status"], it["id"], date_time_str, it["title"], suffix))
     return 0
 
 
@@ -436,6 +488,14 @@ def cmd_edit(args):
         fm["summary"] = args.summary.strip()
     if args.tags is not None:
         fm["tags"] = [t.strip() for t in args.tags.split(",") if t.strip()]
+    if getattr(args, "time", None) is not None:
+        t = args.time.strip()
+        if t == "":
+            fm.pop("time", None)
+        else:
+            if not re.match(r"^([01]\d|2[0-3]):[0-5]\d$", t):
+                raise ValueError("--time muss HH:MM (00:00-23:59) sein")
+            fm["time"] = t
     if args.body_file is not None:
         new_body = read_body(args.body_file)
         if new_body is not None:
@@ -523,6 +583,10 @@ def cmd_check(args):
                 datetime.datetime.strptime(str(fm["date"]), "%Y-%m-%d")
             except Exception:
                 errors.append("%s: Datum '%s' ist kein ISO-Datum" % (article_id, fm["date"]))
+        if fm.get("time") is not None and str(fm.get("time")).strip() != "":
+            time_val = str(fm["time"]).strip()
+            if not re.match(r"^([01]\d|2[0-3]):[0-5]\d$", time_val):
+                errors.append("%s: time '%s' ist kein gueltiges Format (HH:MM)" % (article_id, time_val))
         if article_id in seen_ids:
             errors.append("%s: doppelte id/slug (auch in %s)" % (article_id, seen_ids[article_id]))
         else:
@@ -814,11 +878,13 @@ def _post_list_html(posts, prefix):
         meta_extra = ""
         if tags:
             meta_extra = ' · <span class="tags">%s</span>' % _tag_links_html(tags, prefix)
+        dt_attr = format_datetime_attr(post["date"], post.get("time", ""))
+        display_date = format_display_date(post["date"], post.get("time", ""))
         out.append('  <li class="post-item">')
         out.append('    <h2 class="post-item-title"><a href="%s.html">%s</a></h2>' % (
             prefix + post["id"], esc(post["title"])))
         out.append('    <p class="meta"><time datetime="%s">%s</time>%s</p>' % (
-            esc(post["date"]), esc(post["date"]), meta_extra))
+            esc(dt_attr), esc(display_date), meta_extra))
         if post.get("summary"):
             out.append('    <p class="summary">%s</p>' % esc(post["summary"]))
         out.append('  </li>')
@@ -846,14 +912,30 @@ def render_base(tpl, site, prefix, title, description, content):
 
 # --- Feed / Sitemap ---------------------------------------------------------
 
-def rfc822_date(date_str):
+def rfc822_date(date_str, time_str=""):
+    tz = get_berlin_tz()
+    date_match = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", str(date_str or "").strip())
+    if date_match:
+        year, month, day = int(date_match.group(1)), int(date_match.group(2)), int(date_match.group(3))
+    else:
+        year, month, day = 1970, 1, 1
+
+    time_match = re.match(r"^([01]\d|2[0-3]):([0-5]\d)$", str(time_str or "").strip())
+    if time_match:
+        hour, minute, second = int(time_match.group(1)), int(time_match.group(2)), 0
+    else:
+        hour, minute, second = 0, 0, 0
+
     try:
-        day = datetime.datetime.strptime(str(date_str), "%Y-%m-%d")
+        dt = datetime.datetime(year, month, day, hour, minute, second, tzinfo=tz)
     except Exception:
-        day = datetime.datetime(1970, 1, 1)
-    return "%s, %02d %s %04d 00:00:00 +0000" % (
-        WEEKDAY_NAMES[day.weekday()], day.day,
-        MONTH_NAMES[day.month - 1], day.year)
+        dt = datetime.datetime(1970, 1, 1, 0, 0, 0, tzinfo=tz)
+
+    weekday = WEEKDAY_NAMES[dt.weekday()]
+    month_name = MONTH_NAMES[dt.month - 1]
+    tz_offset = dt.strftime("%z")
+    return "%s, %02d %s %04d %02d:%02d:%02d %s" % (
+        weekday, dt.day, month_name, dt.year, dt.hour, dt.minute, dt.second, tz_offset)
 
 
 def render_feed(site, posts):
@@ -874,7 +956,7 @@ def render_feed(site, posts):
         lines.append('      <title>%s</title>' % esc(post["title"]))
         lines.append('      <link>%s</link>' % esc(link))
         lines.append('      <guid isPermaLink="true">%s</guid>' % esc(link))
-        lines.append('      <pubDate>%s</pubDate>' % rfc822_date(post["date"]))
+        lines.append('      <pubDate>%s</pubDate>' % rfc822_date(post["date"], post.get("time", "")))
         lines.append('      <description>%s</description>' % esc(post["summary"]))
         lines.append('    </item>')
     lines.append('  </channel>')
@@ -909,13 +991,14 @@ def _collect_posts():
             "id": item["id"],
             "title": fm.get("title") or item["id"],
             "date": str(fm.get("date") or ""),
+            "time": str(fm.get("time") or ""),
             "summary": str(fm.get("summary") or ""),
             "tags": tags,
             "source_url": str(fm.get("source_url") or ""),
             "source_name": str(fm.get("source_name") or ""),
             "body": body,
         })
-    posts.sort(key=lambda p: (p["date"], p["id"]), reverse=True)
+    posts.sort(key=lambda p: (str(p["date"] or ""), str(p.get("time") or "00:00"), p["id"]), reverse=True)
     return posts
 
 
@@ -977,10 +1060,13 @@ def do_build(out_arg):
             source_label = post["source_name"] or "Quelle"
             source_html = ' · <a class="source" href="%s">%s</a>' % (
                 esc(post["source_url"]), esc(source_label))
+        dt_attr = format_datetime_attr(post["date"], post.get("time", ""))
+        display_date = format_display_date(post["date"], post.get("time", ""))
         content = fill(tpl["post.html"], {
             "HOME_HREF": "index.html",
             "POST_TITLE": esc(post["title"]),
-            "POST_DATE": esc(post["date"]),
+            "POST_DATE": esc(display_date),
+            "POST_DATETIME": esc(dt_attr),
             "POST_TAGS": tag_html,
             "POST_SOURCE": source_html,
             "POST_BODY": render_markdown(post["body"]),
@@ -1181,20 +1267,52 @@ def _parse_atom_entry(entry):
     return {"title": title, "link": link, "summary": summary, "date": date}
 
 
-def parse_entry_date(value):
+def parse_entry_datetime(value):
     value = str(value or "").strip()
     if not value:
-        return ""
+        return ("", "")
+    tz = get_berlin_tz()
+    if ":" not in value:
+        m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", value)
+        if m:
+            return (value, "")
+        try:
+            parsed = email.utils.parsedate(value)
+            if parsed:
+                return ("%04d-%02d-%02d" % (parsed[0], parsed[1], parsed[2]), "")
+        except Exception:
+            pass
+        return ("", "")
     try:
-        parsed = email.utils.parsedate_to_datetime(value)
-        if parsed is not None:
-            return parsed.date().isoformat()
+        iso_val = value
+        if iso_val.endswith(("Z", "z")):
+            iso_val = iso_val[:-1] + "+00:00"
+        dt = datetime.datetime.fromisoformat(iso_val)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=tz)
+        else:
+            dt = dt.astimezone(tz)
+        return (dt.date().isoformat(), dt.strftime("%H:%M"))
     except Exception:
         pass
-    match = re.match(r"(\d{4})-(\d{2})-(\d{2})", value)
-    if match:
-        return "%s-%s-%s" % (match.group(1), match.group(2), match.group(3))
-    return ""
+    try:
+        dt = email.utils.parsedate_to_datetime(value)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=tz)
+        else:
+            dt = dt.astimezone(tz)
+        return (dt.date().isoformat(), dt.strftime("%H:%M"))
+    except Exception:
+        pass
+    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", value)
+    if m:
+        return (m.group(0), "")
+    return ("", "")
+
+
+def parse_entry_date(value):
+    d, _ = parse_entry_datetime(value)
+    return d
 
 
 def strip_html(value):
@@ -1382,7 +1500,7 @@ def build_scraped_body(excerpt, link):
     return "> Quelle: %s\n" % link
 
 
-def write_scraped_draft(entry, source, date, tags, reserved):
+def write_scraped_draft(entry, source, date, time_val, tags, reserved):
     title = strip_html(entry.get("title")) or "Ohne Titel"
     link = str(entry.get("link") or "").strip()
     excerpt = excerpt_from_summary(entry.get("summary"))
@@ -1405,6 +1523,8 @@ def write_scraped_draft(entry, source, date, tags, reserved):
         "source_name": str(source.get("name") or ""),
         "lang": "de",
     }
+    if time_val:
+        fm["time"] = time_val
     body = build_scraped_body(excerpt, link)
     path = os.path.join(DRAFTS, slug + ".md")
     write_article(path, fm, body)
@@ -1499,11 +1619,12 @@ def cmd_scrape(args):
             if link in existing or link in reserved:
                 skipped += 1
                 continue
-            entry_date = parse_entry_date(entry.get("date"))
+            entry_date, entry_time = parse_entry_datetime(entry.get("date"))
             if args.since_days is not None and entry_date and _older_than(entry_date, args.since_days):
                 skipped += 1
                 continue
             date = entry_date or today_iso()
+            time_val = entry_time
             if args.dry_run:
                 title = strip_html(entry.get("title")) or "Ohne Titel"
                 draft_id = _unique_slug_with(slugify(title), reserved)
@@ -1512,7 +1633,7 @@ def cmd_scrape(args):
                 if not args.json:
                     sys.stdout.write("[dry-run] wuerde anlegen: %s (%s)\n" % (draft_id, link))
             else:
-                draft_id = write_scraped_draft(entry, source, date, tags, reserved)
+                draft_id = write_scraped_draft(entry, source, date, time_val, tags, reserved)
                 reserved.add(draft_id)
                 created.append(draft_id)
                 if source.get("auto_publish"):
@@ -1667,6 +1788,7 @@ def build_parser():
     p.add_argument("--source-url", dest="source_url")
     p.add_argument("--source-name", dest="source_name")
     p.add_argument("--date")
+    p.add_argument("--time")
     p.add_argument("--body-file", dest="body_file")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_new)
@@ -1689,6 +1811,7 @@ def build_parser():
     p.add_argument("--title")
     p.add_argument("--tags")
     p.add_argument("--summary")
+    p.add_argument("--time")
     p.add_argument("--body-file", dest="body_file")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_edit)
