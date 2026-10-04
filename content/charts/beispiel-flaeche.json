@@ -1,0 +1,13 @@
+{
+  "titel": "Monatliches Token-Volumen im Produktivbetrieb",
+  "einheit": "Mrd. Token",
+  "typ": "flaeche",
+  "x": ["Q1", "Q2", "Q3", "Q4"],
+  "reihen": [
+    {"name": "Prompt-Eingaben", "werte": [24.5, 42.1, 68.0, 95.4]},
+    {"name": "Modell-Antworten", "werte": [8.2, 14.6, 23.8, 34.0]}
+  ],
+  "quelle": "Plattform-Telemetrie 2026",
+  "quelle_url": "https://example.org/telemetry",
+  "hinweis": "Beispieldaten zur Demonstration des Diagrammtyps"
+}

@@ -21,11 +21,12 @@ blogctl                 # das Interface (ausführbar)
 INTERFACE.md            # dieser Vertrag (+ Betriebsregeln)
 content/posts/          # veröffentlichte Artikel
 content/drafts/         # Entwürfe
+content/charts/         # Datendateien für Diagramme (JSON, Daten, kein Code)
 content/lexikon.json    # Datendatei für Fachbegriffe und Tooltips
 content/sources.json    # Quellen für `blogctl scrape`
 content/templates/      # Layout der Site (Chunk 2)
 assets/                 # Bilder und Dateien
-tests/                  # Regressionstests (python3 tests/test_time.py, tests/test_lexikon.py)
+tests/                  # Regressionstests (python3 tests/test_time.py, tests/test_lexikon.py, tests/test_charts.py)
 dist/                   # Build-Ausgabe (nicht committen)
 ```
 
@@ -42,8 +43,9 @@ dist/                   # Build-Ausgabe (nicht committen)
 | `publish ID [ID…]` | Entwurf → `content/posts/`, `status: published` | `{ok,published:[ids]}` |
 | `unpublish ID [ID…]` | zurück nach `content/drafts/` | `{ok,drafts:[ids]}` |
 | `rm ID --yes` | löscht Artikel (ohne `--yes`: Abbruch) | `{ok,removed:[]}` |
-| `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links, Lexikon-Marker | `{ok,errors:[],warnings:[]}` |
+| `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links, Lexikon- und Chart-Marker | `{ok,errors:[],warnings:[]}` |
 | `lexikon [--json]` | Begriffe auflisten (Klartext oder JSON) | `{terms:[{term,slug,text}]}` |
+| `charts [--json]` | Chart-Dateien auflisten | `{charts:[{name,titel,typ}]}` |
 | `build [--out dist]` | statische Site bauen | `{ok,out,pages}` |
 | `serve [--port 8080]` | Vorschau lokal | – |
 | `scrape [--source NAME] [--per-source N] [--limit N] [--since-days D] [--dry-run]` | neue Items aus `content/sources.json` → Entwürfe (N je Quelle, Gesamtdeckel über `--limit`) | `{ok,created:[],skipped:N,errors:[]}` |
@@ -92,6 +94,33 @@ Fachbegriffe können in Artikeln und Seiten mit dem Marker `{{Begriff}}` referen
 - **Druck**: Popups und Tooltips werden im Drucklayout (`@media print`) ausgeblendet.
 - **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html` sowie `tag/news.html` und `tag/brainstorming.html` (im Header direkt nach „Start").
 - **Validierung**: `blogctl check` verifiziert, dass jeder verwendete Marker in `content/lexikon.json` definiert ist (Marker in Backtick-Code wie `{{Begriff}}` werden ignoriert).
+
+## Diagramme (Build-Zeit-SVG, kein JavaScript)
+
+Diagramme können in Artikeln und Seiten mit dem Marker `{{chart:<name>}}` platziert werden. Die Quelldaten liegen als JSON-Dateien unter `content/charts/<name>.json`. **Dateien in `content/charts/` sind Daten, kein Code.**
+
+- **Formate**:
+
+| Typ | Beschreibung | Datenfelder |
+|---|---|---|
+| `balken` | Vertikale Balken (einzeln oder gruppiert) | `werte: [{label, wert}]` oder `gruppen: […]` + `reihen: [{name, werte}]` |
+| `balken-horizontal` | Liegende Balken (eine Reihe) | `werte: [{label, wert}]` |
+| `gestapelt` | Gestapelte Balken mit Summe | `gruppen: […]` + `reihen: [{name, werte}]` |
+| `flaeche` | Flächendiagramm (halbtransparent gefüllt) | `x: […]` + `reihen: [{name, werte}]` |
+| `punkte` | Punktdiagramm ohne Verbindungslinien | `x: […]` + `reihen: [{name, werte}]` |
+| `anteil` | Anteilsbalken (Einzelwert oder mehrere Segmente) | `wert`, `von` (optional `label`) oder `anteile: [{label, wert}]` |
+| `linie` | Liniendiagramm (mehrere Reihen) | `x: […]` + `reihen: [{name, werte}]` |
+
+Gemeinsame optionale Felder für alle Typen: `titel` (Pflicht), `einheit` (z. B. "TWh", "%"), `quelle`, `quelle_url`, `hinweis`.
+- **Markup**: Beim Build erzeugt jedes Vorkommen ein semantisches `<figure class="chart-figure">` mit inline `<svg>` und `<figcaption class="chart-caption">`. Titel als sichtbare Bildunterschrift, Quellenzeile (`quelle`, als Link auf `quelle_url`, Ziel `rel="noopener"`), der `hinweis` falls vorhanden in kleiner Schrift.
+- **Design-Zusagen (Build-Zeit-SVG)**:
+  - Vollständig inline im HTML ohne JavaScript (`<script>`-frei), ohne `<img>` oder externe Ressourcen.
+  - Skalierbar über `viewBox` und responsive Breite (`width="100%"` mit automatischem Höhenverhältnis).
+  - Helles Theme, neutraler Hintergrund, Blog-Akzentfarbe (`#0075de`), barrierefrei (`role="img"`, `<title>`).
+  - Deutsche Zahlenformatierung mit Komma als Dezimaltrenner und Tausenderpunkt (z. B. `1.200`, `5,5`).
+  - Deterministischer Build: identischer Input liefert byte-identisches SVG.
+- **Validierung**: `blogctl check` verifiziert die JSON-Syntax aller Diagramme unter `content/charts/` und die Existenz aller in Texten referenzierten Chart-Dateien (Marker in Backtick-Code wie `{{chart:name}}` werden ignoriert).
+- **CLI**: `blogctl charts [--json]` listet alle verfügbaren Chart-Dateien mit Name, Titel und Typ.
 
 ## Quellen (`content/sources.json`)
 

@@ -1,0 +1,18 @@
+{
+  "titel": "Energie pro Anfrage: kurz antworten oder lange rechnen",
+  "einheit": "Wh",
+  "typ": "balken",
+  "werte": [
+    {
+      "label": "kurze Anfrage",
+      "wert": 0.31
+    },
+    {
+      "label": "mit langem Nachdenken",
+      "wert": 3.91
+    }
+  ],
+  "quelle": "Microsoft Research, Energy use of AI inference, efficiency pathways, and test-time scaling, Fachjournal Joule (2026), arXiv:2509.20241",
+  "quelle_url": "https://www.cell.com/joule/fulltext/S2542-4351(26)00114-5",
+  "hinweis": "Medianwerte der Modellierung"
+}

@@ -1,0 +1,13 @@
+{
+  "titel": "Inferenzlatenz nach Eingabelänge",
+  "einheit": "ms",
+  "typ": "punkte",
+  "x": ["1k Token", "4k Token", "16k Token", "64k Token"],
+  "reihen": [
+    {"name": "Kompaktes Modell", "werte": [45, 85, 210, 680]},
+    {"name": "Frontier-Modell", "werte": [120, 290, 890, 2450]}
+  ],
+  "quelle": "Labor-Messreihe",
+  "quelle_url": "https://example.org/latency-test",
+  "hinweis": "Beispieldaten zur Demonstration des Diagrammtyps"
+}

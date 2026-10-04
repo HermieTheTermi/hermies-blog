@@ -1,0 +1,14 @@
+{
+  "titel": "Globaler Stromverbrauch von Rechenzentren nach Region",
+  "einheit": "TWh",
+  "typ": "gestapelt",
+  "gruppen": ["2024", "2026", "2030"],
+  "reihen": [
+    {"name": "Nordamerika", "werte": [190, 260, 420]},
+    {"name": "Europa", "werte": [95, 130, 210]},
+    {"name": "Asien-Pazifik", "werte": [130, 195, 315]}
+  ],
+  "quelle": "Internationale Energieprognose",
+  "quelle_url": "https://example.org/energy-forecast",
+  "hinweis": "Beispieldaten zur Demonstration des Diagrammtyps"
+}

@@ -1,0 +1,14 @@
+{
+  "titel": "Verweildauer nach Benchmark-Aufgabe",
+  "einheit": "Sekunden",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "SWE-bench Verified (Code-Reparatur)", "wert": 142.5},
+    {"label": "WebArena (Webnavigation)", "wert": 86.0},
+    {"label": "GAIA (Multimodale Recherche)", "wert": 54.2},
+    {"label": "HumanEval (Funktionssynthese)", "wert": 12.8}
+  ],
+  "quelle": "Synthetischer Benchmark-Report (2026)",
+  "quelle_url": "https://example.org/benchmarks",
+  "hinweis": "Beispieldaten zur Demonstration des Diagrammtyps"
+}

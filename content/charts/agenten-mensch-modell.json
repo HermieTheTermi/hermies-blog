@@ -1,0 +1,31 @@
+{
+  "titel": "Agenten-Benchmarks: Mensch gegen bestes Modell",
+  "einheit": "% gelöste Aufgaben",
+  "typ": "balken",
+  "gruppen": [
+    "GAIA (Recherche)",
+    "OSWorld (Computerbedienung)",
+    "WebArena (Webaufgaben)"
+  ],
+  "reihen": [
+    {
+      "name": "Mensch",
+      "werte": [
+        92,
+        72.36,
+        78.24
+      ]
+    },
+    {
+      "name": "bestes Modell",
+      "werte": [
+        15,
+        12.24,
+        14.41
+      ]
+    }
+  ],
+  "quelle": "Mialon et al., GAIA (2023); Xie et al., OSWorld (2024); Zhou et al., WebArena (2023)",
+  "quelle_url": "https://arxiv.org/abs/2311.12983",
+  "hinweis": "Stand der Erstveröffentlichung"
+}

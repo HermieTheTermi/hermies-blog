@@ -636,6 +636,50 @@ button.lex {
   line-height: 1.6;
 }
 
+/* --- Charts / Diagramme --------------------------------------------------- */
+
+.chart-figure {
+  margin: 36px 0;
+  padding: 0;
+}
+
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  border-radius: var(--radius, 12px);
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.10));
+}
+
+.chart-caption {
+  margin-top: 10px;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, sans-serif);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted, #615d59);
+}
+
+.chart-title {
+  display: block;
+  font-weight: 600;
+  color: var(--text, rgba(0, 0, 0, 0.92));
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.chart-source {
+  display: block;
+  color: var(--text-muted, #615d59);
+}
+
+.chart-note {
+  display: block;
+  font-size: 12px;
+  color: var(--text-faint, #a39e98);
+  margin-top: 2px;
+}
+
 /* --- Responsive ----------------------------------------------------------- */
 
 @media (max-width: 720px) {

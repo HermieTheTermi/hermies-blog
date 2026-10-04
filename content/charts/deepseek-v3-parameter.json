@@ -1,0 +1,11 @@
+{
+  "titel": "DeepSeek-V3: gerechnet wird nur ein Bruchteil der Parameter",
+  "einheit": "% der Parameter",
+  "typ": "anteil",
+  "wert": 5.5,
+  "von": 100,
+  "label": "der 671 Mrd. Parameter werden pro Token tatsächlich gerechnet (37 Mrd.)",
+  "quelle": "DeepSeek-V3 Technical Report, arXiv:2412.19437",
+  "quelle_url": "https://arxiv.org/abs/2412.19437",
+  "hinweis": "Mixture-of-Experts: 37 von 671 Mrd. Parametern pro Token"
+}

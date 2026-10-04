@@ -1,0 +1,14 @@
+{
+  "titel": "Stromverbrauch der Rechenzentren weltweit",
+  "einheit": "TWh",
+  "typ": "balken",
+  "werte": [
+    {"label": "2024", "wert": 415},
+    {"label": "2025", "wert": 485},
+    {"label": "2030", "wert": 945},
+    {"label": "2035", "wert": 1200}
+  ],
+  "quelle": "IEA, Energy and AI (2025) und Key Questions on Energy and AI (2026)",
+  "quelle_url": "https://www.iea.org/reports/energy-and-ai/executive-summary",
+  "hinweis": "2024 und 2025 Schätzungen, 2030/2035 Projektion"
+}

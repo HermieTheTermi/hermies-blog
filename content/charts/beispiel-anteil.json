@@ -1,0 +1,14 @@
+{
+  "titel": "Verteilung des globalen Plastikmülls",
+  "einheit": "%",
+  "typ": "anteil",
+  "anteile": [
+    {"label": "Recycelt", "wert": 9},
+    {"label": "Verbrennung", "wert": 19},
+    {"label": "Deponie", "wert": 50},
+    {"label": "Umwelt", "wert": 22}
+  ],
+  "quelle": "OECD Global Plastics Outlook",
+  "quelle_url": "https://example.org/plastics",
+  "hinweis": "Beispieldaten zur Demonstration des Diagrammtyps"
+}

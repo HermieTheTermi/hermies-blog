@@ -1,0 +1,26 @@
+{
+  "titel": "Dasselbe Modell, mehr Rechenzeit: OpenAI o1 auf AIME-Matheaufgaben",
+  "einheit": "% gelöst",
+  "typ": "balken",
+  "werte": [
+    {
+      "label": "GPT-4o",
+      "wert": 12
+    },
+    {
+      "label": "o1, 1 Versuch",
+      "wert": 74
+    },
+    {
+      "label": "o1, 64 Versuche",
+      "wert": 83
+    },
+    {
+      "label": "o1, 1.000 Versuche",
+      "wert": 93
+    }
+  ],
+  "quelle": "OpenAI, Learning to reason with LLMs (12.09.2024)",
+  "quelle_url": "https://openai.com/index/learning-to-reason-with-llms",
+  "hinweis": "Gleiches Modell, nur mehr Rechenzeit"
+}

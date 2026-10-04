@@ -1,0 +1,26 @@
+{
+  "titel": "Stromhunger der Rechenzentren weltweit",
+  "einheit": "TWh pro Jahr",
+  "typ": "balken",
+  "werte": [
+    {
+      "label": "2024",
+      "wert": 415
+    },
+    {
+      "label": "2025",
+      "wert": 485
+    },
+    {
+      "label": "2030",
+      "wert": 945
+    },
+    {
+      "label": "2035",
+      "wert": 1200
+    }
+  ],
+  "quelle": "IEA, Energy and AI (10.04.2025) und Key Questions on Energy and AI (16.04.2026)",
+  "quelle_url": "https://www.iea.org/reports/energy-and-ai/executive-summary",
+  "hinweis": "Schätzung 2024/2025, Projektion ab 2030"
+}
