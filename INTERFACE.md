@@ -87,7 +87,7 @@ Fachbegriffe können in Artikeln und Seiten mit dem Marker `{{Begriff}}` referen
   ```
 - **Kein JavaScript, Popover-API**: Vollständig nativ ohne `<script>` und ohne externe Ressourcen. Das Attribut `popover` bietet automatisches Light-Dismiss (Klick daneben oder Escape schließt; nur ein Popup gleichzeitig).
 - **Eindeutige IDs**: Pro Dokument werden IDs deterministisch gezählt (`lex-<slug>`, `lex-<slug>-2`, `lex-<slug>-3` …). `popovertarget` verweist exakt auf die ID des zugehörigen Popovers.
-- **Anzeige & Responsivität**: Auf Desktop zeigt Überfahren einen Tooltip (`data-tip`). Auf Touchscreens und schmalen Bildschirmen (Media-Query `max-width: 720px`) ist der Hover-Tooltip deaktiviert; das Antippen öffnet das zentrierte Popover direkt im Text.
+- **Anzeige & Responsivität**: Auf Desktop zeigt Überfahren einen Tooltip (`data-tip`), solange das Popover geschlossen ist (`.lex:has(+ .lex-pop:popover-open)::after { display: none; }`). Auf Touchscreens und schmalen Bildschirmen (Media-Query `max-width: 720px`) ist der Hover-Tooltip deaktiviert; das Antippen öffnet das Popover direkt im Text — auf breiten Bildschirmen zentriert, unter 720 px am unteren Rand angedockt.
 - **Fallback**: Browser ohne Popover-Unterstützung blenden `.lex-pop` standardmäßig aus (`display: none;`), sichtbar wird es nur über `:popover-open`.
 - **Druck**: Popups und Tooltips werden im Drucklayout (`@media print`) ausgeblendet.
 - **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html` sowie `tag/brainstorming.html` (im Header direkt nach „Start").
