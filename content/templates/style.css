@@ -566,6 +566,10 @@ button.lex {
   visibility: visible;
 }
 
+.lex:has(+ .lex-pop:popover-open)::after {
+  display: none;
+}
+
 .lex-pop {
   display: none;
   position: fixed;
@@ -667,6 +671,13 @@ button.lex {
 
   .lex::after {
     display: none !important;
+  }
+
+  .lex-pop:popover-open {
+    inset: auto 0.75rem 0.75rem 0.75rem;   /* unten, mit Seitenrand */
+    margin: 0;
+    width: auto;
+    max-width: none;
   }
 }
 

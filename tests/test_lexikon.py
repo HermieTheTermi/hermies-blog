@@ -480,6 +480,37 @@ class BlogLexikonTestCase(unittest.TestCase):
             self.assertEqual(item["slug"], blogctl.slugify(term))
             self.assertEqual(item["text"], text)
 
+    # 13. Popover-CSS-Regeln in dist/style.css vorhanden
+    def test_13_popover_css_rules(self):
+        dist_dir = os.path.join(self.tmpdir, "dist")
+        code, out, err = self.run_cli(["build", "--out", dist_dir])
+        self.assertEqual(code, 0, f"build failed: {err}")
+
+        css_path = os.path.join(dist_dir, "style.css")
+        self.assertTrue(os.path.isfile(css_path), "dist/style.css existiert nicht")
+        with open(css_path, "r", encoding="utf-8") as f:
+            css = f.read()
+
+        # Regel 1: Hover-Tooltip aussetzen, solange das eigene Popup offen ist
+        self.assertIn(".lex:has(+ .lex-pop:popover-open)", css)
+        self.assertRegex(
+            css,
+            r"\.lex:has\(\+\s*\.lex-pop:popover-open\)::after\s*\{[^}]*display:\s*none",
+            "Regel .lex:has(+ .lex-pop:popover-open)::after fehlt oder setzt display nicht auf none",
+        )
+
+        # Regel 2: Popup auf schmalen Bildschirmen unten andocken
+        media_pattern = r"@media\s*\([^)]*max-width:\s*720px[^)]*\)\s*\{(?P<block>(?:[^{}]*\{[^{}]*\})*?[^{}]*)\}"
+        match = re.search(media_pattern, css, flags=re.DOTALL)
+        self.assertIsNotNone(match, "@media (max-width: 720px) nicht in dist/style.css gefunden")
+        media_block = match.group("block")
+        self.assertIn(".lex-pop:popover-open", media_block)
+        self.assertRegex(
+            media_block,
+            r"\.lex-pop:popover-open\s*\{[^}]*inset:\s*auto\s+0\.75rem\s+0\.75rem\s+0\.75rem",
+            "Positionierung von .lex-pop:popover-open in @media (max-width: 720px) fehlt",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
