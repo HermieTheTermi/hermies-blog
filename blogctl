@@ -31,6 +31,7 @@ DRAFTS = os.path.join(CONTENT, "drafts")
 POSTS = os.path.join(CONTENT, "posts")
 PAGES = os.path.join(CONTENT, "pages")
 ASSETS = os.path.join(ROOT, "assets")
+LEXIKON_JSON = os.path.join(CONTENT, "lexikon.json")
 
 FIELD_ORDER = [
     "title", "slug", "date", "time", "status", "tags", "summary",
@@ -44,6 +45,62 @@ UMAP = {
 }
 
 LINK_RE = re.compile(r"\]\(([^)]+)\)")
+CODE_SPAN_RE = re.compile(r"`([^`]+)`")
+LEX_MARKER_RE = re.compile(r"\{\{([^{}\n]+)\}\}")
+
+
+def extract_representation_markers(markdown_text):
+    if not markdown_text:
+        return []
+    lines = str(markdown_text).split("\n")
+    clean_lines = []
+    in_code_block = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code_block = not in_code_block
+            continue
+        if not in_code_block:
+            clean_lines.append(line)
+    text = "\n".join(clean_lines)
+    text_without_code = CODE_SPAN_RE.sub("", text)
+    markers = []
+    for match in LEX_MARKER_RE.finditer(text_without_code):
+        raw = match.group(1).strip()
+        markers.append(html.unescape(raw))
+    return markers
+
+
+def validate_lexikon():
+    errors = []
+    if not os.path.isfile(LEXIKON_JSON):
+        errors.append("content/lexikon.json fehlt")
+        return {}, errors
+    try:
+        with open(LEXIKON_JSON, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+    except Exception as exc:
+        errors.append("content/lexikon.json ist kein gueltiges JSON: %s" % exc)
+        return {}, errors
+
+    if not isinstance(data, dict):
+        errors.append("content/lexikon.json muss ein JSON-Objekt sein")
+        return {}, errors
+
+    seen_lower = {}
+    for key, val in data.items():
+        if not isinstance(key, str) or not isinstance(val, str):
+            errors.append("content/lexikon.json muss ein flaches Objekt String->String sein")
+            continue
+        if not val.strip():
+            errors.append("content/lexikon.json: leerer Erklaerungstext fuer '%s'" % key)
+        k_lower = key.lower()
+        if k_lower in seen_lower:
+            errors.append("content/lexikon.json: doppelter Begriff '%s' (kollidiert mit '%s')" % (key, seen_lower[k_lower]))
+        else:
+            seen_lower[k_lower] = key
+
+    return data, errors
 
 
 def ensure_dirs():
@@ -562,6 +619,8 @@ def cmd_rm(args):
 def cmd_check(args):
     errors = []
     warnings = []
+    lex_data, lex_errors = validate_lexikon()
+    errors.extend(lex_errors)
     seen_ids = {}
     seen_source = {}
     articles = list_articles("all")
@@ -620,6 +679,10 @@ def cmd_check(args):
             if find_article(stem):
                 continue
             errors.append("%s: interner Link zeigt ins Leere: %s" % (article_id, target))
+        markers = extract_representation_markers(body)
+        for term in markers:
+            if term not in lex_data:
+                errors.append("%s: unbekannter Begriff '%s' in content/lexikon.json nicht definiert" % (article_id, term))
     seen_pages = {}
     for page in list_pages():
         slug = page["slug"]
@@ -646,6 +709,29 @@ def cmd_check(args):
     return 0 if ok else 1
 
 
+def cmd_lexikon(args):
+    lex_data, lex_errors = validate_lexikon()
+    if lex_errors:
+        for err in lex_errors:
+            sys.stderr.write("FEHLER: %s\n" % err)
+        if getattr(args, "json", False):
+            emit_json({"ok": False, "errors": lex_errors})
+        return 1
+
+    sorted_terms = sorted(lex_data.items(), key=lambda kv: kv[0].lower())
+    if getattr(args, "json", False):
+        terms = [
+            {"term": term, "slug": slugify(term), "text": text}
+            for term, text in sorted_terms
+        ]
+        emit_json({"terms": terms})
+        return 0
+
+    for term, _ in sorted_terms:
+        sys.stdout.write(term + "\n")
+    return 0
+
+
 # ---------------------------------------------------------------------------
 # Chunk 2: statische Site (build/serve)
 # ---------------------------------------------------------------------------
@@ -661,13 +747,12 @@ DEFAULT_SITE = {
     "lang": "de",
 }
 
-TEMPLATE_FILES = ["base.html", "index.html", "post.html", "tag.html", "page.html", "style.css"]
+TEMPLATE_FILES = ["base.html", "index.html", "post.html", "tag.html", "page.html", "style.css", "lexikon.html"]
 
 WEEKDAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-CODE_SPAN_RE = re.compile(r"`([^`]+)`")
 IMG_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 INLINE_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 BOLD_RE = re.compile(r"\*\*(.+?)\*\*")
@@ -676,6 +761,72 @@ ITALIC_RE = re.compile(r"\*(.+?)\*")
 
 def esc(text):
     return html.escape(str(text), quote=True)
+
+
+def escape_tooltip(text):
+    text = " ".join(str(text or "").split())
+    return html.escape(text, quote=True)
+
+
+_LEXIKON_CACHE = {}
+
+
+def load_lexikon(path=None):
+    target = path or LEXIKON_JSON
+    if not os.path.isfile(target):
+        return {}
+    try:
+        mtime = os.path.getmtime(target)
+        cached = _LEXIKON_CACHE.get(target)
+        if cached and cached[0] == mtime:
+            return cached[1]
+        with open(target, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        if isinstance(data, dict):
+            _LEXIKON_CACHE[target] = (mtime, data)
+            return data
+    except Exception:
+        pass
+    return {}
+
+
+def _render_lexikon_markers(text, lexikon=None):
+    if lexikon is None:
+        lexikon = load_lexikon()
+    if not lexikon:
+        return text
+
+    ci_map = {k.lower(): (k, v) for k, v in lexikon.items()}
+
+    def _replace(match):
+        raw = match.group(1)
+        term = raw.strip()
+        unescaped_term = html.unescape(term)
+        explanation = None
+        anchor_term = term
+
+        if term in lexikon:
+            explanation = lexikon[term]
+        elif unescaped_term in lexikon:
+            explanation = lexikon[unescaped_term]
+            anchor_term = unescaped_term
+        elif term.lower() in ci_map:
+            canonical, explanation = ci_map[term.lower()]
+            anchor_term = canonical
+        elif unescaped_term.lower() in ci_map:
+            canonical, explanation = ci_map[unescaped_term.lower()]
+            anchor_term = canonical
+
+        if explanation is None:
+            return match.group(0)
+
+        anchor = slugify(anchor_term)
+        tip = escape_tooltip(explanation)
+        return '<a class="lex" href="lexikon.html#%s" data-tip="%s">%s</a>' % (
+            anchor, tip, raw
+        )
+
+    return LEX_MARKER_RE.sub(_replace, text)
 
 
 def load_site():
@@ -724,7 +875,9 @@ def _render_inline_text(text):
         lambda m: '<a href="%s">%s</a>' % (m.group(2), m.group(1)), text)
     text = BOLD_RE.sub(r"<strong>\1</strong>", text)
     text = ITALIC_RE.sub(r"<em>\1</em>", text)
+    text = _render_lexikon_markers(text)
     return text
+
 
 
 def render_inline(text):
@@ -903,6 +1056,7 @@ def render_base(tpl, site, prefix, title, description, content):
         "HOME_HREF": prefix + "index.html",
         "FEED_HREF": prefix + "feed.xml",
         "TAGS_HREF": prefix + "tags.html",
+        "LEXIKON_HREF": prefix + "lexikon.html",
         "IMPRESSUM_HREF": prefix + "impressum.html",
         "DATENSCHUTZ_HREF": prefix + "datenschutz.html",
         "CONTENT": content,
@@ -1110,6 +1264,27 @@ def do_build(out_arg):
             "Beiträge mit Tag %s" % name, content))
         pages += 1
 
+    lexikon = load_lexikon()
+    lex_entries = []
+    sorted_terms = sorted(lexikon.items(), key=lambda kv: kv[0].lower())
+    for term, text in sorted_terms:
+        slug = slugify(term)
+        lex_entries.append(
+            '  <div class="lex-entry" id="%s">\n    <h2>%s</h2>\n    <p>%s</p>\n  </div>' % (
+                slug, esc(term), esc(text)
+            )
+        )
+    if lex_entries:
+        lex_list_html = '<div class="lex-list">\n%s\n</div>\n' % "\n".join(lex_entries)
+    else:
+        lex_list_html = '<p class="empty">Noch keine Einträge im Lexikon.</p>\n'
+
+    lexikon_content = fill(tpl["lexikon.html"], {"LEXIKON_LIST": lex_list_html})
+    write("lexikon.html", render_base(
+        tpl, site, "", "Lexikon – " + site["title"], "Begriffe und Erklärungen",
+        lexikon_content))
+    pages += 1
+
     write("feed.xml", render_feed(site, posts))
 
     urls = [("index.html", latest)]
@@ -1120,6 +1295,7 @@ def do_build(out_arg):
     urls.append(("tags.html", latest))
     for key, _name in tag_items:
         urls.append(("tag/%s.html" % key, latest))
+    urls.append(("lexikon.html", latest))
     write("sitemap.xml", render_sitemap(site, urls))
 
     return out_dir, pages
@@ -1835,6 +2011,10 @@ def build_parser():
     p = sub.add_parser("check")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_check)
+
+    p = sub.add_parser("lexikon")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_lexikon)
 
     p = sub.add_parser("build")
     p.add_argument("--out", default="dist")

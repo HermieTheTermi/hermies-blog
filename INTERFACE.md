@@ -21,10 +21,11 @@ blogctl                 # das Interface (ausführbar)
 INTERFACE.md            # dieser Vertrag (+ Betriebsregeln)
 content/posts/          # veröffentlichte Artikel
 content/drafts/         # Entwürfe
+content/lexikon.json    # Datendatei für Fachbegriffe und Tooltips
 content/sources.json    # Quellen für `blogctl scrape`
 content/templates/      # Layout der Site (Chunk 2)
 assets/                 # Bilder und Dateien
-tests/                  # Regressionstests (python3 tests/test_time.py)
+tests/                  # Regressionstests (python3 tests/test_time.py, tests/test_lexikon.py)
 dist/                   # Build-Ausgabe (nicht committen)
 ```
 
@@ -41,7 +42,8 @@ dist/                   # Build-Ausgabe (nicht committen)
 | `publish ID [ID…]` | Entwurf → `content/posts/`, `status: published` | `{ok,published:[ids]}` |
 | `unpublish ID [ID…]` | zurück nach `content/drafts/` | `{ok,drafts:[ids]}` |
 | `rm ID --yes` | löscht Artikel (ohne `--yes`: Abbruch) | `{ok,removed:[]}` |
-| `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links | `{ok,errors:[],warnings:[]}` |
+| `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links, Lexikon-Marker | `{ok,errors:[],warnings:[]}` |
+| `lexikon [--json]` | Begriffe auflisten (Klartext oder JSON) | `{terms:[{term,slug,text}]}` |
 | `build [--out dist]` | statische Site bauen | `{ok,out,pages}` |
 | `serve [--port 8080]` | Vorschau lokal | – |
 | `scrape [--source NAME] [--per-source N] [--limit N] [--since-days D] [--dry-run]` | neue Items aus `content/sources.json` → Entwürfe (N je Quelle, Gesamtdeckel über `--limit`) | `{ok,created:[],skipped:N,errors:[]}` |
@@ -98,7 +100,7 @@ Artikel werden mit Datum und Uhrzeit des Quell-Zeitpunkts datiert (Aktualität),
 
 ## Betriebsregeln (verbindlich)
 
-**Ohne Rückfrage erlaubt:** `new`, `edit`, `check`, `list`, `show`, `build`, `serve` auf Entwürfen; `scrape` auswerten, Entwürfe anlegen, Tags/Summary setzen, Titel kürzen, Fakten prüfen.
+**Ohne Rückfrage erlaubt:** `new`, `edit`, `check`, `list`, `show`, `build`, `serve`, `lexikon` auf Entwürfen; `scrape` auswerten, Entwürfe anlegen, Tags/Summary setzen, Titel kürzen, Fakten prüfen.
 
 **Nur mit ausdrücklicher Freigabe:** `publish` und `unpublish`, `rm`, `deploy` in ein öffentliches Remote, neue Quellen in `content/sources.json`, `auto_publish: true` setzen, Änderungen an bereits veröffentlichten Artikeln über Tippfehler/Format hinaus.
 

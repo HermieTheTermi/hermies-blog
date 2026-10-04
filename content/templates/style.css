@@ -506,6 +506,83 @@ p {
   font-size: 12px;
 }
 
+/* --- Lexikon / Fachbegriffe ----------------------------------------------- */
+
+.lex {
+  position: relative;
+  color: inherit;
+  text-decoration: underline dashed var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+.lex:hover,
+.lex:focus {
+  color: var(--accent);
+}
+
+.lex::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  width: max-content;
+  max-width: min(20rem, 90vw);
+  padding: 8px 12px;
+  background: var(--surface-warm);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 400;
+  white-space: normal;
+  text-align: left;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 1000;
+}
+
+.lex:hover::after,
+.lex:focus::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lex-entry {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 24px;
+}
+
+.lex-entry:last-child {
+  border-bottom: none;
+}
+
+.lex-entry h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.lex-entry p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+
 /* --- Responsive ----------------------------------------------------------- */
 
 @media (max-width: 720px) {
@@ -559,6 +636,15 @@ p {
   .back-link,
   .post-note {
     display: none;
+  }
+
+  .lex::after {
+    display: none !important;
+  }
+
+  .lex {
+    text-decoration: none;
+    color: inherit;
   }
 
   body {
