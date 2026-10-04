@@ -76,6 +76,23 @@ Artikel werden mit Datum und Uhrzeit des Quell-Zeitpunkts datiert (Aktualität),
 - **Sortierung**: Startseite, Tag-Seiten, Feed und Sitemap sortieren absteigend nach `(date, time, id)`. Fehlt `time`, sortiert der Artikel wie `00:00`.
 - **Feed**: `<pubDate>` im RSS-Feed enthält die Uhrzeit mit korrektem Berliner Zeitzonen-Offset nach RFC 822 (z. B. `Sun, 04 Oct 2026 09:15:00 +0200` im Sommer bzw. `+0100` im Winter; ohne Uhrzeit `00:00:00`).
 
+## Lexikon, Popover und Fachbegriffe
+
+Fachbegriffe können in Artikeln und Seiten mit dem Marker `{{Begriff}}` referenziert werden. Die Erklärungen liegen zentral in `content/lexikon.json`.
+
+- **Markup & Popover-API**: Beim Build erzeugt jedes Vorkommen einen semantischen Button und ein natives Popover-Element:
+  ```html
+  <button type="button" class="lex" popovertarget="lex-<slug>" data-tip="…">Begriff</button>
+  <span class="lex-pop" popover id="lex-<slug>"><strong>Begriff</strong> Erklärung … <a href="lexikon.html#<slug>">Im Lexikon</a></span>
+  ```
+- **Kein JavaScript, Popover-API**: Vollständig nativ ohne `<script>` und ohne externe Ressourcen. Das Attribut `popover` bietet automatisches Light-Dismiss (Klick daneben oder Escape schließt; nur ein Popup gleichzeitig).
+- **Eindeutige IDs**: Pro Dokument werden IDs deterministisch gezählt (`lex-<slug>`, `lex-<slug>-2`, `lex-<slug>-3` …). `popovertarget` verweist exakt auf die ID des zugehörigen Popovers.
+- **Anzeige & Responsivität**: Auf Desktop zeigt Überfahren einen Tooltip (`data-tip`). Auf Touchscreens und schmalen Bildschirmen (Media-Query `max-width: 720px`) ist der Hover-Tooltip deaktiviert; das Antippen öffnet das zentrierte Popover direkt im Text.
+- **Fallback**: Browser ohne Popover-Unterstützung blenden `.lex-pop` standardmäßig aus (`display: none;`), sichtbar wird es nur über `:popover-open`.
+- **Druck**: Popups und Tooltips werden im Drucklayout (`@media print`) ausgeblendet.
+- **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html` sowie `tag/brainstorming.html` (im Header direkt nach „Start").
+- **Validierung**: `blogctl check` verifiziert, dass jeder verwendete Marker in `content/lexikon.json` definiert ist (Marker in Backtick-Code wie `{{Begriff}}` werden ignoriert).
+
 ## Quellen (`content/sources.json`)
 
 ```json

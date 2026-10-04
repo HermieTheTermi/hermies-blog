@@ -508,6 +508,16 @@ p {
 
 /* --- Lexikon / Fachbegriffe ----------------------------------------------- */
 
+button.lex {
+  display: inline;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+}
+
 .lex {
   position: relative;
   color: inherit;
@@ -554,6 +564,45 @@ p {
 .lex:focus::after {
   opacity: 1;
   visibility: visible;
+}
+
+.lex-pop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: max-content;
+  max-width: min(24rem, 90vw);
+  height: fit-content;
+  padding: 16px 20px;
+  background: var(--surface-warm);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: normal;
+  z-index: 2000;
+}
+
+.lex-pop:popover-open {
+  display: block;
+}
+
+.lex-pop strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.lex-pop a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.lex-pop::backdrop {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .lex-list {
@@ -615,6 +664,10 @@ p {
   .footer-links {
     justify-content: flex-start;
   }
+
+  .lex::after {
+    display: none !important;
+  }
 }
 
 /* --- Motion --------------------------------------------------------------- */
@@ -638,7 +691,8 @@ p {
     display: none;
   }
 
-  .lex::after {
+  .lex::after,
+  .lex-pop {
     display: none !important;
   }
 

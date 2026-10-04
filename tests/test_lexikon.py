@@ -101,8 +101,8 @@ class BlogLexikonTestCase(unittest.TestCase):
         blogctl.write_article(path, fm, body)
         return path
 
-    # 1. Artikel mit {{Token}} -> Artikelseite enthaelt <a class="lex" href="lexikon.html#token"
-    #    und data-tip="..." mit dem Text aus lexikon.json
+    # 1. Artikel mit {{Token}} -> <button type="button" class="lex" popovertarget="lex-token" data-tip="...">
+    #    und kein href="lexikon.html#..." am Button.
     def test_1_article_with_marker_rendering(self):
         body = "Ein Sprachmodell zerlegt Text in {{Token}}. Roboter brauchen einen {{Greifpunkt}}."
         self.create_post("marker-post", body=body)
@@ -121,18 +121,85 @@ class BlogLexikonTestCase(unittest.TestCase):
         token_tip = lex_data["Token"]
         greifpunkt_tip = lex_data["Greifpunkt"]
 
-        # Link and data-tip for Token
-        self.assertIn('<a class="lex" href="lexikon.html#token"', html_content)
+        # Button for Token with popovertarget and data-tip, no href on button
+        self.assertIn('<button type="button" class="lex" popovertarget="lex-token"', html_content)
         self.assertIn(f'data-tip="{token_tip}"', html_content)
-        self.assertIn('>Token</a>', html_content)
+        self.assertIn('>Token</button>', html_content)
+        self.assertNotIn('<button type="button" class="lex" href=', html_content)
+        self.assertNotIn('href="lexikon.html#token">Token</button>', html_content)
 
-        # Link and data-tip for Greifpunkt
-        self.assertIn('<a class="lex" href="lexikon.html#greifpunkt"', html_content)
+        # Button for Greifpunkt
+        self.assertIn('<button type="button" class="lex" popovertarget="lex-greifpunkt"', html_content)
         self.assertIn(f'data-tip="{greifpunkt_tip}"', html_content)
-        self.assertIn('>Greifpunkt</a>', html_content)
+        self.assertIn('>Greifpunkt</button>', html_content)
 
-    # 2. Marker in Backtick-Code bleibt unveraendert; nach dem Build keine {{-Reste in dist/
-    def test_2_backtick_code_and_no_marker_remnants(self):
+        # Popup element for Token
+        token_popup = f'<span class="lex-pop" popover id="lex-token"><strong>Token</strong> {token_tip} <a href="lexikon.html#token">Im Lexikon</a></span>'
+        self.assertIn(token_popup, html_content)
+
+        # Popup element for Greifpunkt
+        greifpunkt_popup = f'<span class="lex-pop" popover id="lex-greifpunkt"><strong>Greifpunkt</strong> {greifpunkt_tip} <a href="lexikon.html#greifpunkt">Im Lexikon</a></span>'
+        self.assertIn(greifpunkt_popup, html_content)
+
+    # 2. Jedem popovertarget entspricht genau ein id="..." im Dokument;
+    #    bei mehrfachem Vorkommen desselben Begriffs sind die IDs eindeutig (lex-token, lex-token-2, ...)
+    def test_2_multiple_occurrences_unique_ids(self):
+        body = (
+            "Erster Absatz mit {{Token}} und {{Greifpunkt}}.\n\n"
+            "Zweiter Absatz mit noch einem {{Token}}.\n\n"
+            "Dritter Absatz mit drittem {{Token}} und zweitem {{Greifpunkt}}."
+        )
+        self.create_post("multi-post", body=body)
+        dist_dir = os.path.join(self.tmpdir, "dist")
+        code, out, err = self.run_cli(["build", "--out", dist_dir])
+        self.assertEqual(code, 0, f"build failed: {err}")
+
+        post_path = os.path.join(dist_dir, "multi-post.html")
+        with open(post_path, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        # Sequential targets
+        self.assertIn('popovertarget="lex-token"', html)
+        self.assertIn('popovertarget="lex-token-2"', html)
+        self.assertIn('popovertarget="lex-token-3"', html)
+        self.assertIn('popovertarget="lex-greifpunkt"', html)
+        self.assertIn('popovertarget="lex-greifpunkt-2"', html)
+
+        # Sequential IDs
+        self.assertIn('id="lex-token"', html)
+        self.assertIn('id="lex-token-2"', html)
+        self.assertIn('id="lex-token-3"', html)
+        self.assertIn('id="lex-greifpunkt"', html)
+        self.assertIn('id="lex-greifpunkt-2"', html)
+
+        # Every popovertarget must match exactly one id in the document
+        targets = re.findall(r'popovertarget="([^"]+)"', html)
+        self.assertEqual(len(targets), 5)
+        for target in targets:
+            id_matches = re.findall(rf'id="{re.escape(target)}"', html)
+            self.assertEqual(len(id_matches), 1, f"popovertarget '{target}' muss genau eine ID im Dokument haben")
+
+    # 3. Popup-Element enthaelt <strong>Token</strong>, die Erklaerung und den Lexikon-Link
+    def test_3_popup_element_structure(self):
+        body = "Ein Satz mit {{Token}}."
+        self.create_post("popup-struct-post", body=body)
+        dist_dir = os.path.join(self.tmpdir, "dist")
+        code, out, err = self.run_cli(["build", "--out", dist_dir])
+        self.assertEqual(code, 0, f"build failed: {err}")
+
+        post_path = os.path.join(dist_dir, "popup-struct-post.html")
+        with open(post_path, "r", encoding="utf-8") as f:
+            html = f.read()
+
+        with open(blogctl.LEXIKON_JSON, "r", encoding="utf-8") as f:
+            lex_data = json.load(f)
+        tip = lex_data["Token"]
+
+        expected = f'<span class="lex-pop" popover id="lex-token"><strong>Token</strong> {tip} <a href="lexikon.html#token">Im Lexikon</a></span>'
+        self.assertIn(expected, html)
+
+    # 4. Marker in Backtick-Code bleibt unveraendert; nach dem Build keine {{-Reste in dist/
+    def test_4_backtick_code_and_no_marker_remnants(self):
         body = (
             "## TL;DR: {{Token}} und {{Mixture-of-Experts}}\n\n"
             "Normaler Text mit `{{Token}}` im Code-Span und {{Greifpunkt}} im Text.\n\n"
@@ -168,14 +235,13 @@ class BlogLexikonTestCase(unittest.TestCase):
                 file_path = os.path.join(root, file)
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
-                # Strip out <code>...</code> and <pre>...</pre>
                 stripped = re.sub(r"<code>.*?</code>", "", content, flags=re.DOTALL)
                 stripped = re.sub(r"<pre>.*?</pre>", "", stripped, flags=re.DOTALL)
                 remnants = re.findall(r"\{\{.*?\}\}", stripped)
                 self.assertEqual(remnants, [], f"Unerwartete {{{{...}}}}-Reste in {file}: {remnants}")
 
-    # 3. dist/lexikon.html existiert, enthaelt jeden Begriff mit korrekter Anker-id, alphabetisch sortiert
-    def test_3_lexikon_page_structure_and_sorting(self):
+    # 5. dist/lexikon.html existiert, enthaelt jeden Begriff mit korrekter Anker-id, alphabetisch sortiert
+    def test_5_lexikon_page_structure_and_sorting(self):
         dist_dir = os.path.join(self.tmpdir, "dist")
         code, out, err = self.run_cli(["build", "--out", dist_dir])
         self.assertEqual(code, 0, f"build failed: {err}")
@@ -203,8 +269,8 @@ class BlogLexikonTestCase(unittest.TestCase):
             self.assertGreater(pos, last_pos, f"Begriff {term} nicht alphabetisch sortiert in lexikon.html")
             last_pos = pos
 
-    # 4. Nav- und Footer-Link "Lexikon" sind auf allen Seiten vorhanden (grep ueber dist/*.html)
-    def test_4_nav_and_footer_links_present_on_all_pages(self):
+    # 6. Nav- und Footer-Link "Lexikon" sind auf allen Seiten vorhanden
+    def test_6_lexikon_nav_and_footer_links(self):
         self.create_post("nav-test-post", {"tags": ["rubrik"]})
         dist_dir = os.path.join(self.tmpdir, "dist")
         code, out, err = self.run_cli(["build", "--out", dist_dir])
@@ -223,17 +289,46 @@ class BlogLexikonTestCase(unittest.TestCase):
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
-            # Root pages link to lexikon.html, subpages (tag/) link to ../lexikon.html
             expected_href = "../lexikon.html" if "/" in rel else "lexikon.html"
             lex_link_snippet = f'href="{expected_href}">Lexikon</a>'
 
             self.assertIn(lex_link_snippet, content, f"Lexikon-Link fehlt in {rel}")
-            # Count must be at least 2: once in header nav, once in footer
             count = content.count(lex_link_snippet)
             self.assertGreaterEqual(count, 2, f"Lexikon-Link nicht in Nav UND Footer in {rel} (count={count})")
 
-    # 5. sitemap.xml enthaelt lexikon.html
-    def test_5_sitemap_contains_lexikon(self):
+    # 7. Nav- und Footer-Link "Brainstorming" auf tag/brainstorming.html in allen Seiten, direkt nach Start
+    def test_7_brainstorming_nav_and_footer_links(self):
+        self.create_post("brainstorming-nav-post", {"tags": ["brainstorming"]})
+        dist_dir = os.path.join(self.tmpdir, "dist")
+        code, out, err = self.run_cli(["build", "--out", dist_dir])
+        self.assertEqual(code, 0, f"build failed: {err}")
+
+        html_files = []
+        for root, dirs, files in os.walk(dist_dir):
+            for file in files:
+                if file.endswith(".html"):
+                    html_files.append(os.path.join(root, file))
+
+        self.assertGreaterEqual(len(html_files), 4, "Zu wenige HTML-Dateien generiert")
+
+        for file_path in html_files:
+            rel = os.path.relpath(file_path, dist_dir)
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read()
+
+            expected_bs_href = "../tag/brainstorming.html" if "/" in rel else "tag/brainstorming.html"
+            bs_link_snippet = f'href="{expected_bs_href}">Brainstorming</a>'
+
+            self.assertIn(bs_link_snippet, content, f"Brainstorming-Link fehlt in {rel}")
+            count = content.count(bs_link_snippet)
+            self.assertGreaterEqual(count, 2, f"Brainstorming-Link nicht in Nav UND Footer in {rel} (count={count})")
+
+            # Check that in header nav, Brainstorming is directly after Start
+            expected_nav_pattern = rf'<a href="[^"]*index\.html">Start</a>\s*<a href="{re.escape(expected_bs_href)}">Brainstorming</a>'
+            self.assertRegex(content, expected_nav_pattern, f"Brainstorming nicht direkt nach Start in {rel}")
+
+    # 8. sitemap.xml enthaelt lexikon.html
+    def test_8_sitemap_contains_lexikon(self):
         dist_dir = os.path.join(self.tmpdir, "dist")
         code, out, err = self.run_cli(["build", "--out", dist_dir])
         self.assertEqual(code, 0, f"build failed: {err}")
@@ -245,8 +340,8 @@ class BlogLexikonTestCase(unittest.TestCase):
 
         self.assertIn("lexikon.html</loc>", sitemap_content, "lexikon.html fehlt in sitemap.xml")
 
-    # 6. check: unbekannter Marker -> Fehler; bekannter Marker -> kein Fehler; kaputtes lexikon.json -> Fehler
-    def test_6_check_validation(self):
+    # 9. check: unbekannter Marker -> Fehler; bekannter Marker -> kein Fehler; kaputtes lexikon.json -> Fehler
+    def test_9_check_validation(self):
         # A: Known marker -> check passes
         self.create_post("valid-post", body="Text mit {{Token}}.")
         code, out, err = self.run_cli(["check"])
@@ -290,8 +385,8 @@ class BlogLexikonTestCase(unittest.TestCase):
         code, out, err = self.run_cli(["check"])
         self.assertEqual(code, 1, "check muss fehlschlagen wenn lexikon.json kein String->String-Objekt ist")
 
-    # 7. Entwicklungsumrechnung im Tooltip: &, ", < im Erklaerungstext bleiben escaped
-    def test_7_tooltip_special_chars_escaping(self):
+    # 10. Escaping im data-tip und im Popup (&, ", <)
+    def test_10_special_chars_escaping_in_tip_and_popup(self):
         special_text = 'Erklaerung mit <tag>, "Anfuehrungszeichen" & Ampersand sowie Zeilenumbruch\nzweite Zeile.'
         with open(blogctl.LEXIKON_JSON, "w", encoding="utf-8") as f:
             json.dump({"Sonder": special_text}, f)
@@ -308,12 +403,19 @@ class BlogLexikonTestCase(unittest.TestCase):
         self.assertIn('&lt;tag&gt;', html)
         self.assertIn('&quot;Anfuehrungszeichen&quot;', html)
         self.assertIn('&amp; Ampersand', html)
-        # Newline normalized to space
         self.assertIn('Zeilenumbruch zweite Zeile.', html)
         self.assertNotIn('\nzweite Zeile', html)
 
-    # 8. Determinismus: zwei Builds byte-identisch. Kein <script, keine externen Ressourcen in dist/
-    def test_8_determinism_and_no_external_resources(self):
+        # Check escaped characters in popup element
+        expected_popup = (
+            '<span class="lex-pop" popover id="lex-sonder">'
+            '<strong>Sonder</strong> Erklaerung mit &lt;tag&gt;, &quot;Anfuehrungszeichen&quot; &amp; Ampersand sowie Zeilenumbruch zweite Zeile. '
+            '<a href="lexikon.html#sonder">Im Lexikon</a></span>'
+        )
+        self.assertIn(expected_popup, html)
+
+    # 11. Determinismus: zwei Builds byte-identisch. Kein <script, keine externen Ressourcen in dist/
+    def test_11_determinism_and_no_external_resources(self):
         self.create_post("det-post-1", body="Artikel 1 mit {{Token}}.")
         self.create_post("det-post-2", body="Artikel 2 mit {{Greifpunkt}} und {{LLM}}.")
 
@@ -347,12 +449,11 @@ class BlogLexikonTestCase(unittest.TestCase):
                     with open(p, "r", encoding="utf-8", errors="ignore") as f:
                         text = f.read()
                     self.assertNotIn("<script", text.lower(), f"<script in {file} gefunden")
-                    # Check for external fonts, CDNs, external scripts/links
                     for ext_pattern in ["fonts.googleapis.com", "fonts.gstatic.com", "cdnjs.cloudflare.com", "unpkg.com"]:
                         self.assertNotIn(ext_pattern, text.lower(), f"Externe Ressource {ext_pattern} in {file}")
 
-    # 9. lexikon-Befehl: Klartext und --json liefern alle Begriffe; Exit 0
-    def test_9_lexikon_cli_command(self):
+    # 12. lexikon-Befehl: Klartext und --json liefern alle Begriffe; Exit 0
+    def test_12_lexikon_cli_command(self):
         with open(blogctl.LEXIKON_JSON, "r", encoding="utf-8") as f:
             lex_data = json.load(f)
 

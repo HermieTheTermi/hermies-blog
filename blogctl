@@ -790,11 +790,13 @@ def load_lexikon(path=None):
     return {}
 
 
-def _render_lexikon_markers(text, lexikon=None):
+def _render_lexikon_markers(text, lexikon=None, tracker=None, prefix=""):
     if lexikon is None:
         lexikon = load_lexikon()
     if not lexikon:
         return text
+    if tracker is None:
+        tracker = {}
 
     ci_map = {k.lower(): (k, v) for k, v in lexikon.items()}
 
@@ -821,10 +823,18 @@ def _render_lexikon_markers(text, lexikon=None):
             return match.group(0)
 
         anchor = slugify(anchor_term)
+        tracker[anchor] = tracker.get(anchor, 0) + 1
+        count = tracker[anchor]
+        pop_id = "lex-%s" % anchor if count == 1 else "lex-%s-%d" % (anchor, count)
         tip = escape_tooltip(explanation)
-        return '<a class="lex" href="lexikon.html#%s" data-tip="%s">%s</a>' % (
-            anchor, tip, raw
+
+        button = '<button type="button" class="lex" popovertarget="%s" data-tip="%s">%s</button>' % (
+            pop_id, tip, term
         )
+        span = '<span class="lex-pop" popover id="%s"><strong>%s</strong> %s <a href="%slexikon.html#%s">Im Lexikon</a></span>' % (
+            pop_id, esc(anchor_term), tip, prefix, anchor
+        )
+        return button + span
 
     return LEX_MARKER_RE.sub(_replace, text)
 
@@ -867,7 +877,7 @@ def fill(template, mapping):
 
 # --- Markdown ---------------------------------------------------------------
 
-def _render_inline_text(text):
+def _render_inline_text(text, tracker=None, prefix=""):
     text = esc(text)
     text = IMG_RE.sub(
         lambda m: '<img src="%s" alt="%s">' % (m.group(2), m.group(1)), text)
@@ -875,12 +885,12 @@ def _render_inline_text(text):
         lambda m: '<a href="%s">%s</a>' % (m.group(2), m.group(1)), text)
     text = BOLD_RE.sub(r"<strong>\1</strong>", text)
     text = ITALIC_RE.sub(r"<em>\1</em>", text)
-    text = _render_lexikon_markers(text)
+    text = _render_lexikon_markers(text, tracker=tracker, prefix=prefix)
     return text
 
 
 
-def render_inline(text):
+def render_inline(text, tracker=None, prefix=""):
     text = str(text)
     parts = []
     pos = 0
@@ -896,7 +906,7 @@ def render_inline(text):
         if kind == "code":
             out.append("<code>%s</code>" % esc(value))
         else:
-            out.append(_render_inline_text(value))
+            out.append(_render_inline_text(value, tracker=tracker, prefix=prefix))
     return "".join(out)
 
 
@@ -930,9 +940,10 @@ def _is_block_start(line):
     return False
 
 
-def render_markdown(text):
+def render_markdown(text, prefix=""):
     if text is None:
         return ""
+    tracker = {}
     text = str(text).replace("\r\n", "\n").replace("\r", "\n")
     lines = text.split("\n")
     out = []
@@ -960,7 +971,7 @@ def render_markdown(text):
         if heading:
             level = min(len(heading.group(1)), 6)
             out.append("<h%d>%s</h%d>" % (
-                level, render_inline(heading.group(2)), level))
+                level, render_inline(heading.group(2), tracker=tracker, prefix=prefix), level))
             i += 1
             continue
         if _is_hr(stripped):
@@ -972,7 +983,7 @@ def render_markdown(text):
             while i < n and lines[i].strip().startswith(">"):
                 buf.append(lines[i].strip()[1:].strip())
                 i += 1
-            out.append("<blockquote>%s</blockquote>" % render_inline(" ".join(buf)))
+            out.append("<blockquote>%s</blockquote>" % render_inline(" ".join(buf), tracker=tracker, prefix=prefix))
             continue
         kind = _list_kind(stripped)
         if kind:
@@ -983,7 +994,7 @@ def render_markdown(text):
                 if _list_kind(cur) != kind:
                     break
                 content = re.sub(r"^([-*+]|\d+[.)])\s+", "", cur)
-                items.append("  <li>%s</li>" % render_inline(content))
+                items.append("  <li>%s</li>" % render_inline(content, tracker=tracker, prefix=prefix))
                 i += 1
             out.append("<%s>\n%s\n</%s>" % (tag, "\n".join(items), tag))
             continue
@@ -992,7 +1003,7 @@ def render_markdown(text):
             buf.append(lines[i].strip())
             i += 1
         if buf:
-            out.append("<p>%s</p>" % render_inline(" ".join(buf)))
+            out.append("<p>%s</p>" % render_inline(" ".join(buf), tracker=tracker, prefix=prefix))
         else:
             i += 1
     if not out:
@@ -1054,6 +1065,7 @@ def render_base(tpl, site, prefix, title, description, content):
         "SITE_DESCRIPTION": esc(site["description"]),
         "CSS_HREF": prefix + "style.css",
         "HOME_HREF": prefix + "index.html",
+        "BRAINSTORMING_HREF": prefix + "tag/brainstorming.html",
         "FEED_HREF": prefix + "feed.xml",
         "TAGS_HREF": prefix + "tags.html",
         "LEXIKON_HREF": prefix + "lexikon.html",
