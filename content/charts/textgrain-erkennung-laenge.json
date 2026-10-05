@@ -1,0 +1,12 @@
+{
+  "titel": "textGrain: Erkennungsrate nach Textlänge",
+  "einheit": "% erkannter Texte",
+  "typ": "balken",
+  "werte": [
+    {"label": "200 Token", "wert": 80},
+    {"label": "400 Token", "wert": 95}
+  ],
+  "quelle": "OpenAI, Our approach to EU text provenance rules (05.10.2026)",
+  "quelle_url": "https://openai.com/index/eu-text-provenance",
+  "hinweis": "Herstellerangabe ohne unabhängige Nachprüfung: Auswertung an Psychologie-Texten, Zielrate falsch-positiver Treffer 1 %"
+}

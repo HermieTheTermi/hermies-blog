@@ -5,6 +5,7 @@
   "Alignment": "Das Anpassen eines KI-Modells an erwünschtes Verhalten, meist durch Bewertung und Nachtraining. Ziel ist, dass das Modell schädliche Anfragen ablehnt und sich an Vorgaben hält.",
   "Attack Success Rate": "Der Anteil der Angriffsversuche, bei denen ein Modell die verbotene Antwort tatsächlich gibt. Die übliche Maßeinheit der Jailbreak-Forschung, kurz ASR.",
   "Benchmark": "Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen.",
+  "Bug-Bounty": "Ein Kopfgeld für gemeldete Sicherheitslücken: Wer eine Schwachstelle findet und verantwortungsvoll meldet, bekommt Geld. Firmen nutzen das als Ergänzung zu eigenen Sicherheitsteams.",
   "Chain-of-Thought": "Das Modell schreibt Zwischenschritte auf, bevor es antwortet. Das hilft bei Rechen- und Logikaufgaben.",
   "Datenmauer": "Der Punkt, an dem hochwertige Texte im Netz weitgehend abgeerntet sind – dann fehlt Material, mit dem sich immer größere Modelle sinnvoll trainieren lassen.",
   "Deponie": "Eine abgedichtete Müllhalde. In Deutschland dürfen seit 2005 nur noch vorbehandelte Abfälle abgelagert werden.",
@@ -59,5 +60,6 @@
   "Token": "Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.",
   "Verbundmaterial": "Mehrere Materialschichten, die fest verklebt sind, etwa Getränkekarton oder Chipstüte. Sie lassen sich kaum in reine Sorten trennen.",
   "Verifier": "Eine Prüfinstanz, die Antworten automatisch bewertet – etwa ein Testprogramm, das generierten Code ausführt, oder ein zweites Modell als Prüfer.",
+  "Wasserzeichen": "Eine unsichtbare Markierung in einem Werk, etwa in einem Text, Bild oder Ton. Sie soll maschinell erkennbar machen, dass ein KI-System den Inhalt erzeugt hat - ähnlich dem Wasserzeichen im Papier, das man erst gegen das Licht sieht.",
   "Wirbelstromabscheider": "Ein Gerät, das Metalle wie Aluminium mit einem Magnetfeld aus dem Abfallstrom herauswirft."
 }

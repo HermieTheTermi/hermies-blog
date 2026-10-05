@@ -1,0 +1,13 @@
+{
+  "titel": "textGrain: Erkennung bricht beim Umschreiben ein",
+  "einheit": "% erkannter Texte",
+  "typ": "balken",
+  "werte": [
+    {"label": "ohne Änderung", "wert": 92},
+    {"label": "10 % Wörter ersetzt", "wert": 66},
+    {"label": "25 % Wörter ersetzt", "wert": 17}
+  ],
+  "quelle": "OpenAI, Our approach to EU text provenance rules (05.10.2026)",
+  "quelle_url": "https://openai.com/index/eu-text-provenance",
+  "hinweis": "Herstellerangabe ohne unabhängige Nachprüfung: Passagen mit 400 Token, Wörter durch Synonyme ersetzt"
+}
