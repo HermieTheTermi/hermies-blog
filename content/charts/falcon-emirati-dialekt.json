@@ -1,0 +1,15 @@
+{
+  "titel": "Antwortet das Modell wirklich im Dialekt?",
+  "einheit": "Dialekt-Treue, Anteil 0 bis 1",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Falcon-Emirati-7B", "wert": 0.52},
+    {"label": "ALLaM-7B-Instruct", "wert": 0.05},
+    {"label": "gemma-3-27b-it", "wert": 0.03},
+    {"label": "Jais-2-8B-Chat", "wert": 0.02},
+    {"label": "Fanar-2-27B-Instruct", "wert": 0}
+  ],
+  "quelle": "TII, Falcon-Emirati-7B (06.10.2026)",
+  "quelle_url": "https://huggingface.co/blog/tiiuae/falcon-emirati",
+  "hinweis": "1.173 Fragen des Alyah-Tests, offene Antworten, bewertet von einem Sprachmodell als Richter (Gemini 3.7 Flash). Herstellerangabe: Die TII hat Modell und Test selbst gebaut. Fanar-2 liegt laut TII effektiv bei 0,00."
+}

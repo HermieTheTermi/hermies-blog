@@ -1,0 +1,14 @@
+{
+  "titel": "Intelligence Index: Mistral Large 4 gegen Claude",
+  "einheit": "Punkte im Artificial Analysis Intelligence Index",
+  "typ": "balken",
+  "werte": [
+    {"label": "Mistral Large 3", "wert": 9},
+    {"label": "Mistral Medium 3.5", "wert": 14},
+    {"label": "Mistral Large 4 (Vorschau)", "wert": 38},
+    {"label": "Claude Opus 5.5 (Max)", "wert": 58}
+  ],
+  "quelle": "Artificial Analysis Intelligence Index v4.3.2 (06.10.2026)",
+  "quelle_url": "https://artificialanalysis.ai/models/mistral-large-4",
+  "hinweis": "Index aus zehn Tests, 0-100 Punkte, unabhängig gemessen. Die Vorwerte für Mistral Large 3 (9) und Medium 3.5 (14) nennt THE DECODER am 6. Oktober 2026; sie wurden unter älteren Versionen des Index erhoben."
+}

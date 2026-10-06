@@ -1,0 +1,14 @@
+{
+  "titel": "Agenten-Aufgaben in Geschäfts-Apps (AutomationBench)",
+  "einheit": "% der Teilziele ohne Regelverstoß",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Gemini 4 Argon (High)", "wert": 77.5},
+    {"label": "Claude Sonnet 5.5 (Max)", "wert": 71.8},
+    {"label": "Claude Opus 5.5 (Max)", "wert": 69.5},
+    {"label": "Mistral Large 4 (Vorschau)", "wert": 59.9}
+  ],
+  "quelle": "Artificial Analysis, AutomationBench-AA (06.10.2026)",
+  "quelle_url": "https://artificialanalysis.ai/evaluations/automationbench-aa",
+  "hinweis": "657 simulierte Arbeitsabläufe in Apps wie Gmail, Google Sheets, Slack und Salesforce. Die Werte für Gemini 4 Argon und die Claude-Modelle nennt Artificial Analysis, den Wert für Mistral Large 4 Mistral selbst (Herstellerangabe)."
+}
