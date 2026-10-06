@@ -17,7 +17,7 @@ lang: de
 - Im unabhängigen [Intelligence Index von Artificial Analysis](https://artificialanalysis.ai/models/mistral-large-4) erreicht die Vorschau 38 von 100 Punkten. Für Mistral ist das ein großer Sprung – der Vorgänger Large 3 stand bei 9 Punkten. Claude Opus 5.5 führt aber mit 58 Punkten.
 - Ihren auffälligsten Wert holt die Vorschau im Sicherheitstest: 82 Prozent bei der Aufgabe, eine echte Schwachstelle nachzustellen und zu flicken – laut Mistral der höchste Wert im Feld. Claude Opus 5.5 und GPT-6 Astra landen dort „nahe null", weil sie die Aufgabe verweigern.
 - Damit misst der Test auch die Regeln der Anbieter, nicht nur das Können der Modelle. Mistral macht genau das zum Verkaufsargument für Kunden aus Verteidigung und Kritischer Infrastruktur.
-- Noch ist das Modell nicht frei: {{Offene Gewichte}} sind nicht veröffentlicht, Architektur, Lizenz und Nachtrainings-Verfahren kündigt Mistral erst mit ihnen an. Und die Angaben zum {{Kontextfenster}} widersprechen sich: Mistral nennt eine Million {{Token}}, Artificial Analysis listet 524.000.
+- Noch ist das Modell nicht frei: {{Offene Gewichte}} sind nicht veröffentlicht, Architektur, Lizenz und Nachtrainings-Verfahren kündigt Mistral erst mit ihnen an. Und die Angaben zum {{Kontextfenster}} widersprechen sich: Die Modelldokumentation nennt laut THE DECODER eine Million {{Token}}, Artificial Analysis listet 524.000.
 
 ## Was ist passiert
 
@@ -52,7 +52,7 @@ Dieser Vorteil kommt mit einem Fragezeichen. Mistral betont gleichzeitig, dass M
 
 {{chart:ml4-automationbench}}
 
-Auf der Seite der reinen Fähigkeiten fällt das Bild gemischter aus als in der Ankündigung. Bei automatisierten Geschäftsabläufen erreicht ML4 nach eigenen Angaben 59,9 Prozent, liegt damit aber hinter GLM-5.3 (62,2 Prozent) und auch die geschlossenen Modelle liegen vorn. Beim Programmieren sind 61,7 Prozent im Test DeepSWE v1.1, 59,4 Prozent bei SWE-Atlas-QnA und 28,3 Prozent im Terminal-Bench 4.0 die eigenen Werte; Mistral reklamiert damit Platz zwei im Coding-Agent-Index von Artificial Analysis. Und in einem blinden Vergleich, bei dem professionelle Bewerter Codetexte ohne Modellnamen benoteten, landete ML4 mit 3,74 von 5 Punkten hinter Claude Opus 5 (4,22), aber vor GLM-5.3 und Kimi K3. Beim Bilderverstehen liegt ML4 auf dem Test Dense 200 mit 42 Prozent knapp vor GPT-6 Astra mit 41 Prozent – der Vorsprung ist ein Prozentpunkt, nicht mehr.
+Auf der Seite der reinen Fähigkeiten fällt das Bild gemischter aus als in der Ankündigung. Bei automatisierten Geschäftsabläufen erreicht ML4 nach eigenen Angaben 59,9 Prozent, liegt damit aber hinter GLM-5.3 (62,2 Prozent) und auch die geschlossenen Modelle liegen vorn. Beim Programmieren sind 61,7 Prozent im Test DeepSWE v1.1, 59,4 Prozent bei SWE-Atlas-QnA und 28,3 Prozent im Terminal-Bench 4.0 die eigenen Werte; im Coding-Agent-Index von Artificial Analysis liegt ML4 mit 49,8 Prozent vor DeepSeek V4 Pro 0813 und Qwen3.8 Max. Und in einem blinden Vergleich, bei dem professionelle Bewerter Codetexte ohne Modellnamen benoteten, landete ML4 mit 3,74 von 5 Punkten hinter Claude Opus 5 (4,22), aber vor GLM-5.3 und Kimi K3. Beim Bilderverstehen liegt ML4 auf dem Test Dense 200 mit 42 Prozent knapp vor GPT-6 Astra mit 41 Prozent – der Vorsprung ist ein Prozentpunkt, nicht mehr.
 
 ## Was heißt das praktisch
 

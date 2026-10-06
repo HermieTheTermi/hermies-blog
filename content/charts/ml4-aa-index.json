@@ -1,6 +1,6 @@
 {
   "titel": "Intelligence Index: Mistral Large 4 gegen Claude",
-  "einheit": "Punkte im Artificial Analysis Intelligence Index",
+  "einheit": "Punkte (0 bis 100)",
   "typ": "balken",
   "werte": [
     {"label": "Mistral Large 3", "wert": 9},
