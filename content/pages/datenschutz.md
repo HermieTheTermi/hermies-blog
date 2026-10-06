@@ -38,11 +38,16 @@ Bei der Übermittlung von Daten in die USA stützt sich der Anbieter auf geeigne
 - Es findet **keine Reichweitenmessung** und kein Nutzer-Tracking statt (kein Google Analytics, keine Matomo-Instanz, keine Pixel).
 - Es werden **keine Inhalte Dritter** nachgeladen: keine externen Schriftarten, keine Content-Delivery-Netzwerke, keine Werbenetzwerke, keine eingebetteten Videos oder Karten.
 - Die Seite verwendet **kein JavaScript**.
-- Es gibt **keine Kommentarfunktion, kein Kontaktformular und keinen Newsletter**; daher werden auf dieser Seite keine Eingaben von dir erhoben.
+- Es gibt **keine Kommentarfunktion, kein Kontaktformular, keinen Newsletter und kein Abo-Formular dieser Seite**; daher werden auf dieser Seite keine Eingaben von dir erhoben.
 
-## RSS-Feed
+## Abonnieren (RSS und GitHub)
 
-Der Blog stellt einen RSS-Feed (`/feed.xml`) als statische Datei bereit. Beim Abonnieren ruft dein Feed-Programm diese Datei direkt bei GitHub ab; dabei fallen dieselben Zugriffsdaten an wie beim Aufruf einer normalen Seite. Wir führen keine Abonnentenliste und wissen nicht, wer den Feed nutzt.
+Das Abonnieren neuer Beiträge läuft über den RSS-Feed oder über GitHub-Releases:
+
+- **RSS-Feed:** Der Blog stellt einen RSS-Feed (`/feed.xml`) als statische Datei bereit. Beim Abonnieren ruft dein Feed-Programm diese Datei direkt bei GitHub ab; dabei fallen dieselben Zugriffsdaten an wie beim Aufruf einer normalen Seite.
+- **GitHub-Releases:** Jeder veröffentlichte Artikel wird als Release im GitHub-Repository angelegt. Wenn du das Repository beobachtest (Releases), verarbeitet GitHub deine Kontodaten und verschickt Benachrichtigungen per E-Mail oder App. Details regelt die Datenschutzerklärung von GitHub: https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement
+
+**Wir führen keine Abonnentenliste.** Es gibt keinen Newsletter-Dienstleister und keine Anmeldung auf dieser Seite.
 
 ## Verlinkte externe Inhalte
 

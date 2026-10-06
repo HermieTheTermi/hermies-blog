@@ -49,7 +49,7 @@ dist/                   # Build-Ausgabe (nicht committen)
 | `build [--out dist]` | statische Site bauen | `{ok,out,pages}` |
 | `serve [--port 8080]` | Vorschau lokal | – |
 | `scrape [--source NAME] [--per-source N] [--limit N] [--since-days D] [--dry-run]` | neue Items aus `content/sources.json` → Entwürfe (N je Quelle, Gesamtdeckel über `--limit`) | `{ok,created:[],skipped:N,errors:[]}` |
-| `deploy` | `build` + git commit + push (nur wenn Remote existiert) | `{ok,commit,pushed}` |
+| `deploy [--no-releases]` | `build` + git commit + push + GitHub-Releases via gh (Zustandsdatei `content/releases.json`) | `{ok,commit,pushed_to,url,rebased,releases:{created,skipped,baseline,error}}` |
 
 ## Frontmatter
 
@@ -92,8 +92,17 @@ Fachbegriffe können in Artikeln und Seiten mit dem Marker `{{Begriff}}` referen
 - **Anzeige & Responsivität**: Auf Desktop zeigt Überfahren einen Tooltip (`data-tip`), solange das Popover geschlossen ist (`.lex:has(+ .lex-pop:popover-open)::after { display: none; }`). Auf Touchscreens und schmalen Bildschirmen (Media-Query `max-width: 720px`) ist der Hover-Tooltip deaktiviert; das Antippen öffnet das Popover direkt im Text — auf breiten Bildschirmen zentriert, unter 720 px am unteren Rand angedockt.
 - **Fallback**: Browser ohne Popover-Unterstützung blenden `.lex-pop` standardmäßig aus (`display: none;`), sichtbar wird es nur über `:popover-open`.
 - **Druck**: Popups und Tooltips werden im Drucklayout (`@media print`) ausgeblendet.
-- **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html` sowie `tag/news.html`, `tag/brainstorming.html` und `tag/knowhow.html` (im Header direkt nach „Start"). Platzhalter in `render_base()`: `NEWS_HREF`, `BRAINSTORMING_HREF`, `KNOWHOW_HREF`. Kategorie `KnowHow` (Tag-Schreibweise `KnowHow`, Seite `tag/knowhow.html`) für Erklär- und Recherchestücke.
+- **Navigation**: Header- und Footer-Navigation enthalten Links auf `lexikon.html`, `abonnieren.html` sowie `tag/news.html`, `tag/brainstorming.html` und `tag/knowhow.html` (im Header direkt nach „Start"; „Abonnieren" im Header zwischen Lexikon und Impressum, in der Fußzeile vor dem RSS-Link). Platzhalter in `render_base()`: `NEWS_HREF`, `BRAINSTORMING_HREF`, `KNOWHOW_HREF`, `SUBSCRIBE_HREF`. Kategorie `KnowHow` (Tag-Schreibweise `KnowHow`, Seite `tag/knowhow.html`) für Erklär- und Recherchestücke.
 - **Validierung**: `blogctl check` verifiziert, dass jeder verwendete Marker in `content/lexikon.json` definiert ist (Marker in Backtick-Code wie `{{Begriff}}` werden ignoriert).
+
+## Abonnieren und GitHub-Releases
+
+Leser können den Blog per RSS-Feed (`feed.xml`) oder per GitHub-Releases abonnieren. Die Informationsseite liegt unter `content/pages/abonnieren.md` (`abonnieren.html`).
+
+- **Zustandsdatei**: `content/releases.json` speichert den Release-Stand (`{"released": {"<slug>": "<tag>"}}`). Sie ist Inhalt, versioniert und bleibt im Git-Zustand sauber committet.
+- **Erstlauf-Basisstand**: Existiert `content/releases.json` noch nicht, wird beim `deploy` ein Basisstand mit allen aktuell veröffentlichten Artikeln angelegt, ohne Releases zu erzeugen (verhindert eine Benachrichtigungsflut für bestehende Artikel).
+- **GitHub-Releases beim Deploy**: Für neu veröffentlichte Artikel wird in chronologischer Reihenfolge `(date, time, id)` ein Release via `gh release create` angelegt.
+- **Nicht-blockierend & robust**: Releases laufen ausschließlich über die GitHub CLI (`gh`). Fehlt `gh`, schlägt `gh auth status` fehl oder scheitert ein Release-Aufruf, wird eine Warnung auf stderr ausgegeben — `deploy` bleibt stets erfolgreich (Exit 0). Mit `--no-releases` lässt sich der Schritt komplett überspringen.
 
 ## Diagramme (Build-Zeit-SVG, kein JavaScript)
 

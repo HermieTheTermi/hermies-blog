@@ -34,6 +34,7 @@ PAGES = os.path.join(CONTENT, "pages")
 ASSETS = os.path.join(ROOT, "assets")
 LEXIKON_JSON = os.path.join(CONTENT, "lexikon.json")
 CHARTS = os.path.join(CONTENT, "charts")
+RELEASES_JSON = os.path.join(CONTENT, "releases.json")
 
 FIELD_ORDER = [
     "title", "slug", "date", "time", "status", "tags", "summary",
@@ -2106,6 +2107,7 @@ def render_base(tpl, site, prefix, title, description, content):
         "BRAINSTORMING_HREF": prefix + "tag/brainstorming.html",
         "KNOWHOW_HREF": prefix + "tag/knowhow.html",
         "FEED_HREF": prefix + "feed.xml",
+        "SUBSCRIBE_HREF": prefix + "abonnieren.html",
         "TAGS_HREF": prefix + "tags.html",
         "LEXIKON_HREF": prefix + "lexikon.html",
         "IMPRESSUM_HREF": prefix + "impressum.html",
@@ -2906,6 +2908,168 @@ def _check_result():
     return code, buffer.getvalue()
 
 
+def release_notes(post, site):
+    base_url = (site.get("base_url") or "").rstrip("/")
+    post_id = post.get("id") or post.get("slug") or ""
+    display_date = format_display_date(post.get("date"), post.get("time", ""))
+    summary = post.get("summary") or ""
+    return "%s\n\nArtikel: %s/%s.html\n\nVeröffentlicht: %s" % (
+        summary, base_url, post_id, display_date
+    )
+
+
+def pending_releases(posts, state):
+    if state and isinstance(state, dict):
+        if "released" in state and isinstance(state["released"], dict):
+            released_map = state["released"]
+        else:
+            released_map = state
+    else:
+        released_map = {}
+    pending = []
+    for post in posts:
+        slug = post.get("id") or post.get("slug")
+        if slug and slug not in released_map:
+            pending.append(post)
+    pending.sort(key=lambda p: (
+        str(p.get("date") or ""),
+        str(p.get("time") or "00:00"),
+        str(p.get("id") or p.get("slug") or "")
+    ))
+    return pending
+
+
+def run_gh(argv):
+    command = ["gh"] + [str(a) for a in argv]
+    return subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
+
+
+def load_releases_state(path=None):
+    target = path or RELEASES_JSON
+    if not os.path.isfile(target):
+        return None
+    try:
+        with open(target, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        if isinstance(data, dict) and "released" in data and isinstance(data["released"], dict):
+            return data
+        return {"released": {}}
+    except Exception:
+        return {"released": {}}
+
+
+def save_releases_state(path, state):
+    target = path or RELEASES_JSON
+    released = state.get("released", {}) if isinstance(state, dict) else {}
+    sorted_released = dict(sorted(released.items(), key=lambda kv: kv[0]))
+    payload = {"released": sorted_released}
+    content = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    parent = os.path.dirname(target)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+    with open(target, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(content)
+
+
+def sync_releases(posts=None, site=None, branch="main", no_releases=False, state_path=None, json_mode=False):
+    target_path = state_path or RELEASES_JSON
+    if posts is None:
+        posts = _collect_posts()
+    if site is None:
+        site = load_site()
+
+    if no_releases:
+        return {"created": [], "skipped": len(posts), "baseline": False, "error": None}
+
+    state = load_releases_state(target_path)
+
+    # Erstlauf: Datei existiert nicht -> Basisstand anlegen: alle aktuell veröffentlichten Slugs eintragen, kein Release erzeugen
+    if state is None:
+        released = {}
+        for p in posts:
+            slug = p.get("id") or p.get("slug")
+            if slug:
+                released[slug] = slug
+        new_state = {"released": released}
+        save_releases_state(target_path, new_state)
+        count = len(released)
+        if not json_mode:
+            sys.stdout.write("Release-Basisstand gesetzt: %d Artikel, keine Benachrichtigungen erzeugt\n" % count)
+        return {"created": [], "skipped": count, "baseline": True, "error": None}
+
+    # Folge-Läufe
+    pending = pending_releases(posts, state)
+    already_released_count = len(posts) - len(pending)
+    if not pending:
+        return {"created": [], "skipped": len(posts), "baseline": False, "error": None}
+
+    # gh Verfügbarkeit und Authentifizierung prüfen
+    try:
+        auth_proc = run_gh(["auth", "status"])
+        if auth_proc.returncode != 0:
+            err_msg = (auth_proc.stderr or auth_proc.stdout or "gh auth status fehlgeschlagen").strip()
+            sys.stderr.write("Warnung: gh nicht angemeldet oder Fehler bei Authentifizierung: %s\n" % err_msg)
+            return {
+                "created": [],
+                "skipped": already_released_count,
+                "baseline": False,
+                "error": "gh nicht angemeldet: %s" % err_msg,
+            }
+    except FileNotFoundError:
+        sys.stderr.write("Warnung: gh CLI ist nicht installiert\n")
+        return {
+            "created": [],
+            "skipped": already_released_count,
+            "baseline": False,
+            "error": "gh nicht installiert",
+        }
+    except Exception as exc:
+        sys.stderr.write("Warnung: Fehler beim Aufruf von gh: %s\n" % exc)
+        return {
+            "created": [],
+            "skipped": already_released_count,
+            "baseline": False,
+            "error": str(exc),
+        }
+
+    created = []
+    error_msg = None
+    for post in pending:
+        tag = post.get("id") or post.get("slug")
+        title = post.get("title") or tag
+        notes = release_notes(post, site)
+        argv = ["release", "create", tag, "--title", title, "--notes", notes, "--target", branch]
+        try:
+            proc = run_gh(argv)
+            if proc.returncode != 0:
+                err = (proc.stderr or proc.stdout or "gh release create fehlgeschlagen").strip()
+                sys.stderr.write("Warnung: gh release create für '%s' fehlgeschlagen: %s\n" % (tag, err))
+                error_msg = err
+                break
+            created.append(tag)
+            state["released"][tag] = tag
+            save_releases_state(target_path, state)
+            if not json_mode:
+                sys.stdout.write("Release erstellt: %s\n" % tag)
+        except Exception as exc:
+            sys.stderr.write("Warnung: gh release create für '%s' fehlgeschlagen: %s\n" % (tag, exc))
+            error_msg = str(exc)
+            break
+
+    total_skipped = len(posts) - len(created)
+    return {
+        "created": created,
+        "skipped": total_skipped,
+        "baseline": False,
+        "error": error_msg,
+    }
+
+
 def cmd_deploy(args):
     code, check_output = _check_result()
     if code != 0:
@@ -2927,7 +3091,8 @@ def cmd_deploy(args):
         return 1
     origin_url = _run_git(["remote", "get-url", "origin"]).stdout.strip()
 
-    do_build("dist")
+    dist_dir = os.path.join(ROOT, "dist")
+    do_build(dist_dir)
 
     _run_git(["add", "-A"])
     status = _run_git(["status", "--porcelain"]).stdout.strip()
@@ -2971,7 +3136,27 @@ def cmd_deploy(args):
 
     _run_git(["push", "origin", branch])
 
-    dist_dir = os.path.join(ROOT, "dist")
+    site = load_site()
+    posts = _collect_posts()
+    rel_info = {"created": [], "skipped": len(posts), "baseline": False, "error": None}
+    if not getattr(args, "no_releases", False):
+        rel_info = sync_releases(
+            posts=posts,
+            site=site,
+            branch=branch,
+            no_releases=False,
+            state_path=RELEASES_JSON,
+            json_mode=args.json
+        )
+        rel_path = os.path.relpath(RELEASES_JSON, ROOT)
+        status_after = _run_git(["status", "--porcelain", rel_path], check=False).stdout.strip()
+        if status_after:
+            _run_git(["add", rel_path])
+            msg = "Release-Basisstand initialisieren" if rel_info.get("baseline") else "Release-Status aktualisieren"
+            _run_git(["commit", "-m", msg])
+            _run_git(["push", "origin", branch])
+            commit = _run_git(["rev-parse", "--short", "HEAD"]).stdout.strip()
+
     temp_dir = tempfile.mkdtemp(prefix="blogctl-gh-pages-")
     try:
         for name in os.listdir(dist_dir):
@@ -2992,10 +3177,10 @@ def cmd_deploy(args):
     finally:
         shutil.rmtree(temp_dir, ignore_errors=True)
 
-    url = load_site()["base_url"]
+    url = site["base_url"]
     if args.json:
         emit_json({"ok": True, "commit": commit, "pushed_to": "gh-pages",
-                   "url": url, "rebased": rebased})
+                   "url": url, "rebased": rebased, "releases": rel_info})
     else:
         sys.stdout.write("Deployed: %s -> %s\n" % (branch, url))
         if commit:
@@ -3091,6 +3276,8 @@ def build_parser():
     p.set_defaults(func=cmd_scrape)
 
     p = sub.add_parser("deploy")
+    p.add_argument("--no-releases", dest="no_releases", action="store_true",
+                   help="Erstellen von GitHub-Releases überspringen")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_deploy)
 
