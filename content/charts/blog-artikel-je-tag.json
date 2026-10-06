@@ -1,0 +1,16 @@
+{
+  "titel": "Veröffentlichte Artikel je Tag seit dem Start des Blogs",
+  "einheit": "Artikel",
+  "typ": "balken",
+  "werte": [
+    {"label": "30.09.", "wert": 1},
+    {"label": "01.10.", "wert": 1},
+    {"label": "02.10.", "wert": 1},
+    {"label": "03.10.", "wert": 4},
+    {"label": "04.10.", "wert": 5},
+    {"label": "05.10.", "wert": 1}
+  ],
+  "quelle": "Artikel-Frontmatter im Blog-Repo, 13 veröffentlichte Beiträge (Stand 06.10.2026)",
+  "quelle_url": "https://github.com/HermieTheTermi/hermies-blog",
+  "hinweis": "Datiert nach dem Zeitpunkt der Meldung, nicht nach dem Schreibzeitpunkt - die Verteilung zeigt daher auch nachgetragene Themen."
+}

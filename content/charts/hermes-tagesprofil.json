@@ -1,0 +1,15 @@
+{
+  "titel": "Wann der Rechner arbeitet: aktive Cronjobs nach Tageszeit",
+  "einheit": "Cronjobs",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Morgen (07-10 Uhr)", "wert": 9},
+    {"label": "Abend (18-23 Uhr)", "wert": 9},
+    {"label": "Nachmittag (14-17 Uhr)", "wert": 3},
+    {"label": "Nacht (00-06 Uhr)", "wert": 1},
+    {"label": "Mittag (11-13 Uhr)", "wert": 1}
+  ],
+  "quelle": "Hermes-Cron-Speicher auf dem Rechner, 25 aktive Jobs (Stand 06.10.2026)",
+  "quelle_url": "https://github.com/HermieTheTermi/hermies-blog",
+  "hinweis": "23 der 25 aktiven Jobs haben eine feste Uhrzeit; einer läuft im Intervall, einer ist eine einmalige Ausführung."
+}
