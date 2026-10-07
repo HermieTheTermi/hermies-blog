@@ -456,6 +456,169 @@ class BlogAudioTestCase(unittest.TestCase):
         mp3_path = os.path.join(blogctl.AUDIO_DIR, "custom-script-post.mp3")
         self.assertTrue(os.path.isfile(mp3_path))
 
+    # 13. audio.enabled = false in content/site.json bricht sofort mit Exit 1 ab, ohne etwas zu erzeugen.
+    def test_13_audio_disabled_in_site_json_exits_1(self):
+        # site.json mit audio.enabled = false schreiben
+        site_cfg = {
+            "title": "Test Blog",
+            "audio": {
+                "enabled": False,
+            },
+        }
+        with open(blogctl.SITE_JSON, "w", encoding="utf-8") as f:
+            json.dump(site_cfg, f)
+
+        self.create_post("post-disabled")
+        txt_path = os.path.join(blogctl.AUDIO_DIR, "post-disabled.txt")
+        with open(txt_path, "w", encoding="utf-8") as f:
+            f.write("Audio Text für deaktivierten Artikel.")
+
+        expected_msg = "Hörfassungen sind in content/site.json deaktiviert (audio.enabled = false)"
+
+        # Aufruf mit Einzel-ID
+        code, out, err = self.run_cli(["audio", "post-disabled"])
+        self.assertEqual(code, 1)
+        self.assertIn(expected_msg, err)
+
+        mp3_path = os.path.join(blogctl.AUDIO_DIR, "post-disabled.mp3")
+        json_path = os.path.join(blogctl.AUDIO_DIR, "post-disabled.json")
+        self.assertFalse(os.path.exists(mp3_path))
+        self.assertFalse(os.path.exists(json_path))
+
+        # Aufruf mit --all
+        code_all, out_all, err_all = self.run_cli(["audio", "--all"])
+        self.assertEqual(code_all, 1)
+        self.assertIn(expected_msg, err_all)
+        self.assertFalse(os.path.exists(mp3_path))
+
+        # Aufruf mit --json
+        code_json, out_json, err_json = self.run_cli(["audio", "post-disabled", "--json"])
+        self.assertEqual(code_json, 1)
+        data_json = json.loads(out_json)
+        self.assertFalse(data_json.get("ok"))
+        self.assertIn(expected_msg, data_json.get("error", ""))
+
+    # 14. --all mit drei Artikeln, mittlerer scheitert: die anderen beiden werden erzeugt, Exit 0, Warnung auf stderr, status: error
+    def test_14_all_continues_on_failure_and_reports_error(self):
+        self.create_post("art-1")
+        self.create_post("art-2")
+        self.create_post("art-3")
+
+        with open(os.path.join(blogctl.AUDIO_DIR, "art-1.txt"), "w", encoding="utf-8") as f:
+            f.write("Text fuer Artikel 1.")
+        with open(os.path.join(blogctl.AUDIO_DIR, "art-2.txt"), "w", encoding="utf-8") as f:
+            f.write("Text fuer Artikel 2 FAIL.")
+        with open(os.path.join(blogctl.AUDIO_DIR, "art-3.txt"), "w", encoding="utf-8") as f:
+            f.write("Text fuer Artikel 3.")
+
+        # Fake-TTS Skript, das fuer art-2 (bzw. bei 'FAIL') einen Fehler wirft
+        fail_tts_path = os.path.join(self.tmpdir, "fake-tts-fail2.sh")
+        script_content = (
+            "#!/bin/sh\n"
+            "if grep -q 'FAIL' \"$1\"; then\n"
+            "    echo 'Synthesefehler im Fake-TTS' >&2\n"
+            "    exit 1\n"
+            "fi\n"
+            "ffmpeg -y -f lavfi -i sine=frequency=440:duration=2 -ac 1 -ar 24000 \"$2\" >/dev/null 2>&1\n"
+        )
+        with open(fail_tts_path, "w", encoding="utf-8") as f:
+            f.write(script_content)
+        os.chmod(fail_tts_path, 0o755)
+        os.environ["BLOGCTL_TTS_CMD"] = fail_tts_path
+
+        # 1. Test mit --json
+        code, out, err = self.run_cli(["audio", "--all", "--json"])
+        self.assertEqual(code, 0, f"--all muss Exit 0 liefern wenn mind. 1 Artikel erfolgreich war. err={err}")
+
+        # Warnung auf stderr
+        self.assertIn("Warnung: art-2 übersprungen:", err)
+
+        # Dateien 1 und 3 existieren, 2 nicht
+        self.assertTrue(os.path.isfile(os.path.join(blogctl.AUDIO_DIR, "art-1.mp3")))
+        self.assertTrue(os.path.isfile(os.path.join(blogctl.AUDIO_DIR, "art-1.json")))
+        self.assertFalse(os.path.exists(os.path.join(blogctl.AUDIO_DIR, "art-2.mp3")))
+        self.assertFalse(os.path.exists(os.path.join(blogctl.AUDIO_DIR, "art-2.json")))
+        self.assertTrue(os.path.isfile(os.path.join(blogctl.AUDIO_DIR, "art-3.mp3")))
+        self.assertTrue(os.path.isfile(os.path.join(blogctl.AUDIO_DIR, "art-3.json")))
+
+        # JSON-Auswertung
+        data = json.loads(out)
+        self.assertTrue(data.get("ok"))
+        audio_items = {item["id"]: item for item in data.get("audio", [])}
+        self.assertEqual(len(audio_items), 3)
+        self.assertEqual(audio_items["art-1"]["status"], "ok")
+        self.assertEqual(audio_items["art-2"]["status"], "error")
+        self.assertIn("error", audio_items["art-2"])
+        self.assertIn("Synthesefehler im Fake-TTS", audio_items["art-2"]["error"])
+        self.assertEqual(audio_items["art-3"]["status"], "ok")
+
+        # 2. Test ohne --json (Summenzeile pruefen)
+        os.remove(os.path.join(blogctl.AUDIO_DIR, "art-1.mp3"))
+        os.remove(os.path.join(blogctl.AUDIO_DIR, "art-3.mp3"))
+        code_txt, out_txt, err_txt = self.run_cli(["audio", "--all", "--force"])
+        self.assertEqual(code_txt, 0)
+        self.assertIn("audio: 2 erzeugt, 0 übersprungen, 1 fehlgeschlagen, 0 fehlend", out_txt)
+
+    # 15. --all, wenn alle scheitern: Exit 1, ok: false
+    def test_15_all_fails_when_all_articles_fail(self):
+        self.create_post("fail-1")
+        self.create_post("fail-2")
+        with open(os.path.join(blogctl.AUDIO_DIR, "fail-1.txt"), "w", encoding="utf-8") as f:
+            f.write("Text fuer Fail 1.")
+        with open(os.path.join(blogctl.AUDIO_DIR, "fail-2.txt"), "w", encoding="utf-8") as f:
+            f.write("Text fuer Fail 2.")
+
+        always_fail_path = os.path.join(self.tmpdir, "always-fail.sh")
+        with open(always_fail_path, "w", encoding="utf-8") as f:
+            f.write("#!/bin/sh\necho 'TTS Totalausfall' >&2\nexit 1\n")
+        os.chmod(always_fail_path, 0o755)
+        os.environ["BLOGCTL_TTS_CMD"] = always_fail_path
+
+        # 1. Mit --json
+        code_json, out_json, err_json = self.run_cli(["audio", "--all", "--json"])
+        self.assertEqual(code_json, 1, f"--all muss Exit 1 liefern wenn alle scheitern. err={err_json}")
+        data = json.loads(out_json)
+        self.assertFalse(data.get("ok"))
+        self.assertEqual(len(data.get("audio", [])), 2)
+        for item in data["audio"]:
+            self.assertEqual(item["status"], "error")
+            self.assertIn("TTS Totalausfall", item.get("error", ""))
+
+        # 2. Ohne --json
+        code_txt, out_txt, err_txt = self.run_cli(["audio", "--all"])
+        self.assertEqual(code_txt, 1)
+        self.assertIn("audio: 0 erzeugt, 0 übersprungen, 2 fehlgeschlagen, 0 fehlend", out_txt)
+
+    # 16. audio <id> mit expliziter ID, die scheitert: unverändert Exit 1 mit Fehlermeldung.
+    def test_16_explicit_id_failure_exits_1(self):
+        self.create_post("explicit-fail")
+        with open(os.path.join(blogctl.AUDIO_DIR, "explicit-fail.txt"), "w", encoding="utf-8") as f:
+            f.write("Text fuer expliziten Fehler-Test.")
+
+        fail_script_path = os.path.join(self.tmpdir, "explicit-fail.sh")
+        with open(fail_script_path, "w", encoding="utf-8") as f:
+            f.write("#!/bin/sh\necho 'TTS Engine gecrashed' >&2\nexit 1\n")
+        os.chmod(fail_script_path, 0o755)
+        os.environ["BLOGCTL_TTS_CMD"] = fail_script_path
+
+        # Ohne --json
+        code, out, err = self.run_cli(["audio", "explicit-fail"])
+        self.assertEqual(code, 1)
+        self.assertIn("Fehler: Synthese fehlgeschlagen für explicit-fail", err)
+        self.assertIn("TTS Engine gecrashed", err)
+
+        mp3_path = os.path.join(blogctl.AUDIO_DIR, "explicit-fail.mp3")
+        json_path = os.path.join(blogctl.AUDIO_DIR, "explicit-fail.json")
+        self.assertFalse(os.path.exists(mp3_path))
+        self.assertFalse(os.path.exists(json_path))
+
+        # Mit --json
+        code_json, out_json, err_json = self.run_cli(["audio", "explicit-fail", "--json"])
+        self.assertEqual(code_json, 1)
+        data = json.loads(out_json)
+        self.assertFalse(data.get("ok"))
+        self.assertIn("TTS Engine gecrashed", data.get("error", ""))
+
 
 if __name__ == "__main__":
     unittest.main()
