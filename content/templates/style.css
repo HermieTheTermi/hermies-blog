@@ -321,6 +321,44 @@ p {
   margin-bottom: 0;
 }
 
+/* --- Audio Player --------------------------------------------------------- */
+
+.post-audio {
+  margin: 0 0 32px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-warm);
+}
+
+.post-audio-label {
+  margin: 0 0 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.post-audio-label strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.post-audio-label a {
+  color: var(--accent);
+}
+
+.post-audio-label .post-audio-size {
+  color: var(--text-muted);
+}
+
+.post-audio audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
 .post-body,
 .page-body {
   font-family: var(--font-serif);
@@ -742,7 +780,8 @@ button.lex {
   .site-nav,
   .footer-links,
   .back-link,
-  .post-note {
+  .post-note,
+  .post-audio {
     display: none;
   }
 

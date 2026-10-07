@@ -35,6 +35,8 @@ ASSETS = os.path.join(ROOT, "assets")
 LEXIKON_JSON = os.path.join(CONTENT, "lexikon.json")
 CHARTS = os.path.join(CONTENT, "charts")
 RELEASES_JSON = os.path.join(CONTENT, "releases.json")
+AUDIO_DIR = os.path.join(CONTENT, "audio")
+AUDIO_CACHE = os.path.join(ROOT, ".audio-cache")
 
 FIELD_ORDER = [
     "title", "slug", "date", "time", "status", "tags", "summary",
@@ -111,7 +113,7 @@ def validate_lexikon():
 
 
 def ensure_dirs():
-    for path in (POSTS, DRAFTS, ASSETS, CHARTS):
+    for path in (POSTS, DRAFTS, ASSETS, CHARTS, AUDIO_DIR):
         os.makedirs(path, exist_ok=True)
 
 
@@ -901,6 +903,10 @@ def cmd_check(args):
             if find_article(stem):
                 continue
             errors.append("%s: interner Link zeigt ins Leere: %s" % (article_id, target))
+        if expected_status == "published":
+            mp3_file = os.path.join(AUDIO_DIR, "%s.mp3" % article_id)
+            if not os.path.isfile(mp3_file):
+                warnings.append("%s: keine Hörfassung (content/audio/%s.mp3 fehlt)" % (article_id, article_id))
         markers = extract_representation_markers(body)
         for term in markers:
             if term.startswith("chart:"):
@@ -931,6 +937,24 @@ def cmd_check(args):
                 chart_data, chart_err = load_chart(chart_name)
                 if chart_err:
                     errors.append("%s: %s" % (slug, chart_err))
+
+    if os.path.isdir(AUDIO_DIR):
+        for fname in sorted(os.listdir(AUDIO_DIR)):
+            if fname.endswith(".mp3"):
+                stem = fname[:-4]
+                txt_path = os.path.join(AUDIO_DIR, "%s.txt" % stem)
+                if not os.path.isfile(txt_path):
+                    warnings.append("%s: content/audio/%s.txt fehlt" % (stem, stem))
+            elif fname.endswith(".json"):
+                stem = fname[:-5]
+                json_path = os.path.join(AUDIO_DIR, fname)
+                try:
+                    with open(json_path, "r", encoding="utf-8") as f_json:
+                        jdata = json.load(f_json)
+                    if not isinstance(jdata, dict):
+                        errors.append("%s: content/audio/%s ist kein gueltiges JSON-Objekt" % (stem, fname))
+                except Exception as exc:
+                    errors.append("%s: content/audio/%s ist kein gueltiges JSON: %s" % (stem, fname, exc))
     ok = not errors
     if args.json:
         emit_json({"ok": ok, "errors": errors, "warnings": warnings})
@@ -2165,6 +2189,12 @@ def render_feed(site, posts):
         lines.append('      <guid isPermaLink="true">%s</guid>' % esc(link))
         lines.append('      <pubDate>%s</pubDate>' % rfc822_date(post["date"], post.get("time", "")))
         lines.append('      <description>%s</description>' % esc(post["summary"]))
+        mp3_path = os.path.join(AUDIO_DIR, "%s.mp3" % post["id"])
+        if os.path.isfile(mp3_path):
+            audio_len = os.path.getsize(mp3_path)
+            lines.append('      <enclosure url="%s/audio/%s.mp3" length="%d" type="audio/mpeg"/>' % (
+                esc(base), esc(post["id"]), audio_len
+            ))
         lines.append('    </item>')
     lines.append('  </channel>')
     lines.append('</rss>')
@@ -2209,6 +2239,65 @@ def _collect_posts():
     return posts
 
 
+def format_audio_duration(seconds):
+    try:
+        total_sec = int(round(float(seconds)))
+    except (ValueError, TypeError):
+        return ""
+    if total_sec < 0:
+        return ""
+    hours = total_sec // 3600
+    minutes = (total_sec % 3600) // 60
+    secs = total_sec % 60
+    if hours > 0:
+        return "%d:%02d:%02d" % (hours, minutes, secs)
+    else:
+        return "%d:%02d" % (minutes, secs)
+
+
+def render_audio_block(post_id):
+    mp3_path = os.path.join(AUDIO_DIR, "%s.mp3" % post_id)
+    if not os.path.isfile(mp3_path):
+        return ""
+
+    duration_str = ""
+    json_path = os.path.join(AUDIO_DIR, "%s.json" % post_id)
+    if os.path.isfile(json_path):
+        try:
+            with open(json_path, "r", encoding="utf-8") as f_meta:
+                meta = json.load(f_meta)
+            if isinstance(meta, dict) and "seconds" in meta:
+                duration_str = format_audio_duration(meta["seconds"])
+        except Exception:
+            duration_str = ""
+
+    try:
+        size_bytes = os.path.getsize(mp3_path)
+    except OSError:
+        size_bytes = 0
+
+    size_mb = size_bytes / (1024 * 1024)
+    size_str = format_german_number(round(size_mb, 1))
+    if "," not in size_str:
+        size_str = size_str + ",0"
+
+    if duration_str:
+        label = 'Zum Anhören: <strong>%s Minuten</strong> – <a href="audio/%s.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(%s MB)</span>' % (
+            duration_str, esc(post_id), size_str
+        )
+    else:
+        label = 'Zum Anhören: <a href="audio/%s.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(%s MB)</span>' % (
+            esc(post_id), size_str
+        )
+
+    return (
+        '\n  <div class="post-audio">\n'
+        '    <p class="post-audio-label">%s</p>\n'
+        '    <audio controls preload="none" src="audio/%s.mp3"></audio>\n'
+        '  </div>'
+    ) % (label, esc(post_id))
+
+
 def do_build(out_arg):
     site = load_site()
     tpl = load_templates()
@@ -2227,6 +2316,14 @@ def do_build(out_arg):
         shutil.rmtree(out_dir)
     os.makedirs(out_dir)
     os.makedirs(os.path.join(out_dir, "tag"))
+
+    if os.path.isdir(AUDIO_DIR):
+        audio_files = [f for f in sorted(os.listdir(AUDIO_DIR)) if f.endswith(".mp3")]
+        if audio_files:
+            dist_audio_dir = os.path.join(out_dir, "audio")
+            os.makedirs(dist_audio_dir, exist_ok=True)
+            for f in audio_files:
+                shutil.copyfile(os.path.join(AUDIO_DIR, f), os.path.join(dist_audio_dir, f))
 
     def write(rel, content):
         path = os.path.join(out_dir, rel)
@@ -2276,6 +2373,7 @@ def do_build(out_arg):
             "POST_DATETIME": esc(dt_attr),
             "POST_TAGS": tag_html,
             "POST_SOURCE": source_html,
+            "POST_AUDIO": render_audio_block(post["id"]),
             "POST_BODY": render_markdown(post["body"]),
         })
         title = "%s – %s" % (post["title"], site["title"])
@@ -3188,6 +3286,545 @@ def cmd_deploy(args):
     return 0
 
 
+DEFAULT_AUDIO_CONFIG = {
+    "enabled": True,
+    "engine": "voxcpm2",
+    "chunk_chars": 1400,
+    "gap_seconds": 0.7,
+    "bitrate": "64k",
+    "sample_rate": 24000,
+    "engines": {
+        "voxcpm2": {"backend": "voxcpm2-tts", "model": "~/models/voxcpm2/voxcpm2-q8_0.gguf"},
+        "qwen3": {"backend": "qwen3-tts", "model": ""},
+    },
+}
+
+
+def load_audio_config():
+    cfg = {
+        "enabled": DEFAULT_AUDIO_CONFIG["enabled"],
+        "engine": DEFAULT_AUDIO_CONFIG["engine"],
+        "chunk_chars": DEFAULT_AUDIO_CONFIG["chunk_chars"],
+        "gap_seconds": DEFAULT_AUDIO_CONFIG["gap_seconds"],
+        "bitrate": DEFAULT_AUDIO_CONFIG["bitrate"],
+        "sample_rate": DEFAULT_AUDIO_CONFIG["sample_rate"],
+        "engines": {k: dict(v) for k, v in DEFAULT_AUDIO_CONFIG["engines"].items()},
+    }
+    if os.path.isfile(SITE_JSON):
+        try:
+            with open(SITE_JSON, "r", encoding="utf-8") as handle:
+                loaded = json.load(handle)
+        except Exception:
+            loaded = {}
+        if isinstance(loaded, dict) and "audio" in loaded and isinstance(loaded["audio"], dict):
+            audio_block = loaded["audio"]
+            for k in ("enabled", "engine", "chunk_chars", "gap_seconds", "bitrate", "sample_rate"):
+                if k in audio_block:
+                    cfg[k] = audio_block[k]
+            if "engines" in audio_block and isinstance(audio_block["engines"], dict):
+                for eng_name, eng_val in audio_block["engines"].items():
+                    if isinstance(eng_val, dict):
+                        cfg["engines"][eng_name] = dict(eng_val)
+    return cfg
+
+
+def get_binary(name):
+    path = shutil.which(name)
+    if path:
+        return path
+    candidate = os.path.join("/opt/homebrew/bin", name)
+    if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+        return candidate
+    return name
+
+
+def find_tts_cmd():
+    raw_cmd = os.environ.get("BLOGCTL_TTS_CMD", "~/tools/crispasr-tts.sh")
+    expanded = os.path.expanduser(raw_cmd)
+    if os.path.isabs(expanded) or "/" in expanded:
+        if os.path.isfile(expanded) and os.access(expanded, os.X_OK):
+            return expanded
+        return None
+    which = shutil.which(expanded)
+    if which and os.access(which, os.X_OK):
+        return which
+    return None
+
+
+def probe_duration(path):
+    if not os.path.isfile(path):
+        return 0.0
+    ffprobe_cmd = get_binary("ffprobe")
+    cmd = [
+        ffprobe_cmd, "-v", "error",
+        "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1",
+        path,
+    ]
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+    if res.returncode != 0:
+        return 0.0
+    try:
+        return float(res.stdout.strip())
+    except (ValueError, TypeError):
+        return 0.0
+
+
+def chunk_text(text, chunk_chars=1400):
+    text = text.replace("\r\n", "\n").replace("\r", "\n").strip()
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    if not text:
+        return []
+
+    raw_paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+    paragraph_units = []
+
+    for p in raw_paragraphs:
+        if len(p) <= chunk_chars:
+            paragraph_units.append([p])
+        else:
+            raw_sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", p) if s.strip()]
+            sentences = []
+            for s in raw_sentences:
+                if len(s) <= chunk_chars:
+                    sentences.append(s)
+                else:
+                    for i in range(0, len(s), chunk_chars):
+                        part = s[i:i + chunk_chars].strip()
+                        if part:
+                            sentences.append(part)
+
+            p_chunks = []
+            curr_chunk = ""
+            for s in sentences:
+                if not curr_chunk:
+                    curr_chunk = s
+                elif len(curr_chunk) + 1 + len(s) <= chunk_chars:
+                    curr_chunk = curr_chunk + " " + s
+                else:
+                    p_chunks.append(curr_chunk)
+                    curr_chunk = s
+            if curr_chunk:
+                p_chunks.append(curr_chunk)
+            paragraph_units.append(p_chunks)
+
+    final_chunks = []
+    current_chunk = ""
+
+    for p_chunks in paragraph_units:
+        for unit in p_chunks:
+            if not current_chunk:
+                current_chunk = unit
+            elif len(current_chunk) + 2 + len(unit) <= chunk_chars:
+                current_chunk = current_chunk + "\n\n" + unit
+            else:
+                final_chunks.append(current_chunk)
+                current_chunk = unit
+
+    if current_chunk:
+        final_chunks.append(current_chunk)
+
+    return final_chunks
+
+
+def synthesize_chunk(tts_cmd, chunk_text, out_mp3_path, env, sample_rate, bitrate):
+    fd_txt, tmp_txt = tempfile.mkstemp(prefix="blogaudio_chunk_", suffix=".txt")
+    fd_wav, tmp_wav = tempfile.mkstemp(prefix="blogaudio_chunk_", suffix=".wav")
+    os.close(fd_txt)
+    os.close(fd_wav)
+    try:
+        with open(tmp_txt, "w", encoding="utf-8") as f:
+            f.write(chunk_text)
+        cmd = [tts_cmd, tmp_txt, tmp_wav]
+        res = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+        if res.returncode != 0:
+            return False, res.stderr or res.stdout or ("TTS-Befehl beendete mit Code %d" % res.returncode)
+        if not os.path.isfile(tmp_wav) or os.path.getsize(tmp_wav) == 0:
+            return False, "TTS erzeugte keine WAV-Datei"
+
+        ffmpeg_cmd = get_binary("ffmpeg")
+        conv_cmd = [
+            ffmpeg_cmd, "-y",
+            "-i", tmp_wav,
+            "-ac", "1",
+            "-ar", str(sample_rate),
+            "-b:a", str(bitrate),
+            out_mp3_path,
+        ]
+        conv_res = subprocess.run(conv_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+        if conv_res.returncode != 0:
+            return False, conv_res.stderr or "ffmpeg-Konvertierung fehlgeschlagen"
+        return True, ""
+    finally:
+        if os.path.isfile(tmp_txt):
+            os.remove(tmp_txt)
+        if os.path.isfile(tmp_wav):
+            os.remove(tmp_wav)
+
+
+def create_gap_audio(gap_path, gap_seconds, sample_rate, bitrate):
+    os.makedirs(os.path.dirname(os.path.abspath(gap_path)), exist_ok=True)
+    ffmpeg_cmd = get_binary("ffmpeg")
+    cmd = [
+        ffmpeg_cmd, "-y",
+        "-f", "lavfi",
+        "-i", "anullsrc=r=%d:cl=mono" % sample_rate,
+        "-t", str(gap_seconds),
+        "-ac", "1",
+        "-ar", str(sample_rate),
+        "-b:a", str(bitrate),
+        gap_path,
+    ]
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+    if res.returncode != 0:
+        raise ValueError("Erzeugung der Pause-Audiodatei fehlgeschlagen: %s" % (res.stderr or res.stdout))
+
+
+def concat_and_tag(chunk_files, gap_file, out_mp3_path, sample_rate, bitrate, title):
+    fd_list, list_path = tempfile.mkstemp(prefix="blogaudio_concat_", suffix=".txt")
+    os.close(fd_list)
+    try:
+        with open(list_path, "w", encoding="utf-8") as f:
+            for i, chunk_path in enumerate(chunk_files):
+                if i > 0 and gap_file:
+                    f.write("file '%s'\n" % os.path.abspath(gap_file))
+                f.write("file '%s'\n" % os.path.abspath(chunk_path))
+        ffmpeg_cmd = get_binary("ffmpeg")
+        cmd = [
+            ffmpeg_cmd, "-y",
+            "-f", "concat",
+            "-safe", "0",
+            "-i", list_path,
+            "-ac", "1",
+            "-ar", str(sample_rate),
+            "-b:a", str(bitrate),
+            "-metadata", "title=%s" % title,
+            "-metadata", "artist=Hermies Blog",
+            "-metadata", "album=Hermies Blog – Hörfassung",
+            "-f", "mp3",
+            out_mp3_path,
+        ]
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+        if res.returncode != 0:
+            raise ValueError("ffmpeg concat fehlgeschlagen: %s" % (res.stderr or res.stdout))
+    finally:
+        if os.path.isfile(list_path):
+            os.remove(list_path)
+
+
+def clean_derived_text(text):
+    if not text:
+        return ""
+    text = re.sub(r"!\[.*?\]\(.*?\)", "", text)
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    text = re.sub(r"https?://\S+", "", text)
+    text = re.sub(r"\{\{chart:\s*[^}]+\}\}", "", text)
+    text = re.sub(r"\{\{([^}]+)\}\}", r"\1", text)
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"[*_`]", "", text)
+    text = re.sub(r"^>\s*", "", text, flags=re.MULTILINE)
+    text = html.unescape(text)
+    return text.strip()
+
+
+def derive_audio_script(fm, body):
+    summary = str(fm.get("summary") or "").strip()
+
+    lines = (body or "").replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    tldr_lines = []
+    rest_lines = []
+    in_tldr = False
+
+    for line in lines:
+        if re.match(r"^##\s+TL;DR\s*$", line.strip(), re.IGNORECASE):
+            in_tldr = True
+            continue
+        if in_tldr:
+            if re.match(r"^#{1,6}\s+", line):
+                in_tldr = False
+                rest_lines.append(line)
+            else:
+                tldr_lines.append(line)
+        else:
+            rest_lines.append(line)
+
+    tldr_items = []
+    curr_item = []
+    for line in tldr_lines:
+        m = re.match(r"^\s*(?:[-*+]|\d+\.)\s+(.*)$", line)
+        if m:
+            if curr_item:
+                tldr_items.append(" ".join(curr_item))
+                curr_item = []
+            curr_item.append(m.group(1).strip())
+        elif line.strip():
+            if curr_item:
+                curr_item.append(line.strip())
+            else:
+                curr_item.append(line.strip())
+    if curr_item:
+        tldr_items.append(" ".join(curr_item))
+
+    cleaned_tldr = []
+    for item in tldr_items:
+        c = clean_derived_text(item)
+        if c:
+            if not c.endswith((".", "!", "?")):
+                c += "."
+            cleaned_tldr.append(c)
+    tldr_paragraph = " ".join(cleaned_tldr)
+
+    cleaned_rest = []
+    for line in rest_lines:
+        stripped = line.strip()
+        if stripped.startswith("|") and stripped.endswith("|"):
+            continue
+        if stripped.startswith("```"):
+            continue
+        m_head = re.match(r"^#{1,6}\s+(.*)$", stripped)
+        if m_head:
+            h_text = clean_derived_text(m_head.group(1))
+            if h_text:
+                if not h_text.endswith((".", "!", "?")):
+                    h_text += "."
+                cleaned_rest.append(h_text)
+            continue
+        c = clean_derived_text(line)
+        cleaned_rest.append(c)
+
+    rest_text = "\n".join(cleaned_rest)
+    raw_paras = [p.strip() for p in rest_text.split("\n\n") if p.strip()]
+
+    paragraphs = []
+    if summary:
+        cleaned_summary = clean_derived_text(summary)
+        if cleaned_summary:
+            paragraphs.append(cleaned_summary)
+    if tldr_paragraph:
+        paragraphs.append(tldr_paragraph)
+    for p in raw_paras:
+        p_clean = " ".join(p.split())
+        if p_clean:
+            paragraphs.append(p_clean)
+
+    return "\n\n".join(paragraphs)
+
+
+def cmd_audio(args):
+    results = []
+    missing = []
+    try:
+        if args.all and args.ids:
+            raise ValueError("Entweder Artikel-IDs oder --all angeben, nicht beides.")
+        if not args.all and not args.ids:
+            raise ValueError("Keine Artikel angegeben. Bitte <id> oder --all angeben.")
+        if args.script and args.all:
+            raise ValueError("--script kann nicht zusammen mit --all verwendet werden.")
+        if args.script and len(args.ids) > 1:
+            raise ValueError("--script kann nur mit genau einer Artikel-ID verwendet werden.")
+        if args.script and not os.path.isfile(args.script):
+            raise ValueError("Skriptdatei nicht gefunden: %s" % args.script)
+
+        cfg = load_audio_config()
+        engine_name = args.engine or cfg.get("engine", "voxcpm2")
+        engines = cfg.get("engines", {})
+        if engine_name not in engines:
+            known = ", ".join(sorted(engines.keys()))
+            raise ValueError("Unbekannte Engine '%s'. Bekannte Engines: %s" % (engine_name, known))
+        engine_info = engines[engine_name]
+        backend = engine_info.get("backend", "")
+        model = engine_info.get("model", "")
+
+        if args.all:
+            items = list_articles("published")
+            target_ids = [item["id"] for item in items]
+        else:
+            target_ids = list(args.ids)
+
+        ensure_dirs()
+        os.makedirs(AUDIO_DIR, exist_ok=True)
+        os.makedirs(AUDIO_CACHE, exist_ok=True)
+
+        sample_rate = int(cfg.get("sample_rate", 24000))
+        bitrate = str(cfg.get("bitrate", "64k"))
+        gap_seconds = float(cfg.get("gap_seconds", 0.7))
+        chunk_chars = int(cfg.get("chunk_chars", 1400))
+
+        for art_id in target_ids:
+            txt_path = os.path.join(AUDIO_DIR, art_id + ".txt")
+            mp3_path = os.path.join(AUDIO_DIR, art_id + ".mp3")
+            json_path = os.path.join(AUDIO_DIR, art_id + ".json")
+
+            if args.script:
+                with open(args.script, "r", encoding="utf-8") as f_src:
+                    script_content = f_src.read()
+                with open(txt_path, "w", encoding="utf-8") as f_dst:
+                    f_dst.write(script_content)
+            elif os.path.isfile(txt_path):
+                pass
+            elif args.derive:
+                art_file = find_article(art_id)
+                if not art_file:
+                    raise ValueError("Artikel nicht gefunden: %s" % art_id)
+                fm, body = read_article(art_file)
+                derived_text = derive_audio_script(fm, body)
+                with open(txt_path, "w", encoding="utf-8") as f_dst:
+                    f_dst.write(derived_text)
+            else:
+                if args.all:
+                    missing.append(art_id)
+                    rel_txt = os.path.relpath(txt_path, ROOT)
+                    sys.stderr.write("Warnung: %s fehlt, überspringe Artikel\n" % rel_txt)
+                    continue
+                else:
+                    rel_txt = os.path.relpath(txt_path, ROOT)
+                    raise ValueError("%s fehlt. Mit --derive kann der Text mechanisch aus dem Artikel abgeleitet werden." % rel_txt)
+
+            with open(txt_path, "r", encoding="utf-8") as f_in:
+                script_text = f_in.read()
+
+            script_text = script_text.replace("\r\n", "\n").replace("\r", "\n").strip()
+            script_text = re.sub(r"\n{3,}", "\n\n", script_text)
+
+            # Check skip
+            if os.path.isfile(mp3_path) and os.path.getmtime(mp3_path) > os.path.getmtime(txt_path) and not args.force:
+                meta = {}
+                if os.path.isfile(json_path):
+                    try:
+                        with open(json_path, "r", encoding="utf-8") as f_meta:
+                            meta = json.load(f_meta)
+                    except Exception:
+                        meta = {}
+                duration = meta.get("seconds") or probe_duration(mp3_path)
+                file_size = meta.get("bytes") or os.path.getsize(mp3_path)
+                chunks_count = meta.get("chunks") or 1
+                item_data = {
+                    "id": art_id,
+                    "mp3": os.path.relpath(mp3_path, ROOT),
+                    "script": os.path.relpath(txt_path, ROOT),
+                    "seconds": duration,
+                    "bytes": file_size,
+                    "chars": meta.get("chars", len(script_text)),
+                    "words": meta.get("words", len(script_text.split())),
+                    "chunks": chunks_count,
+                    "engine": meta.get("engine", engine_name),
+                    "status": "skipped",
+                }
+                results.append(item_data)
+                if not args.json:
+                    sys.stdout.write("%s: übersprungen (aktuell)\n" % art_id)
+                continue
+
+            # Need synthesis -> find TTS command
+            raw_tts_cmd = os.environ.get("BLOGCTL_TTS_CMD", "~/tools/crispasr-tts.sh")
+            tts_cmd = find_tts_cmd()
+            if not tts_cmd:
+                raise ValueError("TTS-Befehl nicht gefunden oder nicht ausführbar: %s" % raw_tts_cmd)
+
+            chunks = chunk_text(script_text, chunk_chars=chunk_chars)
+            if not chunks:
+                chunks = [script_text]
+
+            art_cache_dir = os.path.join(AUDIO_CACHE, art_id)
+            os.makedirs(art_cache_dir, exist_ok=True)
+
+            tts_env = os.environ.copy()
+            tts_env["CRISPASR_TTS_BACKEND"] = backend
+            if model:
+                tts_env["CRISPASR_TTS_MODEL"] = os.path.expanduser(model)
+
+            chunk_files = []
+            for idx, chunk in enumerate(chunks, 1):
+                chunk_file = os.path.join(art_cache_dir, "%03d.mp3" % idx)
+                if os.path.isfile(chunk_file) and os.path.getsize(chunk_file) > 2000 and not args.force:
+                    chunk_files.append(chunk_file)
+                else:
+                    success = False
+                    last_err = ""
+                    for attempt in range(3):
+                        success, last_err = synthesize_chunk(tts_cmd, chunk, chunk_file, tts_env, sample_rate, bitrate)
+                        if success:
+                            break
+                    if not success:
+                        raise ValueError("Synthese fehlgeschlagen für %s (Abschnitt %d): %s" % (art_id, idx, last_err))
+                    chunk_files.append(chunk_file)
+
+            gap_file = os.path.join(AUDIO_CACHE, "_gap.mp3")
+            if len(chunk_files) > 1 and (not os.path.isfile(gap_file) or os.path.getsize(gap_file) == 0):
+                create_gap_audio(gap_file, gap_seconds, sample_rate, bitrate)
+
+            art_file = find_article(art_id)
+            art_title = art_id
+            if art_file:
+                try:
+                    fm_found, _ = read_article(art_file)
+                    art_title = fm_found.get("title", art_id)
+                except Exception:
+                    pass
+
+            tmp_mp3 = mp3_path + ".tmp"
+            if os.path.isfile(tmp_mp3):
+                os.remove(tmp_mp3)
+
+            concat_and_tag(chunk_files, gap_file if len(chunk_files) > 1 else "", tmp_mp3, sample_rate, bitrate, art_title)
+            os.replace(tmp_mp3, mp3_path)
+
+            duration = probe_duration(mp3_path)
+            file_size = os.path.getsize(mp3_path) if os.path.isfile(mp3_path) else 0
+            if not os.path.isfile(mp3_path) or file_size < 5000 or duration < 1.0:
+                if os.path.isfile(mp3_path):
+                    os.remove(mp3_path)
+                raise ValueError("Plausibilitätsprüfung fehlgeschlagen für %s: Datei zu klein (<5KB) oder Dauer <1s" % art_id)
+
+            created_ts = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+            meta = {
+                "id": art_id,
+                "engine": engine_name,
+                "backend": backend,
+                "chars": len(script_text),
+                "words": len(script_text.split()),
+                "chunks": len(chunks),
+                "seconds": round(duration, 1),
+                "bytes": file_size,
+                "created": created_ts,
+            }
+            with open(json_path, "w", encoding="utf-8") as f_meta:
+                json.dump(meta, f_meta, indent=2, ensure_ascii=False)
+                f_meta.write("\n")
+
+            item_data = {
+                "id": art_id,
+                "mp3": os.path.relpath(mp3_path, ROOT),
+                "script": os.path.relpath(txt_path, ROOT),
+                "seconds": round(duration, 1),
+                "bytes": file_size,
+                "chars": len(script_text),
+                "words": len(script_text.split()),
+                "chunks": len(chunks),
+                "engine": engine_name,
+                "status": "ok",
+            }
+            results.append(item_data)
+            if not args.json:
+                m, s = divmod(int(round(duration)), 60)
+                sys.stdout.write("%s: ok — %d:%02d min, %d Abschnitte\n" % (art_id, m, s, len(chunks)))
+
+        if args.json:
+            emit_json({"ok": True, "audio": results, "missing": missing})
+        else:
+            ok_count = sum(1 for r in results if r.get("status") == "ok")
+            skipped_count = sum(1 for r in results if r.get("status") == "skipped")
+            sys.stdout.write("audio: %d erzeugt, %d übersprungen, %d fehlend\n" % (ok_count, skipped_count, len(missing)))
+        return 0
+
+    except Exception as exc:
+        err_msg = str(exc)
+        sys.stderr.write("Fehler: %s\n" % err_msg)
+        if getattr(args, "json", False):
+            emit_json({"ok": False, "error": err_msg, "audio": results, "missing": missing})
+        return 1
+
+
 def build_parser():
     parser = argparse.ArgumentParser(prog="blogctl", description="Blog-CLI")
     sub = parser.add_subparsers(dest="cmd")
@@ -3280,6 +3917,16 @@ def build_parser():
                    help="Erstellen von GitHub-Releases überspringen")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_deploy)
+
+    p = sub.add_parser("audio", help="Hörfassung für Artikel erzeugen")
+    p.add_argument("ids", nargs="*", help="Artikel-IDs")
+    p.add_argument("--all", action="store_true", help="Alle veröffentlichten Artikel abarbeiten")
+    p.add_argument("--script", help="Inhalt dieser Datei als Sprechtext übernehmen")
+    p.add_argument("--derive", action="store_true", help="Sprechtext mechanisch aus Artikel ableiten")
+    p.add_argument("--force", action="store_true", help="Audiodateien neu erzeugen, auch wenn aktuell")
+    p.add_argument("--engine", help="TTS-Engine auswählen")
+    p.add_argument("--json", action="store_true", help="Ausgabe als JSON")
+    p.set_defaults(func=cmd_audio)
 
     return parser
 

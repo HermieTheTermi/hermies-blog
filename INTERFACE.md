@@ -22,6 +22,7 @@ INTERFACE.md            # dieser Vertrag (+ Betriebsregeln)
 content/posts/          # veröffentlichte Artikel
 content/drafts/         # Entwürfe
 content/charts/         # Datendateien für Diagramme (JSON, Daten, kein Code)
+content/audio/          # Hörfassungen (.txt Sprechtexte, .mp3 Audiodateien, .json Metadaten)
 content/lexikon.json    # Datendatei für Fachbegriffe und Tooltips
 content/sources.json    # Quellen für `blogctl scrape`
 content/templates/      # Layout der Site (Chunk 2)
@@ -49,6 +50,7 @@ dist/                   # Build-Ausgabe (nicht committen)
 | `build [--out dist]` | statische Site bauen | `{ok,out,pages}` |
 | `serve [--port 8080]` | Vorschau lokal | – |
 | `scrape [--source NAME] [--per-source N] [--limit N] [--since-days D] [--dry-run]` | neue Items aus `content/sources.json` → Entwürfe (N je Quelle, Gesamtdeckel über `--limit`) | `{ok,created:[],skipped:N,errors:[]}` |
+| `audio [ID…] [--all] [--script S] [--derive] [--force] [--engine E]` | Hörfassung für Artikel erzeugen | `{ok,audio:[{id,mp3,script,seconds,bytes,chars,words,chunks,engine,status}],missing:[ids]}` |
 | `deploy [--no-releases]` | `build` + git commit + push + GitHub-Releases via gh (Zustandsdatei `content/releases.json`) | `{ok,commit,pushed_to,url,rebased,releases:{created,skipped,baseline,error}}` |
 
 ## Frontmatter
@@ -130,6 +132,21 @@ Gemeinsame optionale Felder für alle Typen: `titel` (Pflicht), `einheit` (z. B.
   - Deterministischer Build: identischer Input liefert byte-identisches SVG.
 - **Validierung**: `blogctl check` verifiziert die JSON-Syntax aller Diagramme unter `content/charts/` und die Existenz aller in Texten referenzierten Chart-Dateien (Marker in Backtick-Code wie `{{chart:name}}` werden ignoriert).
 - **CLI**: `blogctl charts [--json]` listet alle verfügbaren Chart-Dateien mit Name, Titel und Typ.
+
+## Hörfassung (Podcast-Audio)
+
+Artikel können als Audiofassung (MP3) bereitgestellt werden.
+
+- **Ablage**: Pro Artikel unter `content/audio/<id>.txt` (Sprechtext), `content/audio/<id>.mp3` (fertige Audiodatei) und `content/audio/<id>.json` (Metadaten `{id, engine, backend, chars, words, chunks, seconds, bytes, created}`).
+- **Cache**: `.audio-cache/` speichert Teilstücke pro Artikel (nicht committen, in `.gitignore`).
+- **Engine-Konfiguration**: Über `content/site.json` unter dem Schlüssel `audio` (Default-Engine, Chunks, Bitrate, Engines).
+- **TTS-Kommando**: Umgebungsvariable `BLOGCTL_TTS_CMD` (Default `~/tools/crispasr-tts.sh`), Aufrufsyntax `<cmd> <textdatei> <wav>`.
+- **Player & Feed**: Beim Build (`blogctl build`) wird `content/audio/*.mp3` nach `dist/audio/` kopiert. Auf der Artikelseite bindet ein nativer `<audio controls preload="none">`-Player die Hörfassung ein (Größe in deutscher Schreibweise, optionale Dauer). Im RSS-Feed (`feed.xml`) erhält der Artikel ein passendes `<enclosure>`-Element mit URL, Länge in Bytes und Typ `audio/mpeg`. Vollständig ohne JavaScript.
+- **Prüfregeln (`blogctl check`)**:
+  - Warnung für jeden veröffentlichten Artikel ohne `content/audio/<id>.mp3`.
+  - Warnung, wenn `content/audio/<id>.mp3` existiert, aber `content/audio/<id>.txt` fehlt.
+  - Fehler, wenn `content/audio/<id>.json` existiert, aber kein gültiges JSON-Objekt ist.
+  - Entwürfe lösen keine Audio-Warnung aus.
 
 ## Quellen (`content/sources.json`)
 

@@ -3,5 +3,17 @@
   "description": "Notizen, News und Analysen.",
   "base_url": "https://hermiethetermi.github.io/hermies-blog",
   "author": "Hermies Blog",
-  "lang": "de"
+  "lang": "de",
+  "audio": {
+    "enabled": true,
+    "engine": "voxcpm2",
+    "chunk_chars": 1400,
+    "gap_seconds": 0.7,
+    "bitrate": "64k",
+    "sample_rate": 24000,
+    "engines": {
+      "voxcpm2": { "backend": "voxcpm2-tts", "model": "~/models/voxcpm2/voxcpm2-q8_0.gguf" },
+      "qwen3": { "backend": "qwen3-tts", "model": "" }
+    }
+  }
 }
