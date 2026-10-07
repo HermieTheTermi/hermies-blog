@@ -141,7 +141,7 @@ Artikel können als Audiofassung (MP3) bereitgestellt werden.
 - **Cache**: `.audio-cache/` speichert Teilstücke pro Artikel (nicht committen, in `.gitignore`).
 - **Engine-Konfiguration**: Über `content/site.json` unter dem Schlüssel `audio` (Default-Engine, Chunks, Bitrate, Engines).
 - **TTS-Kommando**: Umgebungsvariable `BLOGCTL_TTS_CMD` (Default `~/tools/crispasr-tts.sh`), Aufrufsyntax `<cmd> <textdatei> <wav>`.
-- **Player & Feed**: Beim Build (`blogctl build`) wird `content/audio/*.mp3` nach `dist/audio/` kopiert. Auf der Artikelseite bindet ein nativer `<audio controls preload="none">`-Player die Hörfassung ein (Größe in deutscher Schreibweise, optionale Dauer). Im RSS-Feed (`feed.xml`) erhält der Artikel ein passendes `<enclosure>`-Element mit URL, Länge in Bytes und Typ `audio/mpeg`. Vollständig ohne JavaScript.
+- **Player & Feed**: Beim Build (`blogctl build`) wird `content/audio/*.mp3` nach `dist/audio/` kopiert. Auf der Artikelseite bindet ein nativer `<audio controls preload="none">`-Player die Hörfassung ein (Größe in deutscher Schreibweise, optionale Dauer, sichtbarer Hinweis „KI-Stimme“). Die MP3s enthalten Wasserzeichen und C2PA-Signatur (der hörbare Hinweis des Werkzeugs ist abgeschaltet, weil er an jedem Abschnitt hing). Im RSS-Feed (`feed.xml`) erhält der Artikel ein passendes `<enclosure>`-Element mit URL, Länge in Bytes und Typ `audio/mpeg`. Vollständig ohne JavaScript.
 - **Prüfregeln (`blogctl check`)**:
   - Warnung für jeden veröffentlichten Artikel ohne `content/audio/<id>.mp3`.
   - Warnung, wenn `content/audio/<id>.mp3` existiert, aber `content/audio/<id>.txt` fehlt.

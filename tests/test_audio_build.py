@@ -147,6 +147,8 @@ class BlogAudioBuildTestCase(unittest.TestCase):
         self.assertIn(f'src="audio/{post_id}.mp3"', content)
         self.assertIn("download", content)
         self.assertIn("8:07 Minuten", content)
+        self.assertIn("KI-Stimme", content)
+        self.assertIn("<strong>8:07 Minuten</strong> (KI-Stimme) –", content)
         self.assertIn("3,8 MB", content)
         self.assertNotIn("<script", content)
 
@@ -183,6 +185,8 @@ class BlogAudioBuildTestCase(unittest.TestCase):
             content = f.read()
 
         self.assertNotIn("<audio", content)
+        self.assertNotIn(".post-audio", content)
+        self.assertNotIn("KI-Stimme", content)
         self.assertNotIn("audio/", content)
         self.assertNotIn("dist/audio", content)
         self.assertFalse(os.path.exists(os.path.join(out_dist, "audio")))
@@ -212,6 +216,8 @@ class BlogAudioBuildTestCase(unittest.TestCase):
         self.assertIn("<audio", content)
         self.assertIn(f'src="audio/{post_id}.mp3"', content)
         self.assertIn("download", content)
+        self.assertIn("KI-Stimme", content)
+        self.assertIn("Zum Anhören: KI-Stimme –", content)
         self.assertIn("3,8 MB", content)
         # Duration info should be omitted
         self.assertNotIn("Minuten", content)

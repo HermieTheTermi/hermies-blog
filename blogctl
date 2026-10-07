@@ -2282,11 +2282,11 @@ def render_audio_block(post_id):
         size_str = size_str + ",0"
 
     if duration_str:
-        label = 'Zum Anhören: <strong>%s Minuten</strong> – <a href="audio/%s.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(%s MB)</span>' % (
+        label = 'Zum Anhören: <strong>%s Minuten</strong> (KI-Stimme) – <a href="audio/%s.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(%s MB)</span>' % (
             duration_str, esc(post_id), size_str
         )
     else:
-        label = 'Zum Anhören: <a href="audio/%s.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(%s MB)</span>' % (
+        label = 'Zum Anhören: KI-Stimme – <a href="audio/%s.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(%s MB)</span>' % (
             esc(post_id), size_str
         )
 
