@@ -1,0 +1,11 @@
+{
+  "id": "openai-veroeffentlicht-722-mathematik-manuskripte-maschinell-geprueft-ist-ein-fuenftel",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8131,
+  "words": 1144,
+  "chunks": 9,
+  "seconds": 470.3,
+  "bytes": 3763026,
+  "created": "2026-10-07T22:16:32+02:00"
+}
