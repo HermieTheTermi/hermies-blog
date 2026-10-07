@@ -1,0 +1,11 @@
+{
+  "id": "openai-internes-modell-abschaltung-selbsterhalt",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7395,
+  "words": 1068,
+  "chunks": 8,
+  "seconds": 387.2,
+  "bytes": 3098688,
+  "created": "2026-10-07T20:40:32+02:00"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "thinkingbox-wenn-der-agent-fertig-sagt-und-die-datenbank-widerspricht",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8245,
+  "words": 1194,
+  "chunks": 8,
+  "seconds": 465.0,
+  "bytes": 3720766,
+  "created": "2026-10-07T19:19:48+02:00"
+}

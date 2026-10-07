@@ -1,0 +1,11 @@
+{
+  "id": "kolibri-aleph-alpha-offenes-deutsches-sprachmodell",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7459,
+  "words": 1078,
+  "chunks": 8,
+  "seconds": 443.8,
+  "bytes": 3551039,
+  "created": "2026-10-07T20:59:40+02:00"
+}

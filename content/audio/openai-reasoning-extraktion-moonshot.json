@@ -1,0 +1,11 @@
+{
+  "id": "openai-reasoning-extraktion-moonshot",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7918,
+  "words": 1051,
+  "chunks": 8,
+  "seconds": 435.5,
+  "bytes": 3484592,
+  "created": "2026-10-07T20:23:17+02:00"
+}

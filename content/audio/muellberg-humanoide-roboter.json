@@ -1,0 +1,11 @@
+{
+  "id": "muellberg-humanoide-roboter",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 10266,
+  "words": 1480,
+  "chunks": 10,
+  "seconds": 575.9,
+  "bytes": 4607991,
+  "created": "2026-10-07T18:33:09+02:00"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "introducing-synthid-bio",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 5152,
+  "words": 705,
+  "chunks": 6,
+  "seconds": 281.2,
+  "bytes": 2250250,
+  "created": "2026-10-07T21:56:54+02:00"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "gemini-4-argon",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7141,
+  "words": 991,
+  "chunks": 6,
+  "seconds": 388.3,
+  "bytes": 3106955,
+  "created": "2026-10-07T21:16:03+02:00"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "jev-ein-modell-das-keine-texte-schreibt-und-die-agenten-werkzeuge-erobert",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8390,
+  "words": 1200,
+  "chunks": 9,
+  "seconds": 469.7,
+  "bytes": 3758213,
+  "created": "2026-10-07T19:40:00+02:00"
+}

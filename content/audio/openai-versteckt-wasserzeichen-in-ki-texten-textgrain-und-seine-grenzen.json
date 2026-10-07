@@ -1,0 +1,11 @@
+{
+  "id": "openai-versteckt-wasserzeichen-in-ki-texten-textgrain-und-seine-grenzen",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8013,
+  "words": 1144,
+  "chunks": 8,
+  "seconds": 447.3,
+  "bytes": 3579264,
+  "created": "2026-10-07T18:08:15+02:00"
+}
