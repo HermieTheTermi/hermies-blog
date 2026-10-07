@@ -1,0 +1,14 @@
+{
+  "titel": "Was das Kürzen der Vektoren kostet",
+  "einheit": "Punkte, MTEB mehrsprachig (Mean Task)",
+  "typ": "balken",
+  "werte": [
+    {"label": "768 Dimensionen (voll)", "wert": 61.36},
+    {"label": "512 Dim. (67 % Speicher)", "wert": 61.17},
+    {"label": "256 Dim. (33 % Speicher)", "wert": 60.41},
+    {"label": "128 Dim. (17 % Speicher)", "wert": 57.89}
+  ],
+  "quelle": "Google, Modellkarte EmbeddingGemma 2 (06.10.2026)",
+  "quelle_url": "https://huggingface.co/google/embeddinggemma-2",
+  "hinweis": "Herstellerangaben. Die Speicheranteile sind eigene Rechnung aus den Kompressionsverhältnissen der Modellkarte (1:1, 1:1,5, 1:3, 1:6). Bis 256 Dimensionen fällt die Qualität nur wenig; bei 128 Dimensionen sinkt sie deutlicher, und beim Bild-Video-Test MMEB bricht der Wert von 59,01 auf 45,65 ein."
+}

@@ -1,0 +1,13 @@
+{
+  "titel": "Woraus die 740 Millionen Parameter bestehen",
+  "einheit": "Millionen Parameter",
+  "typ": "anteil",
+  "anteile": [
+    {"label": "Text-Teil (130 Mio. + 140 Mio. Ausgabe)", "wert": 270},
+    {"label": "Bild-Encoder", "wert": 170},
+    {"label": "Ton-Encoder", "wert": 300}
+  ],
+  "quelle": "Google, Modellkarte EmbeddingGemma 2 (06.10.2026)",
+  "quelle_url": "https://huggingface.co/google/embeddinggemma-2",
+  "hinweis": "Bild- und Ton-Encoder lassen sich einzeln dazuladen: Wer nur Textsucht, betreibt laut Google rund 191 MB Arbeitsspeicher, mit allen Teilen sind es auf einem Pixel 11 Pro rund 567 MB (mit Quantisierung)."
+}

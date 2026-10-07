@@ -1,0 +1,13 @@
+{
+  "titel": "Formalisierte Ergebnisse nach Datum des Manuskripts",
+  "einheit": "Manuskripte",
+  "typ": "gestapelt",
+  "gruppen": ["10.–18. Sep", "22.–27. Sep", "30. Sep – 2. Okt", "3.–6. Okt"],
+  "reihen": [
+    {"name": "mit Lean-Formalisierung", "werte": [0, 159, 3, 0]},
+    {"name": "ohne", "werte": [4, 407, 4, 143]}
+  ],
+  "quelle": "OpenAI, Repository github.com/openai/math, Stand 07.10.2026",
+  "quelle_url": "https://github.com/openai/math/blob/main/CONTENTS.md",
+  "hinweis": "Eigene Zählung vom 7. Oktober 2026 über die Verzeichnisnamen der 721 datierten Manuskripte (ein weiteres trägt kein Datum und fehlt hier). Der Katalog der Lean-Formalisierungen nennt 162 Ergebnisse; 159 davon stammen aus den fünf Tagen vom 22. bis 27. September, keines aus den letzten 72 Stunden vor der Veröffentlichung."
+}

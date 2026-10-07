@@ -1,0 +1,11 @@
+{
+  "titel": "Wie viel davon ist maschinell geprüft?",
+  "einheit": "% der Manuskripte",
+  "typ": "anteil",
+  "wert": 162,
+  "von": 722,
+  "label": "der Manuskripte haben eine Lean-Formalisierung des Hauptergebnisses",
+  "quelle": "OpenAI, Repository github.com/openai/math, Stand 07.10.2026",
+  "quelle_url": "https://github.com/openai/math/blob/main/lean/formalization.yaml",
+  "hinweis": "Eigene Zählung vom 7. Oktober 2026: Im Katalog der formalisierten Hauptergebnisse (lean/formalization.yaml) stehen 162 Einträge, die auf die 722 Manuskripte der Sammlung verweisen. Das Repository selbst schreibt nur, es seien viele, aber nicht alle Ergebnisse formalisiert; weitere sollen folgen. Eine Formaliserung prüft die logischen Schritte, sie sagt nicht automatisch, dass der formale Satz auch die Aussage des Aufsatzes ist."
+}

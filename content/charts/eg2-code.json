@@ -1,0 +1,12 @@
+{
+  "titel": "Programmcode finden: EmbeddingGemma 2 gegen 1",
+  "einheit": "Punkte, MTEB Code v1 (NDCG@10)",
+  "typ": "balken",
+  "werte": [
+    {"label": "EmbeddingGemma 1", "wert": 68.76},
+    {"label": "EmbeddingGemma 2", "wert": 78.68}
+  ],
+  "quelle": "Google, Modellkarte EmbeddingGemma 2 (06.10.2026)",
+  "quelle_url": "https://huggingface.co/google/embeddinggemma-2",
+  "hinweis": "Herstellerangaben aus der eigenen Testreihe, unabhängig nachgeprüft ist nichts davon. Beim allgemeinen mehrsprachigen Text-Test MTEB steht EmbeddingGemma 2 bei 61,36 Punkten, der Vorgänger bei 61,15 – dort ist der Unterschied also praktisch null."
+}

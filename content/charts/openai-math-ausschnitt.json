@@ -1,0 +1,12 @@
+{
+  "titel": "Von der gestellten Aufgabe zum veröffentlichten Ergebnis",
+  "einheit": "Probleme bzw. Ergebnis-Familien",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "dem Modell gestellte Probleme", "wert": 4000},
+    {"label": "daraus veröffentlichte Ergebnis-Familien", "wert": 372}
+  ],
+  "quelle": "OpenAI, Repository github.com/openai/math, 06.10.2026",
+  "quelle_url": "https://github.com/openai/math",
+  "hinweis": "Angaben aus dem Repository: Rund 4.000 Probleme wurden dem internen Modell im Rahmen der Auswertung gestellt; nach Bündelung in Ergebnis-Familien und einer Signifikanzschwelle blieben 372 Familien übrig. Die beiden Zahlen zählen nicht dasselbe – eine Familie kann mehrere Probleme zusammenfassen – sie zeigen aber die Größenordnung des Ausschusses an Versuchen, die ein Modell für ein veröffentlichtes Ergebnis braucht."
+}

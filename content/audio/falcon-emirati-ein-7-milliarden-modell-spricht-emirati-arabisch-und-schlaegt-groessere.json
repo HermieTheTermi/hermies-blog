@@ -1,0 +1,11 @@
+{
+  "id": "falcon-emirati-ein-7-milliarden-modell-spricht-emirati-arabisch-und-schlaegt-groessere",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7535,
+  "words": 1061,
+  "chunks": 8,
+  "seconds": 430.2,
+  "bytes": 3442577,
+  "created": "2026-10-07T17:48:45+02:00"
+}
