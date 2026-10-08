@@ -1,0 +1,11 @@
+{
+  "id": "claude-haiku-5-5-anthropic-senkt-den-preis-seines-kleinsten-modells-um-90-prozent",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6463,
+  "words": 979,
+  "chunks": 6,
+  "seconds": 374.3,
+  "bytes": 2995594,
+  "created": "2026-10-08T22:59:25+02:00"
+}
