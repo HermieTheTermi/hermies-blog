@@ -1,0 +1,11 @@
+{
+  "titel": "IMO 2026: 30 von 42 Punkten",
+  "einheit": "Punkte",
+  "typ": "anteil",
+  "wert": 30,
+  "von": 42,
+  "label": "Punkte für das Nemotron-System – die Gold-Schwelle lag bei 29",
+  "quelle": "NVIDIA, Hugging-Face-Blog (07.10.2026); arXiv:2609.10712",
+  "quelle_url": "https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026",
+  "hinweis": "Bei vier der sechs Aufgaben gab es volle Punktzahl. Die eingesandten Beweise wurden laut NVIDIA von offiziellen IMO-Prüfern benotet; das Team steuerte zwei feinjustierte Prüfpunkte und das allgemeine Modell bei."
+}

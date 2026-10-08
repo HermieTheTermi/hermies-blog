@@ -1,0 +1,13 @@
+{
+  "titel": "Preis je Million Token: Haiku 5.5 gegen den Vorgänger",
+  "einheit": "US-Dollar pro Million Token",
+  "typ": "balken",
+  "gruppen": ["Haiku 4.5", "Haiku 5.5 (bis 100k)", "Sonnet 5.5"],
+  "reihen": [
+    {"name": "Eingabe", "werte": [1.0, 0.1, 2.0]},
+    {"name": "Ausgabe", "werte": [5.0, 0.5, 10.0]}
+  ],
+  "quelle": "Anthropic, Ankündigung Claude Haiku 5.5 und Preisseite (07.10.2026)",
+  "quelle_url": "https://www.anthropic.com/claude-haiku-5-5",
+  "hinweis": "Für Anfragen über 100.000 Token steigt der Preis bei Haiku 5.5 auf 0,50 und 2,50 Dollar – dann sind es 50 Prozent weniger als beim Vorgänger. Anthropic rechnet im Schnitt mit rund 75 Prozent weniger Kosten, weil der neue Tokenizer denselben Text in etwa 30 Prozent mehr Token zerlegt."
+}

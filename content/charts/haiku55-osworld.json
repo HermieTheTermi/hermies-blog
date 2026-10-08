@@ -1,0 +1,14 @@
+{
+  "titel": "Einen Computer bedienen: OSWorld 2.1 (Offline-Satz)",
+  "einheit": "% gelöster Aufgaben",
+  "typ": "balken",
+  "werte": [
+    {"label": "Haiku 4.5", "wert": 15.7},
+    {"label": "GPT-6 Luna", "wert": 48.9},
+    {"label": "Haiku 5.5", "wert": 72.4},
+    {"label": "Sonnet 5.5", "wert": 83.9}
+  ],
+  "quelle": "Anthropic, Ankündigung Claude Haiku 5.5 (07.10.2026)",
+  "quelle_url": "https://www.anthropic.com/claude-haiku-5-5",
+  "hinweis": "Der Test misst, wie gut ein Modell einen echten Rechner über viele Schritte bedient, mit Teilpunkten. Herstellerangaben aus Anthropics eigener Messung."
+}

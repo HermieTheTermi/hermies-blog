@@ -1,0 +1,13 @@
+{
+  "titel": "IOI 2026: Nemotron über der Gold-Schwelle",
+  "einheit": "Punkte von 600",
+  "typ": "balken",
+  "werte": [
+    {"label": "Gold-Schwelle", "wert": 361.12},
+    {"label": "Bester Mensch", "wert": 498.27},
+    {"label": "Nemotron-3-Ultra-CC", "wert": 535.4}
+  ],
+  "quelle": "NVIDIA, Hugging-Face-Blog (07.10.2026)",
+  "quelle_url": "https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026",
+  "hinweis": "Der Lauf fand unter denselben Zeit-, Internet- und Abgaberegeln statt wie bei menschlichen Teilnehmern, war laut NVIDIA aber inoffiziell und unbeaufsichtigt und zählt nicht zur offiziellen Rangliste. Die 498,27 sind das beste Ergebnis eines menschlichen Teilnehmers am Aufgabensatz, nicht das Ergebnis eines direkten Duells."
+}

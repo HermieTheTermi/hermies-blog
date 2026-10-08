@@ -1,0 +1,15 @@
+{
+  "titel": "Von 130 auf 468 Punkte: die Stufen bei IOI 2025",
+  "einheit": "Punkte (Aufgabensatz IOI 2025)",
+  "typ": "balken",
+  "werte": [
+    {"label": "Nano vor dem Nachtraining", "wert": 130},
+    {"label": "nach Feintuning", "wert": 280},
+    {"label": "nach Reinforcement Learning", "wert": 291},
+    {"label": "mit GenCorrect", "wert": 468},
+    {"label": "Gold-Schwelle", "wert": 438.3}
+  ],
+  "quelle": "NVIDIA, Hugging-Face-Blog: One Model Family, Two Gold-Level Results (07.10.2026)",
+  "quelle_url": "https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026",
+  "hinweis": "Werte für die kleine Fassung Nemotron-3-Nano-CC. Die größere Fassung Ultra-CC kam mit derselben Suchschleife auf 502 Punkte. Herstellerangaben aus NVIDIAs eigener Messung, unabhängig nachgemessen ist nichts davon."
+}
