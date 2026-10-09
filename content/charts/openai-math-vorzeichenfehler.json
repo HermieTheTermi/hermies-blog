@@ -1,0 +1,13 @@
+{
+  "titel": "Was ein falsches Vorzeichen nach sich zieht",
+  "einheit": "Manuskripte",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "zurückgezogen", "wert": 3},
+    {"label": "überarbeitet", "wert": 14},
+    {"label": "nur Zitate aktualisiert", "wert": 13}
+  ],
+  "quelle": "OpenAI, Änderungsprotokoll github.com/openai/math, 07.10.2026",
+  "quelle_url": "https://github.com/openai/math/blob/main/history.md",
+  "hinweis": "Ein falsch gesetztes Vorzeichen in der Arbeit über Weil-Klassen auf abelschen Achtfachen machte ein Kürzungsargument ungültig. Zwei Manuskripte, die dieselbe Konstruktion benutzen, wurden mit zurückgezogen – darunter der Beweis der rationalen Hodge-Vermutung für Produkte von K3-Flächen. 14 weitere Arbeiten wurden repariert, 13 verweisen nur noch auf die korrigierten Fassungen."
+}

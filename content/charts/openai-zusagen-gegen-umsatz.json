@@ -1,0 +1,12 @@
+{
+  "titel": "Zugesagte Rechenleistung gegen ein Jahr Umsatz",
+  "einheit": "Milliarden US-Dollar",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Zusagen für Rechenzentren, 8 Jahre", "wert": 1400},
+    {"label": "Jahresumsatz, August 2026", "wert": 40}
+  ],
+  "quelle": "Sam Altman über Data Center Dynamics (Nov. 2025); Bloomberg (Aug. 2026)",
+  "quelle_url": "https://datacenterdynamics.com/en/news/sam-altman-openai-isnt-seeking-a-government-bailout-has-14tn-in-data-center-commitments-may-launch-an-ai-cloud-service",
+  "hinweis": "Die beiden Zahlen messen nicht dasselbe: links Verpflichtungen für Rechenzentren und Cloud-Dienste über acht Jahre, rechts der auf ein Jahr hochgerechnete Umsatz. Genau darum geht es – ein Versprechen über acht Jahre steht gegen ein einzelnes Einnahmenjahr. Später nannte OpenAI gegenüber Investoren rund 600 Milliarden Dollar bis 2030, laut Wall Street Journal im Juli 2026 etwa 750 Milliarden."
+}

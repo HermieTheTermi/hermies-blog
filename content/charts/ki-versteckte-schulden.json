@@ -1,0 +1,12 @@
+{
+  "titel": "Schulden in der Bilanz und daneben",
+  "einheit": "Milliarden US-Dollar",
+  "typ": "balken",
+  "werte": [
+    {"label": "in der Bilanz", "wert": 1350},
+    {"label": "außerhalb der Bilanz", "wert": 1650}
+  ],
+  "quelle": "Nikkei-Asia-Studie zu Alphabet, Amazon, Meta, Microsoft und Oracle, Juli 2026",
+  "quelle_url": "https://asia.nikkei.com/business/technology/five-us-tech-giants-hidden-debts-soar-to-1.65tn-on-opaque-ai-funding",
+  "hinweis": "Verpflichtungen aus noch nicht laufenden Rechenzentrums-Mietverträgen und GPU-Lieferverträgen stehen zunächst nur in den Fußnoten und wandern in die Bilanz, sobald die Anlagen in Betrieb gehen. Meta allein: rund 420 Milliarden Dollar außerhalb der Bilanz, fast dreimal so viel wie die ausgewiesenen Schulden. Oracle: rund 273 Milliarden, ein Anstieg um mehr als das Dreißigfache in vier Jahren."
+}

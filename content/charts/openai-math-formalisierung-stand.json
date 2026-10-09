@@ -1,0 +1,11 @@
+{
+  "titel": "Maschinell geprüft: knapp die Hälfte",
+  "einheit": "% der Manuskripte",
+  "typ": "anteil",
+  "wert": 300,
+  "von": 719,
+  "label": "haben einen Lean-Beweis",
+  "quelle": "OpenAI, Änderungsprotokoll github.com/openai/math, 07.10.2026",
+  "quelle_url": "https://github.com/openai/math/blob/main/history.md",
+  "hinweis": "Das Änderungsprotokoll vom 7. Oktober nennt 300 von 719 formalisierte Hauptergebnisse, rund 42 Prozent. Am Tag der Veröffentlichung waren es nach eigener Zählung 162 von 722 Manuskripten (22,5 Prozent). Die drei zurückgezogenen Arbeiten gehören nicht zu den formalisierten: Der Lean-Prüfer hätte den Vorzeichenfehler bemerkt. Lean prüft die logischen Schritte, nicht ob der formale Satz dieselbe Aussage hat wie der Aufsatz."
+}
