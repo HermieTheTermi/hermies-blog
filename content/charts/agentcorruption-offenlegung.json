@@ -1,0 +1,13 @@
+{
+  "titel": "Wie lange die Offenlegung dauerte",
+  "einheit": "Tage",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Metadaten-Zugang gemeldet bis IMDSv2-Standard", "wert": 51},
+    {"label": "Metadaten-Zugang gemeldet bis AWS-Antwort", "wert": 108},
+    {"label": "Überprivilegierte Rolle gemeldet bis entschärft", "wert": 260}
+  ],
+  "quelle": "Zenity Labs, AgentCorruption (08.10.2026)",
+  "quelle_url": "https://labs.zenity.io/post/agentcorruption-how-a-single-prompt-collapsed-the-entire-cloud-security-model",
+  "hinweis": "Erste Meldung am 25.12.2025, zweite am 12.01.2026. Am 22.06.2026 war die Rolle laut Zenity noch unverändert."
+}

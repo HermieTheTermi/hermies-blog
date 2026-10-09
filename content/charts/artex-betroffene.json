@@ -1,0 +1,15 @@
+{
+  "titel": "Gemeldete Betroffene je Institut",
+  "einheit": "Personen",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Yegaram Savings Bank", "wert": 40000},
+    {"label": "Shinhan Bank", "wert": 25000},
+    {"label": "KB Kookmin Bank", "wert": 119},
+    {"label": "Hana Bank", "wert": 89},
+    {"label": "BNK Busan Bank", "wert": 11}
+  ],
+  "quelle": "Yonhap (01.10.2026), The Straits Times (05.10.2026)",
+  "quelle_url": "https://en.yna.co.kr/view/AEN20261001006351320",
+  "hinweis": "Angaben der Institute, teils laufend korrigiert. CrowdStrike betont, die Zahl der betroffenen Häuser sei nicht bestätigt; koreanische Medien summieren rund 67.000 Betroffene."
+}

@@ -1,0 +1,13 @@
+{
+  "titel": "Zeit vom ersten Zugriff bis zur Ausbreitung im Netz",
+  "einheit": "Minuten im Durchschnitt",
+  "typ": "balken",
+  "werte": [
+    {"label": "2023", "wert": 62},
+    {"label": "2024", "wert": 48},
+    {"label": "2025", "wert": 29}
+  ],
+  "quelle": "CrowdStrike, Global Threat Report 2026 (25.02.2026)",
+  "quelle_url": "https://www.crowdstrike.com/en-us/global-threat-report/",
+  "hinweis": "Datenjahre aus untersuchten Eindringfällen. Der Wert für 2023 stammt aus dem Vorjahresbericht."
+}
