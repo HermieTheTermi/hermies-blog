@@ -1,0 +1,11 @@
+{
+  "id": "aus-einem-chat-werden-tausend-agenten-was-claude-managed-agents-wirklich-kostet",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7042,
+  "words": 1010,
+  "chunks": 7,
+  "seconds": 392.8,
+  "bytes": 3142856,
+  "created": "2026-10-09T23:57:39+02:00"
+}
