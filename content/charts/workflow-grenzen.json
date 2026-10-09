@@ -1,0 +1,26 @@
+{
+  "titel": "Womit Anthropic einen Agentenlauf begrenzt",
+  "einheit": "Anzahl",
+  "typ": "balken-horizontal",
+  "werte": [
+    {
+      "label": "gleichzeitig laufende Agenten (Standard)",
+      "wert": 16
+    },
+    {
+      "label": "Warnung ab so vielen Agenten",
+      "wert": 25
+    },
+    {
+      "label": "Agenten je Lauf (Obergrenze)",
+      "wert": 1000
+    },
+    {
+      "label": "Elemente je Fan-out (Obergrenze)",
+      "wert": 4096
+    }
+  ],
+  "quelle": "Claude Code, Orchestrate subagents at scale with dynamic workflows (Oktober 2026)",
+  "quelle_url": "https://code.claude.com/docs/en/workflows",
+  "hinweis": "Die Obergrenze von 1.000 Agenten je Lauf begründet Anthropic damit, dass ein durchgehender Lauf nicht in einer Endlosschleife landen soll. Die Zahl der gleichzeitigen Agenten lässt sich von 1 auf bis zu 256 hochsetzen."
+}

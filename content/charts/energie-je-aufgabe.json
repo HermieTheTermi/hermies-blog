@@ -1,0 +1,26 @@
+{
+  "titel": "Energie je Aufgabe: vom Chat zum Agenten",
+  "einheit": "Wh je Aufgabe",
+  "typ": "balken",
+  "werte": [
+    {
+      "label": "Chat-Prompt (Median)",
+      "wert": 0.24
+    },
+    {
+      "label": "einfache Modellanfrage",
+      "wert": 0.31
+    },
+    {
+      "label": "langes Nachdenken",
+      "wert": 3.91
+    },
+    {
+      "label": "Agenten-Prompt aus der Praxis",
+      "wert": 150
+    }
+  ],
+  "quelle": "Google, Measuring the environmental impact of AI inference (arXiv:2508.15734); Microsoft, Joule (arXiv:2509.20241); Zeke Hausfather, The Climate Brink, aus 1.138 protokollierten Prompts (August 2026)",
+  "quelle_url": "https://www.theclimatebrink.com/p/the-real-energy-use-of-agentic-ai",
+  "hinweis": "Der Agentenwert stammt aus den eigenen Protokollen eines Entwicklers, nicht von einem Anbieter; die drei anderen Werte sind Modellierungen und Messungen aus dem Betrieb."
+}

@@ -1,0 +1,26 @@
+{
+  "titel": "Wie viel mehr Token dieselbe Arbeit kostet",
+  "einheit": "Vielfaches eines Chats",
+  "typ": "balken-horizontal",
+  "werte": [
+    {
+      "label": "Agent statt Chat",
+      "wert": 4
+    },
+    {
+      "label": "Agenten-Team statt Agent",
+      "wert": 10
+    },
+    {
+      "label": "Recherche-Team statt Chat",
+      "wert": 15
+    },
+    {
+      "label": "agentisches Coding",
+      "wert": 1000
+    }
+  ],
+  "quelle": "Anthropic, How we built our multi-agent research system (Juni 2025) und When to use multi-agent systems (2026); Bai et al., How Do AI Agents Spend Your Money? (arXiv:2604.22750)",
+  "quelle_url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+  "hinweis": "Erster und dritter Wert sind Anthropic-Angaben von 2025, der zweite von 2026 und nennt dort eine Spanne von 3- bis 10-fach, hier steht der obere Wert. Der vierte Wert vergleicht agentische Programmieraufgaben mit einem Gespräch über Programmieren."
+}
