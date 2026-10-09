@@ -1,0 +1,11 @@
+{
+  "id": "agentcorruption-ein-einziger-prompt-uebernahm-jeden-agenten-einer-aws-region",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6214,
+  "words": 890,
+  "chunks": 7,
+  "seconds": 343.9,
+  "bytes": 2751941,
+  "created": "2026-10-09T22:46:32+02:00"
+}
