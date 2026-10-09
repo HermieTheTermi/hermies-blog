@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenAI veröffentlicht 722 Mathematik-Manuskripte – maschinell geprüft ist ein Fünftel – Hermies Blog</title>
+  <meta name="description" content="OpenAI hat am 6. Oktober 2026 eine Sammlung von 722 mathematischen Manuskripten aus einem internen Modell veröffentlicht, gebündelt in 372 Ergebnis-Familien. Rund 4.000 Probleme wurden gestellt, jedes veröffentlichte Ergebnis kostete im Schnitt drei Stunden ChatGPT-Pro-Denken. Nur 162 der Manuskripte tragen eine Lean-Formalisierung des Hauptergebnisses, der unabhängige Mathematiker-Kreis AGMAI hatte sieben Tage vorher gefordert, mit solchen Tests auf firmeneigenen Modellen aufzuhören.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>OpenAI veröffentlicht 722 Mathematik-Manuskripte – maschinell geprüft ist ein Fünftel</h1>
+    <p class="meta"><time datetime="2026-10-06T14:00+02:00">06.10.2026, 14:00</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/openai.html">#openai</a> <a class="tag" href="tag/forschung.html">#forschung</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/benchmark.html">#benchmark</a></span> · <a class="source" href="https://openai.com/index/sharing-ai-progress-in-mathematics">OpenAI</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:50 Minuten</strong> (KI-Stimme) – <a href="audio/openai-veroeffentlicht-722-mathematik-manuskripte-maschinell-geprueft-ist-ein-fuenftel.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,6 MB)</span></p>
+    <audio controls preload="none" src="audio/openai-veroeffentlicht-722-mathematik-manuskripte-maschinell-geprueft-ist-ein-fuenftel.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>OpenAI hat am 6. Oktober 2026 eine Sammlung von <strong>722 mathematischen Manuskripten</strong> veröffentlicht, gebündelt in <strong>372 Ergebnis-Familien</strong> und frei zugänglich in einem GitHub-Repository.</li>
+  <li>Die Arbeiten stammen von einem <strong>internen Modell, das die Firma nicht herausgibt</strong>. Weder der Modellname noch die Aufgabenstellungen sind öffentlich, veröffentlicht sind nur zehn gekürzte Zusammenfassungen des Denkwegs.</li>
+  <li>Dem Modell wurden laut Repository <strong>rund 4.000 Probleme</strong> gestellt. Im Schnitt kostete ein veröffentlichtes Ergebnis den Rechenaufwand von <strong>drei Stunden ChatGPT-Pro-Denken</strong>.</li>
+  <li>Maschinell nachprüfbar ist bisher ein Teil davon: <strong>162 der 722 Manuskripte</strong> haben eine <button type="button" class="lex" popovertarget="lex-lean" data-tip="Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl.">Lean</button><span class="lex-pop" popover id="lex-lean"><strong>Lean</strong> Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl. <a href="lexikon.html#lean">Im Lexikon</a></span>-Formalisierung des Hauptergebnisses – 22,5 Prozent (eigene Zählung vom 7. Oktober 2026).</li>
+  <li>Der unabhängige Mathematiker-Kreis AGMAI, den OpenAI selbst angesprochen hat, hatte am 29. September gefordert, <strong>keine fortgeschrittenen Mathematikaufgaben mehr auf firmeneigenen Modellen zu testen</strong>. OpenAI hat trotzdem veröffentlicht und nennt den Kreis als Berater.</li>
+  <li>Das Repository trägt den Hinweis selbst: Zu einigen nicht formalisierten Ergebnissen „could have issues&quot; – es könne Einwände geben.</li>
+</ul>
+<h2>Was passiert ist</h2>
+<p>Am 6. Oktober 2026 hat OpenAI eine Sammlung mathematischer Arbeiten veröffentlicht (<a href="https://openai.com/index/sharing-ai-progress-in-mathematics">Ankündigung</a>, <a href="https://github.com/openai/math">Repository</a>, Lizenz Apache 2.0). Sie liegt nicht in einer Fachzeitschrift, sondern in einem GitHub-Ordner der Firma: 722 Manuskripte, sortiert in 372 Ergebnis-Familien. Eine Familie bündelt, was zu einem Ergebnis gehört – den Hauptbeweis, Ergänzungen, Folgerungen, alternative Herleitungen.</p>
+<p>Geschrieben hat das kein Mensch. Die Ergebnisse stammen laut OpenAI von einem internen Modell, das die Firma bisher nicht herausgibt. Sie schreibt, sie arbeite an einer verantwortungsvollen Veröffentlichung dieses Modells; bis dahin bleibt es namenlos. Auch die Aufgabenstellungen, mit denen die Probleme an das Modell gingen, sind nicht öffentlich. Stattdessen gibt es zehn gekürzte Zusammenfassungen des Denkwegs, unter anderem zum Irrationalitätsexponenten von π, zu den Mahler-Vermutungen, zu Kaplanskys Direkt-Endlichkeits-Vermutung und zur Mézard-Parisi-Formel für verdünnte Spingläser (<a href="https://github.com/openai/math#reasoning-summaries">Liste</a>).</p>
+<p>Zwei Ergebnisse fallen laut Repository aus dem üblichen Verfahren heraus: eine nullstellenfreie Region für die Riemannsche Zeta-Funktion rechts von 11/12 und ein Beweis der Hodge-Vermutung für CM-abelsche Varietäten. Beides sind <button type="button" class="lex" popovertarget="lex-millennium-preisprobleme" data-tip="Sieben besonders schwere offene Aufgaben der Mathematik, für deren Lösung das Clay-Institut im Jahr 2000 je eine Million Dollar ausgesetzt hat. Gelöst ist bisher nur eine davon, die Poincaré-Vermutung.">Millennium-Preisprobleme</button><span class="lex-pop" popover id="lex-millennium-preisprobleme"><strong>Millennium-Preisprobleme</strong> Sieben besonders schwere offene Aufgaben der Mathematik, für deren Lösung das Clay-Institut im Jahr 2000 je eine Million Dollar ausgesetzt hat. Gelöst ist bisher nur eine davon, die Poincaré-Vermutung. <a href="lexikon.html#millennium-preisprobleme">Im Lexikon</a></span> – gelöst ist damit keines von beiden. Die Riemannsche Vermutung verlangt, dass alle nicht-trivialen Nullstellen genau auf der Geraden mit Realteil ½ liegen – eine Region bis 11/12 lässt den kritischen Streifen offen. Und die Hodge-Vermutung ist für CM-abelsche Varietäten ein Sonderfall, nicht der allgemeine Satz. Bei der Zeta-Arbeit hat OpenAI den Text nach eigener Angabe von einem Menschen für die Lesbarkeit überarbeiten lassen – die einzige Stelle in der Sammlung, an der ein Mensch genannt wird.</p>
+<h2>Wie belastbar ist das?</h2>
+<p>Die Ankündigung nennt wenige Zahlen, das Repository mehr. Demnach wurden dem Modell im Rahmen der Auswertung <strong>etwa 4.000 Probleme</strong> gestellt. Was daraus eine veröffentlichte Ergebnis-Familie wurde, musste eine Signifikanzschwelle passieren. Dass eine Firma den eigenen Ausschuss offenlegt, ist neu – die Zahl sagt aber nichts über die Qualität der Ergebnisse, sondern über die Menge der Versuche.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Von der gestellten Aufgabe zum veröffentlichten Ergebnis</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Von der gestellten Aufgabe</tspan><tspan x="68" y="48">zum veröffentlichten Ergebnis</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Probleme bzw. Ergebnis-Familien</text>
+  <line x1="260.0" y1="100" x2="260.0" y2="345" stroke="#eeeeee" stroke-width="1" />
+  <text x="260.0" y="363" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="347.5" y1="100" x2="347.5" y2="345" stroke="#eeeeee" stroke-width="1" />
+  <text x="347.5" y="363" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.000</text>
+  <line x1="435.0" y1="100" x2="435.0" y2="345" stroke="#eeeeee" stroke-width="1" />
+  <text x="435.0" y="363" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2.000</text>
+  <line x1="522.5" y1="100" x2="522.5" y2="345" stroke="#eeeeee" stroke-width="1" />
+  <text x="522.5" y="363" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">3.000</text>
+  <line x1="610.0" y1="100" x2="610.0" y2="345" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="363" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">4.000</text>
+  <line x1="260" y1="100" x2="260" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="260" y="145.2" width="350.0" height="32.0" rx="3" fill="#0075de" />
+  <text x="248" y="165.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">dem Modell gestellte Probleme</text>
+  <text x="618.0" y="165.2" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">4.000</text>
+  <rect x="260" y="267.8" width="32.5" height="32.0" rx="3" fill="#0075de" />
+  <text x="248" y="287.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">daraus veröffentlichte Ergebnis-Familien</text>
+  <text x="300.6" y="287.8" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">372</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://github.com/openai/math" target="_blank" rel="noopener">OpenAI, Repository github.com/openai/math, 06.10.2026</a></span>
+  <span class="chart-note">Angaben aus dem Repository: Rund 4.000 Probleme wurden dem internen Modell im Rahmen der Auswertung gestellt; nach Bündelung in Ergebnis-Familien und einer Signifikanzschwelle blieben 372 Familien übrig. Die beiden Zahlen zählen nicht dasselbe – eine Familie kann mehrere Probleme zusammenfassen – sie zeigen aber die Größenordnung des Ausschusses an Versuchen, die ein Modell für ein veröffentlichtes Ergebnis braucht.</span>
+</figcaption>
+</figure>
+<p>Jedes veröffentlichte Ergebnis kostete im Schnitt den Rechenaufwand von rund <strong>drei Stunden ChatGPT-Pro-Denken</strong>, gerechnet in <button type="button" class="lex" popovertarget="lex-testzeit-compute" data-tip="Rechenaufwand, den ein Modell erst beim Beantworten einer Frage einsetzt – etwa mehrere Lösungswege parallel durchrechnen und den besten auswählen.">Testzeit-Compute</button><span class="lex-pop" popover id="lex-testzeit-compute"><strong>Testzeit-Compute</strong> Rechenaufwand, den ein Modell erst beim Beantworten einer Frage einsetzt – etwa mehrere Lösungswege parallel durchrechnen und den besten auswählen. <a href="lexikon.html#testzeit-compute">Im Lexikon</a></span>. Das ist ein Vergleichsmaß für die Menge an Rechenarbeit, nicht die Laufzeit des internen Modells und schon gar nicht die Zeit, die ein Mensch zum Nachprüfen bräuchte.</p>
+<p>Der belastbarste Teil der Sammlung sind die <button type="button" class="lex" popovertarget="lex-lean-2" data-tip="Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl.">Lean</button><span class="lex-pop" popover id="lex-lean-2"><strong>Lean</strong> Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl. <a href="lexikon.html#lean">Im Lexikon</a></span>-Dateien. Lean ist eine Sprache, in der ein Beweis so aufgeschrieben wird, dass ein Computer jeden Schritt gegen einen festen Prüfkern nachrechnen kann. OpenAI formalisiert die Hauptergebnisse nach und nach. Wie viele es bisher sind, nennt die Ankündigung nicht – im Repository stehen aber zwei Dateien, die sich gegeneinander halten lassen: die Manuskript-Übersicht (<a href="https://github.com/openai/math/blob/main/CONTENTS.md">CONTENTS.md</a>) und der Katalog der formalisierten Hauptergebnisse (<a href="https://github.com/openai/math/blob/main/lean/formalization.yaml">lean/formalization.yaml</a>).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 180" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Wie viel davon ist maschinell geprüft?</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Wie viel davon ist maschinell geprüft?</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % der Manuskripte</text>
+  <text x="68" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="700" fill="#0075de">22,4 %</text>
+  <text x="180" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#555555">der Manuskripte haben eine Lean-Formalisierung des Hauptergebnisses</text>
+  <text x="612" y="90" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#888888">162 von 722</text>
+  <rect x="68" y="110" width="544" height="24" rx="6" fill="#eef2f6" />
+  <rect x="68" y="110" width="122.1" height="24" rx="6" fill="#0075de" />
+  <text x="68" y="150" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#888888">0 %</text>
+  <text x="612" y="150" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#888888">100 %</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://github.com/openai/math/blob/main/lean/formalization.yaml" target="_blank" rel="noopener">OpenAI, Repository github.com/openai/math, Stand 07.10.2026</a></span>
+  <span class="chart-note">Eigene Zählung vom 7. Oktober 2026: Im Katalog der formalisierten Hauptergebnisse (lean/formalization.yaml) stehen 162 Einträge, die auf die 722 Manuskripte der Sammlung verweisen. Das Repository selbst schreibt nur, es seien viele, aber nicht alle Ergebnisse formalisiert; weitere sollen folgen. Eine Formaliserung prüft die logischen Schritte, sie sagt nicht automatisch, dass der formale Satz auch die Aussage des Aufsatzes ist.</span>
+</figcaption>
+</figure>
+<p>Unsere Zählung vom 7. Oktober 2026: Der Katalog enthält 162 Einträge, die auf Manuskripte der Sammlung verweisen. Das sind <strong>22,5 Prozent</strong>. Die Verteilung ist dabei auffälliger als die Quote selbst.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Formalisierte Ergebnisse nach Datum des Manuskripts</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Formalisierte Ergebnisse</tspan><tspan x="68" y="48">nach Datum des Manuskripts</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Manuskripte</text>
+  <rect x="379.5" y="62.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="395.5" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">mit Lean-Formalisierung</text>
+  <rect x="586.0" y="62.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="602.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">ohne</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="263.3" x2="650" y2="263.3" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="267.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">200</text>
+  <line x1="68" y1="181.7" x2="650" y2="181.7" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="185.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">400</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">600</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="108.8" y="343.4" width="64.0" height="1.6" rx="2" fill="#e05638" />
+  <text x="140.8" y="347.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="600" fill="#ffffff">4</text>
+  <text x="140.8" y="337.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#111111">4</text>
+  <text x="140.8" y="363.0" transform="rotate(-30 140.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">10.–18. Sep</text>
+  <rect x="254.2" y="280.1" width="64.0" height="64.9" rx="2" fill="#0075de" />
+  <text x="286.2" y="316.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#ffffff">159</text>
+  <rect x="254.2" y="113.9" width="64.0" height="166.2" rx="2" fill="#e05638" />
+  <text x="286.2" y="200.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#ffffff">407</text>
+  <text x="286.2" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#111111">566</text>
+  <text x="286.2" y="363.0" transform="rotate(-30 286.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">22.–27. Sep</text>
+  <rect x="399.8" y="343.8" width="64.0" height="1.2" rx="2" fill="#0075de" />
+  <text x="431.8" y="347.9" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="600" fill="#ffffff">3</text>
+  <rect x="399.8" y="342.1" width="64.0" height="1.6" rx="2" fill="#e05638" />
+  <text x="431.8" y="346.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="600" fill="#ffffff">4</text>
+  <text x="431.8" y="336.1" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#111111">7</text>
+  <text x="431.8" y="363.0" transform="rotate(-30 431.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">30. Sep – 2. Okt</text>
+  <rect x="545.2" y="286.6" width="64.0" height="58.4" rx="2" fill="#e05638" />
+  <text x="577.2" y="319.3" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#ffffff">143</text>
+  <text x="577.2" y="280.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#111111">143</text>
+  <text x="577.2" y="363.0" transform="rotate(-30 577.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">3.–6. Okt</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://github.com/openai/math/blob/main/CONTENTS.md" target="_blank" rel="noopener">OpenAI, Repository github.com/openai/math, Stand 07.10.2026</a></span>
+  <span class="chart-note">Eigene Zählung vom 7. Oktober 2026 über die Verzeichnisnamen der 721 datierten Manuskripte (ein weiteres trägt kein Datum und fehlt hier). Der Katalog der Lean-Formalisierungen nennt 162 Ergebnisse; 159 davon stammen aus den fünf Tagen vom 22. bis 27. September, keines aus den letzten 72 Stunden vor der Veröffentlichung.</span>
+</figcaption>
+</figure>
+<p>Der ganze September-Block vom 22. bis 27. liefert 566 Manuskripte, davon 159 geprüft. Der Oktober-Block mit 143 Manuskripten – 112 davon vom 5. Oktober, dem Tag vor der Veröffentlichung – liefert keins. Die freundliche Lesart: Das Formalisieren dauert länger als das Schreiben, und OpenAI schreibt selbst, weitere Formalisierungen würden folgen. Die unfreundliche: Ein Fünftel der Sammlung entstand, nachdem die Prüfstrecke ihren Durchlauf schon beendet hatte.</p>
+<p>Und auch eine bestandene Lean-Prüfung ist kein Freibrief. Sie bestätigt die Schritte des formalisierten Satzes, nicht dass dieser Satz genau die Aussage des Aufsatzes ist. Der Sprung von der Prosa in die formale Fassung ist selbst Handarbeit – von Menschen oder Modellen.</p>
+<h2>Warum es Streit gibt</h2>
+<p>Die Veröffentlichung fällt in einen offenen Konflikt zwischen der KI-Industrie und der Mathematik. Am 11. September 2026 haben <strong>28 Fields-Medaillen-Träger</strong> eine Erklärung mit dem Titel „A Severe Misalignment of AI in Mathematics&quot; veröffentlicht, darunter Terence Tao, Peter Scholze, Maryna Viazovska und Pierre Deligne (<a href="https://mathandai.org/">Erklärung, DOI 10.5281/zenodo.22737750</a>). Ihr Argument ist nicht, dass die Beweise falsch seien. Es ist, dass Problemlösen nur ein Stellvertreter für Verstehen ist, und dass die Massenproduktion von Wahr-Falsch-Aussagen genau den Boden zerstören kann, auf dem neue Ideen wachsen.</p>
+<p>Dazu kommt der Kreis, den OpenAI selbst angesprochen hat. Aus dem geplanten Beirat wurde ein unabhängiger: die <a href="https://agmai.org/">Advisory Group on Mathematics and Artificial Intelligence</a> mit neun Mathematikern, unter ihnen Timothy Gowers, Martin Hairer, Edward Witten und Melanie Matchett Wood. Ihre <a href="https://agmai.org/general-sep29/">Empfehlungen vom 29. September 2026</a>, gestützt auf über 600 Rückmeldungen aus der Fachwelt, beginnen mit einem Satz, der keinen Spielraum lässt: Fortgeschrittene mathematische Probleme auf firmeneigenen Modellen zu testen, sei abzulehnen, und man bitte darum, damit aufzuhören. Weiter verlangt der Kreis: keine Vermarktung von Modellen mit mathematischen Ergebnissen, Ablage in einem Repositorium, das nicht von einem KI-Unternehmen kontrolliert wird, und Offenlegung von Modellnamen, Aufgabenstellungen, Rechenaufwand und Ausschuss.</p>
+<p>Die Bilanz: Rechenaufwand und Ausschuss sind offengelegt, zehn Denk-Zusammenfassungen statt der Aufgabenstellungen, und OpenAI sagt, es suche weiter nach einer von der Community getragenen Ablage. Modellname und Aufgabenstellungen fehlen. Der eigene GitHub-Ordner ist das Gegenteil eines lab-unabhängigen Repositoriums. Und die Bitte, mit dieser Art von Tests aufzuhören, hat die Firma mit der Veröffentlichung selbst nicht erfüllt.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für Mathematikerinnen und Mathematiker heißt es: Die Zahl 722 nicht als 722 geprüfte Sätze lesen. Wer auf ein Ergebnis aufbauen will, sollte im Repository nachsehen, ob eine Lean-Datei daneben liegt, und deren formalen Satz gegen den Aufsatz halten – Prüfkonfigurationen und ein Vergleichswerkzeug liegen bei. Für die 560 Manuskripte ohne Formalisierung bleibt nur Lesen, und die Fehlerhaftung trägt die Person, die darauf baut.</p>
+<p>Das eigentliche Problem ist die Menge. Eine Sammlung dieser Größe binnen eines Tages zu schreiben, war die leichte Aufgabe; sie zu lesen und zu prüfen, ist die schwere. <button type="button" class="lex" popovertarget="lex-peer-review" data-tip="Die übliche Qualitätskontrolle in der Wissenschaft: Andere Fachleute lesen eine Arbeit vor der Veröffentlichung und suchen Fehler. In der Mathematik gilt sie als das eigentliche Prüfsiegel.">Peer Review</button><span class="lex-pop" popover id="lex-peer-review"><strong>Peer Review</strong> Die übliche Qualitätskontrolle in der Wissenschaft: Andere Fachleute lesen eine Arbeit vor der Veröffentlichung und suchen Fehler. In der Mathematik gilt sie als das eigentliche Prüfsiegel. <a href="lexikon.html#peer-review">Im Lexikon</a></span> funktioniert in der Mathematik über wenige Menschen pro Arbeit und über Jahre. Genau deshalb will OpenAI jetzt Workshops, Konferenzen und Programme finanzieren, in denen diese Ergebnisse aufgearbeitet werden. Der Satz aus der Felder-Erklärung trifft die Lage: Ein Ergebnis, das niemand erklären kann, ist für das Fach niemandes Ergebnis.</p>
+<p>Nüchtern betrachtet bleiben zwei Zahlen. 162 maschinengeprüfte neue Sätze aus einer einzigen Veröffentlichung sind mehr als jede andere Sammlung, die ein Labor bisher vorgelegt hat. Und 560 Aufsätze liegen daneben und warten auf Gutachter, die schon andere Arbeit haben.</p>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://openai.com/index/sharing-ai-progress-in-mathematics">OpenAI: Sharing AI progress in mathematics</a> (6. Oktober 2026)</li>
+  <li><a href="https://github.com/openai/math">Repository github.com/openai/math</a> – README mit den Angaben zu 722 Manuskripten, 372 Familien, rund 4.000 Problemen und dem Rechenaufwand</li>
+  <li><a href="https://github.com/openai/math/blob/main/CONTENTS.md">Manuskript-Übersicht CONTENTS.md</a></li>
+  <li><a href="https://github.com/openai/math/blob/main/lean/formalization.yaml">Katalog der Lean-Formalisierungen</a></li>
+  <li><a href="https://agmai.org/general-sep29/">AGMAI: Empfehlungen zur Veröffentlichung KI-erzeugter Mathematik</a> (29. September 2026)</li>
+  <li><a href="https://agmai.org/">AGMAI: Aufgabenbeschreibung des Kreises</a></li>
+  <li><a href="https://mathandai.org/">Erklärung „A Severe Misalignment of AI in Mathematics&quot;</a> (11. September 2026)</li>
+  <li><a href="https://openai.com/index/navier-stokes-solution">OpenAI: On the Navier–Stokes Millennium Prize Problem</a> (8. September 2026, frühere Veröffentlichung desselben Modells)</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aus einem Chat werden tausend Agenten: was Claude Managed Agents wirklich kostet – Hermies Blog</title>
+  <meta name="description" content="Seit dem 9. Oktober 2026 können Agenten von Claude Managed Agents eigene Workflows starten: bis zu 1.000 Unteragenten je Lauf, 16 gleichzeitig. Der Artikel zeichnet die Kette Chat, Skill, Subagent, Agenten-Team, Workflow nach und rechnet nach: 4- bis 15-mal mehr Token als ein Chat, bis 1.000-mal bei agentischem Programmieren, 50 bis 500 Wattstunden je agentischem Workflow statt 0,24 Wattstunden bei einem Chat-Prompt. Die Streuung zwischen Läufen derselben Aufgabe beträgt bis zu 30-mal, die Trefferquote sättigt jenseits mittlerer Kosten - und Anthropic schreibt selbst, dass Multi-Agenten oft dort eingesetzt werden, wo ein einzelner Agent besser wäre.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Aus einem Chat werden tausend Agenten: was Claude Managed Agents wirklich kostet</h1>
+    <p class="meta"><time datetime="2026-10-09">09.10.2026</time> · <span class="tags"><a class="tag" href="tag/brainstorming.html">#brainstorming</a> <a class="tag" href="tag/agenten.html">#agenten</a> <a class="tag" href="tag/ki.html">#ki</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/energie.html">#energie</a> <a class="tag" href="tag/anthropic.html">#anthropic</a></span> · <a class="source" href="https://platform.claude.com/docs/en/release-notes/api">Claude Platform Release Notes</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:33 Minuten</strong> (KI-Stimme) – <a href="audio/aus-einem-chat-werden-tausend-agenten-was-claude-managed-agents-wirklich-kostet.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,0 MB)</span></p>
+    <audio controls preload="none" src="audio/aus-einem-chat-werden-tausend-agenten-was-claude-managed-agents-wirklich-kostet.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li><strong>Anthropic hat am 9. Oktober 2026 die Dynamic Workflows in Claude Managed Agents freigeschaltet</strong> (Beta): Ein Agent schreibt selbst ein Programm, das viele Unteragenten in Phasen laufen lässt und die Ergebnisse einsammelt. Die Grenze liegt bei <strong>1.000 Agenten je Lauf</strong>, standardmäßig laufen <strong>16 gleichzeitig</strong> (<a href="https://platform.claude.com/docs/en/release-notes/api">Claude-API-Release-Notes</a>).</li>
+  <li><strong>Die Kette hat jetzt fünf Glieder, und jedes ist ein eigenes Produkt:</strong> Chat, <button type="button" class="lex" popovertarget="lex-skill" data-tip="Eine Sammlung von Anweisungen und Dateien zu einem Thema, die ein Modell bei Bedarf nachlädt - etwa die Hausregeln für ein Projekt. So muss nicht alles dauerhaft im Prompt stehen.">Skill</button><span class="lex-pop" popover id="lex-skill"><strong>Skill</strong> Eine Sammlung von Anweisungen und Dateien zu einem Thema, die ein Modell bei Bedarf nachlädt - etwa die Hausregeln für ein Projekt. So muss nicht alles dauerhaft im Prompt stehen. <a href="lexikon.html#skill">Im Lexikon</a></span>, <button type="button" class="lex" popovertarget="lex-subagent" data-tip="Ein zweiter Modellaufruf mit eigenem Kontextfenster, den ein Agent für eine Teilaufgabe startet. Der Unteragent sieht nur seine Aufgabe statt des ganzen Gesprächs und liefert ein zusammengefasstes Ergebnis zurück.">Subagent</button><span class="lex-pop" popover id="lex-subagent"><strong>Subagent</strong> Ein zweiter Modellaufruf mit eigenem Kontextfenster, den ein Agent für eine Teilaufgabe startet. Der Unteragent sieht nur seine Aufgabe statt des ganzen Gesprächs und liefert ein zusammengefasstes Ergebnis zurück. <a href="lexikon.html#subagent">Im Lexikon</a></span>, Agenten-Team, Workflow. Anthropic vergleicht sie in einer eigenen Tabelle – die entscheidende Spalte heißt „Wer entscheidet, was als Nächstes läuft&quot; (<a href="https://code.claude.com/docs/en/workflows">Claude Code Docs</a>).</li>
+  <li><strong>Jedes Glied multipliziert die <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span>:</strong> Ein <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span> verbraucht laut Anthropic typisch <strong>4-mal</strong>, eine Multi-Agenten-Recherche <strong>15-mal</strong> so viel wie ein Chat. Für Multi-Agenten gegenüber einem Einzelagenten nennt Anthropic 2026 <strong>3- bis 10-mal</strong>, bei agentischem Programmieren messen Forscher <strong>bis 1.000-mal</strong>.</li>
+  <li><strong>Die Energie wächst mit:</strong> Ein Chat-Prompt kostet rund <strong>0,24 Wh</strong>. Ein Agenten-Prompt aus echten Protokollen rund <strong>150 Wh</strong> – etwa das <strong>600-Fache</strong>. Ein agentischer Workflow mit 5 bis 50 Modellaufrufen liegt bei <strong>50 bis 500 Wh</strong>.</li>
+  <li><strong>Mehr Einsatz bringt nicht mehr Ergebnis.</strong> Zwei Werkzeugketten mit identischem Testergebnis unterscheiden sich um <strong>mehr als das Zehnfache</strong> im Tokenverbrauch, die Trefferquote sättigt jenseits mittlerer Kosten – und Anthropic schreibt selbst, dass Multi-Agenten „oft&quot; dort eingesetzt werden, wo ein einzelner Agent besser wäre.</li>
+  <li><strong>Praktisch heißt das:</strong> Nicht das Modell ist der Kostentreiber, sondern die Zahl der Aufrufe. Wer Agenten laufen lässt, braucht ein Budget und eine Prüfung, die nicht vom Modell selbst kommt.</li>
+</ul>
+<h2>Was am 9. Oktober dazugekommen ist</h2>
+<p><button type="button" class="lex" popovertarget="lex-agent-2" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent-2"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span>en, die sich selbst vervielfachen, sind kein Zukunftsthema mehr, sondern ein Produkt mit Release Notes. Claude Managed Agents ist Anthropics fertige Agenten-Maschine: Man beschreibt Modell, Systemprompt, Werkzeuge und <button type="button" class="lex" popovertarget="lex-skill-2" data-tip="Eine Sammlung von Anweisungen und Dateien zu einem Thema, die ein Modell bei Bedarf nachlädt - etwa die Hausregeln für ein Projekt. So muss nicht alles dauerhaft im Prompt stehen.">Skill</button><span class="lex-pop" popover id="lex-skill-2"><strong>Skill</strong> Eine Sammlung von Anweisungen und Dateien zu einem Thema, die ein Modell bei Bedarf nachlädt - etwa die Hausregeln für ein Projekt. So muss nicht alles dauerhaft im Prompt stehen. <a href="lexikon.html#skill">Im Lexikon</a></span>s, legt eine Umgebung fest und startet eine Sitzung. Den Rest – Agentenschleife, Sandbox, Werkzeugausführung, Zwischenspeicher, Verdichtung des <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span>s – betreibt Anthropic auf eigenen Servern. Sitzungen laufen laut Dokumentation <strong>stundenlang</strong> weiter, Zugangsdaten liegen in einem Tresor, den der Agent nie sieht (<a href="https://platform.claude.com/docs/en/managed-agents/overview">Managed Agents, Übersicht</a>).</p>
+<p>Die Idee steht seit dem <strong>8. April 2026</strong> in offener Beta, Ende September kam die Sicherheitsschicht dazu: Mit NVIDIA OpenShell prüft eine Regelmaschine außerhalb des Modells, welche Werkzeuge, Dateien und Netzverbindungen ein Agent überhaupt erreichen darf (<a href="https://claude.com/blog/giving-companies-more-control-over-their-ai-agents-with-nvidia">Anthropic, September 2026</a>).</p>
+<p>Am <strong>9. Oktober 2026</strong> folgte der Baustein, um den es hier geht. Ein Managed-Agents-Agent darf jetzt <strong>Dynamic Workflows</strong> benutzen (Beta, Kopfzeile <code>managed-agents-2026-04-01</code>). Statt Schritt für Schritt zu arbeiten, schreibt der Agent ein <strong>Programm</strong>, das viele Agenten in Phasen startet und ihre Ergebnisse zusammenführt. Der Server führt es im Hintergrund als eigenen „Workflow-Lauf&quot; aus, während der Agent schon wieder anderes tut (<a href="https://platform.claude.com/docs/en/release-notes/api">Release-Notes</a>, <a href="https://platform.claude.com/docs/en/managed-agents/workflow-runs">Workflow-Läufe</a>).</p>
+<p>In der Kommandozeilen-Version Claude Code gibt es das schon etwas länger; die Produktseite trägt inzwischen die Notiz, dass Dynamic Workflows <strong>allgemein verfügbar</strong> sind (<a href="https://claude.com/blog/introducing-dynamic-workflows-in-claude-code">Anthropic</a>). Das Anschauungsbeispiel, das Anthropic dort nennt: der Portierungslauf von Bun von Zig nach Rust – rund <strong>750.000 Zeilen</strong> Rust, <strong>99,8 %</strong> der bestehenden Tests bestanden, <strong>elf Tage</strong> von der ersten Zeile bis zum Merge. Das ist eine Herstellerangabe ohne unabhängige Nachprüfung, und sie beschreibt genau das Muster, um das es im Rest dieses Artikels geht: nicht ein Agent, sondern Hunderte parallel, mit zwei Prüfern pro Datei.</p>
+<h2>Die Kette wird länger – und jedes Glied ist ein Produkt</h2>
+<p>Anthropic beschreibt in der Dokumentation vier Wege, eine mehrstufige Aufgabe zu erledigen – und liefert damit die sauberste Beschreibung dessen, was in den letzten zwei Jahren passiert ist (<a href="https://code.claude.com/docs/en/workflows">Claude Code Docs</a>):</p>
+<ul>
+  <li><strong><button type="button" class="lex" popovertarget="lex-subagent-2" data-tip="Ein zweiter Modellaufruf mit eigenem Kontextfenster, den ein Agent für eine Teilaufgabe startet. Der Unteragent sieht nur seine Aufgabe statt des ganzen Gesprächs und liefert ein zusammengefasstes Ergebnis zurück.">Subagent</button><span class="lex-pop" popover id="lex-subagent-2"><strong>Subagent</strong> Ein zweiter Modellaufruf mit eigenem Kontextfenster, den ein Agent für eine Teilaufgabe startet. Der Unteragent sieht nur seine Aufgabe statt des ganzen Gesprächs und liefert ein zusammengefasstes Ergebnis zurück. <a href="lexikon.html#subagent">Im Lexikon</a></span>:</strong> ein Arbeiter, den Claude startet. Ergebnisse landen im Kontextfenster des Hauptgesprächs.</li>
+  <li><strong><button type="button" class="lex" popovertarget="lex-skill-3" data-tip="Eine Sammlung von Anweisungen und Dateien zu einem Thema, die ein Modell bei Bedarf nachlädt - etwa die Hausregeln für ein Projekt. So muss nicht alles dauerhaft im Prompt stehen.">Skill</button><span class="lex-pop" popover id="lex-skill-3"><strong>Skill</strong> Eine Sammlung von Anweisungen und Dateien zu einem Thema, die ein Modell bei Bedarf nachlädt - etwa die Hausregeln für ein Projekt. So muss nicht alles dauerhaft im Prompt stehen. <a href="lexikon.html#skill">Im Lexikon</a></span>:</strong> Anweisungen, denen Claude folgt – ebenfalls im Hauptkontext.</li>
+  <li><strong>Agenten-Team:</strong> ein Leit-Agent, der gleichrangige Sitzungen beaufsichtigt; Zwischenstände liegen in einer gemeinsamen Aufgabenliste.</li>
+  <li><strong>Workflow:</strong> ein Skript, das die Laufzeit ausführt. Die Schleife, die Verzweigungen und die Zwischenergebnisse stecken im Code, nicht im Modell.</li>
+</ul>
+<p>Die Unterschiede sind echt: Ein Workflow ist wiederholbar, prüfbar und bricht nicht ab, wenn ein einzelner Agent den Faden verliert. Aber jede Stufe verschiebt Arbeit von einem Modellaufruf zu <strong>vielen</strong> Modellaufrufen. Anthropic formuliert das an anderer Stelle selbst ungewöhnlich deutlich: Agententeams „erzeugen Koordinationsaufwand und verbrauchen deutlich mehr Token als eine einzelne Sitzung&quot; (<a href="https://code.claude.com/docs/en/agent-teams">Agententeams</a>).</p>
+<p>Das ist die Vermehrung, die in keinem Verhältnis mehr steht. Ein Chat war eine Anfrage. Ein Skill war Anweisung plus Anfrage. Der Agent war ein Dutzend Anfragen in einer Schleife. Das Agententeam war ein Dutzend Agenten. Und der Workflow ist ein Programm, das bis zu <strong>1.000</strong> Agenten startet – für <strong>eine</strong> Aufgabe, die ein Mensch vorher in einem Satz beschrieben hat.</p>
+<h2>Die Rechnung: Token, Wattstunden, Dollar</h2>
+<p>Die Token-Zahlen kommen nicht von Kritikern, sondern von Anthropic selbst. Der Baubericht des Recherche-Werkzeugs von 2025 nennt den Faktor <strong>4 für einen Agenten</strong> und <strong>15 für ein Multi-Agenten-System</strong> gegenüber einem Chat (<a href="https://www.anthropic.com/engineering/multi-agent-research-system">Anthropic</a>). Im Nachfolgeartikel von 2026 stehen <strong>3- bis 10-mal</strong> mehr Token als bei einem Einzelagenten – „für gleichwertige Aufgaben&quot; (<a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">Anthropic</a>).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Wie viel mehr Token dieselbe Arbeit kostet</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Wie viel mehr Token dieselbe Arbeit kostet</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Vielfaches eines Chats</text>
+  <line x1="210.0" y1="75" x2="210.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="210.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="310.0" y1="75" x2="310.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="310.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">250</text>
+  <line x1="410.0" y1="75" x2="410.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="410.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">500</text>
+  <line x1="510.0" y1="75" x2="510.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="510.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">750</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.000</text>
+  <line x1="210" y1="75" x2="210" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="210" y="89.6" width="1.6" height="32.0" rx="3" fill="#0075de" />
+  <text x="198" y="109.6" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Agent statt Chat</text>
+  <text x="219.6" y="109.6" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">4</text>
+  <rect x="210" y="150.9" width="4.0" height="32.0" rx="3" fill="#0075de" />
+  <text x="198" y="170.9" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Agenten-Team statt Agent</text>
+  <text x="222.0" y="170.9" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">10</text>
+  <rect x="210" y="212.1" width="6.0" height="32.0" rx="3" fill="#0075de" />
+  <text x="198" y="232.1" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Recherche-Team statt Chat</text>
+  <text x="224.0" y="232.1" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">15</text>
+  <rect x="210" y="273.4" width="400.0" height="32.0" rx="3" fill="#0075de" />
+  <text x="198" y="293.4" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">agentisches Coding</text>
+  <text x="618.0" y="293.4" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1.000</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener">Anthropic, How we built our multi-agent research system (Juni 2025) und When to use multi-agent systems (2026); Bai et al., How Do AI Agents Spend Your Money? (arXiv:2604.22750)</a></span>
+  <span class="chart-note">Erster und dritter Wert sind Anthropic-Angaben von 2025, der zweite von 2026 und nennt dort eine Spanne von 3- bis 10-fach, hier steht der obere Wert. Der vierte Wert vergleicht agentische Programmieraufgaben mit einem Gespräch über Programmieren.</span>
+</figcaption>
+</figure>
+<p>Forscher der University of Michigan, Stanford und Microsoft haben dieselbe Frage unabhängig gemessen und kommen auf <strong>bis zu 1.000-mal</strong> so viele Token wie bei einem Gespräch über Programmieren – getrieben nicht von den Antworten, sondern von den <strong>Eingaben</strong>, weil der Agent bei jedem Schritt seinen gesamten bisherigen Verlauf erneut verarbeitet (<a href="https://arxiv.org/abs/2604.22750">Bai et al., arXiv:2604.22750</a>).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Energie je Aufgabe: vom Chat zum Agenten</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Energie je Aufgabe: vom Chat zum Agenten</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Wh je Aufgabe</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="238.3" x2="650" y2="238.3" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="242.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="68" y1="156.7" x2="650" y2="156.7" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="160.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">150</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="319.6" width="56.0" height="0.4" rx="3" fill="#0075de" />
+  <text x="140.8" y="313.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,24</text>
+  <text x="140.8" y="338.0" transform="rotate(-30 140.8 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Chat-Prompt (Median)</text>
+  <rect x="258.2" y="319.5" width="56.0" height="0.5" rx="3" fill="#0075de" />
+  <text x="286.2" y="313.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,31</text>
+  <text x="286.2" y="338.0" transform="rotate(-30 286.2 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">einfache Modellanfrage</text>
+  <rect x="403.8" y="313.6" width="56.0" height="6.4" rx="3" fill="#0075de" />
+  <text x="431.8" y="307.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">3,91</text>
+  <text x="431.8" y="338.0" transform="rotate(-30 431.8 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">langes Nachdenken</text>
+  <rect x="549.2" y="75.0" width="56.0" height="245.0" rx="3" fill="#0075de" />
+  <text x="577.2" y="87.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">150</text>
+  <text x="577.2" y="338.0" transform="rotate(-30 577.2 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Agenten-Prompt aus der Praxis</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.theclimatebrink.com/p/the-real-energy-use-of-agentic-ai" target="_blank" rel="noopener">Google, Measuring the environmental impact of AI inference (arXiv:2508.15734); Microsoft, Joule (arXiv:2509.20241); Zeke Hausfather, The Climate Brink, aus 1.138 protokollierten Prompts (August 2026)</a></span>
+  <span class="chart-note">Der Agentenwert stammt aus den eigenen Protokollen eines Entwicklers, nicht von einem Anbieter; die drei anderen Werte sind Modellierungen und Messungen aus dem Betrieb.</span>
+</figcaption>
+</figure>
+<p>Bei der Energie wird die Größenordnung greifbar. Google misst für einen Textprompt in Gemini im Median <strong>0,24 Wh</strong> (<a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference">Google/arXiv:2508.15734</a>). Eine Modellierung von Microsoft kommt für eine einfache Anfrage auf <strong>0,31 Wh</strong>, für langes <button type="button" class="lex" popovertarget="lex-reasoning" data-tip="Sichtbares Zwischendenken vor der Antwort. Reasoning-Modelle rechnen vor dem Ergebnis eine Kette von Schritten durch – das kostet mehr Rechenzeit, bringt aber bei Mathe und Logik mehr Treffer.">Reasoning</button><span class="lex-pop" popover id="lex-reasoning"><strong>Reasoning</strong> Sichtbares Zwischendenken vor der Antwort. Reasoning-Modelle rechnen vor dem Ergebnis eine Kette von Schritten durch – das kostet mehr Rechenzeit, bringt aber bei Mathe und Logik mehr Treffer. <a href="lexikon.html#reasoning">Im Lexikon</a></span> auf <strong>3,91 Wh</strong> – <button type="button" class="lex" popovertarget="lex-testzeit-compute" data-tip="Rechenaufwand, den ein Modell erst beim Beantworten einer Frage einsetzt – etwa mehrere Lösungswege parallel durchrechnen und den besten auswählen.">Testzeit-Compute</button><span class="lex-pop" popover id="lex-testzeit-compute"><strong>Testzeit-Compute</strong> Rechenaufwand, den ein Modell erst beim Beantworten einer Frage einsetzt – etwa mehrere Lösungswege parallel durchrechnen und den besten auswählen. <a href="lexikon.html#testzeit-compute">Im Lexikon</a></span> ist eben <button type="button" class="lex" popovertarget="lex-rechenzeit" data-tip="Der Aufwand, den ein Rechenvorgang braucht: die Zeit auf einem Chip, gemessen in Sekunden, oder die Arbeit, gemessen in Operationen.">Rechenzeit</button><span class="lex-pop" popover id="lex-rechenzeit"><strong>Rechenzeit</strong> Der Aufwand, den ein Rechenvorgang braucht: die Zeit auf einem Chip, gemessen in Sekunden, oder die Arbeit, gemessen in Operationen. <a href="lexikon.html#rechenzeit">Im Lexikon</a></span> (<a href="https://www.cell.com/joule/fulltext/S2542-4351(26">Joule, 2026</a>00114-5)).</p>
+<p>Und dann kommt die Praxis. Der Klimaforscher Zeke Hausfather hat acht Wochen lang seine eigenen Protokolle ausgewertet: <strong>1.138</strong> selbst getippte Prompts lösten <strong>über 14.000</strong> Modellaufrufe aus und bewegten <strong>3,2 Milliarden</strong> Token. Sein bester Schätzwert: rund <strong>170 Kilowattstunden</strong> Rechenzentrumsstrom – etwa <strong>150 Wh pro Prompt</strong>, das <strong>600-Fache</strong> eines Chat-Prompts. Ein durchschnittlicher Arbeitstag mit dem Programmieragenten kam auf <strong>3,0 kWh</strong>, mehr als zwei Kühlschränke im Dauerbetrieb (<a href="https://www.theclimatebrink.com/p/the-real-energy-use-of-agentic-ai">The Climate Brink</a>). Ein Detail daraus ist der eigentliche Befund: <strong>96 %</strong> der verarbeiteten Token waren <button type="button" class="lex" popovertarget="lex-prompt-cache" data-tip="Zwischenspeicher für Text, den das Modell schon einmal verarbeitet hat. Beginnt eine neue Anfrage mit demselben Text, liest das System ihn aus dem Speicher statt ihn neu zu durchrechnen - das ist schneller und viel billiger als frische Eingabe.">Prompt-Cache</button><span class="lex-pop" popover id="lex-prompt-cache"><strong>Prompt-Cache</strong> Zwischenspeicher für Text, den das Modell schon einmal verarbeitet hat. Beginnt eine neue Anfrage mit demselben Text, liest das System ihn aus dem Speicher statt ihn neu zu durchrechnen - das ist schneller und viel billiger als frische Eingabe. <a href="lexikon.html#prompt-cache">Im Lexikon</a></span>-Lesungen – der Agent liest bei jedem seiner 14.000 Schritte seinen eigenen Arbeitsstand neu ein.</p>
+<p>Das ist die Stelle, an der die bisherige Energiedebatte auseinanderfällt. Die beruhigenden Zahlen (0,24 Wh) beschreiben einen Chat. Ein agentischer Ablauf mit 5 bis 50 Modellaufrufen liegt laut dem Rahmenwerk von Watershed bei <strong>50 bis 500 Wh</strong> – und der Fehler, den eine Firma macht, die nur „Interaktionen&quot; zählt, geht laut den Autoren „in Richtung einer Größenordnung oder mehr&quot; (<a href="https://watershed.com/en-GB/blog/ai-emissions-framework">Watershed/Bistline et al., 2026</a>).</p>
+<p>Wer einordnen will, wo die Effizienzrechnung hinführt: Derselbe Text steht ausführlich im Artikel <a href="/wo-soll-die-ki-skalierung-enden-ueber-kraftwerke-datenmauern-und-kluegere-rechenwege.html">„Wo soll die KI-Skalierung enden?&quot;</a> – dort geht es um <button type="button" class="lex" popovertarget="lex-rebound-effekt" data-tip="Wenn etwas effizienter und dadurch billiger wird, wird es häufiger genutzt – der Gesamtverbrauch kann trotz Sparsamkeit steigen. Auch Jevons-Paradox genannt.">Rebound-Effekt</button><span class="lex-pop" popover id="lex-rebound-effekt"><strong>Rebound-Effekt</strong> Wenn etwas effizienter und dadurch billiger wird, wird es häufiger genutzt – der Gesamtverbrauch kann trotz Sparsamkeit steigen. Auch Jevons-Paradox genannt. <a href="lexikon.html#rebound-effekt">Im Lexikon</a></span>, <button type="button" class="lex" popovertarget="lex-rechenzentrum" data-tip="Halle voller Server, in der KI-Modelle trainiert und betrieben werden – sie braucht sehr viel Strom und Kühlung.">Rechenzentrum</button><span class="lex-pop" popover id="lex-rechenzentrum"><strong>Rechenzentrum</strong> Halle voller Server, in der KI-Modelle trainiert und betrieben werden – sie braucht sehr viel Strom und Kühlung. <a href="lexikon.html#rechenzentrum">Im Lexikon</a></span>e und die Frage, warum Effizienz die Gesamtrechnung nicht senkt.</p>
+<h2>Warum mehr Einsatz nicht mehr Ergebnis heißt</h2>
+<p>Der interessanteste Teil der Forschung ist nicht, wie teuer Agenten sind, sondern wie wenig die Kosten die Qualität vorhersagen.</p>
+<p><strong>Die Streuung ist riesig.</strong> Läufe derselben Aufgabe unterscheiden sich um <strong>bis zu 30-mal</strong> im Tokenverbrauch. Die Trefferquote steigt dabei nur bis zu mittleren Kosten und <strong>sättigt</strong> danach: Mehr Token kaufen kein besseres Ergebnis. Die Modelle selbst können ihren Verbrauch nicht vorhersagen und unterschätzen ihn systematisch (<a href="https://arxiv.org/abs/2604.22750">Bai et al.</a>).</p>
+<p><strong>Gleiches Ergebnis, zehnfacher Preis.</strong> Eine Untersuchung über sieben Modelle und fünf Werkzeugketten verglich Konfigurationen, die <strong>alle jeden Test bestanden</strong>: Der Tokenverbrauch unterschied sich um <strong>mehr als das Zehnfache</strong>, weil manche Ketten denselben Inhalt immer wieder neu aufbauten – und die teuren Konfigurationen holten nichts Zusätzliches heraus. Außerdem schadete das Aufteilen einer eng gekoppelten Aufgabe auf Unteragenten, während unabhängige Teilaufgaben davon profitierten (<a href="https://arxiv.org/abs/2608.16630">arXiv:2608.16630</a>).</p>
+<p><strong>Anthropic sagt es selbst.</strong> Im Artikel „Wann man Multi-Agenten einsetzt (und wann nicht)&quot; steht der Satz, der die ganze Debatte zusammenfasst: Multi-Agenten-Systeme würden heute „oft in Situationen eingesetzt, in denen ein einzelner Agent besser abschneiden würde&quot;. Und: „Wir haben Teams gesehen, die Monate in ausgeklügelte Multi-Agenten-Architekturen gesteckt haben, nur um festzustellen, dass besseres Prompting auf einem einzelnen Agenten dasselbe erreichte.&quot; Im eigenen Test verbrauchten die Teams mehr Token für die Koordination als für die Arbeit (<a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">Anthropic</a>).</p>
+<p><strong>Und der Nutzen ist schwer messbar.</strong> Die bekannteste unabhängige Messung zu Programmierwerkzeugen stammt von METR: <strong>16 erfahrene Entwickler</strong> wurden in einem randomisierten Versuch <strong>19 % langsamer</strong> mit KI, obwohl sie nach dem Versuch glaubten, <strong>20 % schneller</strong> gewesen zu sein (<a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">METR, Juli 2025</a>). Die größere Nachfolgestudie mit <strong>57 Entwicklern</strong>, 143 Repositories und über 800 Aufgaben fand im Februar 2026 Effekte, deren Vertrauensintervalle die Null einschließen – METR nennt die eigenen Daten „nur sehr schwache Evidenz&quot; und ändert deshalb das Studiendesign. Ein Grund: <strong>30 bis 50 %</strong> der Teilnehmer weigerten sich, Aufgaben ohne KI zu bearbeiten (<a href="https://metr.org/blog/2026-02-24-uplift-update/">METR, Februar 2026</a>).</p>
+<p>Man muss fair bleiben: Wo Kontextfenster überlaufen, wo Teilaufgaben wirklich unabhängig sind und wo ein externer Prüfer Ergebnisse gegeneinander hält, zeigen Multi-Agenten-Systeme echte Verbesserungen. In Anthropics eigener Auswertung lag das System aus Leitmodell und Unteragenten <strong>90,2 %</strong> über dem Einzelagenten – und <strong>80 %</strong> der Leistungsstreuung erklärte allein die Zahl der verbrauchten Token. Das ist kein Effizienzargument, das ist eine Kostenkurve, die man für den Erfolg mitbezahlt (<a href="https://www.anthropic.com/engineering/multi-agent-research-system">Anthropic</a>).</p>
+<h2>Womit Anthropic selbst begrenzt</h2>
+<p>Auffällig ist, wie viele Bremsen die eigenen Produkte eingebaut haben – sie sind das ehrlichste Eingeständnis, dass diese Architektur Geld frisst.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Womit Anthropic einen Agentenlauf begrenzt</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Womit Anthropic einen Agentenlauf begrenzt</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Anzahl</text>
+  <line x1="260.0" y1="75" x2="260.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="260.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="330.0" y1="75" x2="330.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="330.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.000</text>
+  <line x1="400.0" y1="75" x2="400.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="400.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2.000</text>
+  <line x1="470.0" y1="75" x2="470.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="470.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">3.000</text>
+  <line x1="540.0" y1="75" x2="540.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="540.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">4.000</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">5.000</text>
+  <line x1="260" y1="75" x2="260" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="260" y="89.6" width="1.1" height="32.0" rx="3" fill="#0075de" />
+  <text x="248" y="109.6" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">gleichzeitig laufende Agenten (Standard)</text>
+  <text x="269.1" y="109.6" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">16</text>
+  <rect x="260" y="150.9" width="1.8" height="32.0" rx="3" fill="#0075de" />
+  <text x="248" y="170.9" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Warnung ab so vielen Agenten</text>
+  <text x="269.8" y="170.9" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">25</text>
+  <rect x="260" y="212.1" width="70.0" height="32.0" rx="3" fill="#0075de" />
+  <text x="248" y="232.1" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Agenten je Lauf (Obergrenze)</text>
+  <text x="338.0" y="232.1" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1.000</text>
+  <rect x="260" y="273.4" width="286.7" height="32.0" rx="3" fill="#0075de" />
+  <text x="248" y="293.4" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Elemente je Fan-out (Obergrenze)</text>
+  <text x="554.7" y="293.4" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">4.096</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://code.claude.com/docs/en/workflows" target="_blank" rel="noopener">Claude Code, Orchestrate subagents at scale with dynamic workflows (Oktober 2026)</a></span>
+  <span class="chart-note">Die Obergrenze von 1.000 Agenten je Lauf begründet Anthropic damit, dass ein durchgehender Lauf nicht in einer Endlosschleife landen soll. Die Zahl der gleichzeitigen Agenten lässt sich von 1 auf bis zu 256 hochsetzen.</span>
+</figcaption>
+</figure>
+<p>Die 1.000-Agenten-Grenze je Lauf begründet die Dokumentation damit, dass „ein außer Kontrolle geratener Lauf&quot; verhindert werden soll. Ab <strong>25 Agenten</strong> oder <strong>1,5 Millionen</strong> erwarteten Token zeigt Claude Code eine Warnung an; die Größenrichtlinie lässt sich auf „klein&quot; (unter 5 Agenten) stellen. Sitzungen bei Managed Agents können ein hartes <strong>Ausgabenbudget</strong> bekommen, bei dem die Sitzung pausiert statt weiterzurechnen – und die Dokumentation empfiehlt das ausdrücklich, auch wegen der Läufe (<a href="https://code.claude.com/docs/en/workflows">Kosten</a>, <a href="https://platform.claude.com/docs/en/managed-agents/budgets">Budgets</a>).</p>
+<p>Für die Größenordnung nennt Anthropic in der Kostendokumentation von Claude Code eine eigene Zahl: durchschnittlich rund <strong>13 Dollar pro Entwickler und aktivem Tag</strong>, <strong>150 bis 250 Dollar pro Monat</strong>, bei <strong>90 %</strong> der Nutzer unter 30 Dollar am Tag (<a href="https://code.claude.com/docs/en/costs">Claude Code, Kosten</a>). Das sind Herstellerangaben über das eigene Produkt, ohne unabhängige Prüfung – und sie gelten für normale Sitzungen, nicht für Läufe mit hundert Agenten.</p>
+<p>Eine Zahl fehlt übrigens bis heute: <strong>Anthropic veröffentlicht keine Energieangaben pro Token oder pro Aufgabe.</strong> Das Rahmenwerk von Watershed nennt das höflich, aber bestimmt die größte Datenlücke des Feldes. Solange diese Zahl fehlt, ist jede KI-Bilanz eines Unternehmens eine Schätzung – auch die, die mit 0,24 Wh rechnet.</p>
+<h2>Was heißt das praktisch?</h2>
+<ol>
+  <li><strong>Die Einheit ist nicht die Anfrage, sondern die Kette.</strong> „Unsere KI ist sparsam&quot; sagt nichts, solange nicht dabei steht, ob ein Chat gemeint ist oder ein Workflow mit hundert Agenten. Zwischen 0,24 Wh und 500 Wh liegt der Faktor 2.000.</li>
+  <li><strong>Erst das billigste Glied ausprobieren – das rät der Hersteller selbst.</strong> Kleiner Ausschnitt statt ganzes Repository, kleine Größenrichtlinie, günstigeres Modell für unkritische Phasen. Anthropic baut diese Regler nicht aus Nettigkeit ein.</li>
+  <li><strong>Mehr Agenten sind kein Ersatz für bessere Prüfung.</strong> Die belastbarsten Verbesserungen kommen von Prüfinstanzen, die nicht vom Modell selbst stammen. Wo Unteragenten eine eng gekoppelte Aufgabe zerschneiden, sinkt die Qualität – der Tokenverbrauch steigt trotzdem.</li>
+  <li><strong>Energie und Kosten bleiben eine politische Frage.</strong> Effizienz pro Aufgabe und Gesamtverbrauch laufen seit Jahren auseinander. Was die Branche heute als Produkt verkauft, ist eine Verdopplung der Rechenzeit für einen Teil der Aufgaben – und das ist genau die Achse, auf der das Wachstum seit dem Ende der billigen Skalierung stattfindet.</li>
+</ol>
+<h2>Quellen</h2>
+<p>Primärquellen (Stand der Recherche: 9. Oktober 2026):</p>
+<ol>
+  <li>Anthropic, <strong>Claude-API-Release-Notes</strong> (9.10.2026) – <a href="https://platform.claude.com/docs/en/release-notes/api">Dynamic Workflows in Claude Managed Agents</a></li>
+  <li>Anthropic, <strong>Claude Managed Agents – Übersicht</strong> (Beta) – <a href="https://platform.claude.com/docs/en/managed-agents/overview">Dokumentation</a>; <strong>Multiagent-Orchestrierung</strong> – <a href="https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration">Dokumentation</a>; <strong>Sitzungsbudgets</strong> – <a href="https://platform.claude.com/docs/en/managed-agents/budgets">Dokumentation</a></li>
+  <li>Anthropic, <strong>Claude Managed Agents</strong> (8.4.2026) – <a href="https://claude.com/blog/claude-managed-agents">Blog</a>; <strong>Giving companies more control over their AI agents, with NVIDIA</strong> (September 2026) – <a href="https://claude.com/blog/giving-companies-more-control-over-their-ai-agents-with-nvidia">Blog</a></li>
+  <li>Anthropic, <strong>Introducing dynamic workflows</strong> – <a href="https://claude.com/blog/introducing-dynamic-workflows-in-claude-code">Blog</a>; <strong>Orchestrate subagents at scale with dynamic workflows</strong> – <a href="https://code.claude.com/docs/en/workflows">Claude Code Docs</a>; <strong>Orchestrate teams of Claude Code sessions</strong> – <a href="https://code.claude.com/docs/en/agent-teams">Agententeams</a>; <strong>Manage costs effectively</strong> – <a href="https://code.claude.com/docs/en/costs">Kosten</a></li>
+  <li>Anthropic, <strong>How we built our multi-agent research system</strong> (13.6.2025) – <a href="https://www.anthropic.com/engineering/multi-agent-research-system">Engineering-Blog</a>; <strong>Building multi-agent systems: When and how to use them</strong> (2026) – <a href="https://claude.com/blog/building-multi-agent-systems-when-and-how-to-use-them">Blog</a></li>
+  <li>Bai, Huang, Wang et al., <strong>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks</strong> – <a href="https://arxiv.org/abs/2604.22750">arXiv:2604.22750</a></li>
+  <li>Mohammadi, Klein, Chadha et al., <strong>The Working Set of a Coding Agent: Coherence Debt in Repository-Scale Tasks</strong> – <a href="https://arxiv.org/abs/2608.16630">arXiv:2608.16630</a></li>
+  <li>METR, <strong>Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity</strong> (10.7.2025) – <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/">Blog</a>; <strong>We are Changing our Developer Productivity Experiment Design</strong> (24.2.2026) – <a href="https://metr.org/blog/2026-02-24-uplift-update/">Blog</a></li>
+  <li>Elsworth et al./Google, <strong>Measuring the environmental impact of delivering AI at Google Scale</strong> – <a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference">Blog</a>, <a href="https://arxiv.org/abs/2508.15734">arXiv:2508.15734</a></li>
+  <li>Microsoft Research, <strong>Energy use of AI inference, efficiency pathways, and test-time scaling</strong>, Joule (2026) – <a href="https://www.cell.com/joule/fulltext/S2542-4351(26">Paper</a>00114-5), <a href="https://arxiv.org/abs/2509.20241">arXiv:2509.20241</a></li>
+  <li>Zeke Hausfather, <strong>The real energy use of agentic AI</strong> (August 2026) – <a href="https://www.theclimatebrink.com/p/the-real-energy-use-of-agentic-ai">The Climate Brink</a></li>
+  <li>Bistline, Davis, Suh et al./Watershed, <strong>Open framework for AI emissions measurement</strong> (22.7.2026) – <a href="https://watershed.com/en-GB/blog/ai-emissions-framework">Watershed</a></li>
+</ol>
+<p><em>Hinweis zur Methode: Alle Kernzahlen wurden gegen die hier verlinkten Primärquellen geprüft. Angaben von Anthropic (Token-Faktoren, Kosten pro Entwickler, das Bun-Beispiel) sind Herstellerangaben; bei ihnen fehlt eine unabhängige Nachprüfung, was im Text jeweils steht. Die Energieangaben pro Aufgabe beruhen auf unterschiedlichen Methoden und Systemgrenzen – die Spanne von 0,24 Wh bis 500 Wh ist deshalb keine Widerspruchssammlung, sondern der eigentliche Befund. Für die Umrechnung von Agenten-Token in Energie existiert bislang keine Angabe des Anbieters.</em></p>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Falcon-Emirati: Ein 7-Milliarden-Modell spricht Emirati-Arabisch - und schlägt größere – Hermies Blog</title>
+  <meta name="description" content="Das Forschungsinstitut TII aus Abu Dhabi hat am 6. Oktober 2026 Falcon-Emirati-7B vorgestellt: ein 7-Milliarden-Modell für den Golf-Dialekt Emirati-Arabisch. Auf dem eigenen Test Alyah erreicht es 84,83 Prozent, bei der Dialekt-Treue liegt es mit 0,52 rund zehnmal so hoch wie die Konkurrenz, die korrekt, aber im Hocharabischen antwortet. Alle Werte sind Herstellerangaben, der Test stammt vom selben Haus.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Falcon-Emirati: Ein 7-Milliarden-Modell spricht Emirati-Arabisch - und schlägt größere</h1>
+    <p class="meta"><time datetime="2026-10-06">06.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/benchmark.html">#benchmark</a></span> · <a class="source" href="https://huggingface.co/blog/tiiuae/falcon-emirati">TII / Hugging Face</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:10 Minuten</strong> (KI-Stimme) – <a href="audio/falcon-emirati-ein-7-milliarden-modell-spricht-emirati-arabisch-und-schlaegt-groessere.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,3 MB)</span></p>
+    <audio controls preload="none" src="audio/falcon-emirati-ein-7-milliarden-modell-spricht-emirati-arabisch-und-schlaegt-groessere.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Das Forschungsinstitut TII aus Abu Dhabi hat am 6. Oktober 2026 Falcon-Emirati-7B vorgestellt, ein <button type="button" class="lex" popovertarget="lex-llm" data-tip="Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt.">LLM</button><span class="lex-pop" popover id="lex-llm"><strong>LLM</strong> Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt. <a href="lexikon.html#llm">Im Lexikon</a></span> mit 7 Milliarden <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>, das speziell den Golf-Dialekt Emirati-Arabisch spricht (<a href="https://huggingface.co/blog/tiiuae/falcon-emirati">Ankündigung</a>).</li>
+  <li>Der Anlass ist eine Lücke: Standard-Arabisch steht in Büchern und Nachrichten, gesprochen wird in den Emiraten aber ein Dialekt mit eigenem Wortschatz, eigener Kultur und eigener Dichtung. Ein Modell, das nur Standard-Arabisch kennt, übersetzt jedes Wort richtig und trifft trotzdem nicht den Sinn.</li>
+  <li>Auf dem eigenen Test Alyah erreicht das Modell 84,83 Prozent und damit laut TII mehr als alle anderen arabischen und mehrsprachigen Modelle im Vergleich – darunter deutlich größere.</li>
+  <li>Der aufschlussreichste Wert ist die Dialekt-Treue: 0,52 von 1,0 gegenüber 0,05 (ALLaM-7B), 0,03 (gemma-3-27b), 0,02 (Jais-2-8B) und praktisch 0,00 (Fanar-2-27B). Die anderen Modelle kennen die Antwort oft, antworten aber auf Standard-Arabisch.</li>
+  <li>Alles sind Angaben des Herstellers, und der Test Alyah stammt vom selben Haus wie das Modell. Eine unabhängige Prüfung fehlt.</li>
+  <li>Die Lehre reicht über Arabisch hinaus: Größe allein bringt Dialektkompetenz nicht. Wer einen Dialekt oder eine Fachsprache abdecken will, muss gezielt Daten dafür sammeln und nachtrainieren.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Die Technology Innovation Institute (TII), das staatliche Forschungsinstitut der Emirate Abu Dhabi, hat am 6. Oktober 2026 <a href="https://huggingface.co/blog/tiiuae/falcon-emirati">Falcon-Emirati-7B vorgestellt</a>. Es ist ein <button type="button" class="lex" popovertarget="lex-llm-2" data-tip="Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt.">LLM</button><span class="lex-pop" popover id="lex-llm-2"><strong>LLM</strong> Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt. <a href="lexikon.html#llm">Im Lexikon</a></span> mit 7 Milliarden <button type="button" class="lex" popovertarget="lex-parameter-2" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter-2"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span> – für heutige Verhältnisse ein kleines Modell –, das auf die Umgangssprache der Vereinigten Arabischen Emirate spezialisiert ist.</p>
+<p>Der Ausgangspunkt ist sprachlich. Arabisch ist kein einzelner Dialekt, sondern eine Familie: Modernes Hocharabisch steht in Nachrichten und Schulbüchern, geredet wird in den Emiraten aber Emirati-Arabisch, ein Golf-Dialekt mit eigenem Wortschatz und eigener Rhythmik. Dazu kommen nabati-Dichtung, Sprichwörter und kurze Erzählungen, deren Bedeutung sich nicht aus dem Wörterbuch ergibt. Ein Modell, das nur Hocharabisch gelernt hat, kann jeden Satz wörtlich übersetzen und trotzdem am Sinn vorbeigehen.</p>
+<p>Aufgebaut ist Falcon-Emirati-7B nicht von Null, sondern auf Falcon-H1-Arabisch, der Arabisch-Familie des Instituts. Deren Bauweise ist eine Mischung: In jedem Block arbeiten ein <button type="button" class="lex" popovertarget="lex-state-space-modell" data-tip="Eine alternative Bauweise zu den üblichen Aufmerksamkeits-Modellen: Der Text wird Schritt für Schritt durchgerechnet, der Rechenaufwand wächst dabei nur linear mit der Textlänge. Das spart Rechenzeit bei langen Texten.">State-Space-Modell</button><span class="lex-pop" popover id="lex-state-space-modell"><strong>State-Space-Modell</strong> Eine alternative Bauweise zu den üblichen Aufmerksamkeits-Modellen: Der Text wird Schritt für Schritt durchgerechnet, der Rechenaufwand wächst dabei nur linear mit der Textlänge. Das spart Rechenzeit bei langen Texten. <a href="lexikon.html#state-space-modell">Im Lexikon</a></span> (Mamba) und die übliche Aufmerksamkeits-Berechnung parallel, ihre Ausgaben werden danach zusammengeführt. Der Vorteil: Der Rechenaufwand wächst nur linear mit der Textlänge, was bei einer formenreichen Sprache mit langen Eingaben hilft. Die Familie gibt es in 3, 7 und 34 Milliarden Parametern, mit <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> von bis zu 128.000 und 256.000 <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span>. Die TII erklärt die Wahl der 7-Milliarden-Variante offen: Das 34B-Modell würde die Qualität „wahrscheinlich etwas weiter&quot; treiben, sei aber im Training und Betrieb für einen Dialekt-Chatbot zu teuer, das 3B-Modell lasse zu wenig Raum für kulturelles Wissen.</p>
+<p>Beim Trainingsmaterial nennt die TII drei Quellen: selbst gesammelte Texte aus emiratischen Websites und Foren im echten Dialekt, hocharabische Texte über emiratische Kultur und Geschichte sowie synthetische Daten, die aber mit Glossaren und Stilregeln gezielt gesteuert wurden, damit sie nicht nur „golf-ähnlich&quot; klingen. Wie viel von welcher Sorte sie einsetzten, war laut Blog Experimentierarbeit – es gebe kein etabliertes Rezept für die Anpassung eines Hocharabisch-Modells an einen Dialekt. Das gezielte Weitertrainieren eines fertigen Modells auf einen Zweck nennt man <button type="button" class="lex" popovertarget="lex-fine-tuning" data-tip="Ein fertiges Modell mit eigenen Beispieldaten weitertrainieren, damit es für einen bestimmten Zweck besser passt.">Fine-Tuning</button><span class="lex-pop" popover id="lex-fine-tuning"><strong>Fine-Tuning</strong> Ein fertiges Modell mit eigenen Beispieldaten weitertrainieren, damit es für einen bestimmten Zweck besser passt. <a href="lexikon.html#fine-tuning">Im Lexikon</a></span>.</p>
+<h2>Warum zählt das</h2>
+<p>Die Zahlen der TII sind auf den ersten Blick nicht spektakulär, aber sie erzählen zwei Geschichten.</p>
+<p>Die erste ist der Vergleich nach Größe. Im eigenen Test Alyah – 1.173 Multiple-Choice-Fragen, die Muttersprachler von Hand geschrieben haben, mit Kategorien von Begrüßung und Höflichkeit über Bildsprache und Erbe bis Dichtung – kommt Falcon-Emirati-7B auf 84,83 Prozent und damit nach Angaben der TII vor allen anderen arabischen und mehrsprachigen Modellen, gegen die es verglichen wurde. Darunter sind Modelle mit einem Vielfachen an Parametern. Größe allein, so die Schlussfolgerung, kauft keine Dialektkompetenz.</p>
+<p>Die zweite Geschichte ist die interessantere und steckt in einem zweiten Test. Für dieselben 1.173 Fragen ließ die TII die Modelle frei antworten und bewertete die Antworten mit einem zweiten Sprachmodell als Richter (Gemini 3.7 Flash) – einmal daraufhin, ob der Inhalt stimmt, und einmal daraufhin, ob die Antwort tatsächlich im Dialekt kommt und nicht im Hocharabischen.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Antwortet das Modell wirklich im Dialekt?</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Antwortet das Modell wirklich im Dialekt?</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % der Antworten im Emirati-Dialekt</text>
+  <line x1="180.0" y1="75" x2="180.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="180.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="323.3" y1="75" x2="323.3" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="323.3" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="466.7" y1="75" x2="466.7" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="466.7" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">60</text>
+  <line x1="180" y1="75" x2="180" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="180" y="86.0" width="372.7" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="103.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Falcon-Emirati-7B</text>
+  <text x="560.7" y="103.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">52</text>
+  <rect x="180" y="135.0" width="35.8" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="152.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">ALLaM-7B-Instruct</text>
+  <text x="223.8" y="152.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">5</text>
+  <rect x="180" y="184.0" width="21.5" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">gemma-3-27b-it</text>
+  <text x="209.5" y="201.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">3</text>
+  <rect x="180" y="233.0" width="14.3" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="250.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Jais-2-8B-Chat</text>
+  <text x="202.3" y="250.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">2</text>
+  <rect x="180" y="282.0" width="0.0" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="299.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Fanar-2-27B-Instruct</text>
+  <text x="188.0" y="299.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/blog/tiiuae/falcon-emirati" target="_blank" rel="noopener">TII, Falcon-Emirati-7B (06.10.2026)</a></span>
+  <span class="chart-note">1.173 Fragen des Alyah-Tests, offene Antworten, bewertet von einem Sprachmodell als Richter (Gemini 3.7 Flash). Die TII nennt Anteile von 0 bis 1 (0,52 bzw. 0,05 / 0,03 / 0,02 / effektiv 0,00), hier in Prozent. Herstellerangabe: Die TII hat Modell und Test selbst gebaut.</span>
+</figcaption>
+</figure>
+<p>Das Ergebnis ist der eigentliche Befund: Die anderen Modelle kennen die Antworten häufig, drücken sie aber im Hocharabischen aus. Selbst wenn man sie direkt im Dialekt anspricht, bleibt die Dialekt-Treue bei 0,05, 0,03 und 0,02 von 1,0 – bei Fanar-2-27B-Instruct praktisch bei Null. Falcon-Emirati-7B kommt auf 0,52, also auf rund das Zehnfache des nächstbesten Wertes. Das Muster hält sich über alle Kategorien des Tests, auch bei Dichtung und Bildsprache. Nur bei Begrüßungen halten die anderen mit – dort überschneiden sich Dialekt und Hocharabisch am stärksten, dort klingt ein allgemeines Arabisch-Modell von selbst richtig.</p>
+<p>Ein dritter Blick auf kulturelles Verständnis geht in dieselbe Richtung: In 283 emiratischen Szenarien aus dem Test ArabCulture-Dialogue kommt Falcon auf 85,57 Prozent, vor ALLaM (83,39), Jais-2 (73,79) und Fanar-2 (71,50).</p>
+<p>Drei Einschränkungen gehören dazu. Erstens sind alle genannten Werte Angaben des Herstellers, unabhängig nachgeprüft ist nichts davon. Zweitens ist Alyah ein Test, den die TII selbst mit der Community veröffentlicht hat – wer seine eigene Prüfung schreibt, besteht sie leichter. Drittens ist der Richter im zweiten Test selbst ein Sprachmodell, dessen Urteil nicht dasselbe ist wie das Ohr eines Muttersprachlers. Die TII schreibt immerhin, sie habe die Auswahl zusätzlich von Muttersprachlern beurteilen lassen – und räumt in den Limitationen ein, dass selbst Muttersprachler sich bei Dialektfragen nicht immer einig sind.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für Anwender im Golfraum ändert sich konkret etwas. Wer heute einen Assistenten oder Chatbot für den emiratischen Markt baut, bekommt mit generischen Modellen Antworten in einer Schriftsprache, die im Alltag niemand spricht. Das ist kein Detail, sondern der Unterschied zwischen einem Werkzeug, das Kunden akzeptieren, und einem, das aufgesetzt wirkt. Falcon-Emirati-7B ist über die Chat-Oberfläche des Instituts <a href="https://chat.falconllm.tii.ae/?model=Falcon-Emirati-7B">ausprobierbar</a>; frei herunterladbar sind die Gewichte nach dem Stand der Ankündigung nicht.</p>
+<p>Für alle anderen ist die Übertragung der eigentliche Punkt. Das Rezept lautet: authentische Texte aus der Zielsprache sammeln, Kulturwissen aus der Standardsprache zumischen, synthetische Beispiele nur mit strengen Vorgaben erzeugen und dann beides mit Muttersprachlern prüfen. Mit 7 Milliarden Parametern bleibt ein solches Modell klein genug, um es mit <button type="button" class="lex" popovertarget="lex-quantisierung" data-tip="Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit.">Quantisierung</button><span class="lex-pop" popover id="lex-quantisierung"><strong>Quantisierung</strong> Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit. <a href="lexikon.html#quantisierung">Im Lexikon</a></span> auch auf einem Laptop zu betreiben – bei 27 Milliarden Parametern wird das eng. Der Fall zeigt damit, dass kleine, gezielt nachtrainierte Modelle an Stellen gewinnen, an denen die großen aus reiner Datenmenge nichts gelernt haben.</p>
+<p>Der Haken bleibt die Messung. Wer die Zahlen nachprüfen will, braucht einen unabhängigen Test in emiratischem Dialekt mit Muttersprachlern als Richter. Alyah ist dafür der einzige öffentliche Kandidat – und kommt aus demselben Haus.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>TII, „Falcon-Emirati: When an LLM Learns the Dialect, the Culture, and the Nuance&quot;, 6. Oktober 2026: https://huggingface.co/blog/tiiuae/falcon-emirati</li>
+  <li>TII, Alyah-Benchmark für Emirati-Arabisch (1.173 Beispiele): https://huggingface.co/datasets/tiiuae/alyah-emirati-benchmark</li>
+  <li>TII, Hintergrund zum Benchmark: https://huggingface.co/blog/tiiuae/emirati-benchmarks</li>
+  <li>TII, Falcon-H1-Arabic: https://huggingface.co/blog/tiiuae/falcon-h1-arabic</li>
+  <li>ArabCulture-Dialogue, Kultur-Test im Arabischen (ACL 2026): https://aclanthology.org/2026.acl-long.963/</li>
+  <li>Modell zum Ausprobieren in der Falcon-Chatoberfläche: https://chat.falconllm.tii.ae/?model=Falcon-Emirati-7B</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
