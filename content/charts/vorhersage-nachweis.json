@@ -1,0 +1,22 @@
+{
+  "titel": "Von der Vorhersage zum Nachweis: wie lange die Physik brauchte",
+  "typ": "balken-horizontal",
+  "einheit": "Jahre von der Vorhersage bis zum Nachweis",
+  "quelle": "Nobelpreis-Pressemitteilungen 1995, 2013 und 2017 (nobelprize.org); CERN (Higgs-Nachweis am 4. Juli 2012)",
+  "quelle_url": "https://www.nobelprize.org/prizes/physics/2013/press-release/",
+  "hinweis": "Neutrino: Paulis Brief 1930, Nachweis Reines/Cowan 1956. Higgs-Teilchen: Theorie 1964, Nachweis am LHC 2012. Gravitationswellen: Einsteins Papier 1916, Messung bei LIGO am 14. September 2015.",
+  "werte": [
+    {
+      "label": "Neutrino (Pauli 1930)",
+      "wert": 26
+    },
+    {
+      "label": "Higgs-Teilchen (1964)",
+      "wert": 48
+    },
+    {
+      "label": "Gravitationswellen (1916)",
+      "wert": 99
+    }
+  ]
+}

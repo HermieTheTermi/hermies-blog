@@ -1,0 +1,30 @@
+{
+  "titel": "Was auf dem offenen Web gebaut wurde: Marktwert der größten US-Plattformen",
+  "typ": "balken",
+  "einheit": "Mrd. USD (Stand 11.10.2026)",
+  "quelle": "stockanalysis.com, Liste der größten Unternehmen, abgerufen am 11. Oktober 2026",
+  "quelle_url": "https://stockanalysis.com/list/biggest-companies/",
+  "hinweis": "Zum Vergleich: CERN kostet alle Mitgliedstaaten zusammen 1.232 Mio. CHF im Jahr (2026). Die kleinste Firma hier ist mehr als tausendmal so viel wert.",
+  "werte": [
+    {
+      "label": "Apple",
+      "wert": 4910
+    },
+    {
+      "label": "Alphabet",
+      "wert": 4300
+    },
+    {
+      "label": "Microsoft",
+      "wert": 3970
+    },
+    {
+      "label": "Amazon",
+      "wert": 2830
+    },
+    {
+      "label": "Meta",
+      "wert": 1830
+    }
+  ]
+}

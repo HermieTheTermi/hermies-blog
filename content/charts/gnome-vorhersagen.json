@@ -1,0 +1,11 @@
+{
+  "titel": "GNoME: 2,2 Millionen vorhergesagte Kristalle – und was davon im Labor ankam",
+  "typ": "anteil",
+  "wert": 736,
+  "von": 380000,
+  "label": "der als stabil vorhergesagten Strukturen wurden bis zur Veröffentlichung unabhängig hergestellt",
+  "einheit": "% der stabilen Vorhersagen",
+  "quelle": "Google DeepMind, \"Millions of new materials discovered with deep learning\" (29. November 2023)",
+  "quelle_url": "https://deepmind.google/blog/millions-of-new-materials-discovered-with-deep-learning/",
+  "hinweis": "2,2 Millionen Kristallstrukturen vorhergesagt, davon 380.000 als stabil eingestuft. Unabhängige Forschende zweifelten die Neuheit und Nützlichkeit vieler Vorhersagen öffentlich an."
+}
