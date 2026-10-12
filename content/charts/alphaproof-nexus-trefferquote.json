@@ -1,0 +1,12 @@
+{
+  "titel": "Trefferquote auf offene Forschungsprobleme",
+  "einheit": "% gelöst",
+  "typ": "balken",
+  "werte": [
+    {"label": "Erdős-Probleme (9 von 353)", "wert": 2.5},
+    {"label": "OEIS-Vermutungen (44 von 492)", "wert": 8.9}
+  ],
+  "quelle": "Tsoukalas u. a., Science 394, 234–239 (8. Oktober 2026)",
+  "quelle_url": "https://www.science.org/doi/10.1126/science.aej2213",
+  "hinweis": "AlphaProof Nexus hat alle 353 damals in Lean formalisierten Erdős-Probleme bearbeitet, ohne Auswahl. Die 492 offenen OEIS-Vermutungen wurden vorab maschinell formalisiert."
+}

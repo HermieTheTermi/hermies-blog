@@ -1,0 +1,15 @@
+{
+  "titel": "Maia 300 gegen Maia 200: Angaben von Microsoft",
+  "einheit": "Faktor gegenüber Maia 200",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Token-Durchsatz je Rack", "wert": 7.0},
+    {"label": "Leistung je Watt im Rack", "wert": 2.5},
+    {"label": "Speicherbandbreite je Chip", "wert": 2.5},
+    {"label": "Bandbreite je Watt im Speicher", "wert": 2.0},
+    {"label": "Speicherkapazität je Chip", "wert": 1.33}
+  ],
+  "quelle": "Microsoft Azure Blog, Deep dive into Azure Maia 300 architecture (12. Oktober 2026)",
+  "quelle_url": "https://azure.microsoft.com/en-us/blog/deep-dive-into-azure-maia-300-architecture/",
+  "hinweis": "Herstellerangaben ohne unabhängige Messung. Token-Durchsatz und Leistung je Watt gelten für ein Rack mit 96 Beschleunigern; Speicherkapazität 33 Prozent mehr als bei Maia 200."
+}
