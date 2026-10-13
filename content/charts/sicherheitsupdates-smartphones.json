@@ -1,0 +1,14 @@
+{
+  "titel": "Zugesagte Update-Dauer bei Smartphones",
+  "einheit": "Jahre",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Fairphone 5 (Fairphone)", "wert": 8},
+    {"label": "Pixel 8 und neuer (Google)", "wert": 7},
+    {"label": "Galaxy ab 2024 (Samsung)", "wert": 7},
+    {"label": "EU-Mindestmaß für Neugeräte", "wert": 5}
+  ],
+  "quelle": "Herstellerangaben von Google, Samsung und Fairphone; EU-Verordnung 2023/1670 (Stand Oktober 2026)",
+  "quelle_url": "https://support.google.com/pixelphone/answer/4457705",
+  "hinweis": "EU-Mindestmaß: Betriebssystem-Upgrades mindestens fünf Jahre ab Inverkehrbringen, gültig für Geräte ab 20. Juni 2025"
+}

@@ -1,0 +1,12 @@
+{
+  "titel": "Elektroschrott 2022: nur ein Fünftel dokumentiert recycelt",
+  "einheit": "% der 62 Mio. Tonnen",
+  "typ": "anteil",
+  "anteile": [
+    {"label": "dokumentiert gesammelt und recycelt", "wert": 22.3},
+    {"label": "nicht dokumentiert", "wert": 77.7}
+  ],
+  "quelle": "Global E-waste Monitor 2024 (UNITAR und ITU), 20.03.2024",
+  "quelle_url": "https://unitar.org/about/news-stories/press/global-e-waste-monitor-2024-electronic-waste-rising-five-times-faster-documented-e-waste-recycling",
+  "hinweis": "2022 fielen weltweit 62 Millionen Tonnen an, für 2030 werden 82 Millionen Tonnen erwartet"
+}

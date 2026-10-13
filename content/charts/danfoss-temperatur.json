@@ -1,0 +1,12 @@
+{
+  "titel": "Kühlregal-Temperaturen in der Angriffsnacht",
+  "einheit": "°C",
+  "typ": "balken",
+  "werte": [
+    {"label": "Normalbetrieb", "wert": 4},
+    {"label": "Angriff (Spitze)", "wert": 50}
+  ],
+  "quelle": "BFM TV / Gruppe Les Mousquetaires, 12.10.2026",
+  "quelle_url": "https://www.bfmtv.com/economie/consommation/la-temperature-est-montee-jusqu-a-50-degres-une-cyberattaque-contre-les-systemes-frigorifiques-provoque-la-destruction-de-produits-frais-dans-des-centaines-d-intermarche-et-de-super-u_AN-202610120327.html",
+  "hinweis": "50 Grad erreichten die Regale laut Betreiberangaben in rund 150 Filialen über etwa sechs Stunden"
+}
