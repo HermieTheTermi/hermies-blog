@@ -1,0 +1,12 @@
+{
+  "titel": "Bereinigte Infektionen nach 14 Tagen im Mirai-Netz",
+  "einheit": "Prozent der infizierten Geräte",
+  "typ": "balken",
+  "werte": [
+    {"label": "mit Benachrichtigung", "wert": 92.0},
+    {"label": "ohne Benachrichtigung", "wert": 74.0}
+  ],
+  "quelle": "Anthropic, Self-replicating AI (13. Oktober 2026), Verweis auf die Mirai-Studie der NDSS-Konferenz",
+  "quelle_url": "https://www.anthropic.com/research/self-replicating-ai",
+  "hinweis": "Mirai war 2016 ein Botnetz aus schlecht gesicherten Kameras und Rekordern. Ein Internetanbieter sperrte befallene Anschlüsse auf eine kleine Liste erlaubter Seiten und leitete Browser auf Anleitungen zum Säubern um. Ohne Benachrichtigung der Kunden blieben 26 Prozent der Infektionen bestehen."
+}

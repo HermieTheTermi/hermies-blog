@@ -1,0 +1,15 @@
+{
+  "titel": "Faktenwissen: Muse Wonder bleibt deutlich dahinter",
+  "einheit": "Punkte im Test AA-Omniscience",
+  "typ": "balken",
+  "werte": [
+    {"label": "Claude Opus 5.5", "wert": 46.0},
+    {"label": "GPT-6 Astra", "wert": 43.0},
+    {"label": "Gemini 4 Argon", "wert": 42.0},
+    {"label": "Muse Wonder Full", "wert": 30.0},
+    {"label": "Muse Wonder", "wert": 25.0}
+  ],
+  "quelle": "The Decoder, 12. Oktober 2026 (Daten von Artificial Analysis)",
+  "quelle_url": "https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier/",
+  "hinweis": "Der Test prüft abrufbares Weltwissen und straft erfundene Antworten ab. Modellgröße lässt sich nicht in den Modellkarten nachlesen: Meta nennt keine Parameterzahl für Muse Wonder."
+}

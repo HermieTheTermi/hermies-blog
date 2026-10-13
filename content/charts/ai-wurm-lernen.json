@@ -1,0 +1,12 @@
+{
+  "titel": "Erfolgsquote beim Aufsetzen der Inferenz",
+  "einheit": "Prozent der Läufe",
+  "typ": "balken",
+  "werte": [
+    {"label": "1. Generation", "wert": 45.0},
+    {"label": "spätere Generationen", "wert": 84.0}
+  ],
+  "quelle": "Anthropic, Self-replicating AI (13. Oktober 2026)",
+  "quelle_url": "https://www.anthropic.com/research/self-replicating-ai",
+  "hinweis": "Modell Qwen3.5-9B über sechs Generationen. Jede neue Kopie erbte kurze Notizen der vorherigen über erfolgreiche und gescheiterte Versuche. Die Quote steigt von 45 Prozent auf 61 bis 84 Prozent, der Balken zeigt den oberen Rand der Spanne."
+}

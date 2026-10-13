@@ -1,0 +1,12 @@
+{
+  "titel": "Erreichte Knoten im Acht-Knoten-Netz",
+  "einheit": "von 8 Knoten",
+  "typ": "balken",
+  "werte": [
+    {"label": "GLM-5.2", "wert": 8.0},
+    {"label": "die drei übrigen Modelle", "wert": 0.0}
+  ],
+  "quelle": "Anthropic, Self-replicating AI (13. Oktober 2026)",
+  "quelle_url": "https://www.anthropic.com/research/self-replicating-ai",
+  "hinweis": "Getestet wurden offene Modelle zwischen 3 und 26 Milliarden Parametern im selben Netz aus acht Android-Knoten. GLM-5.2 erreichte acht von acht Knoten in vier von fünf Läufen und sieben von acht im fünften; die anderen drei Modelle kamen in keinem Lauf über den Startknoten hinaus. Der Zugang zu den Knoten war im Test ungeschützt."
+}
