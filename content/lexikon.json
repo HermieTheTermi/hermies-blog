@@ -43,6 +43,7 @@
   "Millennium-Preisprobleme": "Sieben besonders schwere offene Aufgaben der Mathematik, für deren Lösung das Clay-Institut im Jahr 2000 je eine Million Dollar ausgesetzt hat. Gelöst ist bisher nur eine davon, die Poincaré-Vermutung.",
   "Mixture-of-Experts": "Bauweise, bei der ein Modell aus vielen Teil-Netzen besteht und pro Anfrage nur wenige davon rechnen. So bleibt ein sehr großes Modell bezahlbar.",
   "Modellkarte": "Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt.",
+  "Monorepo": "Ein einziges großes Quellcode-Archiv, in dem viele Projekte und Teams gemeinsam liegen, statt eines eigenen Archivs pro Programm. Vorteil: alles passt zusammen. Nachteil: das Archiv wird mit der Zeit riesig.",
   "Multimodal": "Ein Modell, das mehr als eine Eingabeart versteht, etwa Text, Bilder und Ton.",
   "Müllverbrennung": "Verbrennen von Abfall zur Entsorgung und zur Gewinnung von Strom und Wärme. Aus der übrigen Schlacke werden Metalle zurückgeholt.",
   "NIR-Sensor": "Nahinfrarot-Sensor: Er erkennt Kunststoffsorten am zurückgeworfenen Licht, auch wenn sie mit bloßem Auge gleich aussehen.",
@@ -69,6 +70,7 @@
   "Refusal": "Die Weigerung eines Modells, eine Anfrage zu beantworten. Forscher messen sie als Prozentwert über viele Versuche – die Refusal-Rate.",
   "Reinforcement Learning": "Lernverfahren durch Ausprobieren: Das System erhält Belohnung für gute Ergebnisse und verbessert sein Verhalten dadurch selbst.",
   "Restmüll": "Abfall für die graue Tonne, also alles, was nicht getrennt gesammelt wird.",
+  "Reward Hacking": "Wenn ein Modell nicht die Aufgabe löst, sondern einen Weg findet, die Belohnung dafür trotzdem zu kassieren – etwa die Lösung abschreibt oder einen Test austrickst. Von außen sieht das nach Erfolg aus, ist aber keiner.",
   "Rezyklat": "Kunststoff, der aus gesammeltem Altmaterial neu hergestellt wurde, im Gegensatz zu Neuplastik aus Erdöl.",
   "RLHF": "Reinforcement Learning from Human Feedback: Menschen bewerten die Antworten eines Modells, und nach diesen Bewertungen wird es nachtrainiert.",
   "Sandbox": "Eine abgeschottete Spielumgebung: Programme laufen darin ohne Zugriff auf echte Dateien oder das Netz. Behauptet ein Text, die Antwort lande nur in so einer Testumgebung, kann das das Verhalten eines Modells ändern.",
@@ -88,6 +90,7 @@
   "Token": "Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.",
   "Verbundmaterial": "Mehrere Materialschichten, die fest verklebt sind, etwa Getränkekarton oder Chipstüte. Sie lassen sich kaum in reine Sorten trennen.",
   "Verifier": "Eine Prüfinstanz, die Antworten automatisch bewertet – etwa ein Testprogramm, das generierten Code ausführt, oder ein zweites Modell als Prüfer.",
+  "Versionsverwaltung": "Das Programm, das alle Änderungen an Software speichert und verwaltet, meist Git. Es merkt sich, wer wann was geändert hat, und erlaubt, zu früheren Ständen zurückzuspringen.",
   "Wasserzeichen": "Eine unsichtbare Markierung in einem Werk, etwa in einem Text, Bild oder Ton. Sie soll maschinell erkennbar machen, dass ein KI-System den Inhalt erzeugt hat - ähnlich dem Wasserzeichen im Papier, das man erst gegen das Licht sieht.",
   "Wirbelstromabscheider": "Ein Gerät, das Metalle wie Aluminium mit einem Magnetfeld aus dem Abfallstrom herauswirft.",
   "Ökodesign": "EU-Vorgaben, die Umweltanforderungen an Produkte stellen - etwa Reparierbarkeit, Ersatzteile und die Dauer der Update-Versorgung."

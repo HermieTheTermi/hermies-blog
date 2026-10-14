@@ -1,0 +1,17 @@
+{
+  "titel": "Wissen und Programmieren: wo LFM2.5 zurückliegt",
+  "einheit": "Punkte",
+  "typ": "balken",
+  "gruppen": [
+    "GPQA Diamond (Wissen)",
+    "SWE-Bench Verified (Code)",
+    "SciCode"
+  ],
+  "reihen": [
+    {"name": "LFM2.5-24B-A2B", "werte": [74.42, 51.0, 32.71]},
+    {"name": "Qwen3.6-35B-A3B", "werte": [83.69, 66.2, 37.35]}
+  ],
+  "quelle": "Liquid AI, Modellkarte und Blogbeitrag LFM2.5-24B-A2B (13. Oktober 2026)",
+  "quelle_url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b",
+  "hinweis": "Herstellerangaben gemessen mit vLLM. Der SWE-Bench-Wert wurde im Agenten-Gerüst OpenCode erhoben. Liquid AI empfiehlt selbst, das Modell bei wissenslastigen Aufgaben mit einer Suche oder Datenbankabfrage zu kombinieren."
+}

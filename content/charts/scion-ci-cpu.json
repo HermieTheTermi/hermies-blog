@@ -1,0 +1,11 @@
+{
+  "titel": "Weniger Prozessorlast in der CI durch Scion",
+  "einheit": "Prozent",
+  "typ": "anteil",
+  "wert": 25,
+  "von": 100,
+  "label": "weniger Prozessorbedarf in der CI",
+  "quelle": "Anthropic, Redesigning source control at Anthropic (13. Oktober 2026)",
+  "quelle_url": "https://www.anthropic.com/engineering/redesigning-source-control",
+  "hinweis": "Anthropic nennt 25 Prozent weniger Prozessorbedarf allein in der kontinuierlichen Integration. CI steht für Continuous Integration, also die automatischen Tests, die bei jeder Änderung laufen."
+}

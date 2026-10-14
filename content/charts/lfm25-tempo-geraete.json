@@ -1,0 +1,12 @@
+{
+  "titel": "Antwortgeschwindigkeit auf Geräten ohne dicke Grafikkarte",
+  "einheit": "Token pro Sekunde",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Apple M5 Max", "wert": 184.0},
+    {"label": "Ryzen AI Max+ 395", "wert": 114.0}
+  ],
+  "quelle": "Liquid AI, Blogbeitrag LFM2.5-24B-A2B (13. Oktober 2026)",
+  "quelle_url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b",
+  "hinweis": "Zwei verschiedene Geräte, nicht direkt vergleichbar untereinander. Liquid AI gibt an, das Modell sei damit bis zu 1,7-mal schneller als das nächstbeste Modell derselben Größenklasse und brauche den wenigsten Arbeitsspeicher. Es sind Herstellerangaben ohne unabhängige Nachprüfung."
+}

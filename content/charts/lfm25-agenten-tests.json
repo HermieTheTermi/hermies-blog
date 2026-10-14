@@ -1,0 +1,18 @@
+{
+  "titel": "Werkzeug- und Agenten-Tests: LFM2.5 gegen Qwen3.6-35B-A3B",
+  "einheit": "Punkte",
+  "typ": "balken",
+  "gruppen": [
+    "AutomationBench",
+    "LiveClaw",
+    "ToolSandbox",
+    "BFCLv4"
+  ],
+  "reihen": [
+    {"name": "LFM2.5-24B-A2B", "werte": [27.69, 48.09, 80.71, 65.01]},
+    {"name": "Qwen3.6-35B-A3B", "werte": [8.72, 38.19, 75.02, 65.0]}
+  ],
+  "quelle": "Liquid AI, Modellkarte und Blogbeitrag LFM2.5-24B-A2B (13. Oktober 2026)",
+  "quelle_url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b",
+  "hinweis": "Herstellerangaben von Liquid AI, gemessen mit vLLM nach den empfohlenen Einstellungen jedes Tests. Qwen3.6-35B-A3B hat rund 50 Prozent mehr Parameter, davon ebenfalls rund 50 Prozent mehr gleichzeitig aktiv. Unabhängige Nachprüfung fehlt."
+}

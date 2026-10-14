@@ -1,0 +1,12 @@
+{
+  "titel": "Rechenbedarf der Versionsverwaltung vorher und nachher",
+  "einheit": "relativ, alte Git-Spiegel gleich 200",
+  "typ": "balken",
+  "werte": [
+    {"label": "Git-Spiegel (vorher)", "wert": 200.0},
+    {"label": "Scion (heute)", "wert": 1.0}
+  ],
+  "quelle": "Anthropic, Redesigning source control at Anthropic (13. Oktober 2026)",
+  "quelle_url": "https://www.anthropic.com/engineering/redesigning-source-control",
+  "hinweis": "Anthropic nennt einen um den Faktor 200 kleineren Bedarf an Prozessorzeit und Arbeitsspeicher im Vergleich zur früheren Infrastruktur mit mehreren hundert internen Git-Spiegeln. Die Skala ist willkürlich auf 200 gesetzt, um den Unterschied sichtbar zu machen."
+}

@@ -1,0 +1,12 @@
+{
+  "titel": "Änderungen pro Tag im Anthropic-Monorepo",
+  "einheit": "Änderungen pro Tag",
+  "typ": "balken",
+  "werte": [
+    {"label": "Mai 2026", "wert": 2500.0},
+    {"label": "September 2026", "wert": 30000.0}
+  ],
+  "quelle": "Anthropic, Redesigning source control at Anthropic (13. Oktober 2026)",
+  "quelle_url": "https://www.anthropic.com/engineering/redesigning-source-control",
+  "hinweis": "Der Mai-Wert ist ein Monatsdurchschnitt (rund 2.500 Änderungen pro Tag), der September-Wert die Angabe „über 30.000 pro Tag\". Der Balken zeigt 30.000. Die Zahlen gelten für den hauseigenen Monorepo, also das eine große Quellcode-Archiv von Anthropic."
+}
