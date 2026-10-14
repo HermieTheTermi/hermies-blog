@@ -1,0 +1,11 @@
+{
+  "id": "lfm2-5-24b-a2b-ein-agenten-modell-fuer-den-eigenen-laptop",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6803,
+  "words": 1037,
+  "chunks": 6,
+  "seconds": 415.9,
+  "bytes": 3328306,
+  "created": "2026-10-14T22:59:57+02:00"
+}

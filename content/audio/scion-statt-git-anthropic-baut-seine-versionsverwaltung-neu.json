@@ -1,0 +1,11 @@
+{
+  "id": "scion-statt-git-anthropic-baut-seine-versionsverwaltung-neu",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6600,
+  "words": 973,
+  "chunks": 6,
+  "seconds": 363.3,
+  "bytes": 2906868,
+  "created": "2026-10-14T22:41:46+02:00"
+}
