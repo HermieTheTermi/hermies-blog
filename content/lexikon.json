@@ -55,9 +55,11 @@
   "Parameter": "Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.",
   "Patch": "Ein kleines Software-Update, das einen konkreten Fehler behebt. Ein Sicherheits-Patch schließt eine bekannte Lücke.",
   "Peer Review": "Die übliche Qualitätskontrolle in der Wissenschaft: Andere Fachleute lesen eine Arbeit vor der Veröffentlichung und suchen Fehler. In der Mathematik gilt sie als das eigentliche Prüfsiegel.",
+  "Preprint": "Eine wissenschaftliche Arbeit, die öffentlich abrufbar ist, aber noch keine Begutachtung durch unabhängige Fachleute durchlaufen hat. Die Ergebnisse darin sind vorläufig.",
   "Prompt": "Die Eingabe an ein Sprachmodell: Anweisung, Frage und mitgeschickter Kontext. Alles, was im Text steht, kann das Verhalten des Modells beeinflussen.",
   "Prompt-Cache": "Zwischenspeicher für Text, den das Modell schon einmal verarbeitet hat. Beginnt eine neue Anfrage mit demselben Text, liest das System ihn aus dem Speicher statt ihn neu zu durchrechnen - das ist schneller und viel billiger als frische Eingabe.",
   "Pruning": "Beschneiden eines Modells: Unwichtige Verbindungen werden entfernt, damit es weniger Speicher und Rechenzeit braucht.",
+  "Quantil": "Eine Stufe in einer Wahrscheinlichkeitsverteilung. Das 0,9-Quantil ist der Wert, den neun von zehn Fällen unterschreiten. Mehrere Quantile zusammen beschreiben nicht nur einen erwarteten Wert, sondern auch die Unsicherheitsspanne.",
   "Quantisierung": "Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit.",
   "Quellcode": "Der für Menschen lesbare Text, aus dem ein Programm besteht. Ohne ihn ist Software eine Blackbox: Man kann nur von außen testen, nicht nachlesen.",
   "RAG": "Retrieval Augmented Generation: Das Modell bekommt zuerst passende Textstellen aus einer Datenbank geliefert und antwortet darauf gestützt.",
@@ -93,5 +95,7 @@
   "Versionsverwaltung": "Das Programm, das alle Änderungen an Software speichert und verwaltet, meist Git. Es merkt sich, wer wann was geändert hat, und erlaubt, zu früheren Ständen zurückzuspringen.",
   "Wasserzeichen": "Eine unsichtbare Markierung in einem Werk, etwa in einem Text, Bild oder Ton. Sie soll maschinell erkennbar machen, dass ein KI-System den Inhalt erzeugt hat - ähnlich dem Wasserzeichen im Papier, das man erst gegen das Licht sieht.",
   "Wirbelstromabscheider": "Ein Gerät, das Metalle wie Aluminium mit einem Magnetfeld aus dem Abfallstrom herauswirft.",
+  "Zeitreihe": "Messwerte, die in festem Takt anfallen: der Stromverbrauch eines Werks jede Viertelstunde, der Pegel eines Flusses pro Minute, der Umsatz eines Ladens pro Tag.",
+  "Zero-Shot": "Ein Modell löst eine Aufgabe, für die es nicht eigens trainiert wurde. Bei Vorhersagemodellen heißt das: Es rechnet auf einer Datenreihe, die es nie zuvor gesehen hat.",
   "Ökodesign": "EU-Vorgaben, die Umweltanforderungen an Produkte stellen - etwa Reparierbarkeit, Ersatzteile und die Dauer der Update-Versorgung."
 }

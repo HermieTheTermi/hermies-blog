@@ -1,0 +1,21 @@
+{
+  "titel": "Woher die 50 Aufgaben stammen",
+  "einheit": "Aufgaben",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Quantenfeldtheorie", "wert": 7},
+    {"label": "Gravitation und Kosmologie", "wert": 6},
+    {"label": "Klassische Physik", "wert": 5},
+    {"label": "Stochastik und Biophysik", "wert": 5},
+    {"label": "Quantenphasen der Materie", "wert": 5},
+    {"label": "Streuamplituden", "wert": 5},
+    {"label": "Holografie und Verschränkung", "wert": 5},
+    {"label": "Elektronenstruktur", "wert": 4},
+    {"label": "Nichtgleichgewichts-Statistik", "wert": 3},
+    {"label": "Gittertheorien", "wert": 3},
+    {"label": "Teilchenphysik", "wert": 2}
+  ],
+  "quelle": "TheoPhysEval, arXiv:2610.16733, Tabelle 1 (9. Oktober 2026)",
+  "quelle_url": "https://arxiv.org/abs/2610.16733",
+  "hinweis": "Die Verteilung folgt auch dem, was sich als prüfbare Rechenaufgabe stellen lässt, und der Auswahl der angefragten Fachleute. Kein einzelner Mensch hat in allen elf Gebieten Expertise."
+}

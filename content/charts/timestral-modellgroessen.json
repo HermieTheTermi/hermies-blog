@@ -1,0 +1,14 @@
+{
+  "titel": "Kleiner ist fast so gut: die vier Timestral-Größen im Vergleich",
+  "einheit": "MASE im Test GIFT-Eval (kleiner ist besser)",
+  "typ": "balken",
+  "werte": [
+    {"label": "5 Mio.", "wert": 0.705},
+    {"label": "28 Mio.", "wert": 0.678},
+    {"label": "123 Mio.", "wert": 0.659},
+    {"label": "209 Mio.", "wert": 0.658}
+  ],
+  "quelle": "Mistral AI, Modellkarte Timestral-209M (15. Oktober 2026)",
+  "quelle_url": "https://huggingface.co/mistralai/Timestral-209M",
+  "hinweis": "Parameterzahl in Millionen. Zwischen 123 und 209 Millionen Parametern liegen nur ein Tausendstel Unterschied im Testergebnis. Herstellerangaben; unabhängige Nachprüfung fehlt."
+}

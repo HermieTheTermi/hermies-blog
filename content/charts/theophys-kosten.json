@@ -1,0 +1,15 @@
+{
+  "titel": "Was der Durchgang durch den Test kostete",
+  "einheit": "US-Dollar für alle 50 Aufgaben",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Claude Opus 5.5", "wert": 240.43},
+    {"label": "GLM 5.3 (Abo-Tarif)", "wert": 180},
+    {"label": "GPT-6-Astra", "wert": 116.28},
+    {"label": "Gemini 3.8 Flash", "wert": 95.01},
+    {"label": "DeepSeek-V4.1-Flash", "wert": 37.42}
+  ],
+  "quelle": "TheoPhysEval, arXiv:2610.16733, Tabelle 3 (9. Oktober 2026)",
+  "quelle_url": "https://arxiv.org/abs/2610.16733",
+  "hinweis": "Werte des jeweiligen Durchgangs mit Internet, errechnet aus dem Token-Verbrauch mal Listenpreis - abgerechnet wurde nicht zwingend so viel. GLM lief über einen Abo-Tarif von 180 Dollar für beide Durchgänge; über die Programmierschnittstelle wären es 311,71 Dollar gewesen."
+}

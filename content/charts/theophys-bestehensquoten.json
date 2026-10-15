@@ -1,0 +1,19 @@
+{
+  "titel": "50 Physik-Aufgaben: Anteil gelöster Aufgaben je Agent",
+  "einheit": "Prozent der 50 Aufgaben",
+  "typ": "balken",
+  "gruppen": [
+    "GPT-6-Astra",
+    "Claude Opus 5.5",
+    "Gemini 3.8 Flash",
+    "GLM 5.3",
+    "DeepSeek-V4.1-Flash"
+  ],
+  "reihen": [
+    {"name": "mit Internet", "werte": [98, 92, 68, 42, 54]},
+    {"name": "ohne Internet", "werte": [92, 92, 62, 52, 50]}
+  ],
+  "quelle": "TheoPhysEval, arXiv:2610.16733 (9. Oktober 2026), Abbildungen 3 und 4",
+  "quelle_url": "https://arxiv.org/abs/2610.16733",
+  "hinweis": "Je Modell ein Durchgang, deshalb mit Schwankungsbreite behaftet. GLM löst ohne Internet mehr Aufgaben als mit; die Autoren erklären das mit einem Vorzeichenfehler, der sich in einem Block verknüpfter Aufgaben fortpflanzte."
+}

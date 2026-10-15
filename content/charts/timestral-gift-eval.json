@@ -1,0 +1,15 @@
+{
+  "titel": "GIFT-Eval: Timestral liegt knapp vorn",
+  "einheit": "MASE (kleiner ist besser)",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Timestral-209M", "wert": 0.658},
+    {"label": "t0-gamma", "wert": 0.661},
+    {"label": "TimesFM-3", "wert": 0.667},
+    {"label": "Toto-2.0-2.5B", "wert": 0.696},
+    {"label": "Chronos-2", "wert": 0.698}
+  ],
+  "quelle": "Mistral AI, Modellkarte Timestral-209M (15. Oktober 2026)",
+  "quelle_url": "https://huggingface.co/mistralai/Timestral-209M",
+  "hinweis": "MASE misst den Vorhersagefehler, kleinere Werte sind besser. Herstellerangaben; GIFT-Eval vergleicht laut Mistral 83 vortrainierte Modelle ohne Nachhilfe. Die Abstände an der Spitze liegen im Bereich weniger Tausendstel."
+}

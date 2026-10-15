@@ -1,0 +1,12 @@
+{
+  "titel": "Eine Tagesprognose ohne Grafikchip",
+  "einheit": "Millisekunden",
+  "typ": "balken",
+  "werte": [
+    {"label": "Timestral-5M", "wert": 10},
+    {"label": "Timestral-209M", "wert": 140}
+  ],
+  "quelle": "Mistral AI, Blogbeitrag Introducing Timestral (15. Oktober 2026)",
+  "quelle_url": "https://mistral.ai/news/timestral/",
+  "hinweis": "Gemessen auf acht Prozessorkernen; Grundlage sind drei Wochen Verlaufsdaten im 15-Minuten-Takt, vorhergesagt wird ein Tag. Für die mittleren Größen nennt Mistral keine absoluten Zeiten, nur Verhältnisse: das 28-Millionen-Modell rechnet fünfmal schneller als das größte."
+}
