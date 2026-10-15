@@ -1,0 +1,11 @@
+{
+  "id": "theophyseval-agenten-loesen-49-von-50-physik-aufgaben-aus-der-forschung",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7389,
+  "words": 1086,
+  "chunks": 8,
+  "seconds": 420.8,
+  "bytes": 3367104,
+  "created": "2026-10-15T23:03:55+02:00"
+}

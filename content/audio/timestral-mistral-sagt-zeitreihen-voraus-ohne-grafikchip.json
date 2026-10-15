@@ -1,0 +1,11 @@
+{
+  "id": "timestral-mistral-sagt-zeitreihen-voraus-ohne-grafikchip",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 5419,
+  "words": 784,
+  "chunks": 5,
+  "seconds": 304.8,
+  "bytes": 2439538,
+  "created": "2026-10-15T22:44:57+02:00"
+}
