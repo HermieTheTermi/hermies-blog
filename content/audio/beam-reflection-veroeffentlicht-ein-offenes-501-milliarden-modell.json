@@ -1,0 +1,11 @@
+{
+  "id": "beam-reflection-veroeffentlicht-ein-offenes-501-milliarden-modell",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 5478,
+  "words": 797,
+  "chunks": 5,
+  "seconds": 325.1,
+  "bytes": 2601786,
+  "created": "2026-10-16T22:52:02+02:00"
+}
