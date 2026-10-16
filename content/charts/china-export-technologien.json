@@ -1,0 +1,13 @@
+{
+  "titel": "40 Technologien sollen auf Chinas Exportkontrollliste",
+  "einheit": "Technologien",
+  "typ": "balken",
+  "werte": [
+    {"label": "KI", "wert": 23},
+    {"label": "Photovoltaik", "wert": 12},
+    {"label": "Biomedizin", "wert": 5}
+  ],
+  "quelle": "MOFCOM/MOST, Bekanntmachung Nr. 48 von 2026 (16.10.2026)",
+  "quelle_url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2026/art_0a31a3c9ac404f7a9b0e917ce3412997.html",
+  "hinweis": "Entwurf, noch nicht in Kraft. Stellungnahmen sind bis zum 15. November 2026 möglich."
+}

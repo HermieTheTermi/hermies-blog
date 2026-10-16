@@ -1,0 +1,12 @@
+{
+  "titel": "Geplante Einstufung: 14 Verbote, 26 Beschränkungen",
+  "einheit": "Technologien",
+  "typ": "balken",
+  "werte": [
+    {"label": "Ausfuhr verboten", "wert": 14},
+    {"label": "Ausfuhr beschränkt", "wert": 26}
+  ],
+  "quelle": "MOFCOM, Pressegespräch zur Bekanntmachung Nr. 48 (16.10.2026)",
+  "quelle_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_a4acff07e134447fbe7bbeb486df3ea6.html",
+  "hinweis": "Verboten werden soll unter anderem KI-gesteuerte Malware-Erzeugung, beschränkt die KI-gestuetzte Suche nach Sicherheitsluecken."
+}

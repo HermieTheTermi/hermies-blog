@@ -1,0 +1,18 @@
+{
+  "titel": "Terminal Bench 2.1: Wo Beam im Vergleich steht",
+  "einheit": "% gelöste Aufgaben",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "DeepSeek V4.1 Flash", "wert": 90.6},
+    {"label": "Kimi K3", "wert": 88.3},
+    {"label": "GLM 5.3", "wert": 88.2},
+    {"label": "Qwen 3.8 Max", "wert": 86.6},
+    {"label": "GLM 5.2", "wert": 81.0},
+    {"label": "Beam", "wert": 80.1},
+    {"label": "Inkling", "wert": 63.8},
+    {"label": "Nemotron 3 Ultra", "wert": 56.4}
+  ],
+  "quelle": "Reflection, Introducing Beam (05.10.2026)",
+  "quelle_url": "https://reflection.ai/blog/introducing-beam",
+  "hinweis": "Werte aus der Vergleichstabelle des Herstellers. Modelle ohne veröffentlichten Wert (in der Tabelle \"NR\") fehlen im Diagramm."
+}

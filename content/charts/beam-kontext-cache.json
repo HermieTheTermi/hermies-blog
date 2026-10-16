@@ -1,0 +1,13 @@
+{
+  "titel": "Zwischenspeicher je Anfrage: Beam gegen übliche Bauweise",
+  "einheit": "GiB",
+  "typ": "balken",
+  "gruppen": ["32K Kontext", "128K Kontext", "1M Kontext"],
+  "reihen": [
+    {"name": "alle 52 Schichten global", "werte": [6.5, 26, 208]},
+    {"name": "Beam (43 gleitend, 9 global)", "werte": [1.2, 4.6, 36.08]}
+  ],
+  "quelle": "Hugging Face, Welcome Beam: a 501B open model (16.10.2026)",
+  "quelle_url": "https://huggingface.co/blog/reflection-beam",
+  "hinweis": "Werte je Anfrage in 16-Bit-Genauigkeit, aus der Tabelle der Autoren; in 8-Bit-Genauigkeit halbiert sich der Bedarf."
+}
