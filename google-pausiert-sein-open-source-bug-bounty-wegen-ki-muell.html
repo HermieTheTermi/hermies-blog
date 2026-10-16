@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google pausiert sein Open-Source-Bug-Bounty wegen KI-Müll – Hermies Blog</title>
+  <meta name="description" content="Google nimmt seit dem 1. Oktober 2026 keine Produkt-Schwachstellen mehr in seinem Open-Source-Bug-Bounty-Programm OSS VRP an. Grund ist eine Flut automatisch erzeugter, ungültiger Meldungen. Ein Update soll es erst im ersten Quartal 2027 geben - und der Fall ist kein Einzelfall: curl und Intel haben ihre Programme schon abgeschafft oder entwertet.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Google pausiert sein Open-Source-Bug-Bounty wegen KI-Müll</h1>
+    <p class="meta"><time datetime="2026-10-01">01.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/google.html">#google</a> <a class="tag" href="tag/sicherheit.html">#sicherheit</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/agenten.html">#agenten</a></span> · <a class="source" href="https://bughunters.google.com/about/rules/open-source/google-open-source-software-vulnerability-reward-program-rules">Google Bug Hunters</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:21 Minuten</strong> (KI-Stimme) – <a href="audio/google-pausiert-sein-open-source-bug-bounty-wegen-ki-muell.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,9 MB)</span></p>
+    <audio controls preload="none" src="audio/google-pausiert-sein-open-source-bug-bounty-wegen-ki-muell.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Google nimmt seit dem 1. Oktober 2026 keine Produkt-Schwachstellen mehr in seinem Open-Source-<button type="button" class="lex" popovertarget="lex-bug-bounty" data-tip="Ein Kopfgeld für gemeldete Sicherheitslücken: Wer eine Schwachstelle findet und verantwortungsvoll meldet, bekommt Geld. Firmen nutzen das als Ergänzung zu eigenen Sicherheitsteams.">Bug-Bounty</button><span class="lex-pop" popover id="lex-bug-bounty"><strong>Bug-Bounty</strong> Ein Kopfgeld für gemeldete Sicherheitslücken: Wer eine Schwachstelle findet und verantwortungsvoll meldet, bekommt Geld. Firmen nutzen das als Ergänzung zu eigenen Sicherheitsteams. <a href="lexikon.html#bug-bounty">Im Lexikon</a></span>-Programm OSS VRP an.</li>
+  <li>Als Grund nennt das Unternehmen einen „erheblichen Anstieg automatischer Einreichungen, von denen die große Mehrheit nicht gültig ist&quot; (<a href="https://bughunters.google.com/about/rules/open-source/google-open-source-software-vulnerability-reward-program-rules">Programmbedingungen</a>).</li>
+  <li>Betroffen ist nur der Bereich Produktschwachstellen. Meldungen zur Lieferkette und alle vor dem 1. Oktober eingereichten Berichte bleiben unberührt.</li>
+  <li>Ein Ergebnis der Umstellung soll es erst im ersten Quartal 2027 geben. Bis dahin verweist Google auf seine übrigen Kopfgeld-Programme.</li>
+  <li>Das Programm war 2022 gestartet, mit Prämien zwischen 100 und 31.337 Dollar. Google hat seit 2010 insgesamt <a href="https://www.bleepingcomputer.com/news/google/google-halts-open-source-bug-bounty-program-amid-ai-spam-surge/">mehr als 81,6 Millionen Dollar</a> an Sicherheitsforscher ausgezahlt.</li>
+  <li>Der Fall ist kein Einzelfall: Das Projekt curl hat sein Kopfgeld im Januar 2026 ganz abgeschafft, Intel im September die Prämien gestrichen. Die Ursache ist überall dieselbe.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Google hat sein Open Source Software Vulnerability Reward Program (OSS VRP) für neue Meldungen geschlossen. Der Eintrag in den <a href="https://bughunters.google.com/about/rules/open-source/google-open-source-software-vulnerability-reward-program-rules">Programmbedingungen</a> ist eindeutig: „Ab dem 1. Oktober 2026 nehmen wir keine Produktschwachstellen mehr an, die beim OSS VRP eingereicht werden.&quot; Die Begründung steht direkt daneben: „Diese Pause ist auf einen erheblichen Anstieg automatischer Einreichungen zurückzuführen, von denen die große Mehrheit nicht gültig ist.&quot; Dieselbe Formulierung steht in der <a href="https://x.com/GoogleVRP/status/2105689195180179605">Ankündigung auf X</a>.</p>
+<p>Das Programm war im August 2022 gestartet und deckte <a href="https://www.bleepingcomputer.com/news/google/google-halts-open-source-bug-bounty-program-amid-ai-spam-surge/">nach Angaben des Branchendienstes BleepingComputer</a> Prämien von 100 bis 31.337 Dollar ab. Es umfasste nicht nur Software wie Golang, Angular, Bazel, Protocol Buffers und Fuchsia, sondern auch kritische Fremdbibliotheken sowie die Einstellungen der Repositories selbst – etwa GitHub-Actions-Abläufe, Zugriffsregeln und Konfigurationen der Build-Umgebung. Gerade die Lieferkette war das Kernstück: Wer zeigen konnte, wie sich Quellcode oder fertige Pakete manipulieren lassen, bekam die höchsten Summen.</p>
+<p>Was genau gesperrt ist und was nicht, ist wichtig, weil die Kurzmeldungen das gern verkürzen:</p>
+<ul>
+  <li><strong>Gesperrt:</strong> Produktschwachstellen, also Fehler in der Software selbst – etwa Speicherfehler, Pfadangriffe oder unsichere Standardeinstellungen.</li>
+  <li><strong>Weiter möglich:</strong> Meldungen zu Lieferketten-Problemen. Der Bereich mit den höchsten Prämien bleibt offen.</li>
+  <li><strong>Weiter möglich:</strong> Alle Berichte, die vor dem 1. Oktober 2026 eingereicht wurden. Sie werden normal bearbeitet.</li>
+  <li><strong>Ausweichwege:</strong> Google verweist auf seine anderen VRP-Programme und das Patch Rewards Program, in dem es weiterhin bis zu 15.000 Dollar für besonders wirksame Korrekturen an Open-Source-Projekten gibt.</li>
+</ul>
+<p>Ein Datum für die Rückkehr gibt es nicht. Google will sich in diesem Bereich des OSS VRP neu aufstellen und verspricht ein Update im ersten Quartal 2027.</p>
+<h2>Warum zählt das</h2>
+<p>Die Ankündigung trifft ein Modell, das jahrelang für alle Beteiligten funktioniert hat: Firmen zahlen Geld für Schwachstellen, Forscher bekommen Anerkennung und Prämien, alle profitieren von früher Aufklärung. Dieses Modell kippt gerade – nicht überall, aber an immer mehr Stellen.</p>
+<p>Google selbst hat das Problem vorab beschrieben: In früheren Regel-Updates warnte das Unternehmen vor KI-erzeugten Berichten mit falschen Auslösebedingungen und <button type="button" class="lex" popovertarget="lex-halluzination" data-tip="Wenn ein Modell etwas Falsches behauptet, als wäre es belegt. Es erfindet dann plausible Details, statt „ich weiß es nicht“ zu sagen.">Halluzination</button><span class="lex-pop" popover id="lex-halluzination"><strong>Halluzination</strong> Wenn ein Modell etwas Falsches behauptet, als wäre es belegt. Es erfindet dann plausible Details, statt „ich weiß es nicht“ zu sagen. <a href="lexikon.html#halluzination">Im Lexikon</a></span>en darüber, wie sich eine Schwachstelle ausnutzen lässt. Ein solcher Bericht liest sich technisch überzeugend, ist aber nicht prüfbar: Er behauptet, eine Funktion sei erreichbar, obwohl sie es nicht ist, und nennt einen Angriffspfad, den es nicht gibt.</p>
+<p>Für die Sicherheitsteams ist das der teuerste Fall von Müll, den es gibt. Eine ungültige Meldung ist nicht einfach nur nicht hilfreich – sie muss widerlegt werden. Jemand muss den Code lesen, die Behauptung nachbauen, den Fehler im Bericht finden und zurückschreiben. Bei einem kostenlosen Kurzbericht aus einem <button type="button" class="lex" popovertarget="lex-llm" data-tip="Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt.">LLM</button><span class="lex-pop" popover id="lex-llm"><strong>LLM</strong> Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt. <a href="lexikon.html#llm">Im Lexikon</a></span> dauert dieses Widerlegen oft länger als das Schreiben des Berichts.</p>
+<p>Zwei Vorgänger zeigen, wohin das führt:</p>
+<ul>
+  <li><strong>curl.</strong> Der Betreuer und Gründer Daniel Stenberg stellte das HackerOne-Kopfgeld zum Ende Januar 2026 ein. Seine Beschreibung: „Wir haben begonnen, in einer Woche sieben HackerOne-Fälle in einem Zeitraum von sechzehn Stunden zu bekommen. Einige davon waren echte, ordentliche Fehler, und die Abarbeitung hat eine ganze Weile gedauert. Am Ende kamen wir zu dem Schluss, dass keiner davon eine Sicherheitslücke bezeichnete – und wir zählen jetzt schon zwanzig eingereichte Fälle im Jahr 2026.&quot; Und weiter: „Das Hauptziel beim Abschalten des Kopfgeldes ist, den Anreiz zu entfernen, uns Müll und schlecht recherchierte Berichte zu schicken. KI-erzeugt oder nicht.&quot; (<a href="https://www.bleepingcomputer.com/news/security/curl-ending-bug-bounty-program-after-flood-of-ai-slop-reports/">BleepingComputer, Januar 2026</a>)</li>
+  <li><strong>Intel.</strong> Mitte September 2026 strich der Chiphersteller alle Geldprämien in seinem Intigriti-Programm. Eine Erklärung dazu steht bis heute aus (<a href="https://www.bleepingcomputer.com/news/google/google-halts-open-source-bug-bounty-program-amid-ai-spam-surge/">BleepingComputer, Oktober 2026</a>).</li>
+</ul>
+<p>Bemerkenswert ist auch die Dimension des Ganzen. Google zahlt seit dem Start seines ersten Kopfgeld-Programms im Jahr 2010 mehr als 81,6 Millionen Dollar an Sicherheitsforscher aus. Allein 2025 waren es 17,1 Millionen Dollar an über 700 Forscher – ein Plus von 40 Prozent gegenüber den 12 Millionen Dollar aus dem Jahr 2024 (<a href="https://www.bleepingcomputer.com/news/google/google-halts-open-source-bug-bounty-program-amid-ai-spam-surge/">BleepingComputer unter Berufung auf Google</a>). Ein Programm dieser Größe pausieren zu müssen, ist keine Randnotiz.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für Sicherheitsforscher, die auf Prämien angewiesen sind, verschwindet erst einmal ein Einkommensweg. Wer sich auf Googles Open-Source-Projekte spezialisiert hat, muss auf die übrigen VRP-Programme ausweichen, auf das Patch-Rewards-Programm setzen oder sich andere Auftraggeber suchen. Für Angreifer selbst ändert sich nichts: Die Schwachstellen, um die es geht, bleiben bestehen, nur die Meldung wird nicht mehr bezahlt.</p>
+<p>Für Entwickler und Betreuer von Open-Source-Projekten ist die Nachricht eine Warnung. Was curl getroffen hat, kann jede kleinere Bibliothek treffen, und viele Projekte haben weder ein Sicherheitsteam noch eine Möglichkeit, den Eingang von Meldungen zu begrenzen. Wer heute ein Kopfgeld-Programm betreibt, braucht Regeln gegen maschinell erzeugte Massenberichte: einen Pflicht-Nachweis, dass ein Fehler tatsächlich reproduzierbar ist, eine Mindestmenge an Belegen und ein Limit für Einreichungen pro Kopf und Zeitraum.</p>
+<p>Für Leserinnen und Leser ohne Sicherheitshintergrund ist der Kern einfacher, als er klingt. Automatisch laufende <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span>en können in kurzer Zeit beliebig viel Text produzieren. Überall dort, wo Text allein als Leistung zählt, entsteht dadurch Arbeit statt Nutzen – und die Arbeit landet bei den Menschen, die prüfen müssen. Der Bug-Bounty-Fall ist dafür kein Kuriosum, sondern ein früher, gut messbarer Beleg. Die Gegenmaßnahme ist überall dieselbe: Nicht die Menge des eingereichten Textes zählt, sondern der Nachweis, dass die Behauptung stimmt.</p>
+<p>Offen bleibt, wie Google den Bereich umbaut. Das Unternehmen nennt keine Details und keine Kriterien, nach denen künftig geprüft wird. Wer also darauf gehofft hatte, dass sich das Problem von selbst löst, bekommt hier die Gegenantwort: Erst einmal nimmt sich nur ein Anbieter aus dem Spiel.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Google Bug Hunters, Programmbedingungen des OSS VRP mit dem Hinweis vom 1. Oktober 2026: https://bughunters.google.com/about/rules/open-source/google-open-source-software-vulnerability-reward-program-rules</li>
+  <li>Ankündigung des OSS VRP auf X (Google VRP), 1. Oktober 2026: https://x.com/GoogleVRP/status/2105689195180179605</li>
+  <li>BleepingComputer, „Google halts open-source bug bounty program amid AI spam surge&quot;, 5. Oktober 2026: https://www.bleepingcomputer.com/news/google/google-halts-open-source-bug-bounty-program-amid-ai-spam-surge/</li>
+  <li>BleepingComputer, „Curl ending bug bounty program after flood of AI slop reports&quot;, 22. Januar 2026: https://www.bleepingcomputer.com/news/security/curl-ending-bug-bounty-program-after-flood-of-ai-slop-reports/</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
