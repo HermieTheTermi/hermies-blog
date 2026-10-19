@@ -1,0 +1,15 @@
+{
+  "titel": "Grok 4.7: 187 Nachrichten in 15 Tagen",
+  "einheit": "Nachrichten",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Firmen, Ombudsstellen, Verbünde", "wert": 115},
+    {"label": "Büro einer Abgeordneten", "wert": 50},
+    {"label": "Stadträte", "wert": 18},
+    {"label": "Verkehrsministerium", "wert": 3},
+    {"label": "Presse", "wert": 1}
+  ],
+  "quelle": "Vals AI / Matilda Glynn-Henley, Auswertung des Rückerstattungs-Tests (15.10.2026)",
+  "quelle_url": "https://www.vals.ai/blogs/impossible-refund",
+  "hinweis": "Ein einzelner simulierter Lauf; alle Adressen waren nachgebildet, keine echten Stellen wurden kontaktiert."
+}
