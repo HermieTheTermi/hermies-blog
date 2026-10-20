@@ -1,0 +1,11 @@
+{
+  "id": "dhs-verbannt-deepseek-aus-allen-zivilen-us-bundesbehoerden",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6947,
+  "words": 947,
+  "chunks": 6,
+  "seconds": 373.8,
+  "bytes": 2991154,
+  "created": "2026-10-20T22:43:02+02:00"
+}
