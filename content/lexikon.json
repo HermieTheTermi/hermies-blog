@@ -1,6 +1,7 @@
 {
   "Abfallsammler": "Menschen, die Wertstoffe aus Abfällen oder Müllkippen sammeln und verkaufen. Weltweit leben Millionen davon, vor allem im Globalen Süden.",
   "Agent": "Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.",
+  "Air-Gap": "Ein Rechner oder Netz, das absichtlich nicht mit dem Internet verbunden ist, damit niemand von außen hineinkommt. Daten gelangen nur über USB-Sticks oder ähnliche Wege hinein.",
   "Aktor": "Ein angetriebenes Teil eines Roboters, etwa ein Motor oder ein Getriebe.",
   "Alignment": "Das Anpassen eines KI-Modells an erwünschtes Verhalten, meist durch Bewertung und Nachtraining. Ziel ist, dass das Modell schädliche Anfragen ablehnt und sich an Vorgaben hält.",
   "Anomalie-Erkennung": "Verfahren, bei dem ein Modell aus vielen normalen Messwerten lernt, was 'normal' ist, und dann seltene Abweichungen meldet – ohne zu wissen, wonach es sucht.",
