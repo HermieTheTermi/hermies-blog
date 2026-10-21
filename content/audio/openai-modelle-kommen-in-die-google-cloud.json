@@ -1,0 +1,11 @@
+{
+  "id": "openai-modelle-kommen-in-die-google-cloud",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7577,
+  "words": 1065,
+  "chunks": 7,
+  "seconds": 410.8,
+  "bytes": 3287614,
+  "created": "2026-10-21T23:00:41+02:00"
+}
