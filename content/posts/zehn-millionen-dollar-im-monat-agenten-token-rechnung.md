@@ -29,6 +29,8 @@ Knecht hatte die Frage vorbereitet: Er sagte, Steinberger habe früher selbst vo
 
 Bezahlt wird die Rechnung nicht aus seinem Privatvermögen, sondern aus Investorengeld – Steinberger arbeitet mit einem Budget, das an ein Unternehmen mit Finanzierung gebunden ist, nicht an ein privates Konto.
 
+Ein Detail macht die Sache interessanter: OpenClaw selbst wird auf der Projektseite als quelloffener Assistent beschrieben, der auf dem eigenen Gerät läuft – „kein Abonnement, keine gehostete Variante“. Getragen wird das Projekt von einer unabhängigen Stiftung; OpenAI ist dort als Förderer gelistet, das Projekt sei aber kein OpenAI-Produkt ([openclaw.ai](https://openclaw.ai/)). Der Erfinder eines Werkzeugs, das ohne Cloud-Abo auskommen soll, gibt also privat zehn Millionen Dollar im Monat für genau diese Cloud-Arbeit aus.
+
 Danach wurde das Gespräch grundsätzlicher. Steinberger sagte, die eigentliche Herausforderung sei, dass die Infrastruktur noch nicht nachgekommen sei: „Warum läuft das immer noch auf meinem Computer? Sollte das nicht alles in der Cloud sein?“ Der Bericht hält dem entgegen, dass cloudgehostete Agenten teuer sind und Datenschutz- sowie Compliance-Fragen aufwerfen – für alle, die keine Wagniskapitalgeber im Rücken haben, bleibt der lokale Rechner die günstigere Variante.
 
 Zwei weitere Punkte aus dem Gespräch lohnen sich, weil sie die Praxis betreffen. Zum einen die Frage, ob KI-Überschwemmung die Open-Source-Entwicklung erstickt: Steinberger sagte, Pull Requests müssten erklären, wie jemand auf eine Änderung gekommen ist. „Wenn ich deine Gedanken sehe, wie du von A nach B gekommen bist, ist mein Vertrauen in das Ergebnis viel höher, als wenn du die fertige Arbeit über den Zaun wirfst.“
@@ -60,6 +62,7 @@ Was offen bleibt: Ob die 10 Millionen Dollar ein Ausreißer eines Finanziers mit
 ## Quellen
 
 - The Register: [OpenClaw creator says he spent $10 million in tokens last month](https://www.theregister.com/ai-and-ml/2026/10/21/openclaw-creator-says-he-spent-10-million-in-tokens-last-month/5304573) (21.10.2026)
+- OpenClaw: [Projektseite](https://openclaw.ai/) (abgerufen 22.10.2026)
 - Cloudflare Connect 2026: [Speakers – Peter Steinberger](https://www.cloudflare.com/connect/speakers) (abgerufen 22.10.2026)
 - Golem: [KI-Kosten: Openclaw-Gründer gab zehn Millionen Dollar an Token im Monat aus](https://www.golem.de/news/ki-kosten-openclaw-gruender-gab-zehn-millionen-dollar-an-token-im-monat-aus-2610-214410.html) (22.10.2026)
 - Reuters (über The Register verlinkt): [OpenAI seeks to accelerate fundraising ahead of Anthropic IPO](https://www.reuters.com/world/openai-seeks-accelerate-fundraising-ahead-anthropic-ipo-sources-say-2026-10-19/) (19.10.2026)
