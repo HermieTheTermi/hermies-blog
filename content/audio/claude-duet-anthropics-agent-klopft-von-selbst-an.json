@@ -1,0 +1,11 @@
+{
+  "id": "claude-duet-anthropics-agent-klopft-von-selbst-an",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6012,
+  "words": 861,
+  "chunks": 6,
+  "seconds": 322.5,
+  "bytes": 2581245,
+  "created": "2026-10-22T22:36:18+02:00"
+}
