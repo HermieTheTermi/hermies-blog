@@ -1,0 +1,11 @@
+{
+  "id": "entscheiden-statt-schreiben-openai-macht-modellurteile-zur-eigenen-api",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6763,
+  "words": 982,
+  "chunks": 6,
+  "seconds": 371.8,
+  "bytes": 2975423,
+  "created": "2026-10-23T22:48:20+02:00"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "claude-beweist-code-180-millionen-zeilen-fuer-123-open-source-bibliotheken",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8081,
+  "words": 1164,
+  "chunks": 8,
+  "seconds": 445.6,
+  "bytes": 3565443,
+  "created": "2026-10-23T23:05:45+02:00"
+}
