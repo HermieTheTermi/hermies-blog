@@ -1,0 +1,13 @@
+{
+  "titel": "Terminal-Bench 4.0: Kimi K3.1 Pro gegen die Spitze",
+  "einheit": "% gelöste Aufgaben",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Claude Opus 5.5", "wert": 66.4},
+    {"label": "Kimi K3.1 Pro", "wert": 65.7},
+    {"label": "GPT-6 Astra", "wert": 58.2}
+  ],
+  "quelle": "Moonshot AI, Introducing Kimi K3.1 Pro (23.10.2026)",
+  "quelle_url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+  "hinweis": "Herstellerangaben, maximale Denkstufe, Claude-Code-Harness. Vergleichswerte teils aus den Berichten der Anbieter übernommen. Nicht unabhängig geprüft."
+}

@@ -1,0 +1,15 @@
+{
+  "titel": "xdev-bench-hard: Was die Datenbereinigung kostet",
+  "einheit": "% gelöste Exploit-Aufgaben (pass@3)",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "ohne Bereinigung (Zwischenstand)", "wert": 90.5},
+    {"label": "DeepSeek V4.1 Flash", "wert": 85.7},
+    {"label": "Kimi K3.1 Pro (ausgeliefert)", "wert": 81.0},
+    {"label": "GLM-5.3", "wert": 57.1},
+    {"label": "Kimi K3 (Vorgänger)", "wert": 33.3}
+  ],
+  "quelle": "Moonshot AI, Introducing Kimi K3.1 Pro (23.10.2026)",
+  "quelle_url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+  "hinweis": "Interner Benchmark mit nachgebauten Schwachstellen in Linux-Kernel, Node.js, JavaScriptCore, Exim und VirGL. Herstellerangaben, nicht unabhängig geprüft."
+}

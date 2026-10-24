@@ -1,0 +1,15 @@
+{
+  "titel": "BenchCAD mit Werkzeugen: 3D-Rekonstruktion aus Ansichten",
+  "einheit": "% Voxel-IoU-Score",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Claude Opus 5.5", "wert": 96.2},
+    {"label": "GPT-6 Astra", "wert": 95.9},
+    {"label": "Kimi K3.1 Pro", "wert": 92.7},
+    {"label": "Claude Fable 5.1", "wert": 92.6},
+    {"label": "DeepSeek V4.1 Flash", "wert": 81.6}
+  ],
+  "quelle": "Moonshot AI, Introducing Kimi K3.1 Pro (23.10.2026)",
+  "quelle_url": "https://www.kimi.ai/blog/kimi-k3-1-pro",
+  "hinweis": "Teilmenge von 1.000 Fällen aus 17.900. Ohne Werkzeuge kommt Kimi K3.1 Pro auf 72,8 Prozent, Claude Opus 5.5 auf 73,0."
+}
