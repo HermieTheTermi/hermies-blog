@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kolibri: Aleph Alpha veröffentlicht ein offenes deutsches Sprachmodell – Hermies Blog</title>
+  <meta name="description" content="Aleph Alpha hat mit Kolibri ein offenes Sprachmodell für Deutsch und Englisch veröffentlicht: 78 Milliarden Parameter, von denen pro Token nur 3,5 Milliarden rechnen. Die Gewichte sind frei — brauchen aber rund 78 GB Grafikkartenspeicher.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Kolibri: Aleph Alpha veröffentlicht ein offenes deutsches Sprachmodell</h1>
+    <p class="meta"><time datetime="2026-10-03">03.10.2026</time> · <span class="tags"><a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/open-weights.html">#open-weights</a> <a class="tag" href="tag/deutschland.html">#deutschland</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/news.html">#news</a></span> · <a class="source" href="https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/">Aleph Alpha</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:24 Minuten</strong> (KI-Stimme) – <a href="audio/kolibri-aleph-alpha-offenes-deutsches-sprachmodell.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,4 MB)</span></p>
+    <audio controls preload="none" src="audio/kolibri-aleph-alpha-offenes-deutsches-sprachmodell.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li><strong>Wer:</strong> Aleph Alpha aus Heidelberg hat am 3. Oktober 2026 ein neues Sprachmodell vorgestellt: <strong>Kolibri</strong>.</li>
+  <li><strong>Was:</strong> Ein Modell für Deutsch und Englisch mit 78 Milliarden Parametern. Pro Textbaustein rechnen aber nur 3,5 Milliarden davon mit — das macht es sparsam, dafür speicherhungrig.</li>
+  <li><strong>Frei nutzbar:</strong> Die Gewichte (also der trainierte Modellinhalt) liegen öffentlich unter der Apache-2.0-Lizenz. Jeder darf sie herunterladen, betreiben und verändern.</li>
+  <li><strong>Haken:</strong> Es braucht rund 78 GB Grafikkartenspeicher. Auf einem normalen Laptop läuft es nicht.</li>
+  <li><strong>Stark:</strong> Deutsche Mathe- und Fachaufgaben. <strong>Schwach:</strong> Antworten aus dem Gedächtnis und mehrstufige Werkzeug-Aufrufe.</li>
+  <li><strong>Wichtig:</strong> Alle Zahlen kommen aus Aleph Alphas eigenen Tests — unabhängig nachgeprüft sind sie noch nicht.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Am 3. Oktober 2026, dem Tag der Deutschen Einheit, hat Aleph Alpha Kolibri veröffentlicht — ein Sprachmodell für Deutsch und Englisch. Die Gewichte stehen auf <a href="https://huggingface.co/Aleph-Alpha/Kolibri-1">Hugging Face</a> zum Download, die Lizenz ist Apache 2.0, also für fast jede Nutzung frei. Es gibt einen <a href="https://aleph-alpha.com/downloads/tech-report.pdf">technischen Bericht</a> mit 189 Seiten und einen <a href="https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/">Ankündigungs-Blogpost</a>.</p>
+<p>Die wichtigsten Eckdaten:</p>
+<ul>
+  <li>78,1 Milliarden Parameter insgesamt, 3,46 Milliarden davon bei jedem Token (also jedem Textbaustein) aktiv</li>
+  <li>262.144 Token Kontextfenster im Training, getestet bis 1.048.576 Token</li>
+  <li>Wissensstand: 18. Juni 2026</li>
+  <li>Trainiert auf 768 Nvidia-B200-Grafikkarten, 21 Tage lang</li>
+  <li>Insgesamt rund 24 Billionen Trainings-Token, davon gut ein Fünftel Deutsch (21,3 Prozent)</li>
+  <li>Vier Denk-Stufen, die man pro Anfrage wählen kann: keine, niedrig, mittel, hoch</li>
+</ul>
+<h2>Kurz erklärt: Parameter, Token, Mixture of Experts</h2>
+<p>Ein <strong>Parameter</strong> ist eine gelernte Einstellschraube im Modell. Je mehr davon, desto mehr Wissen und Können passen hinein — aber desto mehr Rechenleistung und Speicher braucht das Modell.</p>
+<p>Ein <strong>Token</strong> ist der Baustein, mit dem ein Sprachmodell rechnet: meist ein Wort oder ein Wortteil. Das Modell liest und schreibt Token, keine Buchstaben.</p>
+<p>Ein <strong>Mixture-of-Experts-Modell</strong> (kurz MoE, auf Deutsch etwa „Mischung von Fachleuten&quot;) ist der eigentliche Trick. Statt dass bei jedem Token das ganze Modell rechnet, hat es Schichten mit vielen kleinen Untermodellen — die „Experten&quot;. Ein <strong>Router</strong> schickt jedes Token zu wenigen davon. Bei Kolibri gibt es 50 Schichten mit je 384 Experten; jedes Token landet bei 6 davon plus einem gemeinsamen Experten.</p>
+<p>Das ist wie eine Klinik voller Fachärzte, in der ein Empfangschef jeden Patienten gleich zur richtigen Fachrichtung schickt. Vorteil: Rechenaufwand wie bei einem viel kleineren Modell. Nachteil: Alle Fachärzte müssen anwesend sein. Der Speicherbedarf richtet sich also nach den 78 Milliarden Parametern, nicht nach den 3,5 Milliarden, die gerade arbeiten. Aleph Alpha schreibt das selbst in der Modellkarte: „Das vollständige Modell muss im Speicher gehalten werden, obwohl nur ein Teil davon aktiv ist.&quot;</p>
+<p>Ein weiterer Baustein ist der <strong>Tokenizer</strong>, die Übersetzungsregel von Text zu Token. Deutsche Wörter sind oft lang und zusammengesetzt. Kolibri zerlegt „Genehmigungsverfahren&quot; oder „Bundessozialgerichtes&quot; sauberer als Modelle, die überwiegend mit englischem Text trainiert wurden, und braucht dadurch weniger Token für dieselbe Bedeutung — das spart Rechenzeit bei deutschen Texten.</p>
+<h2>Warum das zählt</h2>
+<p>Zwei Gründe. Erstens: Deutsche Texte sind für viele große Modelle ein Nebenschauplatz. Kolibri ist darauf gebaut — der Modelldaten-Mix liegt zu etwa 21 Prozent auf Deutsch, und zwar überwiegend aus echten deutschen Quellen, nicht aus Übersetzungen. Aleph Alpha argumentiert in eigenen Blogposts, dass maschinell übersetzter Text den kulturellen Bezug verliert.</p>
+<p>Zweitens: <strong>Souveränität</strong>, das Lieblingswort der Ankündigung. Gemeint ist: Ein Amt, ein Gericht oder ein Industriebetrieb kann das Modell auf eigener Hardware betreiben, die Dokumente verlassen das Haus nicht, und niemand kann den Modellzugang von außen abschalten oder ändern. Weil die Gewichte offen sind, ist man nicht auf einen Anbieter angewiesen.</p>
+<h2>Was Kolibri laut eigenen Tests kann</h2>
+<p>Aleph Alpha vergleicht Kolibri in der Ankündigung mit 13 anderen Modellen, alle unter gleichen Testbedingungen. Die auffälligen Werte (in Prozent):</p>
+<ul>
+  <li><strong>AIME 2025</strong>, ein Mathetest: 96,9 auf Englisch, <strong>87,5 auf Deutsch</strong> (bester Deutsch-Wert unter den ähnlich großen Modellen)</li>
+  <li><strong>AIME 2026</strong> auf Deutsch: 90,0</li>
+  <li><strong>GPQA Diamond</strong>, ein Test mit schweren Fachfragen: 84,3 englisch, 81,3 deutsch</li>
+  <li><strong>Gesamtwert</strong> über alle Testreihen: 75,5 englisch, 70,8 deutsch</li>
+</ul>
+<p>Ein Wert, der ohne Erklärung nichts sagt: In einem Halluzinations-Test ließ Kolibri bei Fragen, deren Antwort nicht im mitgelieferten Text stand, in <strong>44 Prozent</strong> der Fälle die Antwort weg statt zu raten. Das Vergleichsmodell Qwen3.5 35B-A3B tat das nur in 11,1 Prozent der Fälle. <strong>Halluzinieren</strong> heißt: Das Modell erfindet eine plausibel klingende Antwort, obwohl es sie nicht weiß. Für Behörden und Firmen, die Antworten aus ihren eigenen Akten erwarten, ist „das steht hier nicht&quot; nützlicher als eine falsche Antwort.</p>
+<p>Der Stromverbrauch für das Training wird mit rund 950 Megawattstunden angegeben (Vor- und Haupttraining sowie die lange Kontextphase, inklusive Rechenzentrums-Overhead). Rechnet man mit einem Durchschnittshaushalt von rund 2.500 Kilowattstunden im Jahr, entspricht das etwa dem Jahresverbrauch von 380 Haushalten. Die Feinabstimmung mit menschlichem Feedback und das Lernen per Belohnungssignal sind in dieser Zahl nicht enthalten.</p>
+<h2>Wo es schwach ist</h2>
+<p>Aleph Alpha veröffentlicht auch die unangenehmen Werte. Die wichtigsten:</p>
+<ul>
+  <li><strong>Wenig Wissen aus dem Gedächtnis.</strong> Im Test AA-Omniscience antwortete Kolibri nur bei 14,8 Prozent der Fragen richtig — der letzte Platz im Vergleichsfeld. Mit Dokumenten im Kontext ist es gut, als wandelndes Lexikon nicht.</li>
+  <li><strong>Mehrstufige Werkzeug-Aufrufe.</strong> Wenn ein Agent in mehreren Runden Funktionen aufrufen und Zwischenergebnisse verarbeiten muss, bleibt Kolibri zurück: 47,5 im BFCL-v4-Test, der Bestwert im Vergleichsfeld liegt bei 62,7.</li>
+  <li><strong>Coding-Agenten.</strong> Terminal-Bench 2.1: 27,7; SWE-bench Verified: 66,4. Beides deutlich unter Modellen mit ähnlicher aktiver Größe.</li>
+  <li><strong>Nur zwei Sprachen.</strong> Deutsch und Englisch, das ist Absicht — „Tiefe statt Breite&quot;, schreibt Aleph Alpha.</li>
+</ul>
+<h2>Was heißt das praktisch</h2>
+<p>Für wen lohnt sich Kolibri? Vor allem für Organisationen mit eigenen, vertraulichen deutschen Dokumenten: Verwaltung, Kanzleien, Industrie, Forschung. Dokumente in den Kontext geben und Fragen dazu beantworten — genau dafür ist es gebaut.</p>
+<p>Was man wissen muss, bevor man es ausprobiert:</p>
+<ul>
+  <li><strong>Hardware.</strong> Rund 78 GB Speicher im Modell selbst. Aleph Alpha nennt als Minimum zwei A100- oder H100-Karten mit je 80 GB, alternativ eine H200, B200 oder B300. Ein Mac oder eine normale Workstation reicht nicht.</li>
+  <li><strong>Betrieb.</strong> Das Modell läuft aktuell über ein Plugin für vLLM, eine verbreitete Server-Software für Sprachmodelle. Danach verhält es sich wie eine OpenAI-Schnittstelle, also ansprechbar mit üblichen Programmen.</li>
+  <li><strong>Kosten steuern.</strong> Die Denk-Stufen sind der Hebel: Bei einer kurzen Frage kann man das Nachdenken abschalten, bei einer schweren Aufgabe auf „hoch&quot; stellen. Das ändert Rechenzeit, Preis und Antwortqualität.</li>
+  <li><strong>Kein Anbieter hostet es.</strong> Am Veröffentlichungstag bot es kein Cloud-Dienst fertig an. Wer es nutzen will, betreibt es selbst.</li>
+</ul>
+<p>Und der Vorbehalt, der bei jedem Modellbericht gilt: Die Zahlen sind Herstellerangaben aus einer eigenen Testreihe. Ausgewählte Benchmarks (also standardisierte Testaufgaben) sagen etwas über bestimmte Fähigkeiten, aber nur begrenzt etwas über den Alltagsnutzen. Unabhängige Nachprüfungen stehen noch aus.</p>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://aleph-alpha.com/en/blog/kolibri-has-landed-a-sovereign-open-weight-model/">Aleph Alpha: Kolibri Has Landed (Ankündigung)</a></li>
+  <li><a href="https://huggingface.co/Aleph-Alpha/Kolibri-1">Modelldaten und Benchmark-Tabellen auf Hugging Face</a></li>
+  <li><a href="https://aleph-alpha.com/downloads/tech-report.pdf">Technischer Bericht (PDF, 189 Seiten)</a></li>
+  <li><a href="https://aleph-alpha.com/en/blog/bounding-hallucinations-merlin-arthur-protocols-for-mutual-information-bounds-in-language-models/">Aleph Alpha: Merlin-Arthur-Protokoll gegen Halluzinationen</a></li>
+  <li><a href="https://aleph-alpha.com/en/blog/sauerkraut-not-burgers-why-german-llms-need-german-data/">Aleph Alpha: Warum deutsche Modelle deutsche Daten brauchen</a></li>
+  <li><a href="https://tej.as/blog/aleph-alpha-kolibri">Einordnung und Nachrechnung der Tokenizer von Tejas Kumar</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

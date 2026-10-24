@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TheoPhysEval: Agenten lösen 49 von 50 Physik-Aufgaben aus der Forschung – Hermies Blog</title>
+  <meta name="description" content="Ein Team aus über 30 Forschenden hat 50 unveröffentlichte Aufgaben aus der laufenden theoretischen Physik gesammelt, jede mit prüfbarer Zahlenantwort. GPT-6-Astra löst 49 davon, für unter 3 Dollar je Aufgabe; ohne Internetzugang bricht die Trefferquote kaum ein. Geschmack für die richtige Frage haben die Agenten trotzdem nicht.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>TheoPhysEval: Agenten lösen 49 von 50 Physik-Aufgaben aus der Forschung</h1>
+    <p class="meta"><time datetime="2026-10-09T15:47+02:00">09.10.2026, 15:47</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/agenten.html">#agenten</a> <a class="tag" href="tag/benchmark.html">#benchmark</a> <a class="tag" href="tag/forschung.html">#forschung</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/ki.html">#ki</a></span> · <a class="source" href="https://arxiv.org/abs/2610.16733">arXiv (TheoPhysEval, Suvrat Raju et al.)</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:01 Minuten</strong> (KI-Stimme) – <a href="audio/theophyseval-agenten-loesen-49-von-50-physik-aufgaben-aus-der-forschung.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,2 MB)</span></p>
+    <audio controls preload="none" src="audio/theophyseval-agenten-loesen-49-von-50-physik-aufgaben-aus-der-forschung.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Ein Team um den Physiker Suvrat Raju vom ICTS Bangalore hat 50 unveröffentlichte Forschungsaufgaben aus der theoretischen Physik gesammelt, jede mit einer eindeutig prüfbaren Zahlenantwort.</li>
+  <li>Ohne KI braucht ein Weltklasse-Fachmann für eine dieser Aufgaben „etwa einen Tag oder weniger&quot; — Fachleute aus Nachbargebieten deutlich länger.</li>
+  <li>Bestes Ergebnis: <strong>GPT-6-Astra löst 49 von 50 Aufgaben (98 Prozent)</strong>, wenn es im Programmiergerüst Codex mit Internet suchen darf. Der ganze Test kostete 116,28 Dollar, also unter 3 Dollar je Aufgabe.</li>
+  <li>Claude Opus 5.5 folgt mit 46 von 50, Gemini 3.8 Flash mit 34, DeepSeek-V4.1-Flash mit 27 und GLM 5.3 mit 21 von 50 Aufgaben.</li>
+  <li>Ohne Internetzugang bricht die Trefferquote kaum ein: Astra und Opus kommen dann beide auf 46 von 50. Die Autoren lesen das als Hinweis, dass die Modelle große Teile der Physik-Literatur auswendig gelernt haben.</li>
+  <li>Eine Aufgabe löste kein Modell: aus einer vorgegebenen Kurve die zugehörige Gleichung zurückrechnen. Und die Autoren dämpfen selbst: Rechnen ist nur der letzte Schritt der Forschung — für Durchbrüche fehlt den Agenten bisher der Blick für die richtige Frage.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Am 9. Oktober 2026 ist bei arXiv die Arbeit <strong>TheoPhysEval</strong> erschienen, ein <button type="button" class="lex" popovertarget="lex-preprint" data-tip="Eine wissenschaftliche Arbeit, die öffentlich abrufbar ist, aber noch keine Begutachtung durch unabhängige Fachleute durchlaufen hat. Die Ergebnisse darin sind vorläufig.">Preprint</button><span class="lex-pop" popover id="lex-preprint"><strong>Preprint</strong> Eine wissenschaftliche Arbeit, die öffentlich abrufbar ist, aber noch keine Begutachtung durch unabhängige Fachleute durchlaufen hat. Die Ergebnisse darin sind vorläufig. <a href="lexikon.html#preprint">Im Lexikon</a></span> aus der theoretischen Physik. Dahinter steht ein großes Team: über 30 Forschende von Instituten in Indien, den USA, Japan, Belgien und Australien, unter ihnen Praneeth Netrapalli von Google DeepMind und Andreas Karch von der University of Texas.</p>
+<p>Die Grundidee ist eine Lücke in der Prüfung von KI-Modellen. Es gibt viele Tests für Schul- und Studienphysik, aber nur wenige für Aufgaben, wie sie in der laufenden Forschung wirklich anfallen. Die Autoren haben deshalb 50 Aufgaben eingesammelt, die drei Bedingungen erfüllen mussten: Sie sollten Bezug zu aktueller Forschung haben, eine prüfbare und trotzdem kaum erratbare Lösung besitzen und nirgends öffentlich nachlesbar sein. Ein häufiger Kniff: Ein Experte nahm eine Rechnung aus einer eigenen, kürzlich erschienenen Arbeit und veränderte ein paar Werte so, dass sich das neue Ergebnis nicht aus dem alten erschließen lässt.</p>
+<p>Die 50 Aufgaben verteilen sich auf elf Teilgebiete, von klassischer Physik und Biophysik über Gittertheorien und Quantenfeldtheorie bis zu Gravitation und Kosmologie. Die Autoren betonen ausdrücklich, dass keine dieser Aufgaben ein großer offener Forschungsstreit ist. Sie nennen sie „turn-the-crank&quot;-Probleme: Bekannte Verfahren werden auf eine leicht veränderte Frage angewandt. Genau solche Aufgaben bekommen üblicherweise Doktoranden als ersten Schritt in die Forschung.</p>
+<p>Wie viel das trotzdem verlangt, zeigt ein Beispiel aus dem Artikel: Für eine Aufgabe zur Lebensdauer eines schwarzen Lochs muss man eine ältere Arbeit finden, deren Formeln von fünf auf vier Dimensionen umschreiben und daraus ein eigenes Rechenprogramm bauen. Ein Mitautor der älteren Arbeit — also jemand, der die Rechnung im Kopf hatte — brauchte dafür rund einen Tag.</p>
+<p>Getestet wurden fünf handelsübliche Agenten, jeweils in dem Programmiergerüst, zu dem sie gehören: GPT-6-Astra in Codex, Claude Opus 5.5 in der Claude-Code-Kommandozeile, Gemini 3.8 Flash in Antigravity sowie die offenen Modelle DeepSeek-V4.1-Flash und GLM 5.3. Jeder Agent lief in zwei Durchgängen: mit Internet und abgeschottet in einem Container ohne Netzzugang. Menschliche Hinweise gab es keine.</p>
+<h2>Warum es zählt</h2>
+<p>Der Vergleich mit früheren Messungen ist der eigentliche Nachrichtenwert. Im Februar 2025 fanden die Autoren des Tests TPBench, dass selbst die damals besten Modelle Forschungsaufgaben praktisch nicht lösten — die Trefferquote der Spitzenmodelle lag bei rund 15 Prozent. Die Aufgaben dort sind andere, ein direkter Vergleich ist also nicht zulässig. Der Richtungswechsel ist trotzdem auffällig: Aus „Forschungsaufgaben bleiben ungelöst&quot; wurde binnen eineinhalb Jahren „98 Prozent bei einer Sammlung, die die Autoren selbst für schwerer halten als vergleichbare Tests&quot;.</p>
+<p>Bemerkenswert ist zweitens, wie stark der Befund von der Umgebung abhängt. Als <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span> zählt hier nicht nur das Modell, sondern das Modell plus Gerüst: Werkzeuge, Dateizugriff, Skriptausführung. Dasselbe Modell in einer anderen Hülle kann deutlich schlechter abschneiden — die Autoren erwähnen selbst, dass sie DeepSeek in Codex und GLM in der Claude-Code-Hülle laufen ließen und andere Kombinationen bessere Ergebnisse liefern könnten.</p>
+<p>Drittens trifft das Ergebnis die Ausbildung. Die Autoren schreiben, einige dieser Aufgaben hätten bis vor Kurzem gut als erste Forschungsprojekte für Nachwuchskräfte getaugt — also als Gelegenheit, ein eigenes Ergebnis zu erzielen. Damit sei es vorbei, sofern das Ziel nicht ausdrücklich sei, den Stoff einfach durchzuarbeiten. Und sie sehen ein strukturelles Problem: Theoretische Physik war historisch billiger als Experimente, was Chancen breiter verteilt hat. Wenn mehr Rechenleistung mehr Ergebnisse bringt, entscheidet das Budget mit.</p>
+<h2>Was zeigen die Zahlen</h2>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>50 Physik-Aufgaben: Anteil gelöster Aufgaben je Agent</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">50 Physik-Aufgaben: Anteil</tspan><tspan x="68" y="48">gelöster Aufgaben je Agent</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Prozent der 50 Aufgaben</text>
+  <rect x="394.5" y="62.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="410.5" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">mit Internet</text>
+  <rect x="518.5" y="62.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="534.5" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">ohne Internet</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="283.8" x2="650" y2="283.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="287.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">25</text>
+  <line x1="68" y1="222.5" x2="650" y2="222.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="226.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="68" y1="161.2" x2="650" y2="161.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="165.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">75</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="82.5" y="104.9" width="42.2" height="240.1" rx="2" fill="#0075de" />
+  <text x="103.6" y="110.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">98</text>
+  <rect x="127.7" y="119.6" width="42.2" height="225.4" rx="2" fill="#e05638" />
+  <text x="148.8" y="114.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">92</text>
+  <text x="126.2" y="363.0" transform="rotate(-30 126.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GPT-6-Astra</text>
+  <rect x="199.0" y="119.6" width="42.2" height="225.4" rx="2" fill="#0075de" />
+  <text x="220.0" y="114.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">92</text>
+  <rect x="244.1" y="119.6" width="42.2" height="225.4" rx="2" fill="#e05638" />
+  <text x="265.2" y="114.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">92</text>
+  <text x="242.6" y="363.0" transform="rotate(-30 242.6 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Claude Opus 5.5</text>
+  <rect x="315.4" y="178.4" width="42.2" height="166.6" rx="2" fill="#0075de" />
+  <text x="336.4" y="173.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">68</text>
+  <rect x="360.5" y="193.1" width="42.2" height="151.9" rx="2" fill="#e05638" />
+  <text x="381.6" y="188.1" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">62</text>
+  <text x="359.0" y="363.0" transform="rotate(-30 359.0 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Gemini 3.8 Flash</text>
+  <rect x="431.8" y="242.1" width="42.2" height="102.9" rx="2" fill="#0075de" />
+  <text x="452.8" y="237.1" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">42</text>
+  <rect x="476.9" y="217.6" width="42.2" height="127.4" rx="2" fill="#e05638" />
+  <text x="498.0" y="212.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">52</text>
+  <text x="475.4" y="363.0" transform="rotate(-30 475.4 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GLM 5.3</text>
+  <rect x="548.2" y="212.7" width="42.2" height="132.3" rx="2" fill="#0075de" />
+  <text x="569.2" y="207.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">54</text>
+  <rect x="593.3" y="222.5" width="42.2" height="122.5" rx="2" fill="#e05638" />
+  <text x="614.4" y="217.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">50</text>
+  <text x="591.8" y="363.0" transform="rotate(-30 591.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">DeepSeek-V4.1-Flash</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://arxiv.org/abs/2610.16733" target="_blank" rel="noopener">TheoPhysEval, arXiv:2610.16733 (9. Oktober 2026), Abbildungen 3 und 4</a></span>
+  <span class="chart-note">Je Modell ein Durchgang, deshalb mit Schwankungsbreite behaftet. GLM löst ohne Internet mehr Aufgaben als mit; die Autoren erklären das mit einem Vorzeichenfehler, der sich in einem Block verknüpfter Aufgaben fortpflanzte.</span>
+</figcaption>
+</figure>
+<p>Mit Internetzugang löst Astra 49 der 50 Aufgaben, Opus 46, Gemini 34, DeepSeek 27 und GLM 21. Ohne Netz lösen Astra und Opus je 46 Aufgaben, Gemini 31, GLM 26 und DeepSeek 25. GLM ist ohne Internet also besser als mit — die Autoren erklären das mit einem Satz verknüpfter Aufgaben zur Elektronenstruktur, bei dem der Agent mit Netzzugang früh einen Vorzeichenfehler machte und ihn über mehrere Teilaufgaben mitschleppte.</p>
+<p>Der Vergleich der beiden Durchgänge ist für die Autoren die wichtigste Einzelbeobachtung. Viele Aufgaben hängen an Formeln aus Veröffentlichungen, die den Modellen in der abgeschotteten Umgebung nicht vorlagen. Trotzdem sinken die Werte kaum. Die Autoren schließen daraus, dass die führenden Modelle weite Teile der physikalischen Fachliteratur auswendig gelernt haben und die Formeln ohne Nachschlagen wiedergeben können.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Was der Durchgang durch den Test kostete</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Was der Durchgang durch den Test kostete</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in US-Dollar für alle 50 Aufgaben</text>
+  <line x1="180.0" y1="75" x2="180.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="180.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="323.3" y1="75" x2="323.3" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="323.3" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="466.7" y1="75" x2="466.7" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="466.7" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">200</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">300</text>
+  <line x1="180" y1="75" x2="180" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="180" y="86.0" width="344.6" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="103.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Claude Opus 5.5</text>
+  <text x="532.6" y="103.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">240,43</text>
+  <rect x="180" y="135.0" width="258.0" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="152.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GLM 5.3 (Abo-Tarif)</text>
+  <text x="446.0" y="152.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">180</text>
+  <rect x="180" y="184.0" width="166.7" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GPT-6-Astra</text>
+  <text x="354.7" y="201.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">116,28</text>
+  <rect x="180" y="233.0" width="136.2" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="250.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Gemini 3.8 Flash</text>
+  <text x="324.2" y="250.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">95,01</text>
+  <rect x="180" y="282.0" width="53.6" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="299.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">DeepSeek-V4.1-Flash</text>
+  <text x="241.6" y="299.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">37,42</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://arxiv.org/abs/2610.16733" target="_blank" rel="noopener">TheoPhysEval, arXiv:2610.16733, Tabelle 3 (9. Oktober 2026)</a></span>
+  <span class="chart-note">Werte des jeweiligen Durchgangs mit Internet, errechnet aus dem Token-Verbrauch mal Listenpreis - abgerechnet wurde nicht zwingend so viel. GLM lief über einen Abo-Tarif von 180 Dollar für beide Durchgänge; über die Programmierschnittstelle wären es 311,71 Dollar gewesen.</span>
+</figcaption>
+</figure>
+<p>Der Sieger ist auch der billigste Agent. Astra verbrauchte nach Angaben der Arbeit rund 37 Millionen <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span>, deutlich weniger als Opus mit 211 Millionen, Gemini mit 607 Millionen und DeepSeek mit über einer Milliarde. Aus den Token-Zahlen mal den Listenpreisen ergeben sich 116,28 Dollar für den kompletten Durchgang mit Internet, im Mittel unter 3 Dollar je Aufgabe. Opus kommt auf 240,43 Dollar, Gemini auf 95,01, DeepSeek auf 37,42. GLM ist gesondert zu lesen: Über die Programmierschnittstelle hätte der Durchgang 311,71 Dollar gekostet, gerechnet wurde über einen Abo-Tarif für 180 Dollar. Das sind keine abgerechneten Beträge, sondern aus den Token-Zahlen errechnete.</p>
+<p>Zum Aufgabenzuschnitt: Die 50 Aufgaben verteilen sich auf elf Teilgebiete, den größten Block stellt die Quantenfeldtheorie mit sieben Aufgaben.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Woher die 50 Aufgaben stammen</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Woher die 50 Aufgaben stammen</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Aufgaben</text>
+  <line x1="238.0" y1="75" x2="238.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="238.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="331.0" y1="75" x2="331.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="331.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2</text>
+  <line x1="424.0" y1="75" x2="424.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="424.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">4</text>
+  <line x1="517.0" y1="75" x2="517.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="517.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">6</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">8</text>
+  <line x1="238" y1="75" x2="238" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="238" y="80.0" width="325.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="90.1" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Quantenfeldtheorie</text>
+  <text x="571.5" y="90.1" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">7</text>
+  <rect x="238" y="102.3" width="279.0" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="112.4" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Gravitation und Kosmologie</text>
+  <text x="525.0" y="112.4" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">6</text>
+  <rect x="238" y="124.6" width="232.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="134.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Klassische Physik</text>
+  <text x="478.5" y="134.7" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">5</text>
+  <rect x="238" y="146.8" width="232.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="157.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Stochastik und Biophysik</text>
+  <text x="478.5" y="157.0" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">5</text>
+  <rect x="238" y="169.1" width="232.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="179.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Quantenphasen der Materie</text>
+  <text x="478.5" y="179.2" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">5</text>
+  <rect x="238" y="191.4" width="232.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Streuamplituden</text>
+  <text x="478.5" y="201.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">5</text>
+  <rect x="238" y="213.6" width="232.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="223.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Holografie und Verschränkung</text>
+  <text x="478.5" y="223.8" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">5</text>
+  <rect x="238" y="235.9" width="186.0" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="246.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Elektronenstruktur</text>
+  <text x="432.0" y="246.0" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">4</text>
+  <rect x="238" y="258.2" width="139.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="268.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Nichtgleichgewichts-Statistik</text>
+  <text x="385.5" y="268.3" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">3</text>
+  <rect x="238" y="280.5" width="139.5" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="290.6" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Gittertheorien</text>
+  <text x="385.5" y="290.6" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">3</text>
+  <rect x="238" y="302.7" width="93.0" height="12.3" rx="3" fill="#0075de" />
+  <text x="226" y="312.9" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Teilchenphysik</text>
+  <text x="339.0" y="312.9" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">2</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://arxiv.org/abs/2610.16733" target="_blank" rel="noopener">TheoPhysEval, arXiv:2610.16733, Tabelle 1 (9. Oktober 2026)</a></span>
+  <span class="chart-note">Die Verteilung folgt auch dem, was sich als prüfbare Rechenaufgabe stellen lässt, und der Auswahl der angefragten Fachleute. Kein einzelner Mensch hat in allen elf Gebieten Expertise.</span>
+</figcaption>
+</figure>
+<p>Bemerkenswert ist noch eine Randnotiz zur Prüfung. Mehrere Antworten von Astra sah das Team zunächst als falsch an. Beim Nachrechnen mit den beteiligten Experten stellte sich heraus, dass die Musterlösungen kleine Fehler enthielten. Nach der Korrektur war Astras Antwort jedes Mal richtig. Die Autoren räumen außerdem ein, dass die Prüfung nur auf den Zahlenantworten beruht und dass sie jeden Agenten aus Kostengründen genau einmal laufen ließen — bei zufälligen Schwankungen in den Antworten ist die Trefferquote also mit Vorsicht zu lesen.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für Physikerinnen und Physiker heißt das: Ein Agent mit Werkzeugen ist kein Ersatz für Fachkenntnis, aber ein sehr schneller Rechenknecht. Die Autoren empfehlen ausdrücklich den Durchgang mit Internet, weil niemand im Alltag Werkzeuge absichtlich abschaltet. Wer selbst nachprüfen will, findet die Aufgaben und die Einstellungen als Datensatz auf Hugging Face und kann sie unter gleichen Bedingungen erneut laufen lassen. Die Autoren bemerken außerdem, dass sich selbst schlechte Agenten in der Praxis stark verbessern, wenn Menschen im Gespräch nachfassen — genau so arbeiten Forschende ohnehin.</p>
+<p>Die Grenze zeigen die Misserfolge. Die einzige Aufgabe, die kein Modell löste, war eine Umkehrung: Aus dem Verlauf einer Kurve sollte die Gleichung gefunden werden, die sie erzeugt. Die Autoren nennen das absichtlich eine unfaire Aufgabe, halten sie aber für realistisch, weil Forschende oft aus ungenauen Messwerten auf die dahinterliegende Physik schließen müssen. Schlechtere Agenten scheiterten auf andere Weise: Bei der Aufgabe zum schwarzen Loch übernahmen Gemini und GLM Formeln aus der Vorlage unverändert, obwohl die dort für fünf Dimensionen gelten und die Aufgabe vier verlangt. Solche Fehler fielen einem Fachmenschen sofort auf.</p>
+<p>Der interessanteste Abschnitt ist der über das, was trotzdem fehlt. Eine konkrete Rechnung ist in der Physik der letzte Schritt. Vorher muss jemand ein Modell bauen und die richtige Frage stellen. Wenn sich eine Frage als zu schwer erweist, wechselt ein guter Forscher zu einer verwandten, einfacheren Frage, die ebenso interessant ist. Genau diesen Richtungswechseln trauen die Autoren die Agenten nicht zu. Und sie beobachten, dass Agenten beim Erfinden neuer Aufgaben an Details hängen bleiben, die ein Mensch langweilig findet. Der Unterschied liegt also nicht beim Rechnen, sondern beim Urteil darüber, was sich zu rechnen lohnt. Die Autoren nennen das „Geschmack&quot; und betonen, dass sie das nicht messen können — es ist ihre Erfahrung aus den Gesprächen, keine Messung.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>arXiv: <a href="https://arxiv.org/abs/2610.16733">TheoPhysEval: Assessing AI agents at autonomous theoretical physics problem solving</a>, 9. Oktober 2026 — Primärquelle für Aufgaben, Auswertung, Kosten und Diskussion</li>
+  <li>Aufgaben und Einstellungen: <a href="https://huggingface.co/datasets/RameshChandra1/TheoPhysEval">Datensatz RameshChandra1/TheoPhysEval</a></li>
+  <li>Vergleichsmessung von 2025: <a href="https://arxiv.org/abs/2502.15815">TPBench (arXiv:2502.15815)</a> — andere Aufgabensammlung, deshalb kein direkter Vergleich</li>
+  <li>Einordnung: <a href="https://the-decoder.com/gpt-6-astra-solves-49-of-50-physics-research-problems-at-2-40-apiece/">The Decoder, 15. Oktober 2026</a> — Sekundärquelle</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
