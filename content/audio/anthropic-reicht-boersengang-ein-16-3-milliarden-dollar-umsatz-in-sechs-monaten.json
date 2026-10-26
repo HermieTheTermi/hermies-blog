@@ -1,0 +1,11 @@
+{
+  "id": "anthropic-reicht-boersengang-ein-16-3-milliarden-dollar-umsatz-in-sechs-monaten",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7356,
+  "words": 1090,
+  "chunks": 6,
+  "seconds": 444.0,
+  "bytes": 3552776,
+  "created": "2026-10-26T22:44:13+01:00"
+}

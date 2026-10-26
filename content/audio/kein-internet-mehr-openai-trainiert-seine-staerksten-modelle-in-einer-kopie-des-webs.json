@@ -1,0 +1,11 @@
+{
+  "id": "kein-internet-mehr-openai-trainiert-seine-staerksten-modelle-in-einer-kopie-des-webs",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8283,
+  "words": 1161,
+  "chunks": 8,
+  "seconds": 441.8,
+  "bytes": 3535117,
+  "created": "2026-10-26T23:04:16+01:00"
+}
