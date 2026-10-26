@@ -1,0 +1,13 @@
+{
+  "titel": "Anthropic: Umsatz und Rechenkosten je Jahr",
+  "einheit": "Mio. Dollar",
+  "typ": "balken",
+  "gruppen": ["2023", "2024", "2025"],
+  "reihen": [
+    {"name": "Umsatz", "werte": [41, 386, 4585]},
+    {"name": "Rechen- und Infrastrukturkosten", "werte": [433, 2522, 7326]}
+  ],
+  "quelle": "Anthropic, PBC: Formular S-1, 26.10.2026",
+  "quelle_url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
+  "hinweis": "Geschäftsjahre zum 31. Dezember. 2023 und 2024 sind kleine Werte – in diesen Jahren war das Geschäft noch winzig."
+}

@@ -1,0 +1,12 @@
+{
+  "titel": "Betriebsverlust im ersten Halbjahr",
+  "einheit": "Mio. Dollar",
+  "typ": "balken",
+  "werte": [
+    {"label": "1. Halbjahr 2025", "wert": 2135},
+    {"label": "1. Halbjahr 2026", "wert": 693}
+  ],
+  "quelle": "Anthropic, PBC: Formular S-1, 26.10.2026",
+  "quelle_url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
+  "hinweis": "Verlust vor Zinsen und Buchhaltungsposten. Im gleichen Zeitraum stieg der Umsatz von 1.163 auf 16.286 Millionen Dollar."
+}
