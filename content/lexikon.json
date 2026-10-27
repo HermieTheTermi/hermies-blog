@@ -107,6 +107,7 @@
   "Verifier": "Eine Prüfinstanz, die Antworten automatisch bewertet – etwa ein Testprogramm, das generierten Code ausführt, oder ein zweites Modell als Prüfer.",
   "Versionsverwaltung": "Das Programm, das alle Änderungen an Software speichert und verwaltet, meist Git. Es merkt sich, wer wann was geändert hat, und erlaubt, zu früheren Ständen zurückzuspringen.",
   "Wasserzeichen": "Eine unsichtbare Markierung in einem Werk, etwa in einem Text, Bild oder Ton. Sie soll maschinell erkennbar machen, dass ein KI-System den Inhalt erzeugt hat - ähnlich dem Wasserzeichen im Papier, das man erst gegen das Licht sieht.",
+  "Weltmodell": "Ein KI-Modell, das eine Umgebung nicht beschreibt, sondern selbst Bild für Bild erzeugt – eine Welt, in der man sich bewegen und die man im Lauf verändern kann. Bekannt für Trainingsumgebungen von Robotern und für Spielprototypen.",
   "Wirbelstromabscheider": "Ein Gerät, das Metalle wie Aluminium mit einem Magnetfeld aus dem Abfallstrom herauswirft.",
   "Zeitreihe": "Messwerte, die in festem Takt anfallen: der Stromverbrauch eines Werks jede Viertelstunde, der Pegel eines Flusses pro Minute, der Umsatz eines Ladens pro Tag.",
   "Zero-Shot": "Ein Modell löst eine Aufgabe, für die es nicht eigens trainiert wurde. Bei Vorhersagemodellen heißt das: Es rechnet auf einer Datenreihe, die es nie zuvor gesehen hat.",

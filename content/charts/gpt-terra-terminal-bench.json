@@ -1,0 +1,12 @@
+{
+  "titel": "Terminal-Bench 4.0: gelöste Aufgaben bei maximalem Rechenaufwand",
+  "einheit": "% der Aufgaben",
+  "typ": "balken",
+  "werte": [
+    {"label": "GPT-5.6 Terra", "wert": 21.5},
+    {"label": "GPT-6.1 Terra", "wert": 50.3}
+  ],
+  "quelle": "OpenAI, Introducing GPT-6.1 Terra (26.10.2026)",
+  "quelle_url": "https://openai.com/index/introducing-gpt-6-1-terra",
+  "hinweis": "Herstellerangaben. Der Benchmark prüft Aufgaben auf der Kommandozeile, etwa das Reparieren einer Webseite, deren Layout beim Laden springt."
+}

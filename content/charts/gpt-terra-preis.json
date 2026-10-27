@@ -1,0 +1,13 @@
+{
+  "titel": "Was eine Million Token kostet: Terra gegen Vorgänger",
+  "einheit": "Dollar je Million Token",
+  "typ": "balken",
+  "gruppen": ["Eingabe", "Ausgabe"],
+  "reihen": [
+    {"name": "GPT-6.1 Terra", "werte": [1, 5]},
+    {"name": "GPT-5.6 Terra", "werte": [2, 12]}
+  ],
+  "quelle": "Artificial Analysis, GPT-6.1 Terra pushes the cost efficiency frontier (26.10.2026)",
+  "quelle_url": "https://artificialanalysis.ai/articles/gpt-6-1-terra-pushes-the-cost-efficiency-frontier",
+  "hinweis": "Standardpreise der API. Gecachte Eingabe kostet bei Terra 0,05 statt 0,20 Dollar je Million Token."
+}
