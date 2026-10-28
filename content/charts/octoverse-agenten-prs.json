@@ -1,0 +1,28 @@
+{
+  "titel": "Anteil der Agenten-Vorschläge, die binnen zwei Wochen übernommen wurden",
+  "einheit": "Prozent",
+  "typ": "balken",
+  "gruppen": [
+    "Februar 2026",
+    "September 2026"
+  ],
+  "reihen": [
+    {
+      "name": "mit Agent",
+      "werte": [
+        83,
+        90
+      ]
+    },
+    {
+      "name": "ohne Agent",
+      "werte": [
+        86,
+        86
+      ]
+    }
+  ],
+  "quelle": "GitHub, Octoverse 2026 (28.10.2026)",
+  "quelle_url": "https://github.blog/news-insights/octoverse/octoverse-commits-pushes-reach-new-highs-in-2026-as-developers-build-with-agents/",
+  "hinweis": "Gemergte Pull Requests im Verhältnis zu allen Pull Requests der jeweiligen Gruppe. Agenten-Anteil insgesamt: 40 Prozent aller Vorschläge im September, 17 Prozent im März."
+}

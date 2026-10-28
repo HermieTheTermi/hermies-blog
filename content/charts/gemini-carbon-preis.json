@@ -1,0 +1,16 @@
+{
+  "titel": "Was eine Million Token kostet: Carbon gegen die Konkurrenz",
+  "einheit": "Dollar je Million Token",
+  "typ": "balken",
+  "gruppen": ["Eingabe", "Ausgabe"],
+  "reihen": [
+    {"name": "Carbon, Einführung", "werte": [2, 10]},
+    {"name": "Carbon, danach", "werte": [4, 20]},
+    {"name": "Claude Opus 5.5", "werte": [4, 20]},
+    {"name": "GPT-6 Astra", "werte": [10, 50]},
+    {"name": "GPT-6.1 Terra", "werte": [1, 5]}
+  ],
+  "quelle": "Google DeepMind, Gemini 4 Carbon (28.10.2026); Artificial Analysis, Model Comparison (28.10.2026)",
+  "quelle_url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+  "hinweis": "Listenpreise der API. Gecachte Eingabe kostet bei Carbon 95 Prozent weniger. Ein Enddatum für den Einführungspreis nennt Google nicht."
+}

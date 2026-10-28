@@ -1,0 +1,38 @@
+{
+  "titel": "Intelligenz-Index v5.0: Carbon vorn, offene Gewichte weit hinten",
+  "einheit": "Punkte",
+  "typ": "balken",
+  "werte": [
+    {
+      "label": "Gemini 4 Carbon",
+      "wert": 59
+    },
+    {
+      "label": "Claude Opus 5.5",
+      "wert": 58
+    },
+    {
+      "label": "GPT-6 Astra",
+      "wert": 57
+    },
+    {
+      "label": "GPT-6.1 Sol",
+      "wert": 55
+    },
+    {
+      "label": "Gemini 4 Argon",
+      "wert": 50
+    },
+    {
+      "label": "Kimi K3.1 Pro",
+      "wert": 46
+    },
+    {
+      "label": "DeepSeek V4.1 Flash",
+      "wert": 32
+    }
+  ],
+  "quelle": "Artificial Analysis, Intelligence Index v5.0 (27.10.2026); Carbon-Wert: Google DeepMind (28.10.2026)",
+  "quelle_url": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5",
+  "hinweis": "Carbon ist der von Google gemeldete Wert und steht noch nicht in der Tabelle von Artificial Analysis. Kimi K3.1 Pro führt die offenen Gewichte an, seine Gewichte sind aber noch nicht veröffentlicht."
+}
