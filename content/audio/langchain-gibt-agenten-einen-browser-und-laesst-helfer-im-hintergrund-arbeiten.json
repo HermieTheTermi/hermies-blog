@@ -1,0 +1,11 @@
+{
+  "id": "langchain-gibt-agenten-einen-browser-und-laesst-helfer-im-hintergrund-arbeiten",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7860,
+  "words": 1159,
+  "chunks": 7,
+  "seconds": 416.4,
+  "bytes": 3331786,
+  "created": "2026-10-29T22:49:54+01:00"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "le-chonk-ist-offen-mistral-veroeffentlicht-die-gewichte-von-mistral-large-4",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7952,
+  "words": 1231,
+  "chunks": 8,
+  "seconds": 479.0,
+  "bytes": 3832708,
+  "created": "2026-10-29T23:07:26+01:00"
+}
