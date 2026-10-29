@@ -5,7 +5,7 @@ date: 2026-10-29
 time: "13:00"
 status: published
 tags: [news, mistral, modelle, llm, open-weights, benchmark]
-summary: "Mistral hat die Gewichte von Mistral Large 4 freigegeben, intern Le Chonk genannt: eine Billion Parameter, 52 Milliarden davon pro Token aktiv, trainiert auf 3.800 Grace-Blackwell-Chips in Europa. Beim Coden liegt das Modell laut Artificial Analysis gleichauf mit dem bisherigen offenen Spitzenmodell GLM-5.3, im Gesamtindex aber nur bei 26 Punkten gegen 32 für DeepSeek V4.1 Flash und GLM-5.3 sowie 46 für Kimi K3.1 Pro, dessen Gewichte noch fehlen. Der API-Preis fällt auf 0,70 und 2,10 Dollar je Million Token. Selbst betreiben braucht laut SGLang-Doku acht B300-Chips, und die Lizenz verlangt für Cloud-Anbieter eine Extra-Genehmigung."
+summary: "Mistral hat die Gewichte von Mistral Large 4 freigegeben, intern Le Chonk genannt: eine Billion Parameter, 52 Milliarden davon pro Token aktiv, trainiert auf 3.800 Grace-Blackwell-Chips in Europa. Beim Coden meldet Mistral 48 Prozent im Coding Agent Index von Artificial Analysis, gleichauf mit GLM-5.3 und mit 47 Prozent weniger Token pro Aufgabe. Im Gesamtindex steht das Modell bei 26 Punkten, gegen 32 für DeepSeek V4.1 Flash und GLM-5.3 sowie 46 für Kimi K3.1 Pro, dessen Gewichte noch fehlen. Der API-Preis fällt auf 0,70 und 2,10 Dollar je Million Token. Selbst betreiben braucht laut SGLang-Dokumentation acht B300-Chips, und die Lizenz verlangt für Cloud-Anbieter eine Extra-Genehmigung."
 source_url: "https://mistral.ai/news/mistral-large-4-oss/"
 source_name: "Mistral AI"
 lang: de
@@ -14,7 +14,7 @@ lang: de
 ## TL;DR
 
 - Mistral hat am Donnerstag die Gewichte von **Mistral Large 4** freigegeben, intern „Le Chonk" genannt: rund **1 Billion {{Parameter}}** (1.000 Milliarden), davon etwa **52 Milliarden pro {{Token}}** aktiv. Trainiert wurde auf 3.800 Grace-Blackwell-GPUs in eigenen Rechenzentren in Europa.
-- Im **Coding Agent Index** von Artificial Analysis kommt Le Chonk auf **48 Prozent** – praktisch gleichauf mit dem bisherigen offenen Spitzenmodell GLM-5.3, laut Mistral aber mit **47 Prozent weniger Token** pro Aufgabe.
+- Im **Coding Agent Index** von Artificial Analysis meldet Mistral für Le Chonk **48 Prozent** – praktisch gleichauf mit dem bisherigen offenen Spitzenmodell GLM-5.3, aber mit **47 Prozent weniger Token** pro Aufgabe. Beides sind Angaben des Herstellers.
 - Im **Intelligence Index v5** derselben Tester steht es bei **26 Punkten**. Die offenen Modelle aus China liegen höher: DeepSeek V4.1 Flash und GLM-5.3 bei je **32**, Kimi K3.1 Pro bei **46** – dessen Gewichte sind allerdings noch nicht veröffentlicht.
 - Der API-Preis fällt deutlich: **0,70 Dollar** je Million Eingabe-Token (gecacht 0,07 Dollar) und **2,10 Dollar** je Million Ausgabe-Token. In der Vorschau waren es 1,36 und 4,18 Dollar.
 - **Die Haken:** Wer das Modell selbst betreiben will, braucht laut SGLang-Dokumentation acht B300-Grafikchips für die Standardfassung. Und die Lizenz ist MIT mit einem Zusatz: Wer das Modell als Cloud-Dienst verkauft, muss bei Mistral eine eigene Lizenz kaufen.
