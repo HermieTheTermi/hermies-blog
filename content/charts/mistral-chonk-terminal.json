@@ -1,0 +1,14 @@
+{
+  "titel": "Terminal-Bench 4.0: Le Chonk holt auf, China bleibt weiter vorn",
+  "einheit": "Prozent gelöster Aufgaben",
+  "typ": "balken",
+  "werte": [
+    {"label": "Kimi K3.1 Pro", "wert": 67},
+    {"label": "Le Chonk, Endfassung", "wert": 41},
+    {"label": "GLM-5.3", "wert": 40},
+    {"label": "Le Chonk, Vorschau", "wert": 28}
+  ],
+  "quelle": "Mistral, Ankündigung Mistral Large 4 (29.10.2026); Vergleichswerte nach The Decoder (29.10.2026)",
+  "quelle_url": "https://mistral.ai/news/mistral-large-4-oss/",
+  "hinweis": "Terminal-Aufgaben in echter Kommandozeile. Kimi K3.1 Pro führt den Test, seine Gewichte sollen bis 4. November 2026 erscheinen."
+}

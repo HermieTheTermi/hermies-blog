@@ -1,0 +1,17 @@
+{
+  "titel": "Intelligenz-Index v5: Chinas offene Modelle bleiben vorn",
+  "einheit": "Punkte",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Gemini 4 Carbon (Google)", "wert": 59},
+    {"label": "Claude Opus 5.5 (Anthropic)", "wert": 58},
+    {"label": "Kimi K3.1 Pro", "wert": 46},
+    {"label": "GLM-5.3", "wert": 32},
+    {"label": "DeepSeek V4.1 Flash", "wert": 32},
+    {"label": "MiMo-V2.6-Pro", "wert": 30},
+    {"label": "Mistral Large 4 (Le Chonk)", "wert": 26}
+  ],
+  "quelle": "Artificial Analysis, Intelligence Index v5.0, Modell-Tabelle (29.10.2026)",
+  "quelle_url": "https://artificialanalysis.ai/leaderboards/models",
+  "hinweis": "Le Chonk ist der beste Wert unter offenen Modellen aus dem Westen. Kimi K3.1 Pro führt die offenen Gewichte, seine Gewichte sind aber noch nicht veröffentlicht."
+}

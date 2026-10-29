@@ -1,0 +1,15 @@
+{
+  "titel": "Was eine Index-Aufgabe kostet: Le Chonk ist günstig, nicht billig",
+  "einheit": "Dollar je Aufgabe",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "MiMo-V2.6-Pro", "wert": 0.26},
+    {"label": "DeepSeek V4.1 Flash", "wert": 0.60},
+    {"label": "Mistral Large 4 (hoch)", "wert": 2.06},
+    {"label": "Kimi K3.1 Pro", "wert": 3.68},
+    {"label": "GLM-5.3 (max)", "wert": 5.01}
+  ],
+  "quelle": "Artificial Analysis, Intelligence Index v5.0, Kosten je Aufgabe (29.10.2026)",
+  "quelle_url": "https://artificialanalysis.ai/leaderboards/models",
+  "hinweis": "Gewichteter Durchschnitt aus Eingabe-, Cache- und Ausgabepreis über alle neun Prüfungen des Index. Kleinere Werte sind besser."
+}
