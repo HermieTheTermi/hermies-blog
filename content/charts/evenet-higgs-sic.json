@@ -1,0 +1,22 @@
+{
+  "titel": "Signalstärke bei der Suche nach exotischen Higgs-Zerfällen (SIC)",
+  "typ": "balken",
+  "einheit": "SIC",
+  "werte": [
+    {
+      "label": "EVENET, vortrainiert",
+      "wert": 4.1
+    },
+    {
+      "label": "EVENET ohne Vortraining",
+      "wert": 1.6
+    },
+    {
+      "label": "SPANet (bisheriger Stand)",
+      "wert": 1.4
+    }
+  ],
+  "quelle": "Hsu et al., Nature Machine Intelligence, 29.10.2026",
+  "quelle_url": "https://www.nature.com/articles/s42256-026-01322-9",
+  "hinweis": "SIC = Signal-Effizienz geteilt durch die Wurzel der Untergrund-Effizienz; höher ist besser."
+}
