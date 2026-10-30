@@ -57,6 +57,29 @@ CHART_INLINE_RE = re.compile(r"\{\{chart:\s*([a-zA-Z0-9_\-]+)\s*\}\}")
 CHART_PALETTE = ["#0075de", "#e05638", "#059669", "#7c3aed", "#d97706", "#db2777"]
 VALID_CHART_TYPES = ("balken", "linie", "balken-horizontal", "gestapelt", "flaeche", "punkte", "anteil")
 
+# Bausteine (Widgets): Daten kommen aus content/widgets/<id>.json, Marker stehen allein
+# in einer Zeile. Damit sind sie auch ohne JavaScript darstellbar.
+WIDGETS = os.path.join(CONTENT, "widgets")
+WIDGET_TYPES = ("zahlen", "zeitleiste", "schritte", "tabelle", "skala", "vergleich", "bild")
+WIDGET_BLOCK_RE = re.compile(
+    r"^\{\{(%s):\s*([a-zA-Z0-9_\-]+)\s*\}\}$" % "|".join(WIDGET_TYPES))
+WIDGET_INLINE_RE = re.compile(
+    r"\{\{(%s):\s*([a-zA-Z0-9_\-]+)\s*\}\}" % "|".join(WIDGET_TYPES))
+
+# Textboxen: ::: art [Titel] ... ::: — Inhalt ist normales Markdown.
+BOX_START_RE = re.compile(r"^:::\s*([A-Za-z\u00c0-\u024f]+)\s*(.*)$")
+BOX_END_RE = re.compile(r"^:::\s*$")
+BOX_DEFAULTS = {
+    "merk": "Das Wichtigste",
+    "warnung": "Der Haken",
+    "methode": "Wie geprüft",
+    "definition": "Begriff",
+    "zitat": "",
+    "aufklappen": "Mehr dazu",
+}
+BOX_TYPES = tuple(BOX_DEFAULTS.keys())
+
+
 
 def extract_representation_markers(markdown_text):
     if not markdown_text:
@@ -113,7 +136,7 @@ def validate_lexikon():
 
 
 def ensure_dirs():
-    for path in (POSTS, DRAFTS, ASSETS, CHARTS, AUDIO_DIR):
+    for path in (POSTS, DRAFTS, ASSETS, CHARTS, WIDGETS, AUDIO_DIR):
         os.makedirs(path, exist_ok=True)
 
 
@@ -835,6 +858,33 @@ def cmd_rm(args):
     return 0
 
 
+def _check_markers(label, body, lex_data, errors, markers=None):
+    """Prüft Marker (Lexikon, Diagramm, Baustein) und die Box-Syntax eines Textes."""
+    for err in validate_markup(body):
+        errors.append("%s: %s" % (label, err))
+    if markers is None:
+        markers = extract_representation_markers(body)
+    for term in markers:
+        if ":" in term:
+            prefix, _, rest = term.partition(":")
+            prefix = prefix.strip().lower()
+            rest = rest.strip()
+            if prefix == "chart":
+                _data, chart_err = load_chart(rest)
+                if chart_err:
+                    errors.append("%s: %s" % (label, chart_err))
+            elif prefix in WIDGET_TYPES:
+                widget_err = validate_widget(prefix, rest)
+                if widget_err:
+                    errors.append("%s: %s" % (label, widget_err))
+            else:
+                errors.append("%s: unbekannter Marker '%s' (erlaubt: chart, %s)"
+                              % (label, term, ", ".join(WIDGET_TYPES)))
+        elif term not in lex_data:
+            errors.append("%s: unbekannter Begriff '%s' in content/lexikon.json nicht definiert"
+                          % (label, term))
+
+
 def cmd_check(args):
     errors = []
     warnings = []
@@ -844,6 +894,10 @@ def cmd_check(args):
         for c in list_charts():
             if c.get("error"):
                 errors.append(c["error"])
+    if os.path.isdir(WIDGETS):
+        for w in list_widgets():
+            if w.get("error"):
+                errors.append(w["error"])
 
     seen_ids = {}
     seen_source = {}
@@ -908,15 +962,7 @@ def cmd_check(args):
             if not os.path.isfile(mp3_file):
                 warnings.append("%s: keine Hörfassung (content/audio/%s.mp3 fehlt)" % (article_id, article_id))
         markers = extract_representation_markers(body)
-        for term in markers:
-            if term.startswith("chart:"):
-                chart_name = term[6:].strip()
-                chart_data, chart_err = load_chart(chart_name)
-                if chart_err:
-                    errors.append("%s: %s" % (article_id, chart_err))
-            else:
-                if term not in lex_data:
-                    errors.append("%s: unbekannter Begriff '%s' in content/lexikon.json nicht definiert" % (article_id, term))
+        _check_markers(article_id, body, lex_data, errors, markers=markers)
     seen_pages = {}
     for page in list_pages():
         slug = page["slug"]
@@ -931,12 +977,7 @@ def cmd_check(args):
         else:
             seen_pages[slug] = page["path"]
         markers = extract_representation_markers(page["body"])
-        for term in markers:
-            if term.startswith("chart:"):
-                chart_name = term[6:].strip()
-                chart_data, chart_err = load_chart(chart_name)
-                if chart_err:
-                    errors.append("%s: %s" % (slug, chart_err))
+        _check_markers(slug, page["body"], lex_data, errors, markers=markers)
 
     if os.path.isdir(AUDIO_DIR):
         for fname in sorted(os.listdir(AUDIO_DIR)):
@@ -1019,6 +1060,30 @@ def cmd_charts(args):
 
     for c in charts:
         sys.stdout.write("%s: %s (%s)\n" % (c["name"], c["titel"], c["typ"]))
+    return 0
+
+
+def cmd_widgets(args):
+    items = list_widgets()
+    errors = [w["error"] for w in items if w.get("error")]
+    if errors:
+        for err in errors:
+            sys.stderr.write("FEHLER: %s\n" % err)
+        if getattr(args, "json", False):
+            emit_json({"ok": False, "errors": errors})
+        return 1
+
+    if getattr(args, "json", False):
+        emit_json({"ok": True, "widgets": items, "boxen": list(BOX_TYPES),
+                   "typen": list(WIDGET_TYPES)})
+        return 0
+
+    if not items:
+        sys.stdout.write("Keine Bausteine vorhanden (content/widgets/).\n")
+    for w in items:
+        sys.stdout.write("%s: %s (%s)\n" % (w["name"], w["titel"] or "-", w["typ"] or "-"))
+    sys.stdout.write("\nBaustein-Typen: %s\n" % ", ".join(WIDGET_TYPES))
+    sys.stdout.write("Textboxen:     %s\n" % ", ".join(BOX_TYPES))
     return 0
 
 
@@ -1929,6 +1994,300 @@ def _render_chart_markers(text, prefix=""):
     return CHART_INLINE_RE.sub(_replace, text)
 
 
+# --- Bausteine (Widgets) ----------------------------------------------------
+#
+# Sechs Datendarstellungen, die ohne JavaScript auskommen und beim Bauen zu
+# HTML werden. Daten liegen als JSON in content/widgets/<name>.json, im Artikel
+# steht der Marker allein in einer Zeile: {{zahlen:name}}, {{zeitleiste:name}},
+# {{schritte:name}}, {{tabelle:name}}, {{skala:name}}, {{vergleich:name}}.
+
+def widget_file(name):
+    return os.path.join(WIDGETS, "%s.json" % name)
+
+
+def load_widget(name):
+    path = widget_file(name)
+    if not os.path.isfile(path):
+        return None, "Baustein '%s' fehlt: content/widgets/%s.json" % (name, name)
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+    except Exception as exc:
+        return None, "content/widgets/%s.json ist kein gueltiges JSON: %s" % (name, exc)
+    if not isinstance(data, dict):
+        return None, "content/widgets/%s.json muss ein JSON-Objekt sein" % name
+    return data, None
+
+
+def list_widgets():
+    out = []
+    if not os.path.isdir(WIDGETS):
+        return out
+    for fname in sorted(os.listdir(WIDGETS)):
+        if not fname.endswith(".json"):
+            continue
+        name = fname[:-5]
+        data, err = load_widget(name)
+        out.append({
+            "name": name,
+            "typ": (data or {}).get("typ", ""),
+            "titel": (data or {}).get("titel", ""),
+            "error": err,
+        })
+    return out
+
+
+def validate_widget(kind, name):
+    """Rendert einen Baustein einmal probeweise; gibt Fehlertext oder None zurück."""
+    try:
+        render_widget(kind, name)
+    except ValueError as exc:
+        return str(exc)
+    return None
+
+
+def validate_markup(body):
+    """Prüft Box-Syntax und Baustein-Marker in einem Artikel-Body (ohne Codeblöcke)."""
+    errors = []
+    lines = str(body or "").split("\n")
+    in_code = False
+    open_box = None
+    open_line = 0
+    for no, line in enumerate(lines, 1):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+        if BOX_END_RE.match(stripped):
+            if open_box is None:
+                errors.append("Zeile %d: ':::' ohne geoeffnete Box" % no)
+            open_box = None
+            continue
+        start = BOX_START_RE.match(stripped)
+        if start:
+            if open_box is not None:
+                errors.append("Zeile %d: Box ':::%s' (Zeile %d) ist nicht geschlossen"
+                              % (no, open_box, open_line))
+            kind = start.group(1).lower()
+            if kind not in BOX_TYPES:
+                errors.append("Zeile %d: unbekannte Box ':::%s' (erlaubt: %s)"
+                              % (no, kind, ", ".join(BOX_TYPES)))
+            open_box = kind
+            open_line = no
+            continue
+        if WIDGET_INLINE_RE.search(stripped) and not WIDGET_BLOCK_RE.match(stripped):
+            errors.append("Zeile %d: Baustein-Marker muss allein in einer Zeile stehen (%s)"
+                          % (no, stripped[:60]))
+    if open_box is not None:
+        errors.append("Box ':::%s' ab Zeile %d ist nicht geschlossen" % (open_box, open_line))
+    return errors
+
+
+def _widget_caption(data):
+    parts = []
+    quelle = data.get("quelle", "")
+    quelle_url = data.get("quelle_url", "")
+    hinweis = data.get("hinweis", "")
+    if quelle:
+        if quelle_url:
+            parts.append('<span class="chart-source">Quelle: <a href="%s" target="_blank" rel="noopener">%s</a></span>'
+                         % (esc(quelle_url), esc(quelle)))
+        else:
+            parts.append('<span class="chart-source">Quelle: %s</span>' % esc(quelle))
+    if hinweis:
+        parts.append('<span class="chart-note">%s</span>' % esc(hinweis))
+    if not parts:
+        return ""
+    return '<figcaption class="chart-caption">\n  ' + "\n  ".join(parts) + "\n</figcaption>"
+
+
+def _w_zahlen(data, prefix=""):
+    werte = data.get("werte") or []
+    if not werte:
+        raise ValueError("Baustein 'zahlen' braucht eine Liste 'werte'")
+    cells = []
+    for item in werte:
+        if not isinstance(item, dict) or not str(item.get("wert", "")).strip():
+            raise ValueError("Baustein 'zahlen': jeder Eintrag braucht 'wert'")
+        detail = item.get("detail", "")
+        detail_html = ('<span class="stat-detail">%s</span>' % render_inline(detail, prefix=prefix)) if detail else ""
+        cells.append(
+            '<div class="stat">\n  <span class="stat-value">%s</span>\n  <span class="stat-label">%s</span>\n  %s\n</div>'
+            % (esc(item.get("wert", "")), render_inline(item.get("label", ""), prefix=prefix), detail_html))
+    return '<div class="stats stats-%d">\n%s\n</div>' % (min(len(cells), 4), "\n".join(cells))
+
+
+def _w_zeitleiste(data, prefix=""):
+    ereignisse = data.get("ereignisse") or []
+    if not ereignisse:
+        raise ValueError("Baustein 'zeitleiste' braucht eine Liste 'ereignisse'")
+    items = []
+    for ev in ereignisse:
+        if not isinstance(ev, dict) or not str(ev.get("titel", "")).strip():
+            raise ValueError("Baustein 'zeitleiste': jeder Eintrag braucht 'titel'")
+        text = ev.get("text", "")
+        text_html = "<p>%s</p>" % render_inline(text, prefix=prefix) if text else ""
+        items.append(
+            '<li>\n  <time>%s</time>\n  <div class="timeline-body">\n    <h3>%s</h3>\n    %s\n  </div>\n</li>'
+            % (esc(ev.get("datum", "")), render_inline(ev.get("titel", ""), prefix=prefix), text_html))
+    return '<ol class="timeline">\n%s\n</ol>' % "\n".join(items)
+
+
+def _w_schritte(data, prefix=""):
+    schritte = data.get("schritte") or []
+    if not schritte:
+        raise ValueError("Baustein 'schritte' braucht eine Liste 'schritte'")
+    items = []
+    for idx, step in enumerate(schritte, 1):
+        if not isinstance(step, dict) or not str(step.get("titel", "")).strip():
+            raise ValueError("Baustein 'schritte': jeder Schritt braucht 'titel'")
+        text = step.get("text", "")
+        text_html = "<p>%s</p>" % render_inline(text, prefix=prefix) if text else ""
+        items.append(
+            '<li>\n  <span class="step-num" aria-hidden="true">%d</span>\n  <div class="step-body">\n    <h3>%s</h3>\n    %s\n  </div>\n</li>'
+            % (idx, render_inline(step.get("titel", ""), prefix=prefix), text_html))
+    return '<ol class="steps">\n%s\n</ol>' % "\n".join(items)
+
+
+def _w_tabelle(data, prefix=""):
+    spalten = data.get("spalten") or []
+    zeilen = data.get("zeilen") or []
+    if not spalten or not zeilen:
+        raise ValueError("Baustein 'tabelle' braucht 'spalten' und 'zeilen'")
+    betont = data.get("betont")
+    heads = []
+    for idx, col in enumerate(spalten):
+        cls = ' class="col-emphasis"' if betont == idx else ""
+        heads.append("<th%s>%s</th>" % (cls, render_inline(str(col), prefix=prefix)))
+    rows = []
+    for row in zeilen:
+        if not isinstance(row, (list, tuple)) or len(row) != len(spalten):
+            raise ValueError("Baustein 'tabelle': jede Zeile braucht genau %d Zellen" % len(spalten))
+        cells = []
+        for idx, cell in enumerate(row):
+            tag = "th" if idx == 0 else "td"
+            cls = ' class="col-emphasis"' if betont == idx else ""
+            cells.append("<%s%s>%s</%s>" % (tag, cls, render_inline(str(cell), prefix=prefix), tag))
+        rows.append("<tr>%s</tr>" % "".join(cells))
+    return ('<div class="table-wrap">\n<table class="data-table">\n<thead><tr>%s</tr></thead>\n<tbody>\n%s\n</tbody>\n</table>\n</div>'
+            % ("".join(heads), "\n".join(rows)))
+
+
+def _w_skala(data, prefix=""):
+    werte = data.get("werte") or []
+    if not werte:
+        raise ValueError("Baustein 'skala' braucht eine Liste 'werte'")
+    try:
+        zahlen = [float(w.get("wert")) for w in werte]
+    except (TypeError, ValueError):
+        raise ValueError("Baustein 'skala': 'wert' muss eine Zahl sein")
+    if data.get("log", True):
+        if any(z <= 0 for z in zahlen):
+            raise ValueError("Baustein 'skala': negative oder Null-Werte gehen nur mit \"log\": false")
+        top = math.log10(max(zahlen))
+        widths = [(math.log10(z) / top if top else 0) for z in zahlen]
+    else:
+        top = max(zahlen)
+        widths = [(z / top if top else 0) for z in zahlen]
+    rows = []
+    for item, z, share in zip(werte, zahlen, widths):
+        anzeige = item.get("anzeige") or format_german_number(z)
+        rows.append(
+            '<div class="scale-row">\n  <span class="scale-label">%s</span>\n'
+            '  <span class="scale-track"><span class="scale-fill" style="width:%.1f%%"></span></span>\n'
+            '  <span class="scale-value">%s</span>\n</div>'
+            % (render_inline(item.get("label", ""), prefix=prefix), max(share * 100.0, 1.5), esc(anzeige)))
+    einheit = data.get("einheit", "")
+    einheit_html = '<p class="scale-unit">Einheit: %s</p>' % render_inline(einheit, prefix=prefix) if einheit else ""
+    note = '<p class="scale-note">Logarithmische Achse: gleiche Strecke heisst Faktor zehn.</p>' if data.get("log", True) else ""
+    return '<div class="scale">\n%s\n%s\n%s\n</div>' % ("\n".join(rows), einheit_html, note)
+
+
+def _w_vergleich(data, prefix=""):
+    links = data.get("links") or {}
+    rechts = data.get("rechts") or {}
+    if not links.get("punkte") and not rechts.get("punkte"):
+        raise ValueError("Baustein 'vergleich' braucht 'links.punkte' oder 'rechts.punkte'")
+
+    def _col(side, cls):
+        punkte = side.get("punkte") or []
+        items = "".join("<li>%s</li>" % render_inline(str(p), prefix=prefix) for p in punkte)
+        return ('<div class="compare-col %s">\n  <p class="compare-head">%s</p>\n  <ul>%s</ul>\n</div>'
+                % (cls, render_inline(side.get("titel", ""), prefix=prefix), items))
+
+    return '<div class="compare">\n%s\n%s\n</div>' % (_col(links, "compare-left"), _col(rechts, "compare-right"))
+
+
+def _w_bild(data, prefix=""):
+    datei = str(data.get("datei", "")).strip().lstrip("/")
+    if not datei:
+        raise ValueError("Baustein 'bild' braucht 'datei' (Dateiname in assets/)")
+    alt = data.get("alt") or data.get("beschriftung") or ""
+    img = '<img src="assets/%s" alt="%s" loading="lazy">' % (esc(datei), esc(alt))
+    if data.get("gross"):
+        img = '<a href="assets/%s">%s</a>' % (esc(datei), img)
+    caption = data.get("beschriftung", "")
+    credit = data.get("credit", "")
+    text = ""
+    if caption or credit:
+        parts = []
+        if caption:
+            parts.append(render_inline(caption, prefix=prefix))
+        if credit:
+            parts.append('<span class="chart-source">%s</span>' % render_inline(credit, prefix=prefix))
+        text = '<figcaption class="chart-caption">\n  %s\n</figcaption>' % "\n  ".join(parts)
+    return img + ("\n" + text if text else "")
+
+
+WIDGET_RENDERERS = {
+    "zahlen": _w_zahlen,
+    "zeitleiste": _w_zeitleiste,
+    "schritte": _w_schritte,
+    "tabelle": _w_tabelle,
+    "skala": _w_skala,
+    "vergleich": _w_vergleich,
+    "bild": _w_bild,
+}
+
+
+def render_widget(kind, name, prefix=""):
+    if kind not in WIDGET_RENDERERS:
+        raise ValueError("Unbekannter Baustein-Typ '%s'" % kind)
+    data, err = load_widget(name)
+    if data is None:
+        raise ValueError(err)
+    declared = data.get("typ")
+    if declared and declared != kind:
+        raise ValueError("Baustein '%s' ist als '%s' angelegt, wird aber als '%s' eingebunden"
+                         % (name, declared, kind))
+    body = WIDGET_RENDERERS[kind](data, prefix=prefix)
+    titel = data.get("titel", "")
+    head = '<p class="widget-title">%s</p>\n' % render_inline(titel, prefix=prefix) if titel else ""
+    caption = _widget_caption(data)
+    return ('<figure class="widget widget-%s">\n%s%s\n%s\n</figure>' % (kind, head, body, caption)).replace("\n\n", "\n")
+
+
+# --- Textboxen --------------------------------------------------------------
+
+def render_box(kind, title, inner_markdown, prefix="", tracker=None):
+    if kind not in BOX_TYPES:
+        raise ValueError("Unbekannte Box '%s' (erlaubt: %s)" % (kind, ", ".join(BOX_TYPES)))
+    title = (title or "").strip() or BOX_DEFAULTS.get(kind, "")
+    inner = render_markdown(inner_markdown, prefix=prefix, tracker=tracker)
+    if kind == "zitat":
+        # Erste Zeile darf die Quelle sein: ::: zitat Quelle — dann als figcaption.
+        quote_html = '<blockquote>%s</blockquote>' % inner
+        cap = '<figcaption>%s</figcaption>' % render_inline(title, prefix=prefix) if title else ""
+        return '<figure class="pullquote">\n%s\n%s\n</figure>' % (quote_html, cap)
+    head = '<p class="box-title">%s</p>' % render_inline(title, prefix=prefix) if title else ""
+    if kind == "aufklappen":
+        return ('<details class="box box-aufklappen">\n<summary>%s</summary>\n<div class="box-body">\n%s\n</div>\n</details>'
+                % (render_inline(title or BOX_DEFAULTS["aufklappen"], prefix=prefix), inner))
+    return '<div class="box box-%s">\n%s\n<div class="box-body">\n%s\n</div>\n</div>' % (kind, head, inner)
+
+
 # --- Markdown ---------------------------------------------------------------
 
 def _render_inline_text(text, tracker=None, prefix=""):
@@ -1994,13 +2353,17 @@ def _is_block_start(line):
         return True
     if CHART_BLOCK_RE.match(stripped):
         return True
+    if WIDGET_BLOCK_RE.match(stripped):
+        return True
+    if BOX_START_RE.match(stripped) or BOX_END_RE.match(stripped):
+        return True
     return False
 
 
-def render_markdown(text, prefix=""):
+def render_markdown(text, prefix="", tracker=None):
     if text is None:
         return ""
-    tracker = {}
+    tracker = {} if tracker is None else tracker
     text = str(text).replace("\r\n", "\n").replace("\r", "\n")
     lines = text.split("\n")
     out = []
@@ -2023,6 +2386,31 @@ def render_markdown(text, prefix=""):
             cls = ' class="language-%s"' % esc(slugify(lang)) if lang else ""
             out.append("<pre><code%s>%s</code></pre>" % (
                 cls, esc("\n".join(buf))))
+            continue
+        if BOX_END_RE.match(stripped):
+            raise ValueError("':::' ohne geoeffnete Box")
+        box_match = BOX_START_RE.match(stripped)
+        if box_match:
+            box_kind = box_match.group(1).lower()
+            box_title = box_match.group(2).strip()
+            if box_kind not in BOX_TYPES:
+                raise ValueError("Unbekannte Box '::: %s' (erlaubt: %s)"
+                                 % (box_kind, ", ".join(BOX_TYPES)))
+            i += 1
+            buf = []
+            while i < n and not BOX_END_RE.match(lines[i].strip()):
+                buf.append(lines[i])
+                i += 1
+            if i >= n:
+                raise ValueError("Box '::: %s' ist nicht geschlossen (fehlendes ':::')" % box_kind)
+            i += 1
+            out.append(render_box(box_kind, box_title, "\n".join(buf),
+                                  prefix=prefix, tracker=tracker))
+            continue
+        widget_match = WIDGET_BLOCK_RE.match(stripped)
+        if widget_match:
+            out.append(render_widget(widget_match.group(1), widget_match.group(2), prefix=prefix))
+            i += 1
             continue
         chart_match = CHART_BLOCK_RE.match(stripped)
         if chart_match:
@@ -2324,6 +2712,15 @@ def do_build(out_arg):
             os.makedirs(dist_audio_dir, exist_ok=True)
             for f in audio_files:
                 shutil.copyfile(os.path.join(AUDIO_DIR, f), os.path.join(dist_audio_dir, f))
+
+    if os.path.isdir(ASSETS):
+        asset_files = [f for f in sorted(os.listdir(ASSETS))
+                       if os.path.isfile(os.path.join(ASSETS, f))]
+        if asset_files:
+            dist_assets = os.path.join(out_dir, "assets")
+            os.makedirs(dist_assets, exist_ok=True)
+            for f in asset_files:
+                shutil.copyfile(os.path.join(ASSETS, f), os.path.join(dist_assets, f))
 
     def write(rel, content):
         path = os.path.join(out_dir, rel)
@@ -3938,6 +4335,10 @@ def build_parser():
     p = sub.add_parser("charts")
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_charts)
+
+    p = sub.add_parser("widgets")
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(func=cmd_widgets)
 
     p = sub.add_parser("build")
     p.add_argument("--out", default="dist")

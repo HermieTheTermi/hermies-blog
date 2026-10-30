@@ -22,12 +22,13 @@ INTERFACE.md            # dieser Vertrag (+ Betriebsregeln)
 content/posts/          # veröffentlichte Artikel
 content/drafts/         # Entwürfe
 content/charts/         # Datendateien für Diagramme (JSON, Daten, kein Code)
+content/widgets/        # Datendateien für Bausteine (Kennzahlen, Zeitleiste, Tabelle, Skala …)
 content/audio/          # Hörfassungen (.txt Sprechtexte, .mp3 Audiodateien, .json Metadaten)
 content/lexikon.json    # Datendatei für Fachbegriffe und Tooltips
 content/sources.json    # Quellen für `blogctl scrape`
 content/templates/      # Layout der Site (Chunk 2)
 assets/                 # Bilder und Dateien
-tests/                  # Regressionstests (python3 tests/test_time.py, tests/test_lexikon.py, tests/test_charts.py)
+tests/                  # Regressionstests (python3 tests/test_time.py, tests/test_lexikon.py, tests/test_charts.py, tests/test_bausteine.py)
 dist/                   # Build-Ausgabe (nicht committen)
 ```
 
@@ -44,9 +45,10 @@ dist/                   # Build-Ausgabe (nicht committen)
 | `publish ID [ID…]` | Entwurf → `content/posts/`, `status: published` | `{ok,published:[ids]}` |
 | `unpublish ID [ID…]` | zurück nach `content/drafts/` | `{ok,drafts:[ids]}` |
 | `rm ID --yes` | löscht Artikel (ohne `--yes`: Abbruch) | `{ok,removed:[]}` |
-| `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links, Lexikon- und Chart-Marker | `{ok,errors:[],warnings:[]}` |
+| `check` | Frontmatter, Pflichtfelder, Duplikate, interne Links, Lexikon-, Chart- und Baustein-Marker, Box-Syntax | `{ok,errors:[],warnings:[]}` |
 | `lexikon [--json]` | Begriffe auflisten (Klartext oder JSON) | `{terms:[{term,slug,text}]}` |
 | `charts [--json]` | Chart-Dateien auflisten | `{charts:[{name,titel,typ}]}` |
+| `widgets [--json]` | Bausteine auflisten, Typen und Boxarten zeigen | `{widgets:[{name,typ,titel}],boxen:[],typen:[]}` |
 | `build [--out dist]` | statische Site bauen | `{ok,out,pages}` |
 | `serve [--port 8080]` | Vorschau lokal | – |
 | `scrape [--source NAME] [--per-source N] [--limit N] [--since-days D] [--dry-run]` | neue Items aus `content/sources.json` → Entwürfe (N je Quelle, Gesamtdeckel über `--limit`) | `{ok,created:[],skipped:N,errors:[]}` |
@@ -132,6 +134,55 @@ Gemeinsame optionale Felder für alle Typen: `titel` (Pflicht), `einheit` (z. B.
   - Deterministischer Build: identischer Input liefert byte-identisches SVG.
 - **Validierung**: `blogctl check` verifiziert die JSON-Syntax aller Diagramme unter `content/charts/` und die Existenz aller in Texten referenzierten Chart-Dateien (Marker in Backtick-Code wie `{{chart:name}}` werden ignoriert).
 - **CLI**: `blogctl charts [--json]` listet alle verfügbaren Chart-Dateien mit Name, Titel und Typ.
+
+## Bausteine (Boxen und Datenbausteine, kein JavaScript)
+
+Zwei Sorten, beide ohne JavaScript und ohne externe Ressourcen:
+
+**1. Textboxen** — Inhalt ist normales Markdown (Fett, Links, Listen, `{{Begriff}}`), eingefasst von `:::`:
+
+```
+::: merk
+Der Kernsatz des Abschnitts.
+:::
+
+::: warnung Der Haken
+Was gegen die Aussage spricht.
+:::
+```
+
+| Box | Zweck | Titel |
+|---|---|---|
+| `merk` | Kernaussage, die man mitnehmen soll | Default „Das Wichtigste" |
+| `warnung` | Einwand, Unsicherheit, Preis | Default „Der Haken" |
+| `methode` | wie geprüft wurde (Quellenlage, Stichprobe, Grenzen der Prüfung) | Default „Wie geprüft" |
+| `definition` | Begriffserklärung im Fließtext | Default „Begriff" |
+| `zitat` | Pull-Quote, letzte mögliche Zeile = Quelle | Text nach `zitat` = Quelle |
+| `aufklappen` | Zusatzwissen, standardmäßig zugeklappt (`<details>`, nativ) | Default „Mehr dazu" |
+
+**2. Datenbausteine** — Marker allein in einer Zeile, Daten in `content/widgets/<name>.json`:
+
+| Marker | Darstellung | Pflichtfelder |
+|---|---|---|
+| `{{zahlen:name}}` | 2–4 große Kennzahlen in einem Raster | `werte: [{wert, label, detail?}]` |
+| `{{zeitleiste:name}}` | senkrechte Zeitleiste mit Punkten | `ereignisse: [{datum, titel, text?}]` |
+| `{{schritte:name}}` | numerierte Ablaufkette | `schritte: [{titel, text?}]` |
+| `{{tabelle:name}}` | Tabelle mit Kopfzeile, optional betonte Spalte (`betont`: Index ab 0) | `spalten: []`, `zeilen: [[…]]` |
+| `{{skala:name}}` | Größenordnungen als logarithmische Balken (`log: false` für linear) | `werte: [{label, wert, anzeige?}]` |
+| `{{vergleich:name}}` | zwei Spalten (vorher/nachher, pro/contra) | `links`/`rechts`: `{titel, punkte: []}` |
+| `{{bild:name}}` | Bild aus `assets/` mit Beschriftung und Credit | `datei`, optional `beschriftung`, `credit`, `alt`, `gross` |
+
+Gemeinsame optionale Felder: `titel`, `typ` (muss zum Marker passen), `quelle`, `quelle_url`, `hinweis`. Der `typ` im JSON ist Pflicht bei `blogctl check`-Sauberkeit, wenn er gesetzt ist — weicht er vom Marker ab, bricht der Build mit einer klaren Meldung ab.
+
+**Regeln**
+
+- Marker stehen **allein in einer Zeile**; mitten im Absatz meldet `check` einen Fehler.
+- Jede Box braucht ein schließendes `:::` in eigener Zeile; offene oder verschachtelte Boxen sind Fehler.
+- Jede Zahl in einem Baustein braucht `quelle` + `quelle_url` — gleiche Regel wie bei Diagrammen.
+- Kein JavaScript, kein `<img>`, keine externen Schriften: alles ist HTML/CSS aus `content/templates/style.css`.
+- Sparsam einsetzen: ein Artikel mit drei Kennzahlen-Rastern und zwei Tabellen wirkt wie ein Datenblatt, nicht wie ein Text.
+- `blogctl widgets [--json]` listet alle Bausteine und die erlaubten Typen.
+- Bilder liegen in `assets/` und werden beim Build nach `dist/assets/` kopiert; `{{bild:name}}` verweist auf den Dateinamen, nicht auf eine URL.
 
 ## Hörfassung (Podcast-Audio)
 

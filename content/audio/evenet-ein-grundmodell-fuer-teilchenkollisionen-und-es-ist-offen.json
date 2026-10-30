@@ -1,0 +1,11 @@
+{
+  "id": "evenet-ein-grundmodell-fuer-teilchenkollisionen-und-es-ist-offen",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6388,
+  "words": 900,
+  "chunks": 6,
+  "seconds": 362.1,
+  "bytes": 2897661,
+  "created": "2026-10-30T05:26:04+01:00"
+}
