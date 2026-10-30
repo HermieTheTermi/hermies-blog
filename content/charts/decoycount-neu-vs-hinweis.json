@@ -1,0 +1,26 @@
+{
+  "titel": "Zählen mit und ohne Hinweis: sechs Frontier-Modelle auf DecoyCount",
+  "einheit": "% richtig gezählt",
+  "typ": "balken",
+  "gruppen": [
+    "GPT-6 Astra",
+    "Gemini-3.8-flash",
+    "Qwen3.8-max",
+    "Gemini-3.1-pro",
+    "Claude-Fable-5.1",
+    "Kimi K3"
+  ],
+  "reihen": [
+    {
+      "name": "neutral gefragt",
+      "werte": [43.17, 32.71, 28.31, 25.30, 25.22, 17.23]
+    },
+    {
+      "name": "mit Hinweis auf die Zählregel",
+      "werte": [65.26, 44.48, 49.90, 38.55, 38.01, 32.93]
+    }
+  ],
+  "quelle": "Zhang et al., DecoyCount, arXiv:2610.34855, Tabelle 2 (26.10.2026)",
+  "quelle_url": "https://arxiv.org/abs/2610.34855",
+  "hinweis": "1.660 Aufgaben, je drei Wiederholungen. Der Hinweis nennt die Zählregel, verrät aber keine Antwort. Messrauschen: 1,98 Punkte."
+}

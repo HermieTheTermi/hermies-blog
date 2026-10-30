@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Der Angriff in vier Zahlen",
+  "werte": [
+    {"wert": "1.000 $", "label": "je Firefox-Version", "detail": "Grenzkosten zu API-Preisen, nach Aufbau der Testumgebung"},
+    {"wert": "6", "label": "kompromittierte Versionen", "detail": "Firefox 156.0 bis 158.0.1, erschienen 17.9. bis 26.10.2026"},
+    {"wert": "12 h", "label": "schnellster Angriff", "detail": "das Modell bekam maximal 48 Stunden"},
+    {"wert": "200 Mio.", "label": "aktive Firefox-Nutzer", "detail": "Angabe von Mozilla"}
+  ],
+  "quelle": "Epoch AI, Open-weight AI models can exploit the patch gap, 29.10.2026",
+  "quelle_url": "https://epoch.ai/publications/open-weight-models-patch-gap",
+  "hinweis": "Die 1.000 Dollar sind Grenzkosten. Die gesamte Studie kostete über 100.000 Dollar, vor allem für den Aufbau der abgeschotteten Testumgebung."
+}

@@ -1,0 +1,13 @@
+{
+  "typ": "schritte",
+  "titel": "Wie aus einem Update ein Angriff wird",
+  "schritte": [
+    {"titel": "Fix im Code finden", "text": "Das Modell liest die veröffentlichten Änderungen, die Firefox als gewöhnliche Verbesserungen tarnt, und sortiert die sicherheitsrelevanten heraus."},
+    {"titel": "Lücke rückwärts erschließen", "text": "Aus dem Fix ergibt sich, welcher Fehler in der ausgelieferten Version noch steckt. Das Modell baut daraus Code, der im Browserprozess läuft."},
+    {"titel": "Sandbox ausbrechen", "text": "Eine zweite, unveröffentlichte Lücke hebt die Abschottung auf. GLM 5.3 fand sie bei jedem Durchlauf neu."},
+    {"titel": "Datei exfiltrieren", "text": "Die fertige Webseite liest beim Aufruf eine lokale Datei und schickt den Inhalt an einen fremden Server. Kein Klick nötig."}
+  ],
+  "quelle": "Epoch AI, Open-weight AI models can exploit the patch gap, 29.10.2026",
+  "quelle_url": "https://epoch.ai/publications/open-weight-models-patch-gap",
+  "hinweis": "Die Reihenfolge folgt dem Bericht. Der Schritt in die Sandbox gelang nur, weil das Modell zusätzlich eine noch unbekannte Lücke selbst fand; sie ist seit Firefox 159.0 geschlossen."
+}
