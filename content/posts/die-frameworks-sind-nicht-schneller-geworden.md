@@ -67,6 +67,8 @@ Die drei großen Backend-Frameworks bleiben außen vor. Für Django, Ruby on Rai
 
 Auf der Plattform sieht die Lage anders aus. GitHub meldet für die zwölf Monate bis September 34,3 Milliarden Commits, dreimal so viele wie zwei Jahre zuvor, und einen Anteil agentengestarteter Pull Requests von über 40 Prozent im September. Die Zahlen stehen ausführlich im [Octoverse-Artikel dieses Blogs vom 28. Oktober](octoverse-2026-34-3-milliarden-commits-github-vermisst-den-agenten-alltag.html); hier zählen sie nur als Kontrast zur Framework-Ebene.
 
+Die deutlichste unabhängige Bestätigung kommt von einer NBER-Studie von Mert Demirer, Leon Musolff und Liyuan Yang, im Mai 2026 erschienen und im September überarbeitet. Die Autoren verknüpfen Daten von mehr als 500.000 GitHub-Entwicklern mit Telemetrie zur KI-Nutzung. Autocomplete hebt die Commits um 30 Prozent, interaktive Agenten um 180, autonome um 240. Bei der Zahl der Projekte bleiben davon 80 Prozent übrig, bei den Releases nur 30. Die Autoren erklären das mit der schwächsten Stelle in der Kette: Prüfen, integrieren und ausliefern muss weiterhin ein Mensch.
+
 Das passt zu den Umfragen. Im Stack-Overflow-Survey 2025 (49.009 Antworten) nutzen oder planen 84 Prozent der Befragten KI-Werkzeuge, 46 Prozent misstrauen deren Genauigkeit. Die DORA-Erhebung 2025 meldet 90 Prozent Nutzung, nach 76 Prozent im Vorjahr, und zum ersten Mal einen positiven Zusammenhang zwischen KI-Nutzung und Durchsatz. Prozentzahlen nannte DORA dafür nicht, 2024 waren es noch minus 1,5 Prozent Durchsatz und minus 7,2 Prozent Stabilität je 25 Prozent mehr KI-Adoption.
 
 Bei der Produktivität hängt alles am Aufgabentyp. Peng und Kollegen maßen 2023 für einen einzelnen, klar umrissenen Task (einen HTTP-Server in JavaScript schreiben) 55,8 Prozent Zeitersparnis bei 95 Entwicklern. METR maß 2025 das Gegenteil: 16 erfahrene Open-Source-Entwickler brauchten mit Cursor für 246 Aufgaben in ihren eigenen, großen Repositories 19 Prozent länger, obwohl sie vorher 24 Prozent Ersparnis erwartet hatten. Beide Zahlen sind belastbar, sie messen nur verschiedene Dinge.
@@ -98,3 +100,4 @@ Offen bleibt die interessantere Frage. Wenn ein großer Teil der Pull Requests m
 - DORA 2025: https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report
 - Stack Overflow Developer Survey 2025: https://survey.stackoverflow.co/2025/ai
 - GitClear, AI Copilot Code Quality 2025: https://www.gitclear.com/ai_assistant_code_quality_2025_research
+- Demirer, Musolff, Yang, Writing Code vs. Shipping Code, NBER Working Paper 35275, Mai 2026: https://www.nber.org/papers/w35275
