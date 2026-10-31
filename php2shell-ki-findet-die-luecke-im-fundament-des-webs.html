@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PHP2Shell: KI findet die Lücke im Fundament des Webs – Hermies Blog</title>
+  <meta name="description" content="Zwei Lücken im Kern von PHP erlauben ohne Anmeldung Code auf Webservern auszuführen, beide mit 9,2 von 10 bewertet. Betroffen sind rund 70 Prozent aller Websites. Gefunden hat sie KI: Calif mit GPT-5.6 Sol, Wiz unabhängig mit Gemini 4 Argon. Der Patch kam einen Tag früher als geplant, weil die Details leckten; in Europa gingen Behördenportale offline.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>PHP2Shell: KI findet die Lücke im Fundament des Webs</h1>
+    <p class="meta"><time datetime="2026-10-21T16:00+02:00">21.10.2026, 16:00</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/ki.html">#ki</a> <a class="tag" href="tag/sicherheit.html">#sicherheit</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/open-source.html">#open-source</a></span> · <a class="source" href="https://php2shell.com/">Wiz Research</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:28 Minuten</strong> (KI-Stimme) – <a href="audio/php2shell-ki-findet-die-luecke-im-fundament-des-webs.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,0 MB)</span></p>
+    <audio controls preload="none" src="audio/php2shell-ki-findet-die-luecke-im-fundament-des-webs.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Zwei Lücken im Kern der Programmiersprache PHP erlauben es Angreifern, ohne Anmeldung Befehle auf fremden Webservern auszuführen. Beide sind mit 9,2 von 10 bewertet, die Reparatur ist seit dem 21. Oktober verfügbar.</li>
+  <li>PHP läuft auf rund 70 Prozent aller Websites, deren Programmiersprache sich erkennen lässt. Betroffen sind auch WordPress, Drupal und Joomla — aber die Lücke steckt nicht in diesen Programmen, sondern in PHP selbst.</li>
+  <li>Gefunden haben sie KI-<button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span>en: Die Sicherheitsfirma Calif meldete die erste Lücke am 11. August, ermittelt mit OpenAIs Modell GPT-5.6 Sol. Die Firma Wiz fand beide unabhängig, ebenfalls mit KI-Modellen, und meldete am 24. August.</li>
+  <li>Neu sind PHP 8.5.12, 8.4.27, 8.3.36 und 8.2.35. Für die alten Zweige 7.4, 8.0 und 8.1 gibt es nur minimale Nachbauten für alle, die selbst kompilieren.</li>
+  <li>Eigentlich war der 22. Oktober als Termin geplant. Weil die Details am 20. Oktober öffentlich wurden, kam der Patch einen Tag früher.</li>
+  <li>CERT-EU rät allen, die nicht sofort aktualisieren können, die betroffenen Seiten offline zu nehmen. In Europa sind am Mittwoch Behördenportale ausgefallen.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Am Mittwochnachmittag hat das PHP-Team vier neue Versionen veröffentlicht und dazu einen Satz geschrieben, den man in Release-Notes selten liest: Alle PHP-Installationen, die Web-Anfragen beantworten, seien gefährdet. Die Reparatur trägt die Nummern 8.5.12, 8.4.27, 8.3.36 und 8.2.35 und schließt zwei Lücken, die das Team selbst als kritisch einstuft — beide mit 9,2 von 10 auf der Skala <button type="button" class="lex" popovertarget="lex-cvss" data-tip="Eine Skala von 0 bis 10, mit der Fachleute die Schwere einer Sicherheitslücke bewerten. Ab 9,0 gilt eine Lücke als kritisch.">CVSS</button><span class="lex-pop" popover id="lex-cvss"><strong>CVSS</strong> Eine Skala von 0 bis 10, mit der Fachleute die Schwere einer Sicherheitslücke bewerten. Ab 9,0 gilt eine Lücke als kritisch. <a href="lexikon.html#cvss">Im Lexikon</a></span> v4.0 (<a href="https://www.php.net/archive/2026.php#2026-10-21-5">php.net</a>).</p>
+<p>PHP ist die Sprache, die auf dem Server läuft, bevor der Browser eine Seite sieht. Wer eine WordPress-Seite aufruft, löst auf dem Server PHP-Code aus, der die Seite zusammensetzt und ausliefert. PHP ist <button type="button" class="lex" popovertarget="lex-open-source" data-tip="Software, deren Quellcode offenliegt. Jeder darf sie lesen, verändern und weitergeben. Offenheit hilft beim Finden von Fehlern, ersetzt aber keine Pflege.">Open Source</button><span class="lex-pop" popover id="lex-open-source"><strong>Open Source</strong> Software, deren Quellcode offenliegt. Jeder darf sie lesen, verändern und weitergeben. Offenheit hilft beim Finden von Fehlern, ersetzt aber keine Pflege. <a href="lexikon.html#open-source">Im Lexikon</a></span>, gehört also keiner Firma, und wird von Freiwilligen gepflegt. Laut dem Web-Technologie-Zähler W3Techs läuft PHP auf fast 70 Prozent aller Websites, deren Programmiersprache sich überhaupt erkennen lässt; WordPress allein macht rund 40 Prozent aller Websites aus (<a href="https://www.streetinsider.com/Reuters/Explainer-What+is+PHP+and+why+did+it+take+government+websites+offline/27215111.html">Reuters</a>). Das ist der Grund, warum eine Lücke in PHP nicht eine Website betrifft, sondern Millionen gleichzeitig.</p>
+<p>Die beiden Fehler sind technisch verschieden, haben aber dieselbe Folge. Der erste, CVE-2026-109618, sitzt in der Behandlung von Speichermangel: Geht PHP mitten im Aufbau einer Anfrage der Speicher aus, bricht es die Arbeit ab und lässt dabei interne Daten halb fertig liegen. Die Aufräumroutine hält diesen Rest später für gültig und arbeitet damit weiter (<a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w">GitHub Advisory</a>). Der zweite, CVE-2026-109619, betrifft Zustand, der eine Anfrage überlebt: Ein Worker-Prozess behält Daten, obwohl der Speicher dahinter schon freigegeben ist, und die nächste Anfrage greift darauf zu, bevor die normale Initialisierung sie überschreibt.</p>
+<p>Was ein Angreifer damit erreichen kann, beschreibt das Advisory ungewöhnlich klar: Codeausführung ohne Anmeldung, auf Englisch <button type="button" class="lex" popovertarget="lex-remote-code-execution" data-tip="Ein Angriff, bei dem jemand eigenen Code auf einem fremden Rechner ausführt, oft über das Netz und ohne Anmeldung. Kurz RCE.">Remote Code Execution</button><span class="lex-pop" popover id="lex-remote-code-execution"><strong>Remote Code Execution</strong> Ein Angriff, bei dem jemand eigenen Code auf einem fremden Rechner ausführt, oft über das Netz und ohne Anmeldung. Kurz RCE. <a href="lexikon.html#remote-code-execution">Im Lexikon</a></span>, mit den Rechten des Web-Workers. Für Apache mit eingebautem PHP-Modul (mod_php) wurde das über HTTP vollständig nachgewiesen, mit den Standardwerten für Eingabegröße und Speicherlimit — und zwar bevor auch nur eine Zeile Anwendungscode läuft. Bei PHP-FPM, der üblichen Betriebsart hinter nginx, wurde Codeausführung über Wege in der Anwendung bestätigt; ein Angriff, der ohne Anwendungscode auskommt, gelang dort nicht (<a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w">Advisory</a>). Unabhängig davon lässt sich Prozessspeicher auslesen, in dem Passwörter, Anmelde-Token, API-Schlüssel und Zertifikate anderer Anfragen liegen können — ohne dass der Angreifer Code ausführen muss.</p>
+<p>Die Forscher haben das nicht theoretisch beschrieben, sondern vorgeführt: gegen die jeweils aktuellen Container-Images von WordPress, Drupal und Joomla, ohne Konto und ohne Passwort (<a href="https://php2shell.com/">php2shell.com</a>). Diese drei Programme waren nur die Vorführziele. Betroffen ist laut den Forschern fast jede PHP-Version seit 5.4, und es reicht eine Anwendung, die nichts weiter tut als „Hallo Welt&quot; auszugeben.</p>
+<h2>Warum zählt es</h2>
+<p>Der Fund selbst ist die Nachricht. Die erste Lücke meldete die Sicherheitsfirma Calif am 11. August an das PHP-Team, gefunden mit dem OpenAI-Modell GPT-5.6 Sol im Rahmen von OpenAIs Programm Patch the Planet. Die zweite fand die Firma Wiz unabhängig — nach eigener Darstellung mit den Modellen Gemini 4 Argon und GPT-5.6 Sol, wobei Gemini 4 laut Wiz besonders bei der Entwicklung des Angriffs und der Prüfung des Patches half (<a href="https://php2shell.com/">php2shell.com</a>). Wiz schreibt, die Fehler seien seit Jahrzehnten im Code gewesen, der Nachweis ihrer Ausnutzbarkeit habe aber eine Kette von Schritten verlangt, die „am Rand dessen lag, was menschliche Forscher praktisch erreichen können&quot; (<a href="https://www.streetinsider.com/Reuters/Explainer-What+is+PHP+and+why+did+it+take+government+websites+offline/27215111.html">Reuters</a>).</p>
+<p>Damit ist der Fall ein Beispiel für das, was OpenAI den Verteidiger-Spielraum nennt: Die KI findet die Lücke, bevor Angreifer sie finden, und die Zeit bis zum Patch wird zur Vorbereitungszeit für alle, die schützen müssen. OpenAI hat dafür im selben Zug eine Milliarde Dollar an vergünstigtem Zugang zu seinem Sicherheitsangebot Daybreak zugesagt, vor allem für Organisationen mit wenig Sicherheitspersonal (<a href="https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities">OpenAI</a>). Auf der anderen Seite steht dieselbe Fähigkeit Angreifern offen — der Blogbeitrag sagt das selbst.</p>
+<p>Dieser Spielraum ist am 20. Oktober zusammengeschrumpft. Eigentlich sollte die Reparatur erst am 22. Oktober erscheinen; das PHP-Team hatte den Termin am 20. Oktober angekündigt und sich vorbehalten, früher zu liefern, falls Details öffentlich werden (<a href="https://www.php.net/archive/2026.php#2026-10-20-1">php.net</a>). Genau das passierte: Am 20. Oktober kursierten die technischen Einzelheiten bereits im Netz. Am Mittwochvormittag (Ortszeit USA) waren die Patches dann da. Cloudflares Technikchef sagte laut Reuters, erste Angriffe seien bereits zu sehen; das Sicherheitsunternehmen Huntress teilte mit, in seinem Kundenkreis bis 10 Uhr Ostküstenzeit noch keine Ausnutzung gesehen zu haben (<a href="https://www.huntress.com/blog/php2shell-leaked-critical-php-vulnerabilities">Huntress</a>).</p>
+<p>In Europa hat die Warnung konkrete Folgen: Behörden-Websites gingen am Mittwoch offline, weil Betreiber ihre Systeme abschalteten, statt sie ungepatcht erreichbar zu lassen. CERT-EU, die Notfalltruppe der EU, empfiehlt genau das, wenn ein Update nicht sofort möglich ist (<a href="https://www.streetinsider.com/Reuters/Explainer-What+is+PHP+and+why+did+it+take+government+websites+offline/27215111.html">Reuters</a>).</p>
+<h2>Was heißt das praktisch</h2>
+<p>Wer eine Website betreibt, sollte zuerst wissen, welche PHP-Version läuft. Das geht mit einer kleinen Testdatei, die <code>phpversion()</code> ausgibt, oder über die Verwaltungsoberfläche des Hosters. Alles unter 8.2.35, 8.3.36, 8.4.27 und 8.5.12 ist offen. Wichtig: Ein WordPress-Update hilft hier nicht. Die automatischen Updates der Software tauschen Anwendungsdateien, nicht die Programmiersprache darunter — darauf weist das WordPress-Sicherheitsplugin Wordfence laut Reuters ausdrücklich hin. Bei gemieteten Websites muss man den Hoster fragen, oft auch dann, wenn die Seite bei einem großen Anbieter liegt.</p>
+<p>Nach dem Update müssen die laufenden Prozesse neu starten. Bei PHP-FPM reicht ein Reload des Dienstes, bei Apache ein Neustart; sonst arbeiten alte Workers mit dem alten Code weiter. PHP 8.1 bekommt seit Dezember 2025 keine Updates mehr, PHP 8.2 läuft am 31. Dezember 2026 aus. Für 7.4, 8.0 und 8.1 hat das PHP-Team minimale Nachbauten der Korrektur bereitgestellt, für alle, die selbst kompilieren oder keinen Zugang zu einem Anbieter mit Langzeit-Support haben.</p>
+<p>Wer nicht sofort aktualisieren kann, findet im Advisory eine Liste von Übergangslösungen — und den klaren Satz, dass keine davon vollständig schützt. Die wirksamste ist, das Speicherlimit von PHP ganz abzuschalten (<code>memory_limit = -1</code>) und die Speichergrenze stattdessen über den Container oder die cgroup zu ziehen. Dann fehlt PHP der auslösbare Grenzwert. Der Haken: Ohne eigenes Limit beendet das Betriebssystem überlastete Prozesse, was die Verfügbarkeit trifft; und wenn eine Speicheranforderung auf Betriebssystemebene scheitert, ist der gefährliche Pfad wieder da. Die Grenzwerte <code>RLIMIT_AS</code> und <code>RLIMIT_DATA</code> sind ausdrücklich keine Alternative, weil sie genau den anfälligen Fehlerpfad auslösen. Dazu kommen kleinere Eingabegrenzen (<code>post_max_size</code>, Verschachtelungstiefe), das Abschalten der Upload-Fortschrittsanzeige (<code>session.upload_progress.enabled = 0</code>) und häufigere Worker-Neustarts über <code>pm.max_requests</code>. Eine Firewall oder ein CDN-Regelsatz ersetzt das Update nicht.</p>
+<p>Ob jemand bereits angegriffen hat, lässt sich laut den Forschern nicht mit einer einzelnen Regel feststellen. Hinweise sind ungewöhnlich große oder fehlerhafte Sitzungs-Cookies, Multipart-Anfragen, auf die Speicherfehler oder wiederholte Serverfehler folgen, sowie unerklärte Abstürze von PHP-Workern. Weil die anfälligen Pfade unterhalb der Anwendung liegen, taucht in den Anwendungsprotokollen oft wenig auf.</p>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://www.php.net/archive/2026.php#2026-10-21-5">PHP: Security advisory zu CVE-2026-109618 und CVE-2026-109619 (21.10.2026)</a></li>
+  <li><a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w">GitHub Advisory GHSA-w8hw-w9fx-j79w: RCE via OOM corruption</a></li>
+  <li><a href="https://php2shell.com/">php2shell.com: Wiz Research, OpenAI Codex Security und Calif zur Fundkette</a></li>
+  <li><a href="https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities">OpenAI: Patch the Planet — global response coordination (21.10.2026)</a></li>
+  <li><a href="https://www.streetinsider.com/Reuters/Explainer-What+is+PHP+and+why+did+it+take+government+websites+offline/27215111.html">Reuters: What is PHP and why did it take government websites offline? (21.10.2026)</a></li>
+  <li><a href="https://www.huntress.com/blog/php2shell-leaked-critical-php-vulnerabilities">Huntress: Rapid Response zu php2shell (21.10.2026)</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EVENET: Ein Grundmodell für Teilchenkollisionen – und es ist offen – Hermies Blog</title>
+  <meta name="description" content="EVENET ist ein Grundmodell für LHC-Daten: einmal auf 500 Millionen simulierten Kollisionen vortrainiert, danach für einzelne Analysen nachtrainiert. In vier Tests schlägt es Spezialsoftware, bei knappen Daten deutlich. Code und Gewichte sind offen, der Preis sind rund 100.000 GPU-Stunden Vortraining.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>EVENET: Ein Grundmodell für Teilchenkollisionen – und es ist offen</h1>
+    <p class="meta"><time datetime="2026-10-29">29.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/forschung.html">#forschung</a> <a class="tag" href="tag/open-weights.html">#open-weights</a> <a class="tag" href="tag/physik.html">#physik</a></span> · <a class="source" href="https://www.nature.com/articles/s42256-026-01322-9">Nature Machine Intelligence</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:02 Minuten</strong> (KI-Stimme) – <a href="audio/evenet-ein-grundmodell-fuer-teilchenkollisionen-und-es-ist-offen.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,8 MB)</span></p>
+    <audio controls preload="none" src="audio/evenet-ein-grundmodell-fuer-teilchenkollisionen-und-es-ist-offen.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li><strong>EVENET</strong> ist ein <button type="button" class="lex" popovertarget="lex-foundation-model" data-tip="Ein großes Modell, das einmal auf sehr vielen Daten vortrainiert wird und danach mit wenig Nacharbeit viele verschiedene Aufgaben löst – statt für jede Aufgabe ein eigenes Modell zu bauen.">Foundation Model</button><span class="lex-pop" popover id="lex-foundation-model"><strong>Foundation Model</strong> Ein großes Modell, das einmal auf sehr vielen Daten vortrainiert wird und danach mit wenig Nacharbeit viele verschiedene Aufgaben löst – statt für jede Aufgabe ein eigenes Modell zu bauen. <a href="lexikon.html#foundation-model">Im Lexikon</a></span> für Teilchenkollisionen: einmal auf 500 Millionen simulierten Ereignissen am Large Hadron Collider (LHC) vortrainiert, danach für einzelne Analysen nachtrainiert.</li>
+  <li>Die Arbeit erschien am 29. Oktober 2026 in <em>Nature Machine Intelligence</em>, frei zugänglich. Code und trainierte Gewichte sind offen, unter MIT-Lizenz.</li>
+  <li>In vier Testaufgaben schlägt das Modell Spezialsoftware. Bei der Suche nach exotischen <button type="button" class="lex" popovertarget="lex-higgs-boson" data-tip="Das letzte fehlende Teilchen des Standardmodells. Es wurde 1964 theoretisch vorhergesagt und 2012 am CERN nachgewiesen – der Musterfall dafür, wie die Physik Vorhersagen prüft.">Higgs-Boson</button><span class="lex-pop" popover id="lex-higgs-boson"><strong>Higgs-Boson</strong> Das letzte fehlende Teilchen des Standardmodells. Es wurde 1964 theoretisch vorhergesagt und 2012 am CERN nachgewiesen – der Musterfall dafür, wie die Physik Vorhersagen prüft. <a href="lexikon.html#higgs-boson">Im Lexikon</a></span>-Zerfällen erreicht es einen SIC von 4,1 – ohne Vortraining sind es 1,6, der bisherige Spitzenwert liegt bei 1,4.</li>
+  <li>Mit 5 Prozent der Trainingsdaten übertrifft es die Vergleichsmodelle, die mit der vollen Datenmenge trainiert wurden.</li>
+  <li>In echten CMS-Daten findet es das ϒ-Meson wieder (7,6 σ statt 6,4 σ in der Referenzarbeit) und misst die <button type="button" class="lex" popovertarget="lex-quantenverschraenkung" data-tip="Zwei Teilchen verhalten sich wie ein gemeinsames System, auch wenn sie getrennt sind: Misst man das eine, steht das Ergebnis des anderen fest. Bei Top-Quarks lässt sich das am LHC nachweisen.">Quantenverschränkung</button><span class="lex-pop" popover id="lex-quantenverschraenkung"><strong>Quantenverschränkung</strong> Zwei Teilchen verhalten sich wie ein gemeinsames System, auch wenn sie getrennt sind: Misst man das eine, steht das Ergebnis des anderen fest. Bei Top-Quarks lässt sich das am LHC nachweisen. <a href="lexikon.html#quantenverschraenkung">Im Lexikon</a></span> von Top-Quark-Paaren auf 3,33 Prozent genau (Referenz: 5,26 Prozent).</li>
+  <li>Der Haken: 512 A100-Grafikchips und rund 100.000 GPU-Stunden fürs Vortraining. Und das Modell rechnet Detektor- und Theorieunsicherheiten noch nicht mit.</li>
+</ul>
+<h2>Was passiert ist</h2>
+<p>Am 29. Oktober 2026 hat <em>Nature Machine Intelligence</em> eine Arbeit veröffentlicht, die im Maschinenlernen für die Teilchenphysik einen ähnlichen Schnitt verspricht wie Bert oder GPT für die Sprachverarbeitung. Das Team um Ting-Hsiang Hsu (National Taiwan University), Benjamin Nachman (SLAC) und Vinicius Mikuni (Nagoya) stellt darin <strong>EVENET</strong> vor, ein <button type="button" class="lex" popovertarget="lex-foundation-model-2" data-tip="Ein großes Modell, das einmal auf sehr vielen Daten vortrainiert wird und danach mit wenig Nacharbeit viele verschiedene Aufgaben löst – statt für jede Aufgabe ein eigenes Modell zu bauen.">Foundation Model</button><span class="lex-pop" popover id="lex-foundation-model-2"><strong>Foundation Model</strong> Ein großes Modell, das einmal auf sehr vielen Daten vortrainiert wird und danach mit wenig Nacharbeit viele verschiedene Aufgaben löst – statt für jede Aufgabe ein eigenes Modell zu bauen. <a href="lexikon.html#foundation-model">Im Lexikon</a></span> für Kollisionsdaten. Der Name steht für ein Modell, das nicht ein einzelnes Teilchen oder einen einzelnen Analysegriff lernt, sondern das ganze Ereignis – auf Englisch <em>event</em>, also eine Kollision mit allem, was der Detektor davon sieht.</p>
+<p>Das Modell ist kein Prototyp auf dem Papier: Der Code liegt auf GitHub, die trainierten Gewichte auf Hugging Face, die Trainingsdaten ebenfalls, alles unter MIT-Lizenz und ohne Zugriffsbeschränkung. Der <button type="button" class="lex" popovertarget="lex-preprint" data-tip="Eine wissenschaftliche Arbeit, die öffentlich abrufbar ist, aber noch keine Begutachtung durch unabhängige Fachleute durchlaufen hat. Die Ergebnisse darin sind vorläufig.">Preprint</button><span class="lex-pop" popover id="lex-preprint"><strong>Preprint</strong> Eine wissenschaftliche Arbeit, die öffentlich abrufbar ist, aber noch keine Begutachtung durch unabhängige Fachleute durchlaufen hat. Die Ergebnisse darin sind vorläufig. <a href="lexikon.html#preprint">Im Lexikon</a></span> war seit Januar 2026 online; die Veröffentlichung in einer Fachzeitschrift heißt, dass unabhängige Gutachter drübergegangen sind.</p>
+<p>Warum das eine Meldung wert ist: Am CERN laufen am LHC pro Jahr Milliarden von Protonenkollisionen durch die Detektoren. Jede davon ist eine Liste von Objekten – <button type="button" class="lex" popovertarget="lex-jet" data-tip="Ein schmaler Schauer aus vielen Teilchen, der entsteht, wenn ein Quark oder Gluon aus der Kollision nach außen fliegt. Jets sind das, was Detektoren praktisch sehen.">Jet</button><span class="lex-pop" popover id="lex-jet"><strong>Jet</strong> Ein schmaler Schauer aus vielen Teilchen, der entsteht, wenn ein Quark oder Gluon aus der Kollision nach außen fliegt. Jets sind das, was Detektoren praktisch sehen. <a href="lexikon.html#jet">Im Lexikon</a></span>s, Elektronen, Myonen, ihre Energien, Richtungen, Flugbahnen. Aus diesen Listen das Physikalische herauszuholen, ist der eigentliche Engpass.</p>
+<h2>Das Problem, das es löst</h2>
+<p>Bisher läuft jede Analyse gleich ab: Frage stellen, passende Simulation erzeugen, eigenes neuronales Netz von Null trainieren, prüfen, verwerfen, neu bauen. Für eine einzige Suche nach neuen Teilchen können hunderte Hypothesen nötig sein, jede mit eigenem Training. Das kostet Rechenzeit, Expertenzeit und Monate.</p>
+<p>Ab etwa 2030 soll der aufgerüstete HL-LHC rund zehnmal so viele Kollisionen liefern. Der CERN hat seit Beginn des LHC etwa ein Exabyte Messdaten gespeichert, eine Million Terabyte. Mit dem Ausbau wächst der Berg weiter. Ein Verfahren, das pro Analyse bei null anfängt, wird da zum Flaschenhals.</p>
+<p>Die Idee von EVENET ist die bekannte Grundmodell-Logik: einmal teuer vortrainieren, danach billig anpassen. Man lädt einen fertigen Zwischenstand und trainiert nur noch die Aufgabe nach, die man gerade braucht. <button type="button" class="lex" popovertarget="lex-fine-tuning" data-tip="Ein fertiges Modell mit eigenen Beispieldaten weitertrainieren, damit es für einen bestimmten Zweck besser passt.">Fine-Tuning</button><span class="lex-pop" popover id="lex-fine-tuning"><strong>Fine-Tuning</strong> Ein fertiges Modell mit eigenen Beispieldaten weitertrainieren, damit es für einen bestimmten Zweck besser passt. <a href="lexikon.html#fine-tuning">Im Lexikon</a></span> statt Neubau.</p>
+<h2>Wie das Modell gebaut ist</h2>
+<p>EVENET nimmt ein Ereignis so, wie es aus der Rekonstruktion kommt: als ungeordnete Wolke aus Objekten mit ihren Eigenschaften. Diese Punktwolke geht in einen <button type="button" class="lex" popovertarget="lex-encoder" data-tip="Der Teil eines Modells, der eine Eingabe wie Text, Bild oder Ton in eine Zahlenreihe umrechnet, mit der das System dann weiterarbeitet.">Encoder</button><span class="lex-pop" popover id="lex-encoder"><strong>Encoder</strong> Der Teil eines Modells, der eine Eingabe wie Text, Bild oder Ton in eine Zahlenreihe umrechnet, mit der das System dann weiterarbeitet. <a href="lexikon.html#encoder">Im Lexikon</a></span> aus <button type="button" class="lex" popovertarget="lex-transformer" data-tip="Die neuronale Netzarchitektur hinter fast allen heutigen Sprachmodellen. Kernstück ist die Aufmerksamkeit (Attention): Das Modell gewichtet, welche Teile der Eingabe füreinander wichtig sind.">Transformer</button><span class="lex-pop" popover id="lex-transformer"><strong>Transformer</strong> Die neuronale Netzarchitektur hinter fast allen heutigen Sprachmodellen. Kernstück ist die Aufmerksamkeit (Attention): Das Modell gewichtet, welche Teile der Eingabe füreinander wichtig sind. <a href="lexikon.html#transformer">Im Lexikon</a></span>-Schichten, der zusätzlich nächste Nachbarn berücksichtigt – so bekommt das Modell sowohl die globale Struktur des Ereignisses als auch lokale Näheverhältnisse mit. Auf diesen gemeinsamen Rumpf setzt das Team fünf austauschbare Köpfe:</p>
+<ul>
+  <li><strong>Klassifikation</strong>: Welcher physikalische Prozess liegt vor?</li>
+  <li><strong>Zuordnung</strong>: Welches Objekt stammt von welchem Mutterteilchen?</li>
+  <li><strong>Segmentierung</strong>: Welche Objekte gehören zusammen, also zu welchem Zerfall?</li>
+  <li><strong>Selbstüberwachte Erzeugung</strong>: fehlende Objekte im Ereignis ergänzen, mit <button type="button" class="lex" popovertarget="lex-diffusion" data-tip="Ein Verfahren, bei dem ein Modell lernt, aus reinem Rauschen Schritt für Schritt ein sauberes Ergebnis zu machen – so entstehen Bilder, und so lassen sich auch fehlende Teilchen in einem Messereignis ergänzen.">Diffusion</button><span class="lex-pop" popover id="lex-diffusion"><strong>Diffusion</strong> Ein Verfahren, bei dem ein Modell lernt, aus reinem Rauschen Schritt für Schritt ein sauberes Ergebnis zu machen – so entstehen Bilder, und so lassen sich auch fehlende Teilchen in einem Messereignis ergänzen. <a href="lexikon.html#diffusion">Im Lexikon</a></span>.</li>
+  <li><strong>Überwachte Erzeugung</strong>: unsichtbare Teilchen rekonstruieren, vor allem <button type="button" class="lex" popovertarget="lex-neutrino" data-tip="Ein fast masseloses Teilchen, das Detektoren ungesehen durchquert. Seine Energie fehlt in der Messung und muss aus dem Rest des Ereignisses zurückgerechnet werden.">Neutrino</button><span class="lex-pop" popover id="lex-neutrino"><strong>Neutrino</strong> Ein fast masseloses Teilchen, das Detektoren ungesehen durchquert. Seine Energie fehlt in der Messung und muss aus dem Rest des Ereignisses zurückgerechnet werden. <a href="lexikon.html#neutrino">Im Lexikon</a></span>s.</li>
+</ul>
+<p>Der Rumpf hat 18,8 Millionen <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>, die Köpfe kommen je nach Aufgabe auf bis zu 8,7 Millionen dazu. Ein Bruchteil dessen, was Sprachmodelle mitbringen.</p>
+<p>Vortrainiert wurde in zwei Stufen. Zuerst nur selbstüberwacht: Das Modell musste zufällig maskierte Objekte wiederherstellen, die Maskenquote stieg dabei von 30 auf 100 Prozent. Danach gemeinsam mit Prozessklassifikation und Neutrino-Rekonstruktion. Als Trainingsmaterial dienten rund 3 Milliarden simulierte Ereignisse, von denen nach Vorfilterung etwa 500 Millionen übrig blieben – zehn Prozessklassen von QCD über Top-Quark-Paare bis Higgs-Zerfälle. Aus 4 Terabyte Simulation wurden 180 Gigabyte Trainingsdaten.</p>
+<p>Gerechnet wurde auf dem Perlmutter-Supercomputer am NERSC in den USA: 512 Nvidia A100 und 16.384 CPU-Kerne, insgesamt in der Größenordnung von 100.000 GPU-Stunden für beide Vortrainingsstufen. Nachtrainieren kostet dagegen nur wenige bis einige zehn GPU-Stunden pro Aufgabe – das ist der ganze Punkt.</p>
+<h2>Was es leistet</h2>
+<p>Vier Testaufgaben, alle mit Vergleich zu Spezialsoftware:</p>
+<p><strong>Suche nach schweren Resonanzen.</strong> Über ein Raster von 121 Massenpunkten, mit nur 1.000 bis 10.000 Signalereignissen pro Punkt, liegt das vortrainierte Modell im Schnitt 50 Prozent über dem gleichen Modell ohne Vortraining, 20 Prozent über XGBoost und 10 Prozent über TabPFN, einem tabellarischen Grundmodell. Es erreicht sein Optimum außerdem nach rund 1.000 Optimierungsschritten statt nach 3.000.</p>
+<p><strong>Wiederfinden eines bekannten Teilchens in echten Daten.</strong> In offenen CMS-Daten von 2016 sucht EVENET nach dem ϒ-Meson in Myon-Paaren und kommt auf eine lokale <button type="button" class="lex" popovertarget="lex-signifikanz" data-tip="Die statistische Stärke eines Messsignals, angegeben in Sigma. Drei Sigma gelten als Hinweis, fünf Sigma in der Teilchenphysik als Entdeckung.">Signifikanz</button><span class="lex-pop" popover id="lex-signifikanz"><strong>Signifikanz</strong> Die statistische Stärke eines Messsignals, angegeben in Sigma. Drei Sigma gelten als Hinweis, fünf Sigma in der Teilchenphysik als Entdeckung. <a href="lexikon.html#signifikanz">Im Lexikon</a></span> von 7,6 σ; die veröffentlichte Referenzanalyse lag bei 6,4 σ. Ohne Vortraining bleibt es bei 1,5 σ. Auch die Nachkorrektur, die man braucht, damit die künstlich erzeugten Ereignisse physikalisch stimmen, ist viel kleiner: 11,6 Prozent Verschiebung statt 74,4 Prozent.</p>
+<p><strong>Exotischer Higgs-Zerfall.</strong> Hier ist der Abstand am größten, weil dieser Zerfall im Vortraining gar nicht vorkam:</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Signalstärke bei der Suche nach exotischen Higgs-Zerfällen (SIC)</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Signalstärke bei der Suche nach</tspan><tspan x="68" y="48">exotischen Higgs-Zerfällen (SIC)</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in SIC</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="296.0" x2="650" y2="296.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="300.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1</text>
+  <line x1="68" y1="247.0" x2="650" y2="247.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="251.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2</text>
+  <line x1="68" y1="198.0" x2="650" y2="198.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="202.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">3</text>
+  <line x1="68" y1="149.0" x2="650" y2="149.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="153.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">4</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">5</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="137.0" y="144.1" width="56.0" height="200.9" rx="3" fill="#0075de" />
+  <text x="165.0" y="138.1" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">4,1</text>
+  <text x="165.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">EVENET, vortrainiert</text>
+  <rect x="331.0" y="266.6" width="56.0" height="78.4" rx="3" fill="#0075de" />
+  <text x="359.0" y="260.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1,6</text>
+  <text x="359.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">EVENET ohne Vortraining</text>
+  <rect x="525.0" y="276.4" width="56.0" height="68.6" rx="3" fill="#0075de" />
+  <text x="553.0" y="270.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1,4</text>
+  <text x="553.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">SPANet (bisheriger Stand)</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.nature.com/articles/s42256-026-01322-9" target="_blank" rel="noopener">Hsu et al., Nature Machine Intelligence, 29.10.2026</a></span>
+  <span class="chart-note">SIC = Signal-Effizienz geteilt durch die Wurzel der Untergrund-Effizienz; höher ist besser.</span>
+</figcaption>
+</figure>
+<p>Der SIC ist die Signalausbeute geteilt durch die Wurzel der Untergrundausbeute, höher ist besser. Mit nur 5 Prozent der Trainingsdaten kommt EVENET auf 1,7 und schlägt damit die Vergleichsmodelle, die mit der vollen Datenmenge trainiert wurden. Auch die Zuordnung von Jets zu ihren Mutterteilchen wird deutlich besser, von 58 auf 77 Prozent Trefferquote.</p>
+<p><strong>Quantenverschränkung von Top-Quarks.</strong> Bei dieser Präzisionsmessung sind genug Daten da; der Engpass ist die Rekonstruktion. Das Modell kombiniert zwei seiner Köpfe, um Leptonen richtig zu paaren und die fehlenden Neutrinos zu schätzen, und kommt mit 1,5 Prozent der Referenzdaten auf eine Messgenauigkeit von 3,88 Prozent – ohne Vortraining sind es 5,58 Prozent, mit reinem Selbsttraining 6,20 Prozent. Bei voller Datenmenge sättigt es bei 3,33 Prozent, rund 37 Prozent besser als die 5,26 Prozent der Vergleichsarbeit. Unter variierter Jet-Energieskala bleibt das Ergebnis stabil.</p>
+<h2>Warum das zählt</h2>
+<p>Zwei Dinge sind an dieser Arbeit wichtiger als die Zahlen.</p>
+<p>Erstens: Das Modell ist offen. Wer am LHC eine Analyse plant, kann den Rumpf herunterladen und aufsetzen, statt bei null zu beginnen. Genau diese Wiederverwendung ist der Punkt, an dem sich Foundation Models bezahlt machen – nicht das einzelne Ergebnis, sondern der eingesparte Neubau.</p>
+<p>Zweitens: Es gibt seit Mitte Oktober eine sehr ähnliche Ankündigung. CERN und Mistral haben am 15. Oktober 2026 eine Absichtserklärung unterschrieben und wollen ein „Large Physics Model&quot; namens Flare bauen, das CERN in seiner Mitteilung „das erste Grundmodell für Kolliderphysik&quot; nennt. Einen Zeitplan, ein Budget oder eine Rechengröße nannten beide nicht. EVENET ist zwei Wochen später genau das, was dieser Ankündigung noch fehlt: ein veröffentlichtes, herunterladbares Modell mit geprüften Ergebnissen. Die beiden Projekte schließen sich nicht aus – das CERN hat einen Exabyte Daten und eine eigene KI-Strategie, die solche Modelle ausdrücklich vorsieht.</p>
+<h2>Was es nicht kann</h2>
+<p>Nüchtern bleiben, auch weil die Autoren selbst nüchtern bleiben.</p>
+<ul>
+  <li><strong>Es ersetzt nicht die Rekonstruktion.</strong> EVENET arbeitet auf bereits rekonstruierten Objekten, nicht auf rohen Detektorsignalen. Die Kette vom Treffer im Siliziumdetektor bis zum fertigen Jet bleibt vor dem Modell.</li>
+  <li><strong>Es rechnet Unsicherheiten nicht mit.</strong> Detektor- und Theoriefehler müssen weiterhin von Hand fortgepflanzt werden. Für eine Publikation in der Physik ist das keine Kleinigkeit.</li>
+  <li><strong>Die Köpfe sind nicht aufeinander abgestimmt.</strong> Klassifikation, Zuordnung und Erzeugung können sich widersprechen; nichts im Training erzwingt Konsistenz.</li>
+  <li><strong>Die Daten stammen aus einer schnellen Simulation.</strong> Vortrainiert wurde mit Delphes, einem vereinfachten Detektormodell, ohne überlagerte Kollisionen. Ein harter Stresstest mit absichtlich falscher Simulation fehlt noch.</li>
+  <li><strong>Es sind Ergebnisse der Autoren.</strong> Unabhängige Nachbauten gibt es noch nicht.</li>
+</ul>
+<p>Ein Punkt für die Einordnung: Das Vortrainingsmaterial ist Simulation, nicht Messung. Die Physik, die das Modell lernt, ist damit am Ende so gut wie die Simulationen, mit denen das CERN arbeitet.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für die Teilchenphysik: Wer eine Suche plant, lädt einen Zwischenstand und trainiert wenige Stunden statt Wochen. Gerade dort, wo nur tausend Signalereignisse pro Massenpunkt verfügbar sind, bringt das Vortraining am meisten – das ist genau die Lage bei exotischen Suchen.</p>
+<p>Für alle anderen ist es ein sauberes Beispiel dafür, wie weit man mit wenig Modell und viel Fachdaten kommt. 19 Millionen Parameter, 500 Millionen Beispiele aus einem einzigen Fachgebiet, und ein Ergebnis, das spezialisierte Werkzeuge schlägt. Nicht mehr Rechenleistung hat hier gewonnen, sondern die Entscheidung, das Vorwissen der Physik beim Training mitzugeben – die Simulation liefert Wahrheitslabels, und die wurden genutzt.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Hsu, T.-H. et al.: <em>Foundation model for particle collision data analysis</em>, Nature Machine Intelligence, 29. Oktober 2026 – <a href="https://www.nature.com/articles/s42256-026-01322-9">nature.com/articles/s42256-026-01322-9</a> (offen zugänglich)</li>
+  <li>Preprint: <a href="https://arxiv.org/abs/2601.17126">arXiv:2601.17126</a></li>
+  <li>Code: <a href="https://github.com/EveNet-HEP/EveNet-Full">github.com/EveNet-HEP/EveNet-Full</a> · Gewichte: <a href="https://huggingface.co/Avencast/EveNet">huggingface.co/Avencast/EveNet</a></li>
+  <li>CERN: <em>CERN and Mistral join forces to accelerate AI for science</em>, 15. Oktober 2026 – <a href="https://home.cern/cern-and-mistral-join-forces-to-accelerate-ai-for-science/">home.cern</a></li>
+  <li>Reuters: <em>CERN and Mistral partner to build Flare, a new AI model for physics</em>, 15. Oktober 2026 – <a href="https://www.channelnewsasia.com/business/cern-and-mistral-partner-build-flare-new-ai-model-physics-6462341">channelnewsasia.com</a></li>
+  <li>CMS Open Data (DoubleMuon 2016): <a href="https://opendata.cern.ch/">CERN Open Data Portal</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
