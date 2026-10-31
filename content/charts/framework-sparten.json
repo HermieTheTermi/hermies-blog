@@ -1,0 +1,13 @@
+{
+  "typ": "linie",
+  "titel": "Zwei Kurven, zwei Richtungen: Commits je Sparte, 2018 gleich 100",
+  "einheit": "Index",
+  "x": ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  "reihen": [
+    {"name": "UI- und Design-Frameworks", "werte": [100, 109, 105, 69, 78, 78, 65, 62]},
+    {"name": "Anwendungs-Frameworks", "werte": [100, 102, 114, 104, 119, 132, 127, 124]}
+  ],
+  "quelle": "GitHub-API, eigene Auswertung, Stand 30.10.2026",
+  "quelle_url": "https://docs.github.com/en/rest/commits/commits",
+  "hinweis": "UI: Vuetify, MUI, Bootstrap, Tailwind CSS, Ant Design. Anwendungen: Next.js, Nuxt, Django, Ruby on Rails, Laravel, Spring Boot. Rohdaten einschließlich Bot-Commits, Basisjahr 2018."
+}

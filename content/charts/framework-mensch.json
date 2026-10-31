@@ -1,0 +1,13 @@
+{
+  "typ": "balken",
+  "titel": "Menschliche Commits vor und nach dem KI-Jahr 2023",
+  "einheit": "Commits pro Jahr",
+  "gruppen": ["Vuetify", "MUI", "Tailwind CSS", "Django", "Spring Boot", "Next.js"],
+  "reihen": [
+    {"name": "Mittel 2019 bis 2022", "werte": [1749, 2098, 663, 1219, 5234, 3058]},
+    {"name": "Mittel 2023 bis 2025", "werte": [1438, 1412, 442, 953, 6058, 5685]}
+  ],
+  "quelle": "GitHub-API, Commits ohne Konten mit der Endung [bot]",
+  "quelle_url": "https://docs.github.com/en/rest/commits/commits",
+  "hinweis": "Sechs Projekte, deren Bot-Anteil einzeln ausgezählt wurde. Bei MUI fielen 2025 von 1.541 Commits 753 an Renovate, bei Tailwind 208 von 712 an Depfu. Ohne diese Bereinigung sähe Tailwind nach Wachstum aus."
+}

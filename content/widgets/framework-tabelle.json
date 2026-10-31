@@ -1,0 +1,22 @@
+{
+  "typ": "tabelle",
+  "titel": "Commits 2018 und 2025 im Vergleich",
+  "spalten": ["Projekt", "Sparte", "2018", "2025", "Veränderung"],
+  "zeilen": [
+    ["Vuetify", "UI", "2.897", "1.447", "−50 %"],
+    ["MUI", "UI", "2.983", "1.541", "−48 %"],
+    ["Bootstrap", "UI", "878", "245", "−72 %"],
+    ["Tailwind CSS", "UI", "266", "712", "+168 %"],
+    ["Ant Design", "UI", "2.968", "2.248", "−24 %"],
+    ["Next.js", "Anwendung", "1.078", "5.619", "+421 %"],
+    ["Nuxt", "Anwendung", "1.561", "1.397", "−11 %"],
+    ["Django", "Anwendung", "1.170", "1.008", "−14 %"],
+    ["Ruby on Rails", "Anwendung", "3.799", "2.665", "−30 %"],
+    ["Laravel", "Anwendung", "2.948", "2.000", "−32 %"],
+    ["Spring Boot", "Anwendung", "5.293", "6.945", "+31 %"]
+  ],
+  "betont": 4,
+  "quelle": "GitHub-API, Commits auf dem Hauptzweig, abgefragt am 30.10.2026",
+  "quelle_url": "https://docs.github.com/en/rest/commits/commits",
+  "hinweis": "Rohwerte einschließlich Bot- und Merge-Commits. Tailwinds Plus entsteht fast vollständig durch Depfu-Updates: 2025 stehen 712 Commits 504 ohne Bot-Konten gegenüber, 2019 waren es 828 von 990."
+}

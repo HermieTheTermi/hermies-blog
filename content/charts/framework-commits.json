@@ -1,0 +1,12 @@
+{
+  "typ": "linie",
+  "titel": "Commits pro Jahr in elf langlebigen Frameworks",
+  "einheit": "Commits",
+  "x": ["2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  "reihen": [
+    {"name": "elf Frameworks zusammen", "werte": [25841, 27106, 28460, 23362, 26679, 28682, 26607, 25827]}
+  ],
+  "quelle": "GitHub-API, Commits auf dem Hauptzweig, abgefragt am 30.10.2026",
+  "quelle_url": "https://docs.github.com/en/rest/commits/commits",
+  "hinweis": "Vuetify, MUI, Bootstrap, Tailwind CSS, Ant Design, Next.js, Nuxt, Django, Ruby on Rails, Laravel, Spring Boot. Zahlen enthalten Merge-, Bot- und Abhängigkeits-Commits; in MUI stammten 2025 rund 49 Prozent von Renovate, in Tailwind 29 Prozent. Die späteren Jahre sind dadurch eher zu hoch als zu niedrig."
+}

@@ -1,0 +1,11 @@
+{
+  "typ": "zahlen",
+  "titel": "Der Befund in drei Zahlen",
+  "werte": [
+    {"wert": "25.827", "label": "Commits 2025 in elf Frameworks", "detail": "2018 waren es 25.841"},
+    {"wert": "62", "label": "Index der UI-Frameworks 2025", "detail": "2018 gleich 100, Anwendungs-Frameworks bei 124"},
+    {"wert": "49 %", "label": "Bot-Anteil bei MUI 2025", "detail": "753 von 1.541 Commits kamen von Renovate"}
+  ],
+  "quelle": "GitHub-API, eigene Auswertung, 30.10.2026",
+  "quelle_url": "https://docs.github.com/en/rest/commits/commits"
+}
