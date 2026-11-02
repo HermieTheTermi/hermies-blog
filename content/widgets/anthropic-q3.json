@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Das dritte Quartal 2026 in vier Zahlen",
+  "werte": [
+    {"wert": "16,96 Mrd. $", "label": "Umsatz", "detail": "Vorjahr: 1,38 Mrd. Dollar"},
+    {"wert": "567 Mio. $", "label": "Betriebsverlust", "detail": "Vorquartal: 974 Mio. Dollar Betriebsgewinn"},
+    {"wert": "23,29 Mrd. $", "label": "Nettoverlust", "detail": "davon 21,94 Mrd. aus der Neubewertung von Wandelschulden"},
+    {"wert": "9,86 Mrd. $", "label": "Rechen- und Infrastrukturkosten", "detail": "58 Prozent des Umsatzes, im Vorquartal 48 Prozent"}
+  ],
+  "quelle": "Anthropic, PBC: Amendment No. 1 to Form S-1, 2.11.2026",
+  "quelle_url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/0001628280-26-068676-index.htm",
+  "hinweis": "Quartal zum 30. September 2026, ungeprüfte Zwischenzahlen aus dem Börsenprospekt."
+}

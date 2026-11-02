@@ -1,0 +1,13 @@
+{
+  "titel": "Verpflichtung und Auftragsbestand",
+  "einheit": "Mio. Dollar",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Auftragsbestand (RPO), 13,8 Mrd.", "wert": 13800},
+    {"label": "fällig bis 30.9.2027, 69,8 Mrd.", "wert": 69800},
+    {"label": "Verpflichtungen insgesamt, 895,4 Mrd.", "wert": 895400}
+  ],
+  "quelle": "Anthropic, PBC: Amendment No. 1 to Form S-1, 2.11.2026",
+  "quelle_url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/0001628280-26-068676-index.htm",
+  "hinweis": "Der Auftragsbestand zählt nur nicht kündbare Kundenverträge. Verbrauch nach Token über die API erscheint dort nicht, deshalb ist der Balken strukturell klein."
+}

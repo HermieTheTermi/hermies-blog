@@ -1,0 +1,13 @@
+{
+  "titel": "Anthropic: Umsatz und Rechenkosten je Quartal",
+  "einheit": "Mio. Dollar",
+  "typ": "balken",
+  "gruppen": ["Q1 25", "Q2 25", "Q3 25", "Q4 25", "Q1 26", "Q2 26", "Q3 26"],
+  "reihen": [
+    {"name": "Umsatz", "werte": [376, 787, 1382, 2040, 4731, 11555, 16956]},
+    {"name": "Rechen- und Infrastrukturkosten", "werte": [944, 1390, 2047, 2945, 3387, 5558, 9863]}
+  ],
+  "quelle": "Anthropic, PBC: Amendment No. 1 to Form S-1, 2.11.2026",
+  "quelle_url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/0001628280-26-068676-index.htm",
+  "hinweis": "Quartalswerte, nicht annualisiert. Bis Q4 2025 lagen die Rechenkosten über dem Umsatz, seit Q1 2026 darunter."
+}

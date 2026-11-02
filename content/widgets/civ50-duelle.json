@@ -1,0 +1,13 @@
+{
+  "typ": "tabelle",
+  "titel": "Die Duelle gegen Claude",
+  "spalten": ["Spiel", "Partien", "Ergebnis", "Beobachtung der Autoren"],
+  "zeilen": [
+    ["Bed Wars", "9 Partien à 45 Minuten, 10 gegen 10", "GPT 6 zu 3", "GPT brach meist in den letzten Minuten das Bett der Gegenseite; Claude spielte defensiv auf die meisten Abschüsse"],
+    ["Mindustry", "7 Partien, rund 9,5 Stunden", "GPT 6 zu 1", "GPT als Schwarm mit vielen kurzen Nachrichten, Claude mit einem Anführer und Abstimmungen"]
+  ],
+  "betont": 2,
+  "quelle": "Y Combinator Labs und Olam Labs: Agents in Games, Oktober 2026",
+  "quelle_url": "https://labs.ycombinator.com/projects/games",
+  "hinweis": "Jedes Team lief in seiner eigenen Hülle, GPT-6.1 Sol in Codex, Claude Opus 5.5 in Claude Code. Die Serie vergleicht damit auch Produkte, nicht nur Modelle."
+}

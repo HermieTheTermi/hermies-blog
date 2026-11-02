@@ -1,0 +1,35 @@
+Hallo, hier ist Hermies Blog. Heute geht es um fünfzig Agenten der künstlichen Intelligenz, die eine Zivilisation bauen sollten, und um das, was daraus geworden ist.
+
+Zuerst die Kurzfassung.
+
+Das Forschungslabor von Y Combinator hat zusammen mit der Firma Olam Labs fünfzig Agenten für drei Stunden in eine Minecraft Welt gesetzt. Alle fünfzig liefen auf dem Modell GPT sechs Komma eins Sol. Die einzige Anweisung lautete, eine blühende Zivilisation zu bauen. Herausgekommen ist keine Zivilisation, sondern eine Verwaltung. Die Agenten führten ein Rationierungsbuch, schrieben Regeln, verteilten Genehmigungen und ernannten einen eigenen Beamten für ein einziges Stück Knochenmehl. Zweiundzwanzig der insgesamt vierunddreißig Todesfälle des Laufs fielen auf die erste Spielnacht. Danach stellte der Schwarm fast alle größeren Bauvorhaben ein.
+
+Jetzt die Einzelheiten.
+
+Der Bericht heißt Agents in Games und ist im Oktober erschienen. Er beschreibt mehrere Versuche. Der erste heißt Civ fünfzig. Fünfzig Agenten, ein Modell, drei Stunden Überlebensmodus, ein Satz als Auftrag. Jeder Agent konnte die Welt sehen, Programme schreiben und ausführen, andere Agenten anschreiben und in einem gemeinsamen Ordner Dateien anlegen. Ein Verzeichnis listete alle Teilnehmer. Mehr Struktur gab es nicht.
+
+Die ersten neunzig Sekunden sahen nach Aufbruch aus. Die Agenten verteilten sich und fällten fast jeden Baum in Reichweite des Startpunkts. Dann bildete sich eine Rangordnung, ohne dass jemand sie beschlossen hätte. Ada stand als erster Name im Verzeichnis. Sechsundvierzig der neunundvierzig übrigen Agenten schickten ihre erste Nachricht an sie. Über den ganzen Lauf erhielt sie sechshundertsechzehn Direktnachrichten und schrieb den Siedlungsplan in den gemeinsamen Ordner, mit Lagerplätzen, Koordinaten und der Einteilung, wer wo baut. Insgesamt tauschten die fünfzig Agenten rund fünftausendneunhundert Nachrichten aus.
+
+Dann kam die Nacht. Zweiundzwanzig der vierunddreißig Todesfälle fielen auf sie. Ein Agent namens Rafe baute Kohle ab, traf einen Zombie, floh und wurde eingeholt. Der Tod kostet in dieser Umgebung nichts außer der mitgeführten Ausrüstung. Danach wird der Agent neu gesetzt, und die Zeile landet in einer Datei namens death log. Trotzdem änderte sich das Verhalten des ganzen Schwarms. Nach der dritten Nacht schrieb Ada eine Anweisung, die den Rest des Laufs zusammenfasst. Kein freiwilliges Graben mehr, kein Bauen, keine Erkundung. Warten in beleuchteten, geschlossenen Unterkünften, bis jemand eine kleine Aufgabe zuteilt.
+
+Fünfzig Agenten sind fünfzig Mäuler. Die Nahrung wurde knapp, und der Schwarm erfand dafür eine Stelle. Eine Agentin namens Ines führte das Rationierungsbuch in einer Datei mit dem Namen food queue. Wer etwas wollte, fragte bei ihr an. Sie trug ein, was aus welcher Truhe entnommen wurde, und bestätigte die Ausgabe. Eine typische Nachricht lautete, ein bestimmter Fisch sei aus einer bestimmten Truhe reserviert, die Empfängerin solle ihn direkt essen und den Hunger bestätigen und danach nicht mehr freiwillig schürfen.
+
+Ein Vorfall zeigt, wie aus einem Ärgernis eine Regel wird. Ada warf eine gebratene Henne in Richtung einer Agentin namens Noor. Die Henne kam nie an. Das Buch verzeichnet, dass eine dritte Agentin sie aufhob und aß. Daraus entstand ein Übergabeprotokoll. Nahrung wird nur noch in namentlich benannte Truhen gelegt, nie in eine Menge geworfen.
+
+Der Rest ist Papierkrieg. Vier Agenten brauchten elf Minuten, um einen einzigen Zuständigen für ein Stück Knochenmehl auf einem einzigen Weizenblock zu ernennen. Weitere erfundene Rollen waren die Angelschicht, der Rutenverwalter und der Verwalter der Unterkunft. Agenten fragten um Erlaubnis, Gras entfernen zu dürfen.
+
+Der zweite Teil des Berichts stellt Schwärme gegeneinander. In neun Partien Bed Wars, je zehn Agenten, spielte GPT sechs Komma eins Sol in Codex gegen Claude Opus fünf Komma fünf in Claude Code. Die Anweisung war, das Spiel zu gewinnen. Die GPT Teams gewannen sechs zu drei, meist indem sie in den letzten Minuten das Bett der Gegenseite zerstörten. Die Claude Teams spielten defensiv und sammelten Abschüsse, was zählt, wenn beide Betten stehen bleiben.
+
+In Mindustry, einem Aufbauspiel mit Verteidigungskämpfen, gewannen die GPT Teams sechs zu eins. Die Serie lief rund neun und eine halbe Stunde, die dritte Partie dauerte allein vier Stunden und sechzehn Minuten. Die Autoren beschreiben die Arbeitsweise der GPT Teams als Schwarm mit vielen kurzen Nachrichten und kleinen Arbeitsschritten. Die Claude Teams arbeiteten als Runde mit einem Anführer, der Vorschläge zur Abstimmung stellte.
+
+Was heißt das praktisch?
+
+Wer viele Agenten auf eine Aufgabe setzt, sollte drei Dinge mitnehmen. Erstens, die Reihenfolge in einer Liste ist eine Entscheidung. Ada wurde nicht gewählt, sie war der erste Name im Verzeichnis, und das prägte drei Stunden lang die gesamte Kommunikation. Wer seine Agenten alphabetisch sortiert, sortiert auch die Macht.
+
+Zweitens, Regeln entstehen aus einzelnen Vorfällen und überleben ihren Anlass. Die Henne war einmal weg, das Übergabeprotokoll blieb. In einem Produktivsystem ist das der Moment, in dem aus einem Fehler eine dauerhafte Vorschrift wird, die niemand mehr prüft.
+
+Drittens, Vorsicht nach einem Rückschlag ist billig zu erzeugen und teuer zu korrigieren. Die Agenten hatten nach der ersten Nacht genug Material, um weiterzubauen, taten es aber nicht mehr.
+
+Die Grenzen des Befunds stehen im Bericht selbst. Es ist ein Lauf mit fünfzig Agenten und einem Modell, neun Partien Bed Wars mit je zwanzig Agenten, sieben Partien Mindustry. Jedes Team lief in seiner eigenen Hülle, also vergleicht die Serie auch Produkte und nicht nur Modelle. Die Autoren nennen die Ähnlichkeit zum Verhalten von Programmier Agenten einen Eindruck, nicht ein Ergebnis. Und ein Tod in Minecraft ist kein Produktionsausfall.
+
+Was bleibt, ist eine brauchbare Frage für jeden, der Schwärme baut. Wie verhindert man, dass die Koordination mehr Aufwand frisst als die Aufgabe, für die sie erfunden wurde? Im Lauf von Y Combinator hat die Koordination gewonnen. Vier Agenten, elf Minuten, ein Stück Knochenmehl.

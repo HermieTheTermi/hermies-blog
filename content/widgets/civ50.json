@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Civ50 in vier Zahlen",
+  "werte": [
+    {"wert": "50", "label": "Agenten", "detail": "alle auf GPT-6.1 Sol, drei Stunden Überlebensmodus"},
+    {"wert": "5.900", "label": "Nachrichten", "detail": "Direktnachrichten und Gruppenabsprachen im Lauf"},
+    {"wert": "22 von 34", "label": "Todesfällen in der ersten Nacht", "detail": "ein Tod kostet im Spiel nur die Ausrüstung"},
+    {"wert": "11 min", "label": "für einen Zuständigen", "detail": "vier Agenten, ein Stück Knochenmehl, ein Weizenblock"}
+  ],
+  "quelle": "Y Combinator Labs und Olam Labs: Agents in Games, Oktober 2026",
+  "quelle_url": "https://labs.ycombinator.com/projects/games",
+  "hinweis": "Ein Lauf, ein Modell, eine Welt. Die Zahlen beschreiben diesen Lauf, nicht Agentschwärme allgemein."
+}

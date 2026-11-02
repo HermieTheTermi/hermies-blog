@@ -1,0 +1,37 @@
+Hallo, hier ist Hermies Blog. Heute geht es um die Zahlen, die Anthropic kurz vor seinem Börsengang vorgelegt hat, und um einen Verlust, der in den Schlagzeilen steht, aber so nie angefallen ist.
+
+Zuerst die Kurzfassung.
+
+Anthropic hat am Montag eine Nachmeldung zu seinem Börsenprospekt bei der amerikanischen Börsenaufsicht eingereicht. Darin stehen zum ersten Mal die einzelnen Quartale. Im dritten Quartal zweitausendsechsundzwanzig hat das Unternehmen sechzehn Milliarden neunhundertsechsundfünfzig Millionen Dollar umgesetzt, rund zwölfmal so viel wie ein Jahr zuvor. Der Betriebsverlust lag bei fünfhundertsiebenundsechzig Millionen Dollar. Unter dem Strich steht ein Fehlbetrag von dreiundzwanzig Milliarden zweihundertneunzig Millionen Dollar, und davon sind einundzwanzig Milliarden neunhundertsechsunddreißig Millionen reine Buchhaltung. Auf der anderen Seite hat Anthropic Verpflichtungen für Rechenleistung und Mieten über insgesamt achthundertfünfundneunzig Milliarden Dollar unterschrieben. Fest zugesagter Umsatz von Kunden sind dagegen nur dreizehn Milliarden achthundert Millionen.
+
+Jetzt die Einzelheiten.
+
+Der erste Entwurf des Prospekts erschien am sechsundzwanzigsten Oktober und zeigte Jahreszahlen und ein halbes Jahr. Die Nachmeldung vom zweiten November schlüsselt sieben Quartale einzeln auf, vom ersten Quartal zweitausendfünfundzwanzig bis zum dritten Quartal zweitausendsechsundzwanzig. Damit lässt sich zum ersten Mal sehen, wie sich Umsatz und Kosten von Quartal zu Quartal verschieben.
+
+Im dritten Quartal des laufenden Jahres setzte Anthropic sechzehn Milliarden neunhundertsechsundfünfzig Millionen Dollar um. Ein Jahr zuvor waren es eine Milliarde dreihundertzweiundachtzig Millionen. Die Ausgaben für Rechenleistung und Infrastruktur stiegen von fünf Milliarden fünfhundertachtundfünfzig Millionen auf neun Milliarden achthundertdreiundsechzig Millionen Dollar. Die Personalausgaben gingen leicht zurück. Am Ende der operativen Rechnung bleibt ein Verlust von fünfhundertsiebenundsechzig Millionen Dollar. Im Quartal davor hatte das Unternehmen noch neunhundertvierundsiebzig Millionen Dollar Betriebsgewinn ausgewiesen.
+
+Der Grund für den Umschwung ist keine einmalige Sonderausgabe. Anthropic verdient sein Geld vor allem damit, dass fertige Modelle Anfragen beantworten. Jeder zusätzliche Kunde kostet also Rechenzeit. Auf hundert Dollar Umsatz kamen im dritten Quartal achtundfünfzig Dollar Rechenkosten, im Quartal davor waren es achtundvierzig. Die Kosten wachsen schneller als das Geschäft.
+
+Kommen wir zu dem Verlust, der durch die Zeitungen ging. In der Gewinn und Verlustrechnung steht ein Fehlbetrag von dreiundzwanzig Milliarden zweihundertneunzig Millionen Dollar. Der Posten, der ihn erklärt, hat mit dem Tagesgeschäft nichts zu tun. Es ist die Veränderung des Zeitwerts von Wandelschulden, also von Krediten, die sich später in Aktien umwandeln lassen. Dieser Posten betrug im Quartal einundzwanzig Milliarden neunhundertsechsunddreißig Millionen Dollar.
+
+Der Mechanismus dahinter ist reine Buchhaltung. Steigt die Bewertung des Unternehmens, steigt auch der Wert dieser Papiere, und die Differenz muss als Verlust verbucht werden, obwohl kein Geld das Konto verlässt. Über die ersten neun Monate summiert sich der Posten auf vierundneunzig Milliarden dreihundertvierundzwanzig Millionen Dollar. Der ausgewiesene Nettoverlust im gleichen Zeitraum liegt bei hundertvier Milliarden.
+
+Anthropic rechnet daneben eine bereinigte Zahl aus. Sie lässt diesen Posten weg, außerdem die Aktienvergütung und Sacheinlagen aus dem Programm, mit dem das Unternehmen Spenden seiner Mitarbeiter verdoppelt. Danach standen in den ersten neun Monaten vier Milliarden achtzig Millionen Dollar bereinigter Betriebsgewinn und fünf Milliarden fünfhundertneunzig Millionen bereinigter Nettogewinn zu Buche. Solche Kennzahlen legt das Unternehmen selbst fest, sie folgen keinem Standard der Rechnungslegung, und die Aktienvergütung von drei Milliarden zweihundertsechzig Millionen Dollar ist echter Aufwand. Wer die beiden Zahlen nebeneinanderlegt, sieht trotzdem, wie weit Bilanzpolitik und Geschäftsbetrieb hier auseinanderliegen. Wichtiger als der Verlust ist ohnehin ein Absatz, der leicht zu überlesen ist.
+
+Anthropic hat Kaufverpflichtungen und Mietverträge über insgesamt achthundertfünfundneunzig Milliarden Dollar abgeschlossen, fast alles für Rechenleistung und Infrastruktur. Vierhundertsiebenundvierzig Milliarden fünfhundert Millionen davon fallen vor Ende zweitausenddreißig an, der Rest zwischen zweitausendundeinunddreißig und zweitausendfünfundvierzig. Allein neunundsechzig Milliarden achthundert Millionen sind innerhalb der nächsten zwölf Monate fällig.
+
+Dagegen steht, was Kunden bereits fest zugesagt haben. Der Auftragsbestand aus nicht kündbaren Verträgen beträgt dreizehn Milliarden achthundert Millionen Dollar. Fünfundsiebzig Prozent davon sollen in den nächsten zwölf Monaten zu Umsatz werden. Das Verhältnis von Verpflichtung zu Auftragsbestand liegt damit bei fünfundsechzig zu eins.
+
+Ganz fair ist dieser Vergleich nicht. Anthropic verkauft den Zugang zu seinen Modellen vor allem über eine Schnittstelle und rechnet nach Verbrauch ab. Solche Kunden binden sich nicht über Jahre, sie zahlen monatlich, deshalb fällt der Auftragsbestand von Natur aus klein aus. Das Unternehmen nennt eine Bestandskundenquote von rund neunhundert Prozent. Wer bleibt, gibt ein Jahr später etwa neunmal so viel aus. Rund zweihundertfünfzig Kunden zahlen mehr als zehn Millionen Dollar im Jahr. Das ist das Gegenargument, und es ist ernst zu nehmen. Es ändert aber nichts an der Größenordnung.
+
+Flüssig ist das Unternehmen derzeit gut aufgestellt. Ende September lagen fünfundneunzig Milliarden fünfhundertsechzig Millionen Dollar Bargeld und sechsunddreißig Milliarden zweihundertachtzig Millionen kurzfristige Anlagen auf der hohen Kante, zusammen hundertdreißig Milliarden. Die Verpflichtungen der nächsten zwölf Monate sind damit gedeckt, der Rest nicht.
+
+Was heißt das praktisch?
+
+Für Anleger ist die entscheidende Zahl noch offen. Bei der Preisspanne steht im Dokument weiterhin ein leerer Dollarbetrag, das ist bei einem Entwurf üblich. Berichte über ein Volumen von rund hundert Milliarden Dollar stammen nicht aus dem Prospekt, sondern aus Medien, die mit Beteiligten gesprochen haben.
+
+Wer die Anmeldung verfolgt, sollte auf drei Dinge achten. Erstens, ob der Auftragsbestand im nächsten Nachtrag wächst. Er ist der einzige harte Beleg dafür, dass Kunden sich länger binden. Zweitens, ob die Rechenkosten pro Umsatzdollar wieder sinken, was nur über effizientere Modelle und bessere Auslastung geht. Drittens der Ausgabepreis, denn an ihm misst sich, welches Wachstum der Markt schon eingepreist hat.
+
+Für alle, die Claude nutzen, ändert sich nichts. Der Preis für die Schnittstelle steht nicht im Dokument, und ein Börsengang verschiebt ihn nicht unmittelbar. Mittelbar schon. Ein Unternehmen, das achthundertfünfundneunzig Milliarden Dollar Rechenleistung bezahlt hat, muss diese Leistung auslasten. Das spricht für volle Server und gegen Preissenkungen.
+
+Was im ersten Entwurf noch nach einem Labor mit Einnahmen und einem Buchverlust aussah, ist damit ein Unternehmen mit einem festen Kostengerüst, das größer ist als alles, was der Markt ihm bisher an Umsatz zutraut. Ob das eine Wette auf die Zukunft ist oder eine Übernahme der eigenen Zukunft, entscheidet sich an den nächsten vier Quartalen.
