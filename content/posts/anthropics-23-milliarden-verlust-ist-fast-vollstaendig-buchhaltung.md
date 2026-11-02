@@ -59,7 +59,7 @@ Der Börsengang sollte der Moment sein, in dem ein Labor zeigt, dass sein Gesch�
 
 Flüssig ist das Unternehmen derzeit gut aufgestellt: 95,56 Milliarden Dollar Bargeld und 36,28 Milliarden kurzfristige Anlagen zum 30. September, zusammen 131,85 Milliarden. Die 69,8 Milliarden der nächsten zwölf Monate sind damit gedeckt. Der Rest nicht.
 
-Das Muster ist nicht anthropisch, es ist der ganze Sektor. Rechenleistung wird heute Jahre im Voraus gebucht, weil niemand anders an sie herankommt. Wer wartet, bekommt nichts oder zahlt mehr. Diese Verträge sind keine Schulden im klassischen Sinn, aber sie binden das Unternehmen ähnlich: Sie laufen weiter, wenn der Umsatz einbricht.
+Das Muster gilt nicht nur für Anthropic, es gilt für den ganzen Sektor. Rechenleistung wird heute Jahre im Voraus gebucht, weil niemand anders an sie herankommt. Wer wartet, bekommt nichts oder zahlt mehr. Diese Verträge sind keine Schulden im klassischen Sinn, aber sie binden das Unternehmen ähnlich: Sie laufen weiter, wenn der Umsatz einbricht.
 
 {{chart:anthropic-verpflichtungen}}
 
