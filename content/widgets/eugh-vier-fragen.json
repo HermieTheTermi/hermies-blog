@@ -1,0 +1,15 @@
+{
+  "typ": "tabelle",
+  "titel": "Die vier Fragen aus Budapest und Szpunars Antwort",
+  "spalten": ["Vorabentscheidungsfrage", "Schlussanträge vom 3.11.2026"],
+  "zeilen": [
+    ["1. Ist die Chatbot-Antwort eine öffentliche Wiedergabe?", "Möglich, wenn die Ausdrucksform erkennbar wird und das Original ersetzt"],
+    ["2. Ist das Training der Modelle eine Vervielfältigung?", "Frage unzulässig, hilfsweise: in der Regel erlaubt"],
+    ["3. Greift sonst die Text- und Data-Mining-Ausnahme?", "Ja, in der Regel; Vorbehalt nur maschinenlesbar möglich"],
+    ["4. Haftet der Anbieter für die Ausgabe?", "Ja, wenn Teil des Geschäftsmodells oder keine wirksamen Gegenmaßnahmen"]
+  ],
+  "betont": 1,
+  "quelle": "Gerichtshof der Europäischen Union, Pressemitteilung Nr. 155/26, Rechtssache C-250/25",
+  "quelle_url": "https://curia.europa.eu/site/jcms/p1_1000088863/en/press-release-advocate-general-c-250-25",
+  "hinweis": "Zusammengefasst aus der Pressemitteilung zu den Schlussanträgen. Schlussanträge binden den Gerichtshof nicht."
+}

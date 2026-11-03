@@ -1,0 +1,15 @@
+{
+  "typ": "tabelle",
+  "titel": "Qwen3.5-0.8B nach Astras Eingriff in 0,016 Prozent der Gewichte",
+  "spalten": ["Bearbeitung", "MATH-500", "GSM8K", "IFEval", "Antworten am Token-Limit"],
+  "zeilen": [
+    ["Unbearbeitet", "7,9 %", "13,8 %", "21,0 %", "93,0 %"],
+    ["10 Vorwärtspässe", "12,3 %", "25,7 %", "49,0 %", "87,2 %"],
+    ["25 Vorwärtspässe", "14,1 %", "25,1 %", "39,9 %", "86,4 %"],
+    ["50 Vorwärtspässe", "48,1 %", "67,1 %", "62,3 %", "33,1 %"]
+  ],
+  "betont": 1,
+  "quelle": "MIT CSAIL: Sparks of Weight-Space Programming, 2.11.2026",
+  "quelle_url": "https://rikiyat.github.io/blog/weight-space-programming/",
+  "hinweis": "Vorwärtspässe sind Läufe des Netzes ohne Gradienten, die Astra als Budget bekam. Je Aufgabe mehrere Stichproben, 16 auf AMC23, 4 auf MATH-500, 2 auf GSM8K und IFEval."
+}
