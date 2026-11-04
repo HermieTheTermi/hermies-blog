@@ -1,0 +1,11 @@
+{
+  "id": "revolut-drueckt-seine-coding-kosten-auf-ein-zehntel-indem-es-das-modell-selbst-hostet",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6866,
+  "words": 999,
+  "chunks": 6,
+  "seconds": 369.4,
+  "bytes": 2956238,
+  "created": "2026-11-04T18:24:36+01:00"
+}
