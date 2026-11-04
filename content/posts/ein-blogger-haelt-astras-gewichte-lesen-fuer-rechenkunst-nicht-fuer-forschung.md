@@ -32,7 +32,7 @@ Für die Einordnung ist der Streit nützlicher als der Bericht allein. Die Autor
 
 ## Was er nachrechnet
 
-Im ersten Experiment sollten die Gewichte verraten, welches von vier Spielen ein Netz trainiert wurde. Alle vier Netze hatten dieselben Eingabekanäle, dieselben sechs Aktionen und dieselben Dimensionen, damit nur die Zahlen Auskunft geben konnten. Astra nannte alle vier richtig, ohne die Auswahl der Spiele zu kennen. Die Netze haben 17.253 Gewichte, verteilt auf zwei Schichten mit je 32 Einheiten.
+Im ersten Experiment sollten die Gewichte verraten, welches von vier Spielen ein Netz trainiert wurde. Alle vier Netze hatten dieselben Eingabekanäle, dieselben Aktionen und dieselben Dimensionen, damit nur die Zahlen Auskunft geben konnten. Astra nannte alle vier richtig, ohne die Auswahl der Spiele zu kennen. Jedes Netz hat 17.253 Gewichte.
 
 Goedecke nennt drei Gründe, warum das leichter ist, als es klingt. Die Eingabekanäle hören direkt auf einzelne Felder eines 10-mal-10-Rasters, sie sind beschriftet, und damit lässt sich ausrechnen, welche Felder die erste Schicht gewichtet. Sein Code ist drei Zeilen lang: Gewichte laden, in die Form Raster mal Kanäle mal Einheiten bringen, über die Einheiten die Länge des Vektors bilden. Übrig bleibt eine Karte pro Kanal, 10 mal 10 Felder.
 
@@ -42,7 +42,7 @@ Aus dieser Karte, schreibt er, erkenne man die Spiele ohne Beschriftung. Bei Bre
 
 ::: methode
 **Worüber hier gestritten wird**
-Vier Netze, mit bestärkendem Lernen auf vier Spielen trainiert, jedes mit 17.253 Gewichten, sechs Eingabekanälen und sechs Ausgaben. Astra bekam die Gewichte als Text in den Prompt, ohne Werkzeuge und ohne die Namen der Spiele zur Auswahl. Der Blogger hat den umgekehrten Weg gewählt und die erste Schicht selbst ausgewertet. Beide Wege führen zum selben Ergebnis; strittig ist, was daran bemerkenswert ist.
+Vier Netze, mit bestärkendem Lernen auf vier Spielen trainiert, jedes mit 17.253 Gewichten und für alle gleich aufgebaut: gleiche Eingabekanäle, gleiche Aktionen, gleiche Dimensionen. Astra bekam die Gewichte als Text in den Prompt, ohne Werkzeuge und ohne die Namen der Spiele zur Auswahl. Der Blogger hat den umgekehrten Weg gewählt und die erste Schicht selbst ausgewertet. Beide Wege führen zum selben Ergebnis; strittig ist, was daran bemerkenswert ist.
 :::
 
 Der wichtigere Teil ist der Fall Qwen3.5-0.8B. Dort hatte das Modell nach Darstellung des Berichts kein Rechenproblem, sondern eine Schleife: Nach 32.768 Token wiederholte es sich und kam nie zu einer Antwort. Goedecke liest daraus, dass das Netz nicht schlecht im Rechnen war, sondern im Aufhören. Alle Aufgaben unterhalb dieser Grenze habe das unveränderte Modell gelöst.
