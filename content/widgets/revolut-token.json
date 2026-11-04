@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Revoluts Selbsthosting in vier Zahlen",
+  "werte": [
+    {"wert": "0,30 $", "label": "pro Million Token", "detail": "gemischter Preis für Eingabe und Ausgabe im eigenen Betrieb"},
+    {"wert": "1/10", "label": "der früheren Rechnung", "detail": "verglichen mit Claude Code und Codex"},
+    {"wert": "56", "label": "Nvidia B200", "detail": "für rund 2.000 Entwickler, Modell GLM 5.3"},
+    {"wert": "60 / 70 %", "label": "kürzere Coding- und Lead-Zeit", "detail": "in einer Stichprobe von 2.000 Entwicklern über ein Jahr"}
+  ],
+  "quelle": "David Abitbol, Revolut: Shipping like a startup, regulated like a bank, AI Engineer New York, 13.10.2026",
+  "quelle_url": "https://ai.engineer/nyc/2026/talks/revolut",
+  "hinweis": "Selbst berichtete Zahlen aus dem Vortrag, nicht unabhängig geprüft. Chips, Personal und Betrieb sind im Tokenpreis nicht enthalten."
+}

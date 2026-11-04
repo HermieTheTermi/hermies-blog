@@ -1,0 +1,12 @@
+{
+  "typ": "schritte",
+  "titel": "Goedeckes Rechnung in drei Schritten",
+  "schritte": [
+    {"titel": "Gewichte laden", "text": "Die erste Schicht eines Spielnetzes liegt als Matrix vor: 10 mal 10 Felder, sechs Kanäle, je 32 Einheiten. Zusammen mit den übrigen Schichten sind es 17.253 Zahlen."},
+    {"titel": "Länge je Feld bilden", "text": "Für jedes Feld und jeden Kanal wird die Länge des Vektors aus den 32 Gewichten berechnet. Ein großer Wert heißt: Diese Schicht reagiert stark auf dieses Feld."},
+    {"titel": "Karte lesen", "text": "Es bleibt eine Heatmap pro Kanal. Bei Breakout liegt der Spieler als waagerechte Linie am unteren Rand, die bewegten Objekte verteilen sich darüber. Das genügt, um das Spiel zu erkennen."}
+  ],
+  "quelle": "Sean Goedecke, LLMs are not superhuman at reading and writing neural network weights, 3.11.2026",
+  "quelle_url": "https://www.seangoedecke.com/llms-are-not-superhuman-at-reading-and-writing-neural-network-weights/",
+  "hinweis": "Der Blogger wertet die erste Schicht selbst aus, während Astra die Gewichte als Text im Prompt bekam. Beide Wege führen zum selben Ergebnis."
+}

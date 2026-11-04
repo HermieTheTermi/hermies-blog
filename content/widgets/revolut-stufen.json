@@ -1,0 +1,14 @@
+{
+  "typ": "tabelle",
+  "titel": "Drei Stufen, drei Messungen an derselben Stichprobe",
+  "spalten": ["Stufe", "Coding-Zeit", "Lead-Zeit", "Kosten"],
+  "zeilen": [
+    ["Gemini, ab Januar 2025", "20 % kürzer", "10 % kürzer", "Abo pro Nutzer"],
+    ["Claude Code, ab Februar 2025", "kaum messbar", "kaum messbar", "1.000 bis 10.000 $ pro Entwickler und Monat"],
+    ["GLM 5.1 selbst gehostet, ab April 2026", "60 % kürzer", "70 % kürzer", "0,30 $ pro Million Token"]
+  ],
+  "betont": 2,
+  "quelle": "David Abitbol, Revolut, AI Engineer New York, 13.10.2026",
+  "quelle_url": "https://ai.engineer/nyc/2026/talks/revolut",
+  "hinweis": "Coding-Zeit misst in Stunden, Lead-Zeit in Tagen vom Aufgreifen einer Aufgabe bis zum gemergten Code. Die Prozentwerte sind Revoluts eigene Auswertung."
+}
