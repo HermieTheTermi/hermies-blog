@@ -1,0 +1,19 @@
+{
+  "titel": "GDPx: Anteil bestandener Aufgaben, erste Version",
+  "einheit": "% der Aufgaben",
+  "typ": "balken",
+  "werte": [
+    {"label": "Claude Opus 5.5", "wert": 12.0},
+    {"label": "Gemini 4 Carbon", "wert": 10.9},
+    {"label": "GPT-6 Astra", "wert": 9.6},
+    {"label": "Muse Wonder Full", "wert": 9.0},
+    {"label": "Claude Fable 5.1", "wert": 8.5},
+    {"label": "GPT-6.1 Sol", "wert": 8.4},
+    {"label": "Claude Sonnet 5.5", "wert": 8.2},
+    {"label": "Gemini 4 Argon", "wert": 7.3},
+    {"label": "GLM 5.3", "wert": 2.7}
+  ],
+  "quelle": "SemiAnalysis, GDPx v1.0 (2. November 2026)",
+  "quelle_url": "https://gdpx.semianalysis.com/",
+  "hinweis": "pass@1, gemittelt über drei Versuche pro Aufgabe, alle elf Felder gleich gewichtet. Die Werte sind nicht der Anteil erledigter Arbeit, sondern ein gewichteter Benchmark-Wert. Metas Muse Wonder Full ist im Cyber-Feld der beste Wert, obwohl er in der Gesamttabelle auf Platz vier liegt."
+}

@@ -1,0 +1,14 @@
+{
+  "typ": "tabelle",
+  "titel": "Vier Käufe, ein Muster",
+  "spalten": ["Käufer", "Übernommen", "Was das Werkzeug macht", "Preis"],
+  "zeilen": [
+    ["OpenAI", "Pierre Computer Company (4. November 2026)", "Code Storage für Quellcode mit Git-Historie, dazu die Bibliotheken Trees, Diffs und Highlights", "nicht genannt"],
+    ["Meta", "Conductor (4. November 2026)", "mehrere Coding-Agenten parallel steuern und ihre Arbeit sortieren", "nicht genannt"],
+    ["Anthropic", "Stainless (Mai 2026)", "erzeugt SDKs aus API-Beschreibungen", "nicht genannt"],
+    ["SpaceX", "Cursor (August 2026 abgeschlossen)", "Coding-Umgebung mit Agentenbetrieb", "60 Milliarden Dollar"]
+  ],
+  "betont": 1,
+  "quelle": "OpenAI, Conductor, Axios, The Decoder (4. November 2026)",
+  "hinweis": "Preise nennt nur der Cursor-Deal; die übrigen drei Ankündigungen schweigen dazu. Stainless und Cursor sind über The Decoder belegt, nicht über eine eigene Ankündigung des Käufers."
+}
