@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Vier Zahlen zum Trainingslauf von Inkling 2 Small",
+  "werte": [
+    {"wert": "68 h", "label": "Vortraining", "detail": "8,4 Billionen Token auf Nvidia GB300 NVL72, nativ in NVFP4"},
+    {"wert": "3,8 Bio.", "label": "zweite Phase", "detail": "weitere Token bei 512.000 Token Kontext"},
+    {"wert": "2.048", "label": "GPUs im RL-Lauf", "detail": "1.075 Schritte, 17 Millionen Rollouts, 9 Tage"},
+    {"wert": "31", "label": "Intelligence Index", "detail": "Median vergleichbarer Modelle: 23 Punkte"}
+  ],
+  "quelle": "Thinking Machines Lab, Ankündigung Inkling 2 Small, 5.11.2026 (Herstellerangaben); Indexwert von Artificial Analysis",
+  "quelle_url": "https://thinkingmachines.ai/news/inkling-2-small/",
+  "hinweis": "Die vierte Zahl stammt nicht vom Hersteller, sondern von der unabhängigen Messung bei Artificial Analysis. Die übrigen Werte sind Angaben des Labors."
+}

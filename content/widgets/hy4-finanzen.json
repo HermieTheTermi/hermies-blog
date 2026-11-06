@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Hy4 in vier Zahlen",
+  "werte": [
+    {"wert": "213", "label": "Finanzfachleute im Test", "detail": "davon 153 aus großen Instituten, über 70 Prozent mit mehr als fünf Jahren Erfahrung"},
+    {"wert": "579", "label": "Aufgaben", "detail": "Hy4 3,04 von 5 Punkten, DeepSeek V4.1 Flash 2,97, Kimi K3.1 Pro und GLM-5.3 je 2,68"},
+    {"wert": "5,45 %", "label": "Halluzinationsrate", "detail": "Vorschau: 15,76 Prozent, spekulative Fehler von 23,1 auf 5,6 Prozent"},
+    {"wert": "30,4/100", "label": "Biologie-Test", "detail": "Hy-BioExperimentBench, laut Tencent deutlich unter der eigenen Risikoschwelle"}
+  ],
+  "quelle": "Tencent Hy, Ankündigung Hy4, 4.11.2026 (Herstellerangaben)",
+  "quelle_url": "https://hy.tencent.ai/research/hy4?langVersion=en",
+  "hinweis": "Alle vier Werte sind eigene Messungen des Herstellers auf eigenen Testreihen mit eigenen Bewertern. Ein unabhängiger Nachbau liegt nicht vor."
+}

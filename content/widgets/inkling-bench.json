@@ -1,0 +1,16 @@
+{
+  "typ": "tabelle",
+  "titel": "Wo Inkling 2 Small in den eigenen Tabellen steht",
+  "spalten": ["Test", "Inkling 2 Small", "DeepSeek V4.1 Flash", "GLM-5.3-Flash", "Muse Spark Open", "Kimi K3"],
+  "zeilen": [
+    ["FrontierCode v2.0", "25,4 %", "28,5 %", "14,2 %", "7,6 %", "17,3 %"],
+    ["DeepSWE v1.1", "72,1 %", "77,0 %", "63,4 %", "60,0 %", "68,5 %"],
+    ["SWEBench Pro v2 (Hard)", "86,3 %", "nicht genannt", "nicht genannt", "82,4 %", "88,2 %"],
+    ["Vibe Code Bench v1.1", "81,6 %", "87,7 %", "30,8 %", "76,2 %", "85,0 %"],
+    ["Terminal Bench Science v0.1", "5,7 %", "12,9 %", "4,8 %", "1,9 %", "8,1 %"]
+  ],
+  "betont": 0,
+  "quelle": "Thinking Machines Lab, Ankündigung Inkling 2 Small, 5.11.2026",
+  "quelle_url": "https://thinkingmachines.ai/news/inkling-2-small/",
+  "hinweis": "Alle Werte sind Herstellerangaben des Labors; die Vergleichszahlen stammen aus den dort zitierten Veröffentlichungen und wurden nicht unabhängig nachgemessen. Höher ist besser."
+}
