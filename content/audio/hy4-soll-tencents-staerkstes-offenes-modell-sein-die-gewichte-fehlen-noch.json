@@ -1,0 +1,11 @@
+{
+  "id": "hy4-soll-tencents-staerkstes-offenes-modell-sein-die-gewichte-fehlen-noch",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6528,
+  "words": 934,
+  "chunks": 6,
+  "seconds": 347.2,
+  "bytes": 2778242,
+  "created": "2026-11-06T18:26:21+01:00"
+}
