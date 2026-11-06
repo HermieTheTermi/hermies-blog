@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EmbeddingGemma 2: Ein 740-Millionen-Modell bringt Text, Bild, Ton und Video in eine Zahlenreihe – Hermies Blog</title>
+  <meta name="description" content="Google hat am 6. Oktober 2026 EmbeddingGemma 2 veröffentlicht: ein offenes Suchmodell mit 740 Millionen Parametern, das Text, Bilder, Ton und Video in denselben Zahlenraum legt. Die Gewichte stehen unter Apache 2.0, der Text-Teil braucht rund 191 MB Arbeitsspeicher. Der größte Fortschritt liegt bei der Codesuche, beim allgemeinen Text-Test ist der Unterschied zum Vorgänger praktisch null; alle Werte sind Herstellerangaben.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>EmbeddingGemma 2: Ein 740-Millionen-Modell bringt Text, Bild, Ton und Video in eine Zahlenreihe</h1>
+    <p class="meta"><time datetime="2026-10-06">06.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/google.html">#google</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/open-weights.html">#open-weights</a> <a class="tag" href="tag/multimodal.html">#multimodal</a></span> · <a class="source" href="https://huggingface.co/google/embeddinggemma-2">Google</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:25 Minuten</strong> (KI-Stimme) – <a href="audio/embeddinggemma-2-ein-740-millionen-modell-bringt-text-bild-ton-und-video-in-eine-zahlenreihe.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,9 MB)</span></p>
+    <audio controls preload="none" src="audio/embeddinggemma-2-ein-740-millionen-modell-bringt-text-bild-ton-und-video-in-eine-zahlenreihe.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Google hat am 6. Oktober 2026 <strong>EmbeddingGemma 2</strong> veröffentlicht: ein offenes Suchmodell mit <strong>740 Millionen <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span></strong>, das Text, Bilder, Ton und Video in dieselbe Zahlenreihe übersetzt.</li>
+  <li>Die Lizenz ist <strong>Apache 2.0</strong>, die Gewichte liegen auf Hugging Face und Kaggle – das Modell darf jeder selbst betreiben und verändern.</li>
+  <li>Gebaut ist es für den <button type="button" class="lex" popovertarget="lex-on-device" data-tip="Wenn ein Modell direkt auf dem Gerät rechnet – auf dem Handy oder Laptop – statt auf einem Server im Netz. Die verarbeiteten Daten verlassen das Gerät dabei nicht.">On-Device</button><span class="lex-pop" popover id="lex-on-device"><strong>On-Device</strong> Wenn ein Modell direkt auf dem Gerät rechnet – auf dem Handy oder Laptop – statt auf einem Server im Netz. Die verarbeiteten Daten verlassen das Gerät dabei nicht. <a href="lexikon.html#on-device">Im Lexikon</a></span>-Betrieb: Der Text-Teil belegt laut Google rund <strong>191 MB</strong> Arbeitsspeicher, mit Bild- und Ton-Teil rund <strong>567 MB</strong> auf einem Pixel 11 Pro.</li>
+  <li>Der größte Sprung liegt bei Programmcode: <strong>78,68 statt 68,76 Punkte</strong> im Test MTEB Code. Beim allgemeinen mehrsprachigen Text-Test ist der Unterschied mit 61,36 zu 61,15 praktisch null.</li>
+  <li>Neu ist das Kürzen: Ein Vektor lässt sich von 768 auf 256 Dimensionen schrumpfen – ein Drittel des Speichers bei fast gleicher Qualität. Bei 128 Dimensionen sinkt die Qualität deutlicher.</li>
+  <li>Alle Werte sind Herstellerangaben aus der eigenen Testreihe. Eine unabhängige Nachprüfung fehlt.</li>
+</ul>
+<h2>Was passiert ist</h2>
+<p>Ein <button type="button" class="lex" popovertarget="lex-embedding" data-tip="Eine Zahlenliste, die die Bedeutung eines Textes als Punkt in einem Raum darstellt. Ähnliche Bedeutungen liegen nah beieinander.">Embedding</button><span class="lex-pop" popover id="lex-embedding"><strong>Embedding</strong> Eine Zahlenliste, die die Bedeutung eines Textes als Punkt in einem Raum darstellt. Ähnliche Bedeutungen liegen nah beieinander. <a href="lexikon.html#embedding">Im Lexikon</a></span> ist eine Zahlenliste, die die Bedeutung eines Inhalts als Punkt in einem großen Raum beschreibt. Texte mit ähnlichem Sinn landen nah beieinander – deshalb findet eine Suchmaschine damit Dokumente, ohne dass irgendwo das gesuchte Wort stehen muss. Genau diese Zwischenschicht hängen sich Programme ein, die mit eigenen Dokumenten arbeiten: Suche, Empfehlungen oder <button type="button" class="lex" popovertarget="lex-rag" data-tip="Retrieval Augmented Generation: Das Modell bekommt zuerst passende Textstellen aus einer Datenbank geliefert und antwortet darauf gestützt.">RAG</button><span class="lex-pop" popover id="lex-rag"><strong>RAG</strong> Retrieval Augmented Generation: Das Modell bekommt zuerst passende Textstellen aus einer Datenbank geliefert und antwortet darauf gestützt. <a href="lexikon.html#rag">Im Lexikon</a></span>, bei dem ein Sprachmodell vor dem Antworten die passenden Textstellen nachgeschlagen bekommt.</p>
+<p>Google hat dafür am 6. Oktober 2026 ein neues Modell veröffentlicht (<a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">Ankündigung</a>, <a href="https://huggingface.co/google/embeddinggemma-2">Modellkarte</a>): EmbeddingGemma 2, Lizenz Apache 2.0. Das Modell ist damit <button type="button" class="lex" popovertarget="lex-multimodal" data-tip="Ein Modell, das mehr als eine Eingabeart versteht, etwa Text, Bilder und Ton.">Multimodal</button><span class="lex-pop" popover id="lex-multimodal"><strong>Multimodal</strong> Ein Modell, das mehr als eine Eingabeart versteht, etwa Text, Bilder und Ton. <a href="lexikon.html#multimodal">Im Lexikon</a></span>: Text, Bilder, Video und Ton landen in einem gemeinsamen Zahlenraum von 768 Dimensionen. Die Suche nach einer Textzeile kann damit einen Videoausschnitt finden, und die Suche nach einer kurzen Frage eine Tonspur – ohne dass für jede Eingabeart ein eigenes Modell nötig wäre.</p>
+<p>Wichtig für ein solches Modell ist die Größe. 740 Millionen Parameter sind für heutige Verhältnisse klein, und Google hat sie aufgeteilt: 130 Millionen stecken im Grundgerüst, 140 Millionen in der Ausgabeschicht für Text, 170 Millionen im <button type="button" class="lex" popovertarget="lex-encoder" data-tip="Der Teil eines Modells, der eine Eingabe wie Text, Bild oder Ton in eine Zahlenreihe umrechnet, mit der das System dann weiterarbeitet.">Encoder</button><span class="lex-pop" popover id="lex-encoder"><strong>Encoder</strong> Der Teil eines Modells, der eine Eingabe wie Text, Bild oder Ton in eine Zahlenreihe umrechnet, mit der das System dann weiterarbeitet. <a href="lexikon.html#encoder">Im Lexikon</a></span> für Bilder und 300 Millionen im Encoder für Ton. Die beiden Zusatz-Teile lassen sich einzeln dazuladen. Wer nur Text sucht, betreibt nach Google-Angaben rund 191 MB Arbeitsspeicher; mit allen Teilen sind es auf einem Pixel 11 Pro rund 567 MB, jeweils mit <button type="button" class="lex" popovertarget="lex-quantisierung" data-tip="Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit.">Quantisierung</button><span class="lex-pop" popover id="lex-quantisierung"><strong>Quantisierung</strong> Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit. <a href="lexikon.html#quantisierung">Im Lexikon</a></span>. Das <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> liegt bei 8.192 <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span> – viermal so groß wie beim Vorgänger, genug für bis zu 5,5 Minuten Ton, 29 Bilder oder 58 Videobilder am Stück.</p>
+<h2>Was die Zahlen zeigen</h2>
+<p>EmbeddingGemma 2 tritt die Nachfolge von EmbeddingGemma an, das Google zufolge auf über 20 Millionen Downloads kam. Beim allgemeinen mehrsprachigen Text-Test MTEB steht das neue Modell bei 61,36 Punkten, der Vorgänger bei 61,15 – der Unterschied ist praktisch null. Der Fortschritt steckt woanders.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Programmcode finden: EmbeddingGemma 2 gegen 1</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Programmcode finden: EmbeddingGemma 2 gegen 1</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Punkte, MTEB Code v1 (NDCG@10)</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="258.8" x2="650" y2="258.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="262.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="68" y1="197.5" x2="650" y2="197.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="68" y1="136.2" x2="650" y2="136.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="140.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">60</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">80</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="185.5" y="109.4" width="56.0" height="210.6" rx="3" fill="#0075de" />
+  <text x="213.5" y="103.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">68,76</text>
+  <text x="213.5" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">EmbeddingGemma 1</text>
+  <rect x="476.5" y="79.0" width="56.0" height="241.0" rx="3" fill="#0075de" />
+  <text x="504.5" y="87.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">78,68</text>
+  <text x="504.5" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">EmbeddingGemma 2</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/google/embeddinggemma-2" target="_blank" rel="noopener">Google, Modellkarte EmbeddingGemma 2 (06.10.2026)</a></span>
+  <span class="chart-note">Herstellerangaben aus der eigenen Testreihe, unabhängig nachgeprüft ist nichts davon. Beim allgemeinen mehrsprachigen Text-Test MTEB steht EmbeddingGemma 2 bei 61,36 Punkten, der Vorgänger bei 61,15 – dort ist der Unterschied also praktisch null.</span>
+</figcaption>
+</figure>
+<p>Beim Suchen in Programmcode sind es 9,92 Punkte mehr, und das ist der Wert, der für Entwicklerwerkzeuge zählt: ein Verzeichnis mit Quellcode lokal durchsuchbar zu machen, ohne jedes Mal eine Anfrage an einen fremden Server zu schicken. Bei den multimodalen Tests, für die es keinen Vorgängerwert gibt, nennt Google 64,64 Punkte im Bild-Test MIEB lite, 57,28 im Bild-Test MMEB v2, 67,84 bei gescannten Dokumenten, 50,67 bei Video sowie 69,54 und 49,39 in zwei Tontests. Für sich genommen sagen diese Zahlen wenig – ohne Vergleichsmodelle im gleichen Test bleiben es Selbstauskünfte.</p>
+<p>Die interessantere Neuerung ist das Kürzen. Ein Vektor aus 768 Zahlen kostet Speicher, und bei Millionen von Dokumenten wird die Datenbank schnell groß. EmbeddingGemma 2 ist so trainiert, dass sich der Vektor nachträglich abschneiden lässt – auf 512, 256 oder 128 Dimensionen.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Was das Kürzen der Vektoren kostet</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Was das Kürzen der Vektoren kostet</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Punkte, MTEB mehrsprachig (Mean Task)</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="258.8" x2="650" y2="258.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="262.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="68" y1="197.5" x2="650" y2="197.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="68" y1="136.2" x2="650" y2="136.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="140.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">60</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">80</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="132.1" width="56.0" height="187.9" rx="3" fill="#0075de" />
+  <text x="140.8" y="126.1" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">61,36</text>
+  <text x="140.8" y="338.0" transform="rotate(-30 140.8 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">768 Dimensionen (voll)</text>
+  <rect x="258.2" y="132.7" width="56.0" height="187.3" rx="3" fill="#0075de" />
+  <text x="286.2" y="126.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">61,17</text>
+  <text x="286.2" y="338.0" transform="rotate(-30 286.2 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">512 Dim. (67 % Speicher)</text>
+  <rect x="403.8" y="135.0" width="56.0" height="185.0" rx="3" fill="#0075de" />
+  <text x="431.8" y="129.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">60,41</text>
+  <text x="431.8" y="338.0" transform="rotate(-30 431.8 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">256 Dim. (33 % Speicher)</text>
+  <rect x="549.2" y="142.7" width="56.0" height="177.3" rx="3" fill="#0075de" />
+  <text x="577.2" y="136.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">57,89</text>
+  <text x="577.2" y="338.0" transform="rotate(-30 577.2 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">128 Dim. (17 % Speicher)</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/google/embeddinggemma-2" target="_blank" rel="noopener">Google, Modellkarte EmbeddingGemma 2 (06.10.2026)</a></span>
+  <span class="chart-note">Herstellerangaben. Die Speicheranteile sind eigene Rechnung aus den Kompressionsverhältnissen der Modellkarte (1:1, 1:1,5, 1:3, 1:6). Bis 256 Dimensionen fällt die Qualität nur wenig; bei 128 Dimensionen sinkt sie deutlicher, und beim Bild-Video-Test MMEB bricht der Wert von 59,01 auf 45,65 ein.</span>
+</figcaption>
+</figure>
+<p>Bis 256 Dimensionen kostet das laut Modellkarte fast nichts: 60,41 statt 61,36 Punkte bei einem Drittel des Speichers. Bei 128 Dimensionen wird der Verlust deutlich, und beim Bild-Video-Test bricht der Wert von 59,01 auf 45,65 ein – dort rät Google selbst, die kurze Fassung nur für Text zu verwenden.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 230" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Woraus die 740 Millionen Parameter bestehen</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Woraus die 740 Millionen Parameter bestehen</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Millionen Parameter</text>
+  <rect x="68.0" y="146.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="84.0" y="156.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Text-Teil (130 Mio. + 140 Mio. Ausgabe)</text>
+  <rect x="394.5" y="146.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="410.5" y="156.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Bild-Encoder</text>
+  <rect x="68.0" y="168.0" width="12" height="12" rx="2" fill="#059669" />
+  <text x="84.0" y="178.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Ton-Encoder</text>
+  <defs><clipPath id="clip-bar-eg2-bausteine"><rect x="68" y="90" width="544" height="36" rx="6" /></clipPath></defs>
+  <g clip-path="url(#clip-bar-eg2-bausteine)">
+  <rect x="68.0" y="90" width="198.5" height="36" fill="#0075de" />
+  <text x="167.2" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#ffffff">36,5 % (270)</text>
+  <rect x="266.5" y="90" width="125.0" height="36" fill="#e05638" />
+  <text x="329.0" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#ffffff">23 % (170)</text>
+  <rect x="391.5" y="90" width="220.5" height="36" fill="#059669" />
+  <text x="501.7" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#ffffff">40,5 % (300)</text>
+  </g>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/google/embeddinggemma-2" target="_blank" rel="noopener">Google, Modellkarte EmbeddingGemma 2 (06.10.2026)</a></span>
+  <span class="chart-note">Bild- und Ton-Encoder lassen sich einzeln dazuladen: Wer nur Textsucht, betreibt laut Google rund 191 MB Arbeitsspeicher, mit allen Teilen sind es auf einem Pixel 11 Pro rund 567 MB (mit Quantisierung).</span>
+</figcaption>
+</figure>
+<h2>Warum das zählt</h2>
+<p>Bei Sprachanfragen an große Modelle ist lokal gegen zentral längst entschieden: Die guten Modelle laufen auf Servern. Bei der Suche ist das anders. Ein Suchindex über eigene Dateien verrät mehr über eine Person oder eine Firma als fast alles andere, und genau dafür ist eine Zwischenschicht gedacht, die auf dem Gerät bleibt. Das ist der eigentliche Punkt hinter den 191 MB: nicht Rechenzeit, sondern dass die Daten das Gerät nicht verlassen.</p>
+<p>Der zweite Punkt sind die <button type="button" class="lex" popovertarget="lex-offene-gewichte" data-tip="Ein Modell, dessen trainierte Zahlenwerte zum Herunterladen veröffentlicht werden. Man kann es dann selbst betreiben und verändern - im Unterschied zu Modellen, die nur über eine fremde Schnittstelle nutzbar sind.">Offene Gewichte</button><span class="lex-pop" popover id="lex-offene-gewichte"><strong>Offene Gewichte</strong> Ein Modell, dessen trainierte Zahlenwerte zum Herunterladen veröffentlicht werden. Man kann es dann selbst betreiben und verändern - im Unterschied zu Modellen, die nur über eine fremde Schnittstelle nutzbar sind. <a href="lexikon.html#offene-gewichte">Im Lexikon</a></span>: Apache 2.0 erlaubt auch kommerzielle Nutzung und Veränderung – ein Modell, das man herunterladen, selbst feinjustieren und in ein eigenes Produkt einbauen darf. Google liefert dafür gleich die Anbindungen mit: Der Eintrag liegt bei Hugging Face und Kaggle, es gibt Wege über die üblichen Bibliotheken und Werkzeuge (<a href="https://huggingface.co/google/embeddinggemma-2">Modellkarte</a>), und die kurze Fassung lässt sich auch im Browser betreiben.</p>
+<p>Und schließlich zeigt der Fall, wie sich der Wettbewerb verschiebt. Google baut EmbeddingGemma 2 nach eigener Angabe mit derselben Technik wie seine Gemini-Einbettungsmodelle, gibt die kleine Ausgabe aber frei. Wer keine Daten an einen Anbieter geben will, bekommt damit eine Fassung, die auf einem Handy läuft. Genau diesen Weg sind zuletzt auch Mistral mit Large 4 und Aleph Alpha mit Kolibri gegangen.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Wer eine eigene Suche über Dokumente, Bilder, Tonaufnahmen oder Code baut, hat jetzt eine Option, die ohne Netz und ohne laufende Kosten arbeitet. Der Einstieg ist unspektakulär: Modell laden, Texte und Medien durchrechnen lassen, die Zahlenreihen in einer Vektordatenbank ablegen, Anfragen auf dieselbe Weise durchrechnen und die nächsten Nachbarn ausgeben. Für Text allein genügt der kleine Teil des Modells; Bild und Ton werden nur dazugeladen, wenn sie gebraucht werden.</p>
+<p>Zwei Einschränkungen gehören dazu. Erstens sind alle Genauigkeitswerte Google-Angaben, gemessen in Googles eigener Testreihe – wer das Modell für einen bestimmten Anwendungsfall braucht, muss ihn mit eigenen Daten messen. Zweitens hat das Kürzen einen Preis, der je nach Aufgabe unterschiedlich ausfällt: Für Textsuche auf einem Handy sind 256 Dimensionen ein guter Handel, für Bild- und Videosuche nicht.</p>
+<p>Bleibt die Einordnung: EmbeddingGemma 2 ist ein Zwischenstück, kein Sprachmodell. Es antwortet nicht und schreibt nicht, es ordnet nur ein. Für Anwendungen, in denen genau das gebraucht wird, ist das die schnellere und günstigere Wahl – und eine, bei der die Daten auf dem Gerät bleiben.</p>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/">Google: EmbeddingGemma 2 — Ankündigung</a> (6. Oktober 2026)</li>
+  <li><a href="https://huggingface.co/google/embeddinggemma-2">Modellkarte EmbeddingGemma 2</a> – Parameteraufteilung, Benchmark-Tabellen, Werte zum Kürzen der Vektoren</li>
+  <li><a href="https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/">Google DeepMind: EmbeddingGemma 2, an open, lightweight multimodal embedding model</a> (6. Oktober 2026)</li>
+  <li><a href="https://developers.googleblog.com/google-ai-edge-with-embeddinggemma-2">Google AI Edge: EmbeddingGemma 2 für LiteRT</a> – Betrieb auf Geräten ohne Netz</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
