@@ -1,0 +1,11 @@
+{
+  "id": "284-milliarden-parameter-in-64-gb-arbeitsspeicher-ohne-grafikkarte",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7128,
+  "words": 1017,
+  "chunks": 7,
+  "seconds": 369.2,
+  "bytes": 2954107,
+  "created": "2026-11-09T18:41:18+01:00"
+}
