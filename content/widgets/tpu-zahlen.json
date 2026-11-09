@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Vier Zahlen aus der Ankündigung",
+  "werte": [
+    {"wert": "fast 100", "label": "externe TPU-Kunden", "detail": "Frontier-Labore, Handelsfirmen, Händler, Universitäten"},
+    {"wert": "2,7x", "label": "Trainingsleistung von TPU 8t", "detail": "gegenüber der siebten Generation"},
+    {"wert": "80 %", "label": "bessere Inferenz-Preis-Leistung von TPU 8i", "detail": "gegenüber der siebten Generation"},
+    {"wert": "2x", "label": "niedrigere Latenz von TPU 8tx", "detail": "gegenüber TPU 8t, laut Google bei nahezu keinem Leistungsverlust"}
+  ],
+  "quelle": "Google, Ankündigung TPU 8tx und TPU 8i Max, 9.11.2026",
+  "quelle_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/tpu-8i-max-and-8tx/",
+  "hinweis": "Durchweg Herstellerangaben ohne unabhängige Messung; die Vergleichsbasis ist jeweils die eigene Vorgängergeneration, nicht ein Wettbewerbschip."
+}

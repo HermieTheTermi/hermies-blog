@@ -1,0 +1,25 @@
+{
+  "typ": "vergleich",
+  "titel": "Dieselbe Modellfamilie, zwei Laufzeiten",
+  "links": {
+    "titel": "Vorher: UD-IQ1_S, unveränderte Laufzeit",
+    "punkte": [
+      "Datei 76,87 GiB, passt nicht in nutzbare 62,5 GiB",
+      "Prompt-Verarbeitung bricht auf 64 GB ab (OOM oder Swap)",
+      "Ausgabe 5,91 Token pro Sekunde mit der großen Datei",
+      "Genauigkeit: Bezugspunkt"
+    ]
+  },
+  "rechts": {
+    "titel": "Nachher: Fractal-64, gepatchte Kernel",
+    "punkte": [
+      "Datei 56,56 GiB, Spitze 57,61 bis 58,9 GiB im Speicher bei 256K Kontext",
+      "Prompt-Verarbeitung 43,2 bis 44,4 Token pro Sekunde",
+      "Ausgabe 9,1 bis 10,0 Token pro Sekunde, mit Entwurfsmodell 11,5 bis 14,7",
+      "Genauigkeit: laut Autor identisch zur unveränderten Laufzeit auf derselben Datei"
+    ]
+  },
+  "quelle": "README llama-modchip v2.4.0, Commit vom 8.11.2026",
+  "quelle_url": "https://github.com/synchopate/llama-modchip",
+  "hinweis": "Selbst berichtete Werte des Autors auf einem Ryzen 9 9955HX mit 64 GB DDR5, nicht unabhängig nachgemessen. Die Genauigkeitsangabe vergleicht gegen dieselbe bereits komprimierte Datei, nicht gegen die volle Präzision."
+}

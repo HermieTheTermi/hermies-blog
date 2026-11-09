@@ -1,0 +1,15 @@
+{
+  "typ": "tabelle",
+  "titel": "Die vier Systeme der achten TPU-Generation",
+  "spalten": ["System", "Zweck", "Grundlage", "Was neu ist"],
+  "zeilen": [
+    ["TPU 8t", "Training großer Modelle", "eigene Generation, April 2026", "Basis dieser Generation"],
+    ["TPU 8i", "Inferenz mit niedriger Latenz", "eigene Generation, April 2026", "Basis dieser Generation"],
+    ["TPU 8tx", "vertrauliche Inferenz, kleines Training", "Silizium des 8t plus EPYC-Hosts der fünften Generation", "Schutz der Daten während der Verarbeitung, Boardfly-Netz, bis zu 2x niedrigere Latenz als 8t"],
+    ["TPU 8i Max", "sehr lange Kontexte, hohe Rechendichte", "zwei 8i-Chips auf einem Package", "2x Rechenleistung, 2x SRAM, 2x HBM-Bandbreite gegenüber 8i"]
+  ],
+  "betont": 0,
+  "quelle": "Google, Ankündigung TPU 8tx und TPU 8i Max, 9.11.2026",
+  "quelle_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/global-network/tpu-8i-max-and-8tx/",
+  "hinweis": "Alle Angaben sind Herstellerangaben. Google nennt in der Ankündigung weder Preise noch Verfügbarkeitstermine für die beiden neuen Systeme."
+}
