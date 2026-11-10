@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Die Arbeit in vier Zahlen",
+  "werte": [
+    {"wert": "6,5 Mio.", "label": "Zeilen Lean-Beweis", "detail": "vom Lean-Kernel geprüft; dazu 140.000 Zeilen für die eingebauten Altfehler"},
+    {"wert": "rd. 26.000", "label": "Zeilen Vertrauensbasis", "detail": "18.000 Zeilen Spezifikation plus 8.000 Zeilen AArch64-Semantik"},
+    {"wert": "4 Wochen", "label": "Dauer der Verifikation", "detail": "Team aus fünf Personen, Agenten liefen durchgehend auf den eigenen Rechnern"},
+    {"wert": "140.000", "label": "AArch64-Befehle verifiziert", "detail": "etwa 560 KB Maschinencode aus unverändertem Rust"}
+  ],
+  "quelle": "Chaudhuri u. a., AlphaProof Code: Verifying Signal's Security at the Machine-Code Level, Google DeepMind, 10.11.2026, Abschnitt 7",
+  "quelle_url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+  "hinweis": "Zahlen aus dem technischen Papier, nicht unabhängig nachgeprüft. Die 6,5 Millionen Zeilen zählen nur Beweise; das Repository umfasst knapp 7 Millionen Zeilen."
+}

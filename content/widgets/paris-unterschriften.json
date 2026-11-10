@@ -1,0 +1,18 @@
+{
+  "typ": "tabelle",
+  "titel": "Wer die Pariser Erklärung unterschrieben hat",
+  "spalten": ["Akteur", "Unterschrieben", "Anmerkung"],
+  "zeilen": [
+    ["Frankreich, Kanada, Bahrain, Finnland, Norwegen, Niederlande", "ja", "Gründungsrunde, Wortlaut vom 9. November"],
+    ["Zypern, Kenia, Lettland, Österreich, Estland, Irland", "ja", "später ergänzt, Élysée-Liste vom 10. November"],
+    ["OpenAI, Anthropic, Microsoft, Mistral AI, Hugging Face, Cohere", "ja", "dazu Sakana AI, Black Forest Labs, Synthesia, Domyn"],
+    ["USA", "nein", "Finanzminister Scott Bessent nahm an der Videokonferenz teil"],
+    ["Deutschland", "nein", "keine Begründung in den Dokumenten"],
+    ["Großbritannien, Japan", "nein", "waren nach Angaben von Control Plane beim Treffen vertreten"],
+    ["China", "nein", "nicht beteiligt"]
+  ],
+  "betont": 1,
+  "quelle": "Élysée-Palast, Paris Call for AI safety and security, Liste vom 10.11.2026; Wortlaut der kanadischen Regierung vom 9.11.2026",
+  "quelle_url": "https://www.elysee.fr/en/emmanuel-macron/2026/11/09/paris-call-for-ai-safety-and-security",
+  "hinweis": "Die Zahl der Unterzeichner wuchs innerhalb eines Tages von sechs auf zwölf Staaten. Der Text bleibt laut Élysée offen für weitere Unterstützungen."
+}

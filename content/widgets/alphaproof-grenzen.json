@@ -1,0 +1,25 @@
+{
+  "typ": "vergleich",
+  "titel": "Was der Beweis abdeckt und was nicht",
+  "links": {
+    "titel": "Bewiesen",
+    "punkte": [
+      "Forward Secrecy, Authentifizierung, Post-Compromise Security, Handshake-Geheimheit",
+      "PQXDH-Handshake und Triple Ratchet für Sitzungen zwischen zwei Geräten",
+      "libsignal 0.105.4, unverändert mit dem Standard-Rust-Compiler nach AArch64 übersetzt",
+      "zwei Modelle: symbolisch zehn Theoreme, computational eine Angreifer-Schranke"
+    ]
+  },
+  "rechts": {
+    "titel": "Nicht bewiesen",
+    "punkte": [
+      "Sicherheit der Krypto-Primitive, sie gelten als Vertrag",
+      "Gruppenchats, Mehrgeräte-Zustand und der Trust-on-First-Use-Pfad",
+      "Quantenangreifer in der computationalen Schranke",
+      "großer Maßstab: die Schranke wird ab etwa 25.000 Nachrichten je Sitzung leer"
+    ]
+  },
+  "quelle": "Tabelle 1 und Abschnitte 5.1.6, 5.2.5 des Papiers vom 10.11.2026",
+  "quelle_url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+  "hinweis": "Die Semantik modelliert einen einzelnen Thread ohne Signale und ohne dynamisches Linken. Geprüft wurde ein Kommandozeilen-Harness um libsignal, nicht die Signal-App."
+}
