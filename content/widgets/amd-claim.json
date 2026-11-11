@@ -1,0 +1,26 @@
+{
+  "typ": "vergleich",
+  "titel": "Was Tom Brown sagt und was die Fußnote sagt",
+  "links": {
+    "titel": "Im Video gesagt",
+    "punkte": [
+      "„It got Claude running on AMD in just three days with basically no human intervention\"",
+      "„Claude ported or wrote almost 100% of the kernels\"",
+      "Vergleichsbalken: etwa 3 Tage gegen etwa 6 bis 12 Monate herkömmlicher Weg",
+      "kein Hinweis auf Modell, Chip-Typ oder Lastart"
+    ]
+  },
+  "rechts": {
+    "titel": "In der Fußnote",
+    "punkte": [
+      "etwa 3 Tage, ausdrücklich als Annäherung",
+      "Claude Mythos Preview, nicht alle Modelle",
+      "Prompt-Verarbeitung eines Anthropic-Modells, kein Training",
+      "AMD MI355X, „at a useful level of performance\"",
+      "6 bis 12 Monate beruhen auf eigener historischer Erfahrung des Unternehmens"
+    ]
+  },
+  "quelle": "Folie im Roadshow-Video bei Minute 20:42, Fußnotentext zitiert nach CellCog, 11.11.2026",
+  "quelle_url": "https://cellcog.ai/blog/anthropic-roadshow-video-amd-cancer-claims/",
+  "hinweis": "Der Fußnotentext steht nur im Bild und fehlt in der Sprechspur. Geschwindigkeit, Kosten und ein Vergleich mit Nvidia nennt keine der beiden Fassungen."
+}

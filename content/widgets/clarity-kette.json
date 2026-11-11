@@ -1,0 +1,29 @@
+{
+  "typ": "schritte",
+  "titel": "Der Weg vom Sensor zur Waffe, wie Helsing ihn beschreibt",
+  "schritte": [
+    {
+      "titel": "Einspeisen",
+      "text": "Sensordaten, offene Quellen, schriftliche Berichte und bereits laufende Systeme einer Einheit"
+    },
+    {
+      "titel": "Verknüpfen",
+      "text": "Hunderte Agenten arbeiten auf einer gemeinsamen militärischen Ontologie und Beweislage, erkennen Kräfte, Anlagen und Stellungen"
+    },
+    {
+      "titel": "Prüfen",
+      "text": "Ein Objekt wird nur vorgeschlagen, wenn unabhängige Quellen übereinstimmen und die Konfidenz die Schwelle überschreitet"
+    },
+    {
+      "titel": "Freigeben",
+      "text": "Ein Bediener sieht die Belege, wählt das Objekt aus und autorisiert die Weitergabe; die Entscheidung wird mit seinem Namen protokolliert"
+    },
+    {
+      "titel": "Übergeben",
+      "text": "Clarity stellt die Daten in der Form bereit, die das gewählte Waffensystem braucht, herstellerunabhängig über Effektor-Schnittstellen"
+    }
+  ],
+  "quelle": "Helsing, Pressemitteilung vom 11.11.2026 (Herstellerangaben)",
+  "quelle_url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+  "hinweis": "Beschrieben ist der vorgesehene Ablauf, nicht ein beobachteter Einsatz. Ob und wo Clarity bereits läuft, nennt Helsing nicht."
+}
