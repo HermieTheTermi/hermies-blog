@@ -1,0 +1,13 @@
+{
+  "typ": "zeitleiste",
+  "titel": "Zwei Wochen von der ersten Meldung bis zum Rücktritt",
+  "ereignisse": [
+    {"datum": "29.10.2026", "titel": "Erster Bericht", "text": "Die New York Times meldet eine enge Beziehung Huangs zu Alice Huang, einer chinesischen Geschäftsfrau und Chip-Einkäuferin. US-Geheimdienste halten sie für eine Spionin, Peking weist das zurück."},
+    {"datum": "08.11.2026", "titel": "Huang räumt eine Affäre ein", "text": "In einer Mitarbeitermail schreibt er, er sei seiner Frau untreu gewesen. Der Verwaltungsrat eröffnet eine Untersuchung, geführt von der Kanzlei Wachtell, Lipton, Rosen & Katz, und erklärt, er habe Vertrauen in Huang."},
+    {"datum": "09.11.2026", "titel": "Das FBI ermittelt", "text": "Präsident Trump sagt, die Bundespolizei untersuche die Sache, und nennt Huang einen ehrenwerten Mann."},
+    {"datum": "11.11.2026", "titel": "Zweite Affäre gemeldet", "text": "Die New York Times berichtet von einer weiteren Beziehung, diesmal mit einer Nvidia-Führungskraft, die direkt an Huang berichtet. Der Verwaltungsrat berät am Abend."},
+    {"datum": "12.11.2026", "titel": "Rücktritt vor Handelsbeginn", "text": "Huang legt alle Ämter mit sofortiger Wirkung nieder. Colette Kress übernimmt als Interims-CEO, Harvey C. Jones wird erster Vorsitzender des Verwaltungsrats. Die Aktie verliert zum Start 13,4 Prozent."}
+  ],
+  "quelle": "Nvidia-Pressemitteilung, New York Times, AP, BBC, Spiegel",
+  "quelle_url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition"
+}

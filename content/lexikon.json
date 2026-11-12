@@ -49,6 +49,7 @@
   "Inferenz": "Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training.",
   "Jailbreak": "Eine Eingabe, die ein KI-Modell dazu bringt, seine eigenen Sicherheitsregeln zu umgehen – etwa über Rollenspiel, eine erfundene Testumgebung, eine andere Sprache oder eine über viele Nachrichten verteilte Erzählung.",
   "Jet": "Ein schmaler Schauer aus vielen Teilchen, der entsteht, wenn ein Quark oder Gluon aus der Kollision nach außen fliegt. Jets sind das, was Detektoren praktisch sehen.",
+  "Kalibrierung": "Wie gut die angegebene Sicherheit eines Modells zur tatsächlichen Trefferquote passt. Ein kalibriertes Modell, das 70 Prozent sagt, liegt auch in 70 Prozent der Fälle richtig; nur dann lässt sich eine Schwelle setzen, ab der ein Mensch entscheiden soll.",
   "Kontextfenster": "Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.",
   "Kreislaufwirtschaft": "Wirtschaftsweise, in der Materialien mehrfach genutzt werden statt weggeworfen. Voraussetzung ist, dass Sortieren und Wiederverwerten günstiger sind als Wegwerfen.",
   "KV-Cache": "Der Zwischenspeicher für den schon gelesenen Text. Ein Modell legt pro Token und Schicht ab, worauf es sich später beziehen muss; bei langen Unterhaltungen wächst dieser Speicher und wird zum Flaschenhals.",

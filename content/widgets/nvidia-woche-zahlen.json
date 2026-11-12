@@ -1,0 +1,23 @@
+{
+  "typ": "zahlen",
+  "titel": "Die Woche in drei Zahlen",
+  "werte": [
+    {
+      "wert": "13,4 %",
+      "label": "Kursverlust zum Handelsstart",
+      "detail": "gegenüber dem Schluss vom Mittwoch"
+    },
+    {
+      "wert": "1,6 Bio. $",
+      "label": "Börsenwert seit dem Rekord verloren",
+      "detail": "rund 30 Prozent, Berechnung von Reuters"
+    },
+    {
+      "wert": "5,88 Bio. $",
+      "label": "Börsenwert auf dem Hoch",
+      "detail": "Anfang Oktober, laut TechCrunch"
+    }
+  ],
+  "quelle": "Spiegel, Reuters, TechCrunch, 12.11.2026",
+  "quelle_url": "https://www.spiegel.de/wirtschaft/nvidia-affaere-sprecher-des-us-repraesentantenhauses-bringt-nach-aus-von-jensen-huang-exportbeschraenkungen-nach-china-ins-spiel-a-57708f11-fca9-4140-ae71-495c4c9b1781"
+}

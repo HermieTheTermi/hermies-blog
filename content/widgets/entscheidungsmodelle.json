@@ -1,0 +1,37 @@
+{
+  "typ": "tabelle",
+  "titel": "Drei Entscheidungsmodelle in Googles Vergleich",
+  "spalten": [
+    "Modell",
+    "Preis je Mio. Token",
+    "Kalibrierungsfehler (ECE)",
+    "New Yorker Bildunterschrift",
+    "Eingaben"
+  ],
+  "zeilen": [
+    [
+      "Gemini Decision 1",
+      "0,10 $",
+      "0,0250",
+      "79,7 %",
+      "Text, Bild, Audio, Video, PDF"
+    ],
+    [
+      "Jev 1.14 (TypeSafe)",
+      "0,042 $",
+      "0,0494",
+      "72,0 %",
+      "Text"
+    ],
+    [
+      "GPT-6 Luna (OpenAI)",
+      "0,10 $",
+      "0,0721",
+      "68,4 %",
+      "Text, Bild, JSON"
+    ]
+  ],
+  "quelle": "Googles Vergleichstabelle zur Decisions API, abgelesen bei DataCamp am 12.11.2026; Preise aus den Ankündigungen der drei Anbieter",
+  "quelle_url": "https://www.datacamp.com/blog/gemini-decision-1",
+  "hinweis": "ECE misst, wie weit die angegebene Konfidenz von der tatsächlichen Trefferquote abweicht, niedriger ist besser. Alle Werte stammen aus Googles eigener Testsuite."
+}
