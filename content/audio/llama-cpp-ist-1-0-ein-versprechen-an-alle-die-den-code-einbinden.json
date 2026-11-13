@@ -1,0 +1,11 @@
+{
+  "id": "llama-cpp-ist-1-0-ein-versprechen-an-alle-die-den-code-einbinden",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7081,
+  "words": 997,
+  "chunks": 7,
+  "seconds": 371.9,
+  "bytes": 2976186,
+  "created": "2026-11-13T22:46:46+01:00"
+}

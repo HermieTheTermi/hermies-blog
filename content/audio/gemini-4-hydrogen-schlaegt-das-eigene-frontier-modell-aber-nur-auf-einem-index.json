@@ -1,0 +1,11 @@
+{
+  "id": "gemini-4-hydrogen-schlaegt-das-eigene-frontier-modell-aber-nur-auf-einem-index",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7699,
+  "words": 1110,
+  "chunks": 8,
+  "seconds": 407.4,
+  "bytes": 3259975,
+  "created": "2026-11-13T23:04:33+01:00"
+}
