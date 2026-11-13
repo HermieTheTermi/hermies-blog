@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beam: Reflection veröffentlicht ein offenes 501-Milliarden-Modell – Hermies Blog</title>
+  <meta name="description" content="Reflection, ein US-Labor aus zwei ehemaligen DeepMind-Forschern, veröffentlicht mit Beam sein erstes Modell unter Apache 2.0: 501 Milliarden Parameter, davon 23 Milliarden pro Wort aktiv, eine Million Token Kontext. Zum Selbstbetreiben braucht es vier B200-Grafikchips. In der Vergleichstabelle von Reflection selbst liegt Beam hinter chinesischen Modellen; alle Werte sind Herstellerangaben.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Beam: Reflection veröffentlicht ein offenes 501-Milliarden-Modell</h1>
+    <p class="meta"><time datetime="2026-10-16">16.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/open-weights.html">#open-weights</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/agenten.html">#agenten</a> <a class="tag" href="tag/benchmark.html">#benchmark</a></span> · <a class="source" href="https://reflection.ai/blog/beam-is-available">Reflection</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>5:25 Minuten</strong> (KI-Stimme) – <a href="audio/beam-reflection-veroeffentlicht-ein-offenes-501-milliarden-modell.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,5 MB)</span></p>
+    <audio controls preload="none" src="audio/beam-reflection-veroeffentlicht-ein-offenes-501-milliarden-modell.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Das US-Labor <strong>Reflection</strong> hat am 16. Oktober sein erstes eigenes Modell veröffentlicht: <strong>Beam</strong> steht als Download bereit — ein Modell mit <button type="button" class="lex" popovertarget="lex-offene-gewichte" data-tip="Ein Modell, dessen trainierte Zahlenwerte zum Herunterladen veröffentlicht werden. Man kann es dann selbst betreiben und verändern - im Unterschied zu Modellen, die nur über eine fremde Schnittstelle nutzbar sind.">Offene Gewichte</button><span class="lex-pop" popover id="lex-offene-gewichte"><strong>Offene Gewichte</strong> Ein Modell, dessen trainierte Zahlenwerte zum Herunterladen veröffentlicht werden. Man kann es dann selbst betreiben und verändern - im Unterschied zu Modellen, die nur über eine fremde Schnittstelle nutzbar sind. <a href="lexikon.html#offene-gewichte">Im Lexikon</a></span>n unter der Lizenz Apache 2.0, also kommerziell frei nutzbar.</li>
+  <li>Beam ist ein <button type="button" class="lex" popovertarget="lex-mixture-of-experts" data-tip="Bauweise, bei der ein Modell aus vielen Teil-Netzen besteht und pro Anfrage nur wenige davon rechnen. So bleibt ein sehr großes Modell bezahlbar.">Mixture-of-Experts</button><span class="lex-pop" popover id="lex-mixture-of-experts"><strong>Mixture-of-Experts</strong> Bauweise, bei der ein Modell aus vielen Teil-Netzen besteht und pro Anfrage nur wenige davon rechnen. So bleibt ein sehr großes Modell bezahlbar. <a href="lexikon.html#mixture-of-experts">Im Lexikon</a></span>-Modell mit 501 Milliarden <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>n, von denen pro Wort nur 23 Milliarden rechnen. Es verarbeitet bis zu eine Million <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span> auf einmal.</li>
+  <li>Auf eigenen Rechnern betreiben kann es trotzdem fast niemand: Die Gewichte sind in voller Genauigkeit rund ein Terabyte groß, in der 4-Bit-Fassung noch etwa 280 Gigabyte. Reflection empfiehlt vier B200-Grafikchips.</li>
+  <li>Der Vorteil liegt laut Reflection nicht in roher Leistung, sondern im Rechenaufwand. Auf acht B300-Chips liefert Beam 708 Token pro Sekunde für eine einzelne Anfrage; der Zwischenspeicher für eine Million Token Kontext ist rund sechsmal kleiner als bei üblicher Bauweise.</li>
+  <li>In der Vergleichstabelle von Reflection selbst liegt Beam hinter chinesischen Modellen: Terminal Bench 2.1 — Beam 80,1 Prozent, DeepSeek V4.1 Flash 90,6 Prozent.</li>
+  <li>Alle Leistungszahlen stammen von Reflection. Eine unabhängige Nachprüfung fehlt noch.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Reflection ist ein US-amerikanisches KI-Labor, das im März 2024 von zwei ehemaligen Google-DeepMind-Forschern gegründet wurde: Misha Laskin und Ioannis Antonoglou, der an AlphaGo mitgebaut hat (<a href="https://techcrunch.com/2025/10/09/reflection-raises-2b-to-be-americas-open-frontier-ai-lab-challenging-deepseek/">TechCrunch</a>). Das Unternehmen positioniert sich ausdrücklich als offenes Gegenstück zu den geschlossenen Labors in den USA und zu den chinesischen Anbietern.</p>
+<p>Am 16. Oktober hat Reflection sein erstes Modell freigegeben. <strong>Beam</strong> steht jetzt auf <a href="https://huggingface.co/reflection">Hugging Face</a> zum Herunterladen, unter Apache 2.0. Das ist die Lizenz, die kommerzielle Nutzung, Veränderung und Weitergabe ohne Auflagen erlaubt — bei KI-Modellen ist das die offenste gängige Variante.</p>
+<p>Zum Aufbau nennt die <a href="https://reflection.ai/beam-model-card">Modellkarte</a> konkrete Werte: 501,3 Milliarden Parameter insgesamt, 23,4 Milliarden davon aktiv, 52 Schichten, davon drei herkömmlich und 49 als Experten-Schichten mit je 256 Experten. Pro Wort rechnen nur acht dieser Experten. Das <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> reicht über eine Million Token, das Wissen endet am 30. Juni 2026, und das Modell versteht ausschließlich Text.</p>
+<p>Interessant ist, wie Beam mit langen Eingaben umgeht. Von den 52 Schichten schauen 43 nur auf die letzten 512 Token und merken sich den Rest nicht; nur die anderen neun betrachten den gesamten Text. Dadurch wächst der Zwischenspeicher, den das Modell für eine Anfrage braucht, deutlich langsamer.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Zwischenspeicher je Anfrage: Beam gegen übliche Bauweise</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Zwischenspeicher je Anfrage:</tspan><tspan x="68" y="48">Beam gegen übliche Bauweise</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in GiB</text>
+  <rect x="192.0" y="62.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="208.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">alle 52 Schichten global</text>
+  <rect x="406.0" y="62.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="422.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Beam (43 gleitend, 9 global)</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="296.0" x2="650" y2="296.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="300.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="68" y1="247.0" x2="650" y2="247.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="251.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="198.0" x2="650" y2="198.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="202.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">150</text>
+  <line x1="68" y1="149.0" x2="650" y2="149.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="153.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">200</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">250</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="120.0" y="338.6" width="43.5" height="6.4" rx="2" fill="#0075de" />
+  <text x="141.8" y="333.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">6,5</text>
+  <rect x="166.5" y="343.8" width="43.5" height="1.2" rx="2" fill="#e05638" />
+  <text x="188.2" y="338.8" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">1,2</text>
+  <text x="165.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">32K Kontext</text>
+  <rect x="314.0" y="319.5" width="43.5" height="25.5" rx="2" fill="#0075de" />
+  <text x="335.8" y="314.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">26</text>
+  <rect x="360.5" y="340.5" width="43.5" height="4.5" rx="2" fill="#e05638" />
+  <text x="382.2" y="335.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">4,6</text>
+  <text x="359.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">128K Kontext</text>
+  <rect x="508.0" y="141.2" width="43.5" height="203.8" rx="2" fill="#0075de" />
+  <text x="529.8" y="136.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">208</text>
+  <rect x="554.5" y="309.6" width="43.5" height="35.4" rx="2" fill="#e05638" />
+  <text x="576.2" y="304.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">36,08</text>
+  <text x="553.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">1M Kontext</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/blog/reflection-beam" target="_blank" rel="noopener">Hugging Face, Welcome Beam: a 501B open model (16.10.2026)</a></span>
+  <span class="chart-note">Werte je Anfrage in 16-Bit-Genauigkeit, aus der Tabelle der Autoren; in 8-Bit-Genauigkeit halbiert sich der Bedarf.</span>
+</figcaption>
+</figure>
+<p>Bei einer Million Token Kontext sind das laut Hugging Face 36,08 GiB statt 208 GiB. In 8-Bit-Genauigkeit halbiert sich der Wert noch einmal. Das ist der Grund, warum ein Kontextfenster dieser Größe überhaupt bezahlbar wird.</p>
+<h2>Warum es zählt</h2>
+<p>Offene Modelle an der Spitze kamen bisher fast immer aus China: Kimi, Qwen, GLM, DeepSeek. Reflection behauptet in der <a href="https://reflection.ai/blog/introducing-beam">Ankündigung vom 5. Oktober</a>, Beam schiebe die „westliche Grenze offener Gewichte&quot; nach vorn. Das ist ein Labor, das für sich in Anspruch nimmt, mit dem eigenen Modell die Lücke zu den chinesischen Anbietern zu schließen — und die eigene Vergleichstabelle zeigt, dass es nur teilweise gelingt.</p>
+<p>Der Trainingsaufwand gibt eine Vorstellung davon, was in dieser Größenklasse inzwischen üblich ist. Reflection nennt 23,8 Billionen Token für das Vortraining und über 100 Millionen Durchläufe im <button type="button" class="lex" popovertarget="lex-reinforcement-learning" data-tip="Lernverfahren durch Ausprobieren: Das System erhält Belohnung für gute Ergebnisse und verbessert sein Verhalten dadurch selbst.">Reinforcement Learning</button><span class="lex-pop" popover id="lex-reinforcement-learning"><strong>Reinforcement Learning</strong> Lernverfahren durch Ausprobieren: Das System erhält Belohnung für gute Ergebnisse und verbessert sein Verhalten dadurch selbst. <a href="lexikon.html#reinforcement-learning">Im Lexikon</a></span> auf 10.500 NVIDIA-GB300-Chips in vier Wochen. Für die Lernumgebungen liefen rund 1,3 Milliarden <button type="button" class="lex" popovertarget="lex-sandbox" data-tip="Eine abgeschottete Spielumgebung: Programme laufen darin ohne Zugriff auf echte Dateien oder das Netz. Behauptet ein Text, die Antwort lande nur in so einer Testumgebung, kann das das Verhalten eines Modells ändern.">Sandbox</button><span class="lex-pop" popover id="lex-sandbox"><strong>Sandbox</strong> Eine abgeschottete Spielumgebung: Programme laufen darin ohne Zugriff auf echte Dateien oder das Netz. Behauptet ein Text, die Antwort lande nur in so einer Testumgebung, kann das das Verhalten eines Modells ändern. <a href="lexikon.html#sandbox">Im Lexikon</a></span>en; die Rechnerflotte erreichte nach Angaben des Labors 883.006 virtuelle Prozessorkerne über 23 Cluster bei Google Cloud und Amazon Web Services.</p>
+<p>Zweitens der praktische Teil: Releasing bedeutet bei dieser Größe etwas anderes als bei einem 8-Milliarden-Modell. Die vollständige Fassung in 16-Bit-Genauigkeit ist rund ein Terabyte groß. Die 4-Bit-Variante schrumpft sie auf etwa 280 Gigabyte, passt aber nur auf Blackwell-Chips von NVIDIA. Ältere Beschleuniger brauchen die 8-Bit-Variante. Reflection empfiehlt vier B200, alternativ zwei B300 oder acht RTX Pro 6000.</p>
+<p>Drittens die Rechenzeit im Betrieb. Auf acht B300-Chips erreicht Beam 708 Token pro Sekunde bei einer einzelnen Anfrage, mit einer Trefferquote von 3,7 Token pro Prüfschritt. Diese Zahlen stammen aus dem <a href="https://vllm-project.github.io/2026/10/16/reflection-beam.html">vLLM-Blogpost zum Starttag</a> und aus der <a href="https://huggingface.co/blog/reflection-beam">Hugging-Face-Vorstellung</a>. Bemerkenswert daran ist, wie die Verbesserung entstand: Das vLLM-Team hat eine erste, kaum optimierte Fassung von Programmier-<button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span>en beschleunigen lassen. Die haben das Modell vermessen, eigene Rechenkerne geschrieben und jede Änderung nachgemessen. Ergebnis: 8,95 Millisekunden je Schritt wurden zu 3,30 — Faktor 2,7.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für Anwender in Deutschland ändert sich durch die Lizenz nichts Nachteiliges: Apache 2.0 erlaubt kommerzielle Nutzung ohne Einschränkung. Der Knackpunkt ist die Hardware. Ein Modell dieser Größe läuft nicht auf einem Arbeitsplatzrechner und auch nicht auf einer einzelnen Grafikarte. Wer Beam selbst betreiben will, braucht ein Rechenzentrum oder einen Anbieter.</p>
+<p>Der Ausprobier-Weg ist deshalb ein anderer: <a href="https://ollama.com/blog/reflection-beam">Ollama</a> gibt Beam befristet kostenlos über die eigene Cloud aus, mit der Zusage, keine Daten zu speichern. Reflection selbst betreibt eine Programmierschnittstelle in einer offenen Beta, und rund 40 Anbieter und Projekte nennen den Starttag — darunter Amazon Web Services, Microsoft Azure, Google Cloud, Cloudflare, CoreWeave, Together AI und OpenRouter.</p>
+<p>Eine Einschränkung ist im Modell selbst angelegt: Es wurde laut Modellkarte überwiegend auf Englisch entwickelt. Für deutschsprachige Texte gibt es keine Angaben.</p>
+<p>Und der ehrlichste Teil steht in der Ankündigung von Reflection selbst. Das Labor schreibt, wo andere offene Modelle wie Kimi K3 bei der reinen Fähigkeit vorn bleiben, liege Beams Vorteil in der Effizienz zur Laufzeit. Zwei Vergleichstabellen zeigen genau das.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Terminal Bench 2.1: Wo Beam im Vergleich steht</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Terminal Bench 2.1: Wo Beam im Vergleich steht</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % gelöste Aufgaben</text>
+  <line x1="180.0" y1="75" x2="180.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="180.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="287.5" y1="75" x2="287.5" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="287.5" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">25</text>
+  <line x1="395.0" y1="75" x2="395.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="395.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="502.5" y1="75" x2="502.5" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="502.5" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">75</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="180" y1="75" x2="180" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="180" y="81.9" width="389.6" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="94.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">DeepSeek V4.1 Flash</text>
+  <text x="577.6" y="94.3" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">90,6</text>
+  <rect x="180" y="112.5" width="379.7" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="124.9" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Kimi K3</text>
+  <text x="567.7" y="124.9" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">88,3</text>
+  <rect x="180" y="143.1" width="379.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="155.6" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GLM 5.3</text>
+  <text x="567.3" y="155.6" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">88,2</text>
+  <rect x="180" y="173.8" width="372.4" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="186.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Qwen 3.8 Max</text>
+  <text x="560.4" y="186.2" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">86,6</text>
+  <rect x="180" y="204.4" width="348.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="216.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GLM 5.2</text>
+  <text x="536.3" y="216.8" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">81</text>
+  <rect x="180" y="235.0" width="344.4" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="247.4" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Beam</text>
+  <text x="532.4" y="247.4" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">80,1</text>
+  <rect x="180" y="265.6" width="274.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="278.1" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Inkling</text>
+  <text x="462.3" y="278.1" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">63,8</text>
+  <rect x="180" y="296.3" width="242.5" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="308.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Nemotron 3 Ultra</text>
+  <text x="430.5" y="308.7" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">56,4</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://reflection.ai/blog/introducing-beam" target="_blank" rel="noopener">Reflection, Introducing Beam (05.10.2026)</a></span>
+  <span class="chart-note">Werte aus der Vergleichstabelle des Herstellers. Modelle ohne veröffentlichten Wert (in der Tabelle &quot;NR&quot;) fehlen im Diagramm.</span>
+</figcaption>
+</figure>
+<p>Beim <button type="button" class="lex" popovertarget="lex-benchmark" data-tip="Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen.">Benchmark</button><span class="lex-pop" popover id="lex-benchmark"><strong>Benchmark</strong> Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen. <a href="lexikon.html#benchmark">Im Lexikon</a></span> Terminal Bench 2.1 liegt Beam mit 80,1 Prozent hinter DeepSeek V4.1 Flash (90,6), Kimi K3 (88,3), GLM 5.3 (88,2), Qwen 3.8 Max (86,6) und GLM 5.2 (81,0). Bei den schweren Wissensfragen sieht es ähnlich aus.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Humanity&#x27;s Last Exam ohne Werkzeuge</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Humanity&#x27;s Last Exam ohne Werkzeuge</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % richtige Antworten</text>
+  <line x1="180.0" y1="75" x2="180.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="180.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="266.0" y1="75" x2="266.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="266.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">10</text>
+  <line x1="352.0" y1="75" x2="352.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="352.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="438.0" y1="75" x2="438.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="438.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">30</text>
+  <line x1="524.0" y1="75" x2="524.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="524.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="180" y1="75" x2="180" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="180" y="81.9" width="403.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="94.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Kimi K3</text>
+  <text x="591.3" y="94.3" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">46,9</text>
+  <rect x="180" y="112.5" width="375.0" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="124.9" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Qwen 3.8 Max</text>
+  <text x="563.0" y="124.9" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">43,6</text>
+  <rect x="180" y="143.1" width="363.8" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="155.6" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GLM 5.3</text>
+  <text x="551.8" y="155.6" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">42,3</text>
+  <rect x="180" y="173.8" width="348.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="186.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GLM 5.2</text>
+  <text x="536.3" y="186.2" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">40,5</text>
+  <rect x="180" y="204.4" width="336.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="216.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">DeepSeek V4.1 Flash</text>
+  <text x="524.3" y="216.8" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">39,1</text>
+  <rect x="180" y="235.0" width="311.3" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="247.4" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Beam</text>
+  <text x="499.3" y="247.4" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">36,2</text>
+  <rect x="180" y="265.6" width="255.4" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="278.1" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Inkling</text>
+  <text x="443.4" y="278.1" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">29,7</text>
+  <rect x="180" y="296.3" width="229.6" height="16.8" rx="3" fill="#0075de" />
+  <text x="168" y="308.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Nemotron 3 Ultra</text>
+  <text x="417.6" y="308.7" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">26,7</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://reflection.ai/blog/introducing-beam" target="_blank" rel="noopener">Reflection, Introducing Beam (05.10.2026)</a></span>
+  <span class="chart-note">Werte aus der Vergleichstabelle des Herstellers. Mit Werkzeugen kommt Beam laut eigener Modellkarte auf 51,1 Prozent.</span>
+</figcaption>
+</figure>
+<p>Solche Herstellerangaben sind mit Vorsicht zu lesen: Reflection hat die Werte für die Konkurrenzmodelle der Tabelle selbst zusammengestellt, und wo für ein Modell kein Wert veröffentlicht war, steht in der Tabelle „NR&quot;. Ob die Zahlen einem unabhängigen Nachbau standhalten, ist offen. Ein erster Anhaltspunkt ist, dass Reflection die eigenen Schwächen benennt, statt sie wegzulassen.</p>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://reflection.ai/blog/beam-is-available">Beam ist verfügbar — Reflection (16.10.2026)</a></li>
+  <li><a href="https://reflection.ai/blog/introducing-beam">Introducing Beam — Reflection (05.10.2026), mit Vergleichstabelle</a></li>
+  <li><a href="https://reflection.ai/beam-model-card">Beam-Modellkarte — Reflection</a></li>
+  <li><a href="https://huggingface.co/reflection/Beam-1.0-501B-A23B">Beam 1.0 501B A23B — Hugging Face, Modellkarte mit Testwerten</a></li>
+  <li><a href="https://huggingface.co/blog/reflection-beam">Welcome Beam: a 501B open model — Hugging Face Blog (16.10.2026)</a></li>
+  <li><a href="https://vllm-project.github.io/2026/10/16/reflection-beam.html">Serving Reflection Beam on vLLM from Day 0 (16.10.2026)</a></li>
+  <li><a href="https://ollama.com/blog/reflection-beam">Reflection&#x27;s Beam is freely available on Ollama</a></li>
+  <li><a href="https://techcrunch.com/2025/10/09/reflection-raises-2b-to-be-americas-open-frontier-ai-lab-challenging-deepseek/">Reflection AI raises $2B — TechCrunch</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

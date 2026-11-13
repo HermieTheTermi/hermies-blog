@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Timestral: Mistral sagt Zeitreihen voraus, ohne Grafikchip – Hermies Blog</title>
+  <meta name="description" content="Mistral veröffentlicht Timestral: seine ersten Zeitreihen-Modelle, in vier Größen von 5 bis 209 Millionen Parametern, mit 21 Quantilen und ohne Grafikchip lauffähig. Laut eigener Modellkarte Platz eins auf GIFT-Eval, TIME und fev-bench; die Bestenlisten-Einträge fehlen noch, unabhängig nachgeprüft ist nichts.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Timestral: Mistral sagt Zeitreihen voraus, ohne Grafikchip</h1>
+    <p class="meta"><time datetime="2026-10-15">15.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/benchmark.html">#benchmark</a> <a class="tag" href="tag/mistral.html">#mistral</a> <a class="tag" href="tag/open-weights.html">#open-weights</a> <a class="tag" href="tag/ki.html">#ki</a></span> · <a class="source" href="https://mistral.ai/news/timestral/">Mistral AI</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>5:05 Minuten</strong> (KI-Stimme) – <a href="audio/timestral-mistral-sagt-zeitreihen-voraus-ohne-grafikchip.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,3 MB)</span></p>
+    <audio controls preload="none" src="audio/timestral-mistral-sagt-zeitreihen-voraus-ohne-grafikchip.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Mistral hat am 15. Oktober 2026 <strong>Timestral</strong> vorgestellt — die ersten Modelle des Hauses, die keine Texte schreiben, sondern Zahlenreihen fortschreiben: Messwerte aus Anlagen, Verbrauchsdaten, Kontobewegungen.</li>
+  <li>Die Familie kommt in vier Größen von 5 bis 209 Millionen <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>. Das größte Modell führt laut Mistral die drei großen öffentlichen Vorhersage-Bestelllisten an: GIFT-Eval, TIME und fev-bench.</li>
+  <li>Es braucht dafür keinen Grafikchip. Eine Tagesprognose aus drei Wochen 15-Minuten-Messwerten dauert laut Mistral <strong>140 Millisekunden auf acht Prozessorkernen</strong> — das kleinste Modell schafft dieselbe Aufgabe in 10 Millisekunden.</li>
+  <li>Statt einer einzelnen Zahl liefert Timestral 21 <button type="button" class="lex" popovertarget="lex-quantil" data-tip="Eine Stufe in einer Wahrscheinlichkeitsverteilung. Das 0,9-Quantil ist der Wert, den neun von zehn Fällen unterschreiten. Mehrere Quantile zusammen beschreiben nicht nur einen erwarteten Wert, sondern auch die Unsicherheitsspanne.">Quantil</button><span class="lex-pop" popover id="lex-quantil"><strong>Quantil</strong> Eine Stufe in einer Wahrscheinlichkeitsverteilung. Das 0,9-Quantil ist der Wert, den neun von zehn Fällen unterschreiten. Mehrere Quantile zusammen beschreiben nicht nur einen erwarteten Wert, sondern auch die Unsicherheitsspanne. <a href="lexikon.html#quantil">Im Lexikon</a></span>e, also auch die Unsicherheitsspanne. Für Wartungs- und Einkaufspläne ist das oft die wichtigere Angabe.</li>
+  <li>Der Haken: Die Vergleichszahlen stammen aus Mistrals eigener <button type="button" class="lex" popovertarget="lex-modellkarte" data-tip="Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt.">Modellkarte</button><span class="lex-pop" popover id="lex-modellkarte"><strong>Modellkarte</strong> Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt. <a href="lexikon.html#modellkarte">Im Lexikon</a></span>. Sie sind bei den Bestenlisten eingereicht, dort aber noch nicht einsehbar; eine unabhängige Nachprüfung fehlt.</li>
+  <li>Die Gewichte stehen unter einer abgewandelten MIT-Lizenz zum Herunterladen, der Quellcode liegt auf GitHub, ein technischer Bericht ist angekündigt.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Mistral AI hat am 15. Oktober 2026 seine erste Familie von Modellen für <button type="button" class="lex" popovertarget="lex-zeitreihe" data-tip="Messwerte, die in festem Takt anfallen: der Stromverbrauch eines Werks jede Viertelstunde, der Pegel eines Flusses pro Minute, der Umsatz eines Ladens pro Tag.">Zeitreihe</button><span class="lex-pop" popover id="lex-zeitreihe"><strong>Zeitreihe</strong> Messwerte, die in festem Takt anfallen: der Stromverbrauch eines Werks jede Viertelstunde, der Pegel eines Flusses pro Minute, der Umsatz eines Ladens pro Tag. <a href="lexikon.html#zeitreihe">Im Lexikon</a></span>n veröffentlicht: <strong>Timestral</strong>. Zeitreihen sind Messwerte, die in festem Takt anfallen — der Druck in einer Rohrleitung, der Stromverbrauch einer Fabrikhalle, die Ladekurve eines Batteriespeichers. Wer diese Werte fortschreiben kann, plant Wartung, Ersatzteile, Personal und Energieeinkauf.</p>
+<p>Solche Modelle funktionieren anders als ein Sprachmodell. Timestral schreibt keine Sätze, sondern gibt für die nächsten Zeitabschnitte Werte aus. Die Idee dahinter ist dieselbe wie bei Sprachmodellen: Statt für jeden Kunden eine eigene Rechnung aufzusetzen, wird das Modell einmal auf sehr vielen verschiedenen Reihen trainiert und kann danach auf Daten arbeiten, die es nie gesehen hat — das nennt man <button type="button" class="lex" popovertarget="lex-zero-shot" data-tip="Ein Modell löst eine Aufgabe, für die es nicht eigens trainiert wurde. Bei Vorhersagemodellen heißt das: Es rechnet auf einer Datenreihe, die es nie zuvor gesehen hat.">Zero-Shot</button><span class="lex-pop" popover id="lex-zero-shot"><strong>Zero-Shot</strong> Ein Modell löst eine Aufgabe, für die es nicht eigens trainiert wurde. Bei Vorhersagemodellen heißt das: Es rechnet auf einer Datenreihe, die es nie zuvor gesehen hat. <a href="lexikon.html#zero-shot">Im Lexikon</a></span>-Vorhersage.</p>
+<p>Mistral liefert vier Größen: 5, 28, 123 und 209 Millionen Parameter. Alle vier teilen sich denselben Aufbau und dasselbe Trainingsverfahren. Das größte Modell hat 24 Schichten und zerlegt die Zeitreihe in Abschnitte von je 32 Messpunkten. Es verarbeitet bis zu 32.768 Messpunkte auf einmal — bei Viertelstundenwerten sind das gut acht Monate — und sagt bis zu 1.024 Schritte im Voraus. Der eigentlich ungewöhnliche Teil steht in der Modellkarte: Der Rechner braucht dafür keinen Grafikchip.</p>
+<h2>Warum es zählt</h2>
+<p>Der Unterschied zwischen Mistrals Ankündigung und den üblichen Modellmeldungen liegt in der Größe. 209 Millionen Parameter sind so wenig, dass das Modell in den Arbeitsspeicher eines gewöhnlichen Servers passt. Mistral nennt eine konkrete Messung: Auf acht Prozessorkernen sagt das größte Modell einen Tag voraus, gestützt auf drei Wochen Verlaufsdaten im 15-Minuten-Takt, und braucht dafür 140 Millisekunden. Das kleinste Modell schafft dieselbe Aufgabe in 10 Millisekunden, das mittlere 28-Millionen-Modell ist fünfmal schneller als das größte.</p>
+<p>Diese Zahlen sind der Grund, warum so ein Modell überhaupt in eine Fabrikhalle passt. Wer 40.000 Sensoren überwachen will, kann nicht für jeden Sensor eine Grafikarte hinstellen — und erst recht nicht die Messwerte an einen fremden Dienst schicken. Mistral nennt als Einsatzorte ausdrücklich Maschinenparks, Finanzströme und Lagerketten und als Betriebsform Server im Haus, im eigenen Netz oder ganz ohne Netzanbindung.</p>
+<p>Zweitens ändert sich die Art der Antwort. Timestral gibt pro Zeitpunkt nicht einen Wert aus, sondern 21 Quantile — vom 1-Prozent-Fall bis zum 99-Prozent-Fall. Praktisch heißt das: Ein Wartungsteam kann eine Warnschwelle so setzen, dass sie nur anschlägt, wenn selbst das obere Ende der Spanne auffällt. Ein einzelner vorhergesagter Wert kann das nicht leisten, weil er nicht verrät, wie sicher er ist.</p>
+<p>Drittens der Umgang mit bekanntem Zukunftswissen. Timestral unterscheidet Eingaben, die nur aus der Vergangenheit stammen dürfen, von solchen, die für die Zukunft schon feststehen — ein Feiertagskalender oder die Wettervorhersage zum Beispiel. Das Modell rechnet sie mit, ohne dabei versehentlich den eigenen Zielwert aus der Zukunft zu verraten. Genau dieser Betrug am eigenen Test ist bei Prognosemodellen ein häufiger Fehler.</p>
+<h2>Was zeigen die Zahlen</h2>
+<p>Mistral vergleicht Timestral mit fünf anderen Prognosemodellen. Die Tabellen stehen in der Modellkarte, das größte Modell führt dort jede der drei Testreihen an.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>GIFT-Eval: Timestral liegt knapp vorn</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">GIFT-Eval: Timestral liegt knapp vorn</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in MASE (kleiner ist besser)</text>
+  <line x1="180.0" y1="75" x2="180.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="180.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="287.5" y1="75" x2="287.5" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="287.5" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,2</text>
+  <line x1="395.0" y1="75" x2="395.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="395.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,4</text>
+  <line x1="502.5" y1="75" x2="502.5" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="502.5" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,6</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,8</text>
+  <line x1="180" y1="75" x2="180" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="180" y="86.0" width="353.7" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="103.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Timestral-209M</text>
+  <text x="541.7" y="103.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,658</text>
+  <rect x="180" y="135.0" width="355.3" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="152.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">t0-gamma</text>
+  <text x="543.3" y="152.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,661</text>
+  <rect x="180" y="184.0" width="358.5" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">TimesFM-3</text>
+  <text x="546.5" y="201.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,667</text>
+  <rect x="180" y="233.0" width="374.1" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="250.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Toto-2.0-2.5B</text>
+  <text x="562.1" y="250.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,696</text>
+  <rect x="180" y="282.0" width="375.2" height="27.0" rx="3" fill="#0075de" />
+  <text x="168" y="299.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Chronos-2</text>
+  <text x="563.2" y="299.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,698</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/mistralai/Timestral-209M" target="_blank" rel="noopener">Mistral AI, Modellkarte Timestral-209M (15. Oktober 2026)</a></span>
+  <span class="chart-note">MASE misst den Vorhersagefehler, kleinere Werte sind besser. Herstellerangaben; GIFT-Eval vergleicht laut Mistral 83 vortrainierte Modelle ohne Nachhilfe. Die Abstände an der Spitze liegen im Bereich weniger Tausendstel.</span>
+</figcaption>
+</figure>
+<p>Der Abstand ist denkbar knapp. Beim GIFT-Eval-Test liegt Timestral-209M bei 0,658, das zweitbeste Modell t0-gamma bei 0,661. Ob drei Tausendstel Unterschied bei einer zweiten Messung halten, lässt sich ohne die eingereichten Einzelergebnisse nicht beurteilen. Mistral schreibt, die Ergebnisse seien bei den Bestenlisten GIFT-Eval und TIME eingereicht — abrufbar sind sie dort noch nicht.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Eine Tagesprognose ohne Grafikchip</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Eine Tagesprognose ohne Grafikchip</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Millisekunden</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="238.3" x2="650" y2="238.3" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="242.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="68" y1="156.7" x2="650" y2="156.7" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="160.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">150</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="185.5" y="303.7" width="56.0" height="16.3" rx="3" fill="#0075de" />
+  <text x="213.5" y="297.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">10</text>
+  <text x="213.5" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Timestral-5M</text>
+  <rect x="476.5" y="91.3" width="56.0" height="228.7" rx="3" fill="#0075de" />
+  <text x="504.5" y="87.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">140</text>
+  <text x="504.5" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Timestral-209M</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://mistral.ai/news/timestral/" target="_blank" rel="noopener">Mistral AI, Blogbeitrag Introducing Timestral (15. Oktober 2026)</a></span>
+  <span class="chart-note">Gemessen auf acht Prozessorkernen; Grundlage sind drei Wochen Verlaufsdaten im 15-Minuten-Takt, vorhergesagt wird ein Tag. Für die mittleren Größen nennt Mistral keine absoluten Zeiten, nur Verhältnisse: das 28-Millionen-Modell rechnet fünfmal schneller als das größte.</span>
+</figcaption>
+</figure>
+<p>Deutlicher als der Vorsprung an der Spitze ist das Verhältnis von Größe zu Qualität. Auch die kleinen Modelle liegen laut Modellkarte nahe an der Spitze.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Kleiner ist fast so gut: die vier Timestral-Größen im Vergleich</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Kleiner ist fast so gut: die vier</tspan><tspan x="68" y="48">Timestral-Größen im Vergleich</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in MASE im Test GIFT-Eval (kleiner ist besser)</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="283.8" x2="650" y2="283.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="287.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,2</text>
+  <line x1="68" y1="222.5" x2="650" y2="222.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="226.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,4</text>
+  <line x1="68" y1="161.3" x2="650" y2="161.3" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="165.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,6</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0,8</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="129.1" width="56.0" height="215.9" rx="3" fill="#0075de" />
+  <text x="140.8" y="123.1" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,705</text>
+  <text x="140.8" y="363.0" transform="rotate(-30 140.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">5 Mio.</text>
+  <rect x="258.2" y="137.4" width="56.0" height="207.6" rx="3" fill="#0075de" />
+  <text x="286.2" y="131.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,678</text>
+  <text x="286.2" y="363.0" transform="rotate(-30 286.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">28 Mio.</text>
+  <rect x="403.8" y="143.2" width="56.0" height="201.8" rx="3" fill="#0075de" />
+  <text x="431.8" y="137.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,659</text>
+  <text x="431.8" y="363.0" transform="rotate(-30 431.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">123 Mio.</text>
+  <rect x="549.2" y="143.5" width="56.0" height="201.5" rx="3" fill="#0075de" />
+  <text x="577.2" y="137.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,658</text>
+  <text x="577.2" y="363.0" transform="rotate(-30 577.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">209 Mio.</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://huggingface.co/mistralai/Timestral-209M" target="_blank" rel="noopener">Mistral AI, Modellkarte Timestral-209M (15. Oktober 2026)</a></span>
+  <span class="chart-note">Parameterzahl in Millionen. Zwischen 123 und 209 Millionen Parametern liegen nur ein Tausendstel Unterschied im Testergebnis. Herstellerangaben; unabhängige Nachprüfung fehlt.</span>
+</figcaption>
+</figure>
+<p>Mistral formuliert den Anspruch so: Jede der vier Größen liege auf der Grenze des Machbaren, für ihre Größenklasse sage kein öffentliches Modell besser voraus. Das 28-Millionen-Modell schlägt demnach Chronos-2, das etwa viermal größer ist, das 209-Millionen-Modell liegt vor TimesFM-3 und Falcon-2.0, obwohl es laut Mistral mit weniger Parametern rechnet.</p>
+<p>Trainiert wurde überwiegend mit künstlich erzeugten Reihen. Mistral schreibt, die Mehrzahl der Trainingsdaten sei synthetisch: zuerst einfache Verläufe mit Trend, Saison und verschiedenen Rauscharten, dann künstliche Mehrgrößensysteme mit Abhängigkeiten zwischen den Reihen. Erst danach folgte eine zweite Stufe mit echten und künstlichen Daten und vierfach längerem <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span>. Der Vorteil liegt auf der Hand: Über eigene Kundendaten muss beim Training niemand reden.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Die Gewichte der vier Modelle stehen auf Hugging Face, der Quellcode auf GitHub, und Mistral nennt als Betriebsarten Server im eigenen Haus, ein eigenes Netz oder eine abgeschottete Umgebung ohne Netzanbindung. Die Lizenz ist eine abgewandelte MIT-Lizenz — der Zusatz untersagt ausdrücklich jede Nutzung, die Rechte Dritter verletzt, etwa Schutzrechte. Mistral nennt den Stand „Public Preview&quot;.</p>
+<p>Für Firmen, die ein eigenes Vorhersagemodell brauchen, ist das die interessantere Variante: Wer Timestral auf eigenen Daten nachtrainiert, behält die Trainingsdaten und die Gewichte im Haus. Mistral verweist dafür auf seine Plattform Forge und darauf, dass sich auch die Trainingsmischung selbst zusammenstellen lässt — man kann also steuern, worauf das Modell geeicht wird.</p>
+<p>Offen bleibt einiges. Ein technischer Bericht war zum Start noch nicht veröffentlicht, Mistral kündigt ihn an. Die Zahlen zur Trefferqualität sind Herstellerangaben aus der eigenen Modellkarte; die Bestenlisten-Einträge fehlen noch. Und der Vergleich mit Sprachmodellen, die Mistral als Ergänzung für mehrstufige Abläufe vorschlägt, ist in der Ankündigung beschrieben, aber nicht gemessen. Wer das Modell einsetzen will, sollte es deshalb auf den eigenen Reihen gegen die bisherige Methode testen — die Modellkarte allein reicht als Beleg nicht aus.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Mistral AI: <a href="https://mistral.ai/news/timestral/">Introducing Timestral</a>, 15. Oktober 2026 — Primärquelle für Ankündigung, Laufzeiten, Trainingsverfahren und Bestenlisten-Platzierung</li>
+  <li>Modellkarte: <a href="https://huggingface.co/mistralai/Timestral-209M">mistralai/Timestral-209M</a> — Architektur, Kontextlänge, Ergebnis- und Vergleichstabellen</li>
+  <li>Modellübersicht und Lizenz: <a href="https://docs.mistral.ai/models/timestral-1-0">Timestral 1.0 in der Mistral-Dokumentation</a> · <a href="https://huggingface.co/mistralai/Timestral-209M/blob/main/LICENSE">Lizenztext</a></li>
+  <li>Quellcode: <a href="https://github.com/mistralai/timestral">github.com/mistralai/timestral</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

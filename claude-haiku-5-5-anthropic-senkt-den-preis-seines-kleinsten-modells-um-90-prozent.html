@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Haiku 5.5: Anthropic senkt den Preis seines kleinsten Modells um 90 Prozent – Hermies Blog</title>
+  <meta name="description" content="Anthropic hat am 7. Oktober 2026 Claude Haiku 5.5 veröffentlicht, das kleinste und schnellste Modell der 5.5-Reihe. Für Anfragen bis 100.000 Token kostet es 0,10 Dollar pro Million Eingabe- und 0,50 Dollar pro Million Ausgabe-Token, 90 Prozent weniger als der Vorgänger. In den eigenen Tests steigt der Wert beim Bedienen eines Computers von 15,7 auf 72,4 Prozent und beim Kommandozeilen-Test von 0 auf 39,2 Prozent; das größere Sonnet 5.5 bleibt bei schwerer Programmierung vorn. Alle Leistungswerte sind Herstellerangaben.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Claude Haiku 5.5: Anthropic senkt den Preis seines kleinsten Modells um 90 Prozent</h1>
+    <p class="meta"><time datetime="2026-10-07">07.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/benchmark.html">#benchmark</a> <a class="tag" href="tag/anthropic.html">#anthropic</a></span> · <a class="source" href="https://www.anthropic.com/claude-haiku-5-5">Anthropic</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:14 Minuten</strong> (KI-Stimme) – <a href="audio/claude-haiku-5-5-anthropic-senkt-den-preis-seines-kleinsten-modells-um-90-prozent.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,9 MB)</span></p>
+    <audio controls preload="none" src="audio/claude-haiku-5-5-anthropic-senkt-den-preis-seines-kleinsten-modells-um-90-prozent.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Anthropic hat am 7. Oktober 2026 <strong>Claude Haiku 5.5</strong> veröffentlicht: das kleinste, schnellste und günstigste Modell der 5.5-Reihe (<a href="https://www.anthropic.com/claude-haiku-5-5">Ankündigung</a>, <a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview">Modelldaten</a>).</li>
+  <li>Der Preis fällt deutlich: <strong>0,10 Dollar pro Million Eingabe-Token</strong> und <strong>0,50 Dollar pro Million Ausgabe-Token</strong> bei Anfragen bis 100.000 Token. Haiku 4.5 kostete 1 und 5 Dollar – das sind 90 Prozent weniger.</li>
+  <li>Oberhalb von 100.000 Token gelten 0,50 und 2,50 Dollar, immer noch halb so viel wie beim Vorgänger. Im Schnitt rechnet Anthropic mit rund 75 Prozent weniger Kosten – der neue Tokenizer zerlegt denselben Text aber in etwa 30 Prozent mehr <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span>.</li>
+  <li>In den eigenen Tests legt das Modell überall zu: Computerbedienung (OSWorld 2.1) <strong>72,4 statt 15,7 Prozent</strong>, Kommandozeilen-Aufgaben (Terminal-Bench 4.0) <strong>39,2 statt 0 Prozent</strong>, Wissensarbeit (GDPval-AA) <strong>1.620 statt 735 Punkte</strong>. Gegen das gleich teure GPT-6 Luna gewinnt es in allen genannten Tests, gegen das größere Sonnet 5.5 verliert es beim schweren Programmieren deutlich.</li>
+  <li>Erstmals bei Haiku gibt es eine einstellbare Denk-Stufe, dazu ein <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> von einer Million Token und bis zu 128.000 Token Ausgabe.</li>
+  <li>Nebenbei senkt Anthropic den Cache-Preis von Sonnet 5.5 um die Hälfte und führt monatliche API-Guthaben für Max- und Team-Abos ein. Alle Leistungswerte sind Herstellerangaben aus der eigenen Testreihe; unabhängig geprüft hat sie niemand.</li>
+</ul>
+<h2>Was passiert ist</h2>
+<p>Anthropic hat am 7. Oktober 2026 Claude Haiku 5.5 vorgestellt. Es ist der dritte und letzte Teil der 5.5-Reihe: Opus 5.5 kam am 22. September, Sonnet 5.5 am 28. September, Haiku ist die kleine, schnelle und günstige Variante für viel Routinearbeit (<a href="https://www.anthropic.com/claude-haiku-5-5">Ankündigung</a>).</p>
+<p>Die Reihe ist damit komplett – und der Preis ist die eigentliche Nachricht. Für Anfragen bis 100.000 Token kostet Haiku 5.5 jetzt 0,10 Dollar pro Million Eingabe-Token und 0,50 Dollar pro Million Ausgabe-Token. Beim Vorgänger Haiku 4.5 waren es 1 und 5 Dollar (<a href="https://platform.claude.com/docs/en/about-claude/pricing">Preisliste</a>). Nach Anthropics eigener Rechnung sind das 90 Prozent weniger; für Anfragen über 100.000 Token halbiert sich der Preis. Diese kurzen Anfragen machen laut Anthropic rund 90 Prozent der Aufrufe des Vorgängermodells aus.</p>
+<p>Ein Detail verhindert, dass die Ersparnis eine Milchmädchenrechnung wird. Haiku 5.5 nutzt denselben neuen Tokenizer wie die größeren Modelle, und der zerlegt denselben Text in etwa 30 Prozent mehr Token (<a href="https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide">Migrationsleitfaden</a>). Wer seine Kosten anhand alter Token-Zahlen schätzt, landet zu niedrig. Anthropic rechnet deshalb mit rund 75 Prozent Ersparnis im Schnitt, nicht mit 90.</p>
+<p>Auch die Größe des Modells ist neu für diese Klasse: <button type="button" class="lex" popovertarget="lex-kontextfenster-2" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster-2"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> von einer Million Token, bis zu 128.000 Token Ausgabe, und zum ersten Mal bei einem Haiku eine einstellbare Denk-Stufe. Bisher gab es diesen Regler nur bei den größeren Modellen – damit lässt sich pro Anfrage entscheiden, ob das Modell mehr rechnen (und kosten) soll oder schneller antwortet. Die Standardstufe ist „medium&quot;. Das Modell läuft auf der Claude-API und am ersten Tag auch bei Amazon Bedrock, Google Cloud und Microsoft Foundry.</p>
+<h2>Was die Zahlen zeigen</h2>
+<p>Anthropic vergleicht Haiku 5.5 mit dem Vorgänger, mit OpenAIs GPT-6 Luna und zur Einordnung mit dem eigenen Sonnet 5.5. Der auffälligste Sprung liegt beim Bedienen eines echten Rechners.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Einen Computer bedienen: OSWorld 2.1 (Offline-Satz)</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Einen Computer bedienen:</tspan><tspan x="68" y="48">OSWorld 2.1 (Offline-Satz)</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % gelöster Aufgaben</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="296.0" x2="650" y2="296.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="300.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="68" y1="247.0" x2="650" y2="247.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="251.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="68" y1="198.0" x2="650" y2="198.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="202.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">60</text>
+  <line x1="68" y1="149.0" x2="650" y2="149.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="153.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">80</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="306.5" width="56.0" height="38.5" rx="3" fill="#0075de" />
+  <text x="140.8" y="300.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">15,7</text>
+  <text x="140.8" y="363.0" transform="rotate(-30 140.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Haiku 4.5</text>
+  <rect x="258.2" y="225.2" width="56.0" height="119.8" rx="3" fill="#0075de" />
+  <text x="286.2" y="219.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">48,9</text>
+  <text x="286.2" y="363.0" transform="rotate(-30 286.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GPT-6 Luna</text>
+  <rect x="403.8" y="167.6" width="56.0" height="177.4" rx="3" fill="#0075de" />
+  <text x="431.8" y="161.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">72,4</text>
+  <text x="431.8" y="363.0" transform="rotate(-30 431.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Haiku 5.5</text>
+  <rect x="549.2" y="139.4" width="56.0" height="205.6" rx="3" fill="#0075de" />
+  <text x="577.2" y="133.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">83,9</text>
+  <text x="577.2" y="363.0" transform="rotate(-30 577.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Sonnet 5.5</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" rel="noopener">Anthropic, Ankündigung Claude Haiku 5.5 (07.10.2026)</a></span>
+  <span class="chart-note">Der Test misst, wie gut ein Modell einen echten Rechner über viele Schritte bedient, mit Teilpunkten. Herstellerangaben aus Anthropics eigener Messung.</span>
+</figcaption>
+</figure>
+<p>Im Test OSWorld 2.1, der zusammenhängende Klickfolgen und Teilpunkte bewertet, steigt der Wert von 15,7 auf 72,4 Prozent. Das ist mehr als das Vierfache und liegt 23,5 Punkte vor GPT-6 Luna. Bemerkenswert ist, dass Anthropic gleichzeitig die Computer- und Browser-Steuerung in den eigenen Entwicklerbibliotheken freigegeben hat – für die schnelle, günstige Variante gedacht.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Wissensarbeit im Vergleich: GDPval-AA v2.1</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Wissensarbeit im Vergleich: GDPval-AA v2.1</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Punkte (Elo-Skala)</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="258.8" x2="650" y2="258.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="262.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">500</text>
+  <line x1="68" y1="197.5" x2="650" y2="197.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.000</text>
+  <line x1="68" y1="136.2" x2="650" y2="136.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="140.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.500</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2.000</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="230.0" width="56.0" height="90.0" rx="3" fill="#0075de" />
+  <text x="140.8" y="224.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">735</text>
+  <text x="140.8" y="338.0" transform="rotate(-30 140.8 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Haiku 4.5</text>
+  <rect x="258.2" y="144.0" width="56.0" height="176.0" rx="3" fill="#0075de" />
+  <text x="286.2" y="138.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1.437</text>
+  <text x="286.2" y="338.0" transform="rotate(-30 286.2 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GPT-6 Luna</text>
+  <rect x="403.8" y="121.5" width="56.0" height="198.5" rx="3" fill="#0075de" />
+  <text x="431.8" y="115.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1.620</text>
+  <text x="431.8" y="338.0" transform="rotate(-30 431.8 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Haiku 5.5</text>
+  <rect x="549.2" y="94.6" width="56.0" height="225.4" rx="3" fill="#0075de" />
+  <text x="577.2" y="88.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1.840</text>
+  <text x="577.2" y="338.0" transform="rotate(-30 577.2 338.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Sonnet 5.5</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" rel="noopener">Anthropic, Ankündigung Claude Haiku 5.5 (07.10.2026)</a></span>
+  <span class="chart-note">Der Test lässt Modelle Aufgaben aus 44 Berufen bearbeiten und vergleicht sie paarweise, die Werte stehen auf einer Elo-Skala wie im Schach. Alle Zahlen sind Herstellerangaben aus Anthropics eigener Testreihe; für GPT-6 Luna stammen sie aus derselben Tabelle, unabhängig nachgemessen hat sie niemand.</span>
+</figcaption>
+</figure>
+<p>Bei Aufgaben aus 44 Berufen (GDPval-AA v2.1) kommt Haiku 5.5 auf 1.620 Punkte, der Vorgänger auf 735, GPT-6 Luna auf 1.437. Beim anderen Wissensarbeitstest AA-Briefcase sind es 1.578 statt 614 Punkte. In beiden Fällen bleibt Sonnet 5.5 vorn – beim GDPval-Test mit 1.840 Punkten –, kostet dafür aber das Zwanzigfache pro Token.</p>
+<p>Der zweite auffällige Wert ist Terminal-Bench 4.0, ein Test für mehrschrittige Profiaufgaben in der Kommandozeile: 39,2 Prozent, nach 0,0 Prozent beim Vorgänger. Genau hier zeigt sich aber die Grenze: Sonnet 5.5 erreicht im gleichen Test 70,6 Prozent. Für schwere Programmierarbeit bleibt also das größere Modell die richtige Wahl; Haiku 5.5 ist für eng umrissene Aufgaben gedacht.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Preis je Million Token: Haiku 5.5 gegen den Vorgänger</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Preis je Million Token:</tspan><tspan x="68" y="48">Haiku 5.5 gegen den Vorgänger</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in US-Dollar pro Million Token</text>
+  <rect x="477.0" y="62.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="493.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Eingabe</text>
+  <rect x="563.5" y="62.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="579.5" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Ausgabe</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="283.8" x2="650" y2="283.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="287.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2,5</text>
+  <line x1="68" y1="222.5" x2="650" y2="222.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="226.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">5</text>
+  <line x1="68" y1="161.2" x2="650" y2="161.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="165.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">7,5</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">10</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="120.0" y="320.5" width="43.5" height="24.5" rx="2" fill="#0075de" />
+  <text x="141.8" y="315.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">1</text>
+  <rect x="166.5" y="222.5" width="43.5" height="122.5" rx="2" fill="#e05638" />
+  <text x="188.2" y="217.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">5</text>
+  <text x="165.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Haiku 4.5</text>
+  <rect x="314.0" y="342.6" width="43.5" height="2.5" rx="2" fill="#0075de" />
+  <text x="335.8" y="337.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">0,1</text>
+  <rect x="360.5" y="332.8" width="43.5" height="12.2" rx="2" fill="#e05638" />
+  <text x="382.2" y="327.8" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">0,5</text>
+  <text x="359.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Haiku 5.5 (bis 100k)</text>
+  <rect x="508.0" y="296.0" width="43.5" height="49.0" rx="2" fill="#0075de" />
+  <text x="529.8" y="291.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">2</text>
+  <rect x="554.5" y="100.0" width="43.5" height="245.0" rx="2" fill="#e05638" />
+  <text x="576.2" y="110.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">10</text>
+  <text x="553.0" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Sonnet 5.5</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" rel="noopener">Anthropic, Ankündigung Claude Haiku 5.5 und Preisseite (07.10.2026)</a></span>
+  <span class="chart-note">Für Anfragen über 100.000 Token steigt der Preis bei Haiku 5.5 auf 0,50 und 2,50 Dollar – dann sind es 50 Prozent weniger als beim Vorgänger. Anthropic rechnet im Schnitt mit rund 75 Prozent weniger Kosten, weil der neue Tokenizer denselben Text in etwa 30 Prozent mehr Token zerlegt.</span>
+</figcaption>
+</figure>
+<p>Bei den übrigen Werten nennt Anthropic 46,4 Prozent beim eigenen Programmiertest FrontierCode 1.1 (GPT-6 Luna: 42,4), 46,4 Prozent beim Diagramm-Test Chartography (GPT-6 Luna: 29,1) und 45,9 beziehungsweise 57,4 Prozent im Wissensquiz Humanity&#x27;s Last Exam ohne und mit Hilfsmitteln. Das sind allesamt Werte aus der eigenen Testreihe des Herstellers, mit dem Vergleichsmodell in derselben Tabelle.</p>
+<h2>Warum das zählt</h2>
+<p>Kleine Modelle sind die Arbeitstiere der Praxis: Sie sortieren E-Mails, fassen Dokumente zusammen, klassifizieren Anfragen und arbeiten als Unteragenten für die großen Modelle. Wenn dieses Segment im Preis fällt und gleichzeitig deutlich besser wird, sinkt die Schwelle, ab der sich <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span>-Anwendungen überhaupt rechnen. Ein Modell, das einen Rechner bedienen kann, für 0,10 Dollar pro Million Eingabe-Token, verändert die Kalkulation für Anwendungen, die bisher zu teuer waren.</p>
+<p>Bemerkenswert ist auch das Tempo: Opus 5.5, Sonnet 5.5 und Haiku 5.5 kamen innerhalb von gut zwei Wochen. Der Preis von 0,10 und 0,50 Dollar ist derselbe, den OpenAI im September für sein kleines Modell GPT-6 Luna aufgerufen hat (<a href="https://decrypt.co/380351/anthropic-launches-haiku-5-5-cheapest-fastest-claude-model">Bericht</a>). Die günstigste Klasse ist also der Ort, an dem sich die Anbieter derzeit direkt unterbieten.</p>
+<p>Und schließlich verschiebt sich das Verhältnis zwischen den Größenklassen. Wer vor einem Jahr zwischen Haiku und Sonnet wählen musste, wählte zwischen „kann das nicht&quot; und „kann das&quot; – heute liegt Haiku beim Bedienen von Computern nur noch rund elf Punkte hinter dem größeren Modell, beim schweren Programmieren aber gut 30 Punkte. Die Entscheidung wird also nicht einfacher, sondern feiner.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Wer Kosten senken will, sollte drei Dinge prüfen. Erstens: Wie lang sind die Anfragen wirklich? Unter 100.000 Token gilt der günstige Tarif, darüber verdoppelt sich der Preis fast. Zweitens: Wie viele Token fallen mit dem neuen Tokenizer an? Ein Test mit echten Daten ist sicherer als eine Rechnung nach alter Gewohnheit. Drittens: Lohnt sich Zwischenspeichern? Das Lesen aus dem Cache kostet bei Haiku 5.5 nur 0,01 Dollar pro Million Token, also ein Zehntel der Eingabe.</p>
+<p>Für Agenten mit vielen Schritten kommt ein zweiter Hebel dazu: Die einstellbare Denk-Stufe erlaubt, einfache Schritte billig und schwierige Schritte gründlich zu fahren, ohne das Modell zu wechseln. Dazu kommen monatliche Guthaben für Abos, die Anthropic diese Woche einführt: 100 Dollar im Monat beim kleinen Max-Abo, 200 beim großen und bis zu 500 Dollar für Team-Kunden, die gemeinsam verbraucht werden können (<a href="https://www.anthropic.com/claude-haiku-5-5">Ankündigung</a>). Dass Anthropic gleichzeitig den Cache-Preis des größeren Sonnet 5.5 halbiert hat – von 0,20 auf 0,10 Dollar, laut Anthropic rund 20 Prozent weniger Kosten bei typischer Agentenarbeit – zeigt, wo die Rechnung im Alltag wirklich auffällt: nicht beim Text hineinschreiben, sondern beim wiederholten Lesen desselben Kontexts.</p>
+<p>Bleibt die Einschränkung: Alle Leistungswerte stammen aus Anthropics eigener Messung, die Preise gelten ohne Mengenrabatt und ohne die Aufschläge regionaler Endpunkte bei den Cloud-Anbietern. Wer umstellt, sollte mit einer Handvoll eigener Aufgaben nachmessen.</p>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://www.anthropic.com/claude-haiku-5-5">Anthropic: Introducing Claude Haiku 5.5</a> (7. Oktober 2026) – Preise, Benchmark-Tabelle, Sicherheitsangaben, Cache-Preis für Sonnet 5.5 und die monatlichen API-Guthaben</li>
+  <li><a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview">Claude Haiku 5.5 – Modelldaten</a> (Plattform-Dokumentation) – Kontextfenster von 1 Million Token, 128.000 Token Ausgabe, Denk-Stufe, Tokenizer</li>
+  <li><a href="https://platform.claude.com/docs/en/about-claude/pricing">Preisliste von Anthropic</a> – Vergleichspreise von Haiku 4.5, Sonnet 5.5 und den Cloud-Plattformen</li>
+  <li><a href="https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide">Migrationsleitfaden zu Haiku 5.5</a> – rund 30 Prozent mehr Token für denselben Text</li>
+  <li><a href="https://www.anthropic.com/document/claude-haiku-5-5-system-card">Claude Haiku 5.5 – System Card</a> – Sicherheitsbewertungen und Einsatzentscheidungen</li>
+  <li><a href="https://decrypt.co/380351/anthropic-launches-haiku-5-5-cheapest-fastest-claude-model">Decrypt: Anthropic Launches Haiku 5.5</a> – zum Preis von GPT-6 Luna (Sekundärquelle zur Einordnung)</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
