@@ -1,0 +1,13 @@
+{
+  "typ": "zahlen",
+  "titel": "Dreieinhalb Jahre bis zur 1.0",
+  "werte": [
+    {"wert": "3,5 Jahre", "label": "vom ersten Commit bis 1.0.0", "detail": "erster Commit 26c0846 am 10. März 2023, Version 1.0.0 am 13. November 2026"},
+    {"wert": "134.862", "label": "Sterne auf GitHub", "detail": "dazu 25.553 Forks und 447 Beitragende am Tag der Veröffentlichung"},
+    {"wert": "2.604", "label": "offene Issues", "detail": "zum selben Zeitpunkt, im Reddit-Thread der meistgenannte Kritikpunkt"},
+    {"wert": "150+", "label": "Modellarchitekturen", "detail": "unterstützte Varianten laut Projektblog, dazu alle gängigen Verfahren zum spekulativen Dekodieren"}
+  ],
+  "quelle": "GitHub-API für ggml-org/llama.cpp und Hugging-Face-Blogbeitrag zur Version 1.0.0, beide abgerufen am 13.11.2026",
+  "quelle_url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+  "hinweis": "Stände vom Tag der Veröffentlichung. Die Zahl der Beitragenden stammt aus der Beitragenden-Schnittstelle von GitHub ohne anonyme Einträge."
+}

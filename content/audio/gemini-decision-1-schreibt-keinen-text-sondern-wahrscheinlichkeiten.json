@@ -1,0 +1,11 @@
+{
+  "id": "gemini-decision-1-schreibt-keinen-text-sondern-wahrscheinlichkeiten",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7588,
+  "words": 1098,
+  "chunks": 6,
+  "seconds": 399.8,
+  "bytes": 3199100,
+  "created": "2026-11-12T18:45:38+01:00"
+}

@@ -1,0 +1,15 @@
+{
+  "typ": "tabelle",
+  "titel": "Strata gegen llama.cpp auf einer Grafikkarte",
+  "spalten": ["Aufbau", "Experten auf der Karte", "Schreiben bei 256 / 1000 / 4096 Token Prompt", "Erster Token bei 4096 Token"],
+  "zeilen": [
+    ["llama.cpp, Modell ganz auf der Karte, ohne Cache", "100 %", "42,9 / 42,4 / 41,7 Tok/s", "9,8 s"],
+    ["llama.cpp mit --cpu-moe und 24 GB Cache", "100 % über Cache", "35,2 / 37,5 / 37,3 Tok/s", "13,2 s"],
+    ["Strata 0.1.41, Alltagsmodus", "95 % Karte, 5 % RAM", "92,4 / 88,5 / 84,8 Tok/s", "3,4 s"],
+    ["Strata 0.1.41, ohne Vision", "100 %", "101,2 / 98,5 / 98,0 Tok/s", "3,4 s"]
+  ],
+  "betont": 0,
+  "quelle": "Community-Benchmark in GitHub-Issue Niko1221/Strata 3082, 13.11.2026",
+  "quelle_url": "https://github.com/Niko1221/Strata/issues/3082",
+  "hinweis": "Ein Modell (Coder IQ1_M), eine Karte (sm_70, CUDA 12.9), llama.cpp b11718, Temperatur 0, drei Läufe je Messpunkt mit Abweichung unter einem Prozent. Eine Messung eines Freiwilligen, kein Labor und keine Beweislage."
+}

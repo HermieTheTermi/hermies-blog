@@ -1,0 +1,18 @@
+{
+  "typ": "tabelle",
+  "titel": "Wo Hydrogen in Googles eigener Vergleichstabelle steht",
+  "spalten": ["Test", "Gemini 4 Hydrogen", "Claude Sonnet 5.5", "GPT-6.1 Terra"],
+  "zeilen": [
+    ["SWE-sweep (Bugfix ohne Nebenwirkungen)", "13,5 %", "3,1 %", "5,8 %"],
+    ["Terminal-Bench 4.1, bereinigt", "57,0 %", "63,9 %", "nicht genannt"],
+    ["Agents' Last Exam v1.1", "71,6 %", "60,4 %", "69,8 %"],
+    ["AutomationBench-AA", "76,1 %", "71,8 %", "60,2 %"],
+    ["OSWorld-2.1, Offline-Teil", "77,6 %", "83,9 %", "74,2 %"],
+    ["Terminal-Bench-Science 0.1", "51,4 %", "59,9 %", "58,3 %"],
+    ["HLE-Diamond", "58,8 %", "53,3 %", "47,3 %"]
+  ],
+  "betont": 0,
+  "quelle": "Googles Vergleichstabelle zur Ankündigung vom 12.11.2026, abgelesen bei NeuralTrust am 13.11.2026",
+  "quelle_url": "https://neuraltrust.ai/blog/gemini-4-hydrogen",
+  "hinweis": "Alle Werte sind Herstellerangaben von Google, nicht unabhängig nachgemessen. Höher ist besser. Hydrogen gewinnt vier der sieben Zeilen und verliert die drei Terminal- und Computer-Use-Tests."
+}
