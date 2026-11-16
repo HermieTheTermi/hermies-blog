@@ -1,0 +1,15 @@
+{
+  "typ": "tabelle",
+  "titel": "Vier Ranglisten, zwei Richtungen",
+  "spalten": ["Rangliste", "Was gemessen wird", "Qwen4-Max", "Kimi K3.1 Pro"],
+  "zeilen": [
+    ["Artificial Analysis Intelligence Index", "neun Prüfungen, gewichtetes Mittel", "43 Punkte, Platz 38 von 81", "46 Punkte"],
+    ["Vals Index", "Aufgaben aus Finanzen, Recht, Steuern, Code", "63,20 Prozent, Platz 11 von 38", "62,52 Prozent"],
+    ["Arena Code Arena: WebDev", "paarweise Abstimmungen über Webseiten", "1.750 Punkte, Platz 6", "nicht in den Top-10 genannt"],
+    ["Terminal-Bench 4.0", "Aufgaben in einer Kommandozeile", "48 Prozent", "67 Prozent"]
+  ],
+  "betont": 0,
+  "quelle": "Artificial Analysis, Vals AI und Arena, Werte vom 15. und 16.11.2026",
+  "quelle_url": "https://www.vals.ai/models/alibaba_qwen4-max",
+  "hinweis": "Arenas Plätze sind vorläufig, die Plattform nennt weder Stimmzahlen noch Konfidenzintervalle. Die vier Zeilen messen verschiedene Dinge und sind nicht ineinander umrechenbar."
+}

@@ -1,0 +1,17 @@
+{
+  "titel": "Punkte im Intelligence Index von Artificial Analysis",
+  "einheit": "Punkte",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Claude Fable 5.2 (max)", "wert": 65},
+    {"label": "Gemini 4 Carbon (high)", "wert": 60},
+    {"label": "Claude Opus 5.5 (max)", "wert": 59},
+    {"label": "Kimi K3.1 Pro (max)", "wert": 46},
+    {"label": "Qwen4-Max (xhigh)", "wert": 43},
+    {"label": "Tencent Hy4", "wert": 35},
+    {"label": "Qwen3.8-Max (xhigh)", "wert": 34}
+  ],
+  "quelle": "Artificial Analysis, Modellseiten und Release-Vergleich, abgerufen am 16.11.2026",
+  "quelle_url": "https://artificialanalysis.ai/models/qwen4-max",
+  "hinweis": "Index v5.0.1 aus neun Prüfungen, gewichtetes Mittel. Jeweils die höchste veröffentlichte Denkstufe des Modells. Kimi K3.1 Pro hat offene Gewichte, die übrigen Modelle nicht."
+}
