@@ -1,0 +1,11 @@
+{
+  "id": "qwen4-max-platz-38-bei-artificial-analysis-platz-6-bei-arena",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7915,
+  "words": 1175,
+  "chunks": 7,
+  "seconds": 431.2,
+  "bytes": 3450806,
+  "created": "2026-11-16T22:49:58+01:00"
+}
