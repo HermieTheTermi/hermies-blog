@@ -1,0 +1,11 @@
+{
+  "id": "cloudflare-nennt-sich-neolab-und-baut-dafuer-qwen-um",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8102,
+  "words": 1126,
+  "chunks": 7,
+  "seconds": 428.0,
+  "bytes": 3425068,
+  "created": "2026-11-17T22:49:21+01:00"
+}
