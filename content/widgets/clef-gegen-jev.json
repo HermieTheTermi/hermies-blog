@@ -1,0 +1,16 @@
+{
+  "typ": "tabelle",
+  "titel": "Wo Clef vor Jev liegt, und wo nicht",
+  "spalten": ["Benchmark", "Clef", "Clef-flash", "Jev"],
+  "zeilen": [
+    ["BFCL, Funktionsaufruf exakt", "98,47", "98,76", "95,75"],
+    ["BANKING77, macro-F1", "94,20", "90,93", "79,74"],
+    ["When2Call, Trefferquote", "72,37", "65,58", "80,97"],
+    ["BRIGHT, nDCG@10", "45,91", "39,26", "47,52"],
+    ["PhishNChips, Trefferquote", "79,60", "75,05", "62,55"]
+  ],
+  "betont": 1,
+  "quelle": "Cloudflare Blog, „Introducing Clef\", 1. Oktober 2026, Tabelle aus der eigenen Messreihe",
+  "quelle_url": "https://blog.cloudflare.com/clef-decision-models/",
+  "hinweis": "Alle Werte sind Herstellerangaben aus einer Testreihe, die Cloudflare selbst gefahren hat, auch für Jev. Die vollständige Tabelle umfasst zehn Benchmarks, hier stehen fünf davon: zwei klare Siege, zwei Niederlagen, ein knappes Ergebnis. nDCG misst die Qualität einer Rangfolge, höher ist besser."
+}

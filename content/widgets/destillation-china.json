@@ -1,0 +1,16 @@
+{
+  "typ": "zeitleiste",
+  "titel": "Von der Forschungsnot zur Industrie",
+  "ereignisse": [
+    {"datum": "November 2024", "titel": "Jiao Tong University baut Trainingsdaten aus o1", "text": "Forscher sammeln rund 5.000 Antworten von OpenAIs Reasoning-Modell, übersetzen sie mit GPT-4o mini und bauen 10.750 zweisprachige Beispiele, um Alibabas Qwen2.5-72B weiterzutrainieren. Im Paper warnen sie selbst vor der Abhängigkeit von fremder Innovation."},
+    {"datum": "April 2025", "titel": "Alibaba erzeugt fremdsprachige Daten mit GPT-4 und GPT-4o", "text": "Das Unternehmen beschreibt, wie es Antworten filtert und bewertet, um damit kleinere Qwen-Modelle zu trainieren. Es ist der erste öffentlich dokumentierte Fall systematischer Nutzung über eine ganze Modellfamilie."},
+    {"datum": "Januar 2026", "titel": "Acht Ministerien veröffentlichen „AI+Manufacturing\"", "text": "Das Paket fördert Verfahren, die den Rechenbedarf senken, damit kleinere Modelle in der Fertigung laufen. Kopieren amerikanischer Modelle steht nicht darin, Effizienz schon."},
+    {"datum": "Februar 2026", "titel": "Jiao Tong und Meituan lassen GPT-4o Agentenpläne schreiben", "text": "Die Pläne für die Koordination mehrerer Programmier-Agenten dienen als Trainingsmaterial für ein kleineres Modell, das diese Aufgaben danach selbst organisiert."},
+    {"datum": "September 2026", "titel": "Washington erhebt Vorwürfe im Industriemaßstab", "text": "US-Behörden werfen chinesischen Firmen vor, systematisch und gezielt Reasoning aus amerikanischen Modellen abzuschöpfen."},
+    {"datum": "16.11.2026", "titel": "Lizenzpflicht für gemietete Rechenleistung", "text": "Das Handelsministerium veröffentlicht die Eilverordnung, die den Fernzugriff auf amerikanische Chips an die Regeln für den physischen Export angleicht."},
+    {"datum": "17.11.2026", "titel": "Reuters veröffentlicht die Recherche", "text": "Die Agentur wertet mehr als 300 chinesische Dokumente aus und beschreibt Destillation als arbeitsteiligen Wirtschaftszweig."}
+  ],
+  "quelle": "Reuters, „China taps US AI models to train homegrown rivals as chip curbs bite\", 17.11.2026",
+  "quelle_url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+  "hinweis": "Die Beispiele stammen aus Fachartikeln, die Reuters ausgewertet hat. Die Einordnung als Industriemaßstab ist die Schlussfolgerung der Agentur, nicht eine Angabe der Papiere."
+}
