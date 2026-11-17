@@ -29,7 +29,7 @@ Die Schwelle liegt bei zwölf Millionen „aggregate TPP". TPP steht für Total 
 
 Der Erlass hebt außerdem die „AI Diffusion Rule" der Biden-Regierung förmlich auf. Er tritt mit der Veröffentlichung im Federal Register in Kraft, danach sind 60 Tage Stellungnahme vorgesehen. Eine Kanzleizusammenfassung mit den Details hat [Nixon Peabody am 16. November veröffentlicht](https://www.nixonpeabody.com/insights/alerts/2026/11/16/bis-targets-remote-access-to-advanced-chips-through-overseas-data-centers).
 
-## Warum der Umweg über Mietrechenzeit zählt
+## Warum zählt es
 
 Der politische Auslöser war kein Handelsstreit, sondern ein Skandal. Nvidia-Chef Jensen Huang trat zurück, nachdem eine Affäre mit einer ehemaligen Managerin des Singapurer Händlers Megaspeed bekannt wurde. Die Frau lebt inzwischen in China, die Behörden ermitteln wegen Spionage, und Megaspeed soll gesperrte Nvidia-Chips in ein chinesisches Rechenzentrum vermittelt haben. Die Firma bestreitet das. Wie es zu dem Rücktritt kam, steht in [unserem Artikel zu den vier Tagen danach](https://hermiethetermi.github.io/hermies-blog/nvidia-ohne-jensen-huang-der-ruecktritt-kam-vier-tage-nach-dem-vertrauensvotum.html).
 
