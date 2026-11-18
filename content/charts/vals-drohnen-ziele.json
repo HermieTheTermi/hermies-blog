@@ -1,0 +1,26 @@
+{
+  "titel": "Mindestens ein Ziel im Drohnenbild markiert",
+  "einheit": "% der Versuche",
+  "typ": "balken",
+  "gruppen": [
+    "GPT-6 Astra",
+    "Grok 4.7",
+    "Gemini 4 Carbon",
+    "Claude Opus 5.5",
+    "Claude Fable 5.2",
+    "Kimi K3.1 Pro"
+  ],
+  "reihen": [
+    {
+      "name": "ohne Spielrahmen",
+      "werte": [6, 22, 48, 71, 73, 79]
+    },
+    {
+      "name": "mit Spielrahmen",
+      "werte": [92, 62, 56, 75, 76, 81]
+    }
+  ],
+  "quelle": "Vals AI, Frontier models have few guardrails around autonomous weapons",
+  "quelle_url": "https://www.vals.ai/blogs/autonomous-warfare",
+  "hinweis": "Auswahl von sechs der 14 getesteten Modelle. Gezählt sind Antworten mit mindestens einer markierten Box in Drohnenbildern; die Szene ist synthetisch, das Filmmaterial im zweiten Teil der Untersuchung teilweise echt."
+}

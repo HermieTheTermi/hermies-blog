@@ -1,0 +1,16 @@
+{
+  "titel": "Preis, Indexwert und Programmierleistung der vier OpenAI-Modelle",
+  "typ": "tabelle",
+  "betont": 2,
+  "spalten": ["", "GPT-6 Astra", "GPT-6.2 Astra", "GPT-6.1 Sol", "GPT-6.2 Sol"],
+  "zeilen": [
+    ["Preis je Million Token (Eingabe / Ausgabe)", "10 $ / 50 $", "8 $ / 40 $", "2 $ / 10 $", "2 $ / 10 $"],
+    ["Gecachte Eingabe je Million Token", "1,00 $", "0,40 $", "0,10 $", "0,10 $"],
+    ["Intelligence Index v5", "57", "62", "55", "57"],
+    ["Kosten je Indexaufgabe", "keine Angabe", "4,00 $", "keine Angabe", "1,01 $"],
+    ["Coding Agent Index", "Bezugswert", "unverändert", "Bezugswert", "3 Punkte weniger"]
+  ],
+  "quelle": "OpenAI, Artificial Analysis",
+  "quelle_url": "https://artificialanalysis.ai/articles/openai-has-the-2-model-in-the-intelligence-index-with-the-release-of-gpt-6-2-astra-and-gpt-6-2-sol",
+  "hinweis": "Indexwerte bei maximaler Aufwandsstufe. Kosten je Indexaufgabe sind gewichtete Durchschnittswerte von Artificial Analysis; für die Vorgängermodelle nennt die Auswertung keine eigenen Werte."
+}
