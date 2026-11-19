@@ -4,7 +4,7 @@ slug: "der-bgh-warnt-vor-ki-schriftsaetzen-das-bag-hat-schon-einen-verworfen"
 date: 2026-11-18
 time: "17:42"
 status: published
-tags: [news, deutschland, sicherheit, agenten, llm]
+tags: [news, deutschland, sicherheit, ki]
 summary: "Der Bundesgerichtshof hat am 13. Oktober entschieden, dass eine Revisionsbegründung unwirksam sein kann, wenn ein Verteidiger sie mit KI erstellt und nicht prüft, den konkreten Schriftsatz aber trotz erheblicher Zweifel noch durchgelassen. Das Bundesarbeitsgericht verwarf am 30. September eine Nichtzulassungsbeschwerde als unzulässig, weil sie vier nicht existierende Entscheidungen zitierte. Der Text erklärt den Maßstab des Paragrafen 345 StPO, was beide Gerichte aus dem Schriftbild geschlossen haben und was daraus für Kanzleien und Werkzeuganbieter folgt."
 source_url: "https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Strafsenate/3_StS/2026/3_StR_350-26.pdf?__blob=publicationFile&v=1"
 source_name: "Bundesgerichtshof"

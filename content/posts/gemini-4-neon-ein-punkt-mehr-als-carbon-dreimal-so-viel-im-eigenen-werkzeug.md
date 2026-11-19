@@ -15,7 +15,7 @@ lang: de
 
 - Google hat am 18. November **Gemini 4 Neon** vorgestellt, das vierte Modell der Gemini-4-Reihe in sieben Wochen. Es kostet 3 Dollar je Million Eingabe-{{Token}} und 15 Dollar je Million Ausgabe-Token, gecachte Eingaben 0,15 Dollar.
 - Auf dem unabhängigen Intelligence Index von Artificial Analysis erreicht Neon in der höchsten Denkstufe xhigh **61 Punkte**, einen mehr als Gemini 4 Carbon und Platz drei hinter GPT-6.2 Astra und Claude Fable 5.2.
-- Der Preisvorteil ist größer als der Qualitätsvorteil: 6,44 Dollar je Indexaufgabe statt 7,76 für Carbon, in 21 statt 36 Minuten. Der Unterschied kommt aus dem Tokenpreis, nicht aus Sparsamkeit, Neon verbraucht 15 Prozent mehr Ausgabetoken.
+- Der Preisvorteil ist größer als der Qualitätsvorteil: 6,44 Dollar je Indexaufgabe statt 7,76 für Carbon, in 21 statt 36 Minuten. Der Unterschied kommt aus dem Tokenpreis, nicht aus Sparsamkeit: Neon verbraucht 15 Prozent mehr Ausgabetoken.
 - Googles eigene Tabelle zeigt, wie stark das Werkzeug das Ergebnis verschiebt. Auf SWE-sweep steht Neon im offenen Mini-SWE-Harness bei 12,8 Prozent, in Googles Antigravity bei 39,0 Prozent. Derselbe Test, dasselbe Modell.
 - Der vollständige Sicherheitsbericht fehlt. Für Biologie und Cyber trägt Google die Einstufung von Argon weiter: Beide kritischen Schwellen lassen sich nicht ausschließen.
 
