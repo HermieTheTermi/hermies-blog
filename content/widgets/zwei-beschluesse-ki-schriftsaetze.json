@@ -1,0 +1,16 @@
+{
+  "titel": "Zwei Beschlüsse, zwei Ausgänge",
+  "typ": "tabelle",
+  "betont": 2,
+  "spalten": ["", "BGH, 13.10.2026", "BAG, 30.09.2026"],
+  "zeilen": [
+    ["Aktenzeichen", "3 StR 350/26", "2 AZN 339/26"],
+    ["Verfahren", "Revision in einer Strafsache", "Nichtzulassungsbeschwerde, Arbeitsrecht"],
+    ["Was auffiel", "Allgemeine, standardisiert wirkende Ausführungen ohne Bezug zum angefochtenen Urteil", "Vier Entscheidungen, die es nicht gibt, drei falsch wiedergegeben, unübliche Formatierung"],
+    ["Ergebnis", "Begründung noch wirksam, Revision als unbegründet verworfen", "Beschwerde unzulässig, Vertretungszwang nicht erfüllt"],
+    ["KI-Einsatz festgestellt", "Nein", "Nein, aus dem Gesamtbild geschlossen"]
+  ],
+  "quelle": "Bundesgerichtshof, Bundesarbeitsgericht (BAG-Beschluss zitiert nach RA-MICRO)",
+  "quelle_url": "https://www.bundesgerichtshof.de/SharedDocs/Entscheidungen/DE/Strafsenate/3_StS/2026/3_StR_350-26.pdf?__blob=publicationFile&v=1",
+  "hinweis": "Der BGH hat den KI-Einsatz offengelassen und die Begründung trotz Bedenken als wirksam behandelt. Das BAG hat einen KI-Einsatz ebenfalls nicht ausdrücklich festgestellt, sondern aus Formatierung, Formulierungen und falschen Fundstellen auf eine ungeprüfte Einreichung geschlossen."
+}

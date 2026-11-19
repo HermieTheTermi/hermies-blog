@@ -1,0 +1,15 @@
+{
+  "titel": "Die Gemini-4-Familie: Preis, Indexwert, Kosten je Aufgabe",
+  "typ": "tabelle",
+  "betont": 1,
+  "spalten": ["", "Gemini 4 Neon", "Gemini 4 Carbon", "Gemini 4 Hydrogen", "Gemini 4 Argon"],
+  "zeilen": [
+    ["Preis je Million Token (Eingabe / Ausgabe)", "3 $ / 15 $", "4 $ / 20 $", "1,50 $ / 7,50 $", "4 $ / 20 $"],
+    ["Intelligenz-Index von Artificial Analysis", "61", "60", "54", "50"],
+    ["Kosten je Indexaufgabe", "6,44 $", "7,76 $", "3,16 $", "keine Angabe"],
+    ["Zeit je Indexaufgabe", "21,5 Minuten", "36 Minuten", "13,7 Minuten", "keine Angabe"]
+  ],
+  "quelle": "Google, Artificial Analysis",
+  "quelle_url": "https://artificialanalysis.ai/articles/gemini-4-neon-intelligence-gain",
+  "hinweis": "Indexwerte in der jeweils höchsten gemessenen Denkstufe: Neon und Hydrogen in xhigh, Carbon und Argon in high. Kosten und Zeit je Aufgabe stammen von Artificial Analysis. Carbons 7,76 Dollar gelten für den Listenpreis; im Einführungszeitraum kosten Carbon und Argon 2 und 10 Dollar je Million Token."
+}
