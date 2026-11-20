@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wo soll die KI-Skalierung enden? Über Kraftwerke, Datenmauern und klügere Rechenwege – Hermies Blog</title>
+  <meta name="description" content="Rechenzentren brauchten 2024 rund 415 TWh Strom, bis 2030 sollen es 945 TWh sein – und trotzdem fällt der Strom pro Anfrage um mehr als eine Größenordnung pro Jahr. Warum die Rechnung nicht sinkt und welche Techniken KI schlanker machen: Mixture-of-Experts, Quantisierung, Destillation, Testzeit-Compute und Agenten-Methoden.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Wo soll die KI-Skalierung enden? Über Kraftwerke, Datenmauern und klügere Rechenwege</h1>
+    <p class="meta"><time datetime="2026-10-04">04.10.2026</time> · <span class="tags"><a class="tag" href="tag/brainstorming.html">#brainstorming</a> <a class="tag" href="tag/ki.html">#ki</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/agenten.html">#agenten</a> <a class="tag" href="tag/energie.html">#energie</a></span></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>10:39 Minuten</strong> (KI-Stimme) – <a href="audio/wo-soll-die-ki-skalierung-enden-ueber-kraftwerke-datenmauern-und-kluegere-rechenwege.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(4,9 MB)</span></p>
+    <audio controls preload="none" src="audio/wo-soll-die-ki-skalierung-enden-ueber-kraftwerke-datenmauern-und-kluegere-rechenwege.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li><strong>Die Stromrechnung der KI wächst schneller als alles andere in der Energiebranche.</strong> Rechenzentren brauchten 2024 rund <strong>415 TWh</strong> – etwa <strong>1,5 % des Weltstromverbrauchs</strong>. Die Internationale Energieagentur (IEA) erwartet für 2030 rund <strong>945 TWh</strong>, mehr als Japan heute insgesamt verbraucht. KI-fokussierte Rechenzentren legten 2025 um <strong>50 %</strong> zu.</li>
+  <li><strong>Pro Anfrage wird KI gleichzeitig dramatisch sparsamer.</strong> Google misst für einen Gemini-Textprompt im Median <strong>0,24 Wh</strong> – <strong>33-mal weniger</strong> als zwölf Monate zuvor. Die IEA nennt das Tempo „beispiellos in der Energiegeschichte&quot;.</li>
+  <li><strong>Trotzdem sinkt die Rechnung nicht.</strong> Was pro Anfrage billiger wird, wird häufiger genutzt. Der Gesamtverbrauch steigt weiter – der klassische Rebound-Effekt.</li>
+  <li><strong>Die alte Wachstumsachse stößt an Grenzen.</strong> Der hochwertige Text im Netz ist laut Epoch AI schon zwischen 2023 und 2025 abgeerntet, das Rechen-Wachstum der Spitzenmodelle hat sich seit 2018 auf etwa <strong>4× pro Jahr</strong> verlangsamt.</li>
+  <li><strong>Die neue Achse heißt Rechenzeit pro Antwort und schlankere Architektur.</strong> DeepSeek-V3 hält <strong>671 Mrd. Parameter</strong> bereit, rechnet aber pro Token nur <strong>37 Mrd.</strong> – rund 5,5 %. Ein Qwen3-Modell mit 4 Mrd. Parametern soll laut Hersteller ein 72-Mrd.-Modell von 2024 erreichen.</li>
+  <li><strong>Agenten verschieben die Intelligenz in den Ablauf:</strong> Werkzeuge, Prüfschritte und mehrere Versuche heben kleine Modelle auf das Niveau großer. Das kostet aber Rechenzeit – ein Multi-Agenten-Recherchesystem verbraucht etwa <strong>15× so viele Token</strong> wie ein normaler Chat.</li>
+</ul>
+<p><strong>Der Kern in einem Satz:</strong> Es endet nicht die Skalierung, es endet ihre billige Variante.</p>
+<h2>Was gerade passiert: 415 TWh, ein Kraftwerksstau und zwei Atomdeals</h2>
+<p>Beginnen wir mit der Zahl, die den Streit befeuert: Ein <button type="button" class="lex" popovertarget="lex-rechenzentrum" data-tip="Halle voller Server, in der KI-Modelle trainiert und betrieben werden – sie braucht sehr viel Strom und Kühlung.">Rechenzentrum</button><span class="lex-pop" popover id="lex-rechenzentrum"><strong>Rechenzentrum</strong> Halle voller Server, in der KI-Modelle trainiert und betrieben werden – sie braucht sehr viel Strom und Kühlung. <a href="lexikon.html#rechenzentrum">Im Lexikon</a></span> ist heute ein Kraftwerkskunde. Laut der IEA-Studie <a href="https://www.iea.org/reports/energy-and-ai/executive-summary"><em>Energy and AI</em></a> (10. April 2025) entfielen 2024 rund <strong>415 TWh</strong> des weltweiten Stromverbrauchs auf Rechenzentren – etwa <strong>1,5 %</strong>. Bis 2030 soll dieser Wert auf rund <strong>945 TWh</strong> steigen, bis 2035 auf etwa <strong>1.200 TWh</strong>. Im April 2026 hat die Agentur nachgelegt: 2025 lag der Verbrauch schon bei <strong>485 TWh</strong> (+17 % gegenüber dem Vorjahr), und der Anteil der reinen KI-Rechenzentren wuchs um <strong>50 %</strong> (<a href="https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions">IEA, <em>Key Questions on Energy and AI</em></a>).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Stromhunger der Rechenzentren weltweit</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Stromhunger der Rechenzentren weltweit</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in TWh pro Jahr</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="271.0" x2="650" y2="271.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="275.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">250</text>
+  <line x1="68" y1="222.0" x2="650" y2="222.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="226.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">500</text>
+  <line x1="68" y1="173.0" x2="650" y2="173.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="177.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">750</text>
+  <line x1="68" y1="124.0" x2="650" y2="124.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="128.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.000</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1.250</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="238.7" width="56.0" height="81.3" rx="3" fill="#0075de" />
+  <text x="140.8" y="232.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">415</text>
+  <text x="140.8" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">2024</text>
+  <rect x="258.2" y="224.9" width="56.0" height="95.1" rx="3" fill="#0075de" />
+  <text x="286.2" y="218.9" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">485</text>
+  <text x="286.2" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">2025</text>
+  <rect x="403.8" y="134.8" width="56.0" height="185.2" rx="3" fill="#0075de" />
+  <text x="431.8" y="128.8" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">945</text>
+  <text x="431.8" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">2030</text>
+  <rect x="549.2" y="84.8" width="56.0" height="235.2" rx="3" fill="#0075de" />
+  <text x="577.2" y="87.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1.200</text>
+  <text x="577.2" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">2035</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener">IEA, Energy and AI (10.04.2025) und Key Questions on Energy and AI (16.04.2026)</a></span>
+  <span class="chart-note">Schätzung 2024/2025, Projektion ab 2030</span>
+</figcaption>
+</figure>
+<p>In den USA ist der Druck am größten. Das Lawrence Berkeley National Laboratory beziffert den Anteil der Rechenzentren am US-Strom für 2023 mit <strong>176 TWh = 4,4 %</strong> und erwartet für 2028 <strong>325 bis 580 TWh</strong>, also <strong>6,7 bis 12 %</strong> (<a href="https://eta-publications.lbl.gov/sites/default/files/2024-12/lbnl-2024-united-states-data-center-energy-usage-report.pdf">LBNL-Bericht für das US-Energieministerium</a>, 20. Dezember 2024). Die Spanne ist so breit, weil niemand weiß, wie viele der angekündigten Anlagen wirklich gebaut werden.</p>
+<p>Genau da liegt der eigentliche Engpass: nicht der Strom, sondern der Anschluss. Ein typisches 2024 fertiggestelltes Kraftwerksprojekt wartete <strong>55 Monate</strong> auf den Netzanschluss (<a href="https://emp.lbl.gov/sites/default/files/2025-12/Queued%20Up%202025%20Edition%20-%2012.15.2025.pdf">LBNL, <em>Queued Up</em></a>, Dezember 2025). In Texas stehen laut dem Netzbetreiber ERCOT rund <strong>410 GW</strong> an Großlast-Anfragen in der Warteschlange – etwa <strong>87 % davon Rechenzentren</strong>, ein Zuwachs von 178 GW gegenüber Ende 2025 (<a href="https://www.ercot.com/files/docs/2026/04/13/9-Interconnection-and-Grid-Analysis-Update.pdf">ERCOT, April 2026</a>). Zum Vergleich: 410 GW ist ungefähr die vierfache Spitzenlast Deutschlands.</p>
+<p>Also werden Kraftwerke bestellt, die es noch nicht gibt. Die Auftragsbücher der Turbinenhersteller sind voll: GE Vernova meldete im dritten Quartal 2025 eine Gaskraftwerks-Auftragslage von <strong>62 GW</strong>, Siemens Energy einen Rekord-Auftragsbestand von <strong>138 Mrd. €</strong> (<a href="https://www.gevernova.com/news/press-releases/ge-vernova-reports-third-quarter-2025-financial">GE Vernova</a>, <a href="https://assets.siemens-energy.com/dam/8b35c13c-396b-4623-8590-b3950053f94c/6--SE-Press-Release-EN-pdf_Original%20file.pdf">Siemens Energy</a>, beide Herstellerangaben).</p>
+<p>Weil Gas teuer und politisch unruhig ist, kaufen die Konzerne Atomstrom ein, der noch nicht fließt: Microsoft lässt mit Constellation das stillgelegte Kraftwerk Three Mile Island (<strong>~835 MW</strong>) bis <strong>Ende 2027</strong> reaktivieren (<a href="https://www.constellationenergy.com/newsroom/2024/Constellation-to-Launch-Crane-Clean-Energy-Center-Restoring-Jobs-and-Carbon-Free-Power-to-The-Grid.html">Constellation</a>), Google hat mit Kairos Power einen ersten kleinen Reaktor beauftragt – Baubeginn war der 17. April 2026, bis 2035 sollen <strong>500 MW</strong> entstehen (<a href="https://www.kairospower.com/updates/kairos-power-breaks-ground-on-hermes-2-demonstration-plant">Kairos Power</a>), Amazon erweitert sein Abkommen mit Talen Energy (<a href="https://ir.talenenergy.com/node/8671/pdf">Talen</a>). Das sind keine laufenden Kraftwerke, sondern Vorleistungen auf eine Nachfrage, die man erwartet.</p>
+<p>Auch Wasser gehört zur Rechnung: Google beziffert den Verbrauch eines Gemini-Textprompts auf <strong>0,26 Milliliter</strong> – etwa fünf Tropfen (<a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference">Google</a>, August 2025).</p>
+<h2>Die Gegenbewegung: pro Anfrage wird KI rasend schnell sparsamer</h2>
+<p>Dieselbe Google-Messung zeigt die andere Hälfte des Bildes. Der Median-Prompt kostet <strong>0,24 Wh</strong> Energie, verursacht <strong>0,03 g CO₂e</strong> – und über zwölf Monate sanken Energie- und CO₂-Fußabdruck pro Prompt um <strong>33× bzw. 44×</strong>, bei besserer Antwortqualität. Epoch AI kommt für typische ChatGPT-Anfragen auf ähnliche Größenordnungen (rund <strong>0,3 Wh</strong>, <a href="https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use">Epoch AI</a>).</p>
+<p>Die IEA hält das für einen Trend, nicht für einen Ausreißer: Der Energiebedarf <strong>pro einzelner KI-Aufgabe</strong> fällt um mindestens eine Größenordnung pro Jahr – ein Tempo, das die Agentur „beispiellos in der Energiegeschichte&quot; nennt (<a href="https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions">IEA</a>). Eine Microsoft-Arbeit im Fachjournal <em>Joule</em> (2026, <a href="https://arxiv.org/abs/2509.20241">arXiv:2509.20241</a>) modelliert Frontier-Inferenz und kommt auf einen Median von rund <strong>0,31 Wh</strong> für einfache Anfragen – und <strong>3,91 Wh</strong>, wenn das Modell lange <button type="button" class="lex" popovertarget="lex-reasoning" data-tip="Sichtbares Zwischendenken vor der Antwort. Reasoning-Modelle rechnen vor dem Ergebnis eine Kette von Schritten durch – das kostet mehr Rechenzeit, bringt aber bei Mathe und Logik mehr Treffer.">Reasoning</button><span class="lex-pop" popover id="lex-reasoning"><strong>Reasoning</strong> Sichtbares Zwischendenken vor der Antwort. Reasoning-Modelle rechnen vor dem Ergebnis eine Kette von Schritten durch – das kostet mehr Rechenzeit, bringt aber bei Mathe und Logik mehr Treffer. <a href="lexikon.html#reasoning">Im Lexikon</a></span>-Ketten rechnet.</p>
+<p>Damit ist der Zielkonflikt des ganzen Artikels in einer Zahl: <strong>Der Strom pro Anfrage fällt um Faktor 33, der Strom pro Modellaufruf-Volumen steigt trotzdem.</strong></p>
+<h2>Warum die Sparsamkeit die Rechnung nicht senkt</h2>
+<p>Der <button type="button" class="lex" popovertarget="lex-rebound-effekt" data-tip="Wenn etwas effizienter und dadurch billiger wird, wird es häufiger genutzt – der Gesamtverbrauch kann trotz Sparsamkeit steigen. Auch Jevons-Paradox genannt.">Rebound-Effekt</button><span class="lex-pop" popover id="lex-rebound-effekt"><strong>Rebound-Effekt</strong> Wenn etwas effizienter und dadurch billiger wird, wird es häufiger genutzt – der Gesamtverbrauch kann trotz Sparsamkeit steigen. Auch Jevons-Paradox genannt. <a href="lexikon.html#rebound-effekt">Im Lexikon</a></span> ist der Grund. Wenn eine Technik effizienter wird, sinkt ihr Preis, und ein niedrigerer Preis erzeugt neue Nachfrage – das ist das Jevons-Paradox, 1865 an der Dampfmaschine beschrieben und in einer FAccT-Studie von 2025 ausdrücklich auf KI übertragen (<a href="https://arxiv.org/abs/2501.16548">arXiv:2501.16548</a>).</p>
+<p>Zu beobachten ist das an den Netzentgelten. Im größten US-Netzverbund PJM hat sich der Preis für gesicherte Leistung in den Auktionen von <strong>28,92 auf 333,44 Dollar pro Megawatt und Tag</strong> vervielfacht – die Auktion von 2025 schlug mit rund <strong>16,4 Mrd. Dollar</strong> zu Buche, und die Netzbetreiber begründen das zum großen Teil mit Rechenzentren. Bezahlt wird das über die Stromrechnung – auch von Haushalten, die nie ein KI-Modell aufgerufen haben. Wer den wahren Preis von KI wissen will, darf nicht den Wahrscheinlichkeits-Prompt betrachten, sondern den Kraftwerkszubau.</p>
+<p>Die ehrliche Formulierung lautet also: KI wird pro Aufgabe viel effizienter und in Summe immer teurer. Wer aus Effizienzgewinnen auf sinkenden Gesamtverbrauch schließt, rechnet am Verhalten vorbei.</p>
+<h2>Wo die alte Achse endet: Datenmauer und Parameter-Wettrüsten</h2>
+<p>Die Ursprungsannahme der Branche stammt von 2020: Das <button type="button" class="lex" popovertarget="lex-skalierungsgesetz" data-tip="Faustregel aus Messreihen: Die Leistung eines Modells wächst vorhersagbar mit Rechenleistung, Datenmenge und Modellgröße – lange galt: größer ist besser.">Skalierungsgesetz</button><span class="lex-pop" popover id="lex-skalierungsgesetz"><strong>Skalierungsgesetz</strong> Faustregel aus Messreihen: Die Leistung eines Modells wächst vorhersagbar mit Rechenleistung, Datenmenge und Modellgröße – lange galt: größer ist besser. <a href="lexikon.html#skalierungsgesetz">Im Lexikon</a></span>, formuliert von Kaplan und Kollegen, besagt, dass Modelle mit mehr <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>n, mehr Daten und mehr Rechenleistung zuverlässig besser werden (<a href="https://arxiv.org/abs/2001.08361">arXiv:2001.08361</a>). Der praktische Fehler dabei wurde 2022 korrigiert: Chinchilla zeigte, dass Modellgröße und Datenmenge <strong>gleich</strong> wachsen müssen – auf einen Parameter sollten etwa <strong>20 Token</strong> Trainingsdaten kommen (<a href="https://arxiv.org/abs/2203.15556">arXiv:2203.15556</a>). GPT-3 mit 175 Mrd. Parametern war deshalb nicht zu groß, sondern zu schlecht gefüttert.</p>
+<p><strong>Das zweite Problem: Der Nachschub an Text ist begrenzt</strong> – in der Branche <button type="button" class="lex" popovertarget="lex-datenmauer" data-tip="Der Punkt, an dem hochwertige Texte im Netz weitgehend abgeerntet sind – dann fehlt Material, mit dem sich immer größere Modelle sinnvoll trainieren lassen.">Datenmauer</button><span class="lex-pop" popover id="lex-datenmauer"><strong>Datenmauer</strong> Der Punkt, an dem hochwertige Texte im Netz weitgehend abgeerntet sind – dann fehlt Material, mit dem sich immer größere Modelle sinnvoll trainieren lassen. <a href="lexikon.html#datenmauer">Im Lexikon</a></span> genannt. Epoch AI schätzt den Bestand hochwertigen Sprachtextes im Netz und kommt zu dem Ergebnis, dass er zwischen <strong>2023 und 2025</strong> abgeerntet ist; die Vorräte an minderwertigem Text reichen laut derselben Projektion bis in die 2030er (<a href="https://epoch.ai/publications/will-we-run-out-of-ml-data-evidence-from-projecting-dataset">Epoch AI</a>, <a href="https://arxiv.org/abs/2211.04325">arXiv:2211.04325</a>). Ein größeres Modell braucht mehr Text – der aber wächst nicht mehr.</p>
+<p><strong>Das dritte Problem: Das Tempo lässt nach.</strong> Das Rechenvolumen der größten Modelle wuchs zwischen 2010 und 2024 zwar um <strong>4 bis 5× pro Jahr</strong>, nach 2018 aber merklich langsamer als davor (<a href="https://epochai.org/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year">Epoch AI</a>). Und die berühmten „Emergenten Fähigkeiten&quot;, bei denen Modelle plötzlich etwas können, was sie vorher nicht konnten, halten viele Forscher inzwischen für einen Messartefakt: Bei anderer Bewertungsmetrik verschwindet der Sprung (<a href="https://arxiv.org/abs/2304.15004">Schaeffer et al., NeurIPS 2023</a>). Die Kurve verläuft also glatter und flacher als die Erzählung vom Schwellenwert.</p>
+<p>Deshalb ist die Parameterzahl als Maßstab entwertet: Ein Modell mit Billionen Parametern, von denen pro Token nur ein Bruchteil rechnet, ist nicht „größer&quot; im entscheidenden Sinn.</p>
+<h2>Die neue Achse: Rechenzeit beim Antworten statt Größe beim Training</h2>
+<p>Der Ausweg heißt <button type="button" class="lex" popovertarget="lex-testzeit-compute" data-tip="Rechenaufwand, den ein Modell erst beim Beantworten einer Frage einsetzt – etwa mehrere Lösungswege parallel durchrechnen und den besten auswählen.">Testzeit-Compute</button><span class="lex-pop" popover id="lex-testzeit-compute"><strong>Testzeit-Compute</strong> Rechenaufwand, den ein Modell erst beim Beantworten einer Frage einsetzt – etwa mehrere Lösungswege parallel durchrechnen und den besten auswählen. <a href="lexikon.html#testzeit-compute">Im Lexikon</a></span>: Das Modell rechnet länger an einer einzelnen Antwort. Eine Google-DeepMind-Studie von 2024 zeigte, dass ein kleineres Modell mit zusätzlicher Rechenzeit beim Antworten ein <strong>14-mal größeres</strong> Modell schlagen kann – bei gleichem Rechenbudget (<a href="https://arxiv.org/abs/2408.03314">Snell et al.</a>). In der Praxis (OpenAI, 2024): GPT-4o löst 12 % der AIME-Matheaufgaben, das Reasoning-Modell o1 kommt auf <strong>74 %</strong> mit einem Versuch, <strong>83 %</strong> mit Abstimmung über 64 Läufe und <strong>93 %</strong> mit Auswahl aus 1.000 Läufen – das Modell bleibt dasselbe, nur die Rechenzeit wächst (<a href="https://openai.com/index/learning-to-reason-with-llms">OpenAI</a>).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Energie pro Anfrage: kurz antworten oder lange rechnen</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Energie pro Anfrage: kurz</tspan><tspan x="68" y="48">antworten oder lange rechnen</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Wh</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="283.8" x2="650" y2="283.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="287.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">1</text>
+  <line x1="68" y1="222.5" x2="650" y2="222.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="226.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2</text>
+  <line x1="68" y1="161.2" x2="650" y2="161.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="165.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">3</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">4</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="185.5" y="326.0" width="56.0" height="19.0" rx="3" fill="#0075de" />
+  <text x="213.5" y="320.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">0,31</text>
+  <text x="213.5" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">kurze Anfrage</text>
+  <rect x="476.5" y="105.5" width="56.0" height="239.5" rx="3" fill="#0075de" />
+  <text x="504.5" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">3,91</text>
+  <text x="504.5" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">mit langem Nachdenken</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://www.cell.com/joule/fulltext/S2542-4351(26)00114-5" target="_blank" rel="noopener">Microsoft Research, Energy use of AI inference, efficiency pathways, and test-time scaling, Fachjournal Joule (2026), arXiv:2509.20241</a></span>
+  <span class="chart-note">Medianwerte der Modellierung</span>
+</figcaption>
+</figure>
+<p>Der Preis dafür ist unangenehm konkret. Beim ARC-AGI-Benchmark erreichte OpenAI o3 <strong>87,5 %</strong> – mit 1.024 Versuchen pro Aufgabe, <strong>172×</strong> dem Rechenaufwand der sparsamen Variante und Kosten von <strong>4.560 Dollar pro gelöster Aufgabe</strong> (<a href="https://arcprize.org/blog/oai-o3-pub-breakthrough">ARC Prize</a>). Und die Achse läuft nicht monoton: Es gibt Aufgaben, bei denen mehr Nachdenken die Antwort <strong>schlechter</strong> macht (<a href="https://arxiv.org/abs/2507.14417"><em>Inverse Scaling in Test-Time Compute</em></a>, 2025).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Dasselbe Modell, mehr Rechenzeit: OpenAI o1 auf AIME-Matheaufgaben</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Dasselbe Modell, mehr Rechenzeit:</tspan><tspan x="68" y="48">OpenAI o1 auf AIME-Matheaufgaben</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % gelöst</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="283.8" x2="650" y2="283.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="287.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">25</text>
+  <line x1="68" y1="222.5" x2="650" y2="222.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="226.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="68" y1="161.2" x2="650" y2="161.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="165.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">75</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="112.8" y="315.6" width="56.0" height="29.4" rx="3" fill="#0075de" />
+  <text x="140.8" y="309.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">12</text>
+  <text x="140.8" y="363.0" transform="rotate(-30 140.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GPT-4o</text>
+  <rect x="258.2" y="163.7" width="56.0" height="181.3" rx="3" fill="#0075de" />
+  <text x="286.2" y="157.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">74</text>
+  <text x="286.2" y="363.0" transform="rotate(-30 286.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">o1, 1 Versuch</text>
+  <rect x="403.8" y="141.7" width="56.0" height="203.3" rx="3" fill="#0075de" />
+  <text x="431.8" y="135.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">83</text>
+  <text x="431.8" y="363.0" transform="rotate(-30 431.8 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">o1, 64 Versuche</text>
+  <rect x="549.2" y="117.1" width="56.0" height="227.9" rx="3" fill="#0075de" />
+  <text x="577.2" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">93</text>
+  <text x="577.2" y="363.0" transform="rotate(-30 577.2 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">o1, 1.000 Versuche</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://openai.com/index/learning-to-reason-with-llms" target="_blank" rel="noopener">OpenAI, Learning to reason with LLMs (12.09.2024)</a></span>
+  <span class="chart-note">Gleiches Modell, nur mehr Rechenzeit</span>
+</figcaption>
+</figure>
+<p>Die Verschiebung trifft die Rechnung an einer neuen Stelle: Die Kosten wandern vom einmaligen Training in die <strong><button type="button" class="lex" popovertarget="lex-inferenz" data-tip="Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training.">Inferenz</button><span class="lex-pop" popover id="lex-inferenz"><strong>Inferenz</strong> Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training. <a href="lexikon.html#inferenz">Im Lexikon</a></span></strong>, also in jeden einzelnen Aufruf. Ein Testzeit-Modell ist billig zu bauen und teuer zu betreiben; ein großes Modell ist teuer zu bauen und billig zu betreiben, wenn die Anfrage kurz ist.</p>
+<h2>Schlanker statt größer: was 2023 bis 2026 wirklich passiert ist</h2>
+<p>Der sichtbarste Fortschritt liegt nicht in neuen Rekorden, sondern im Sparen.</p>
+<p><strong><button type="button" class="lex" popovertarget="lex-mixture-of-experts" data-tip="Bauweise, bei der ein Modell aus vielen Teil-Netzen besteht und pro Anfrage nur wenige davon rechnen. So bleibt ein sehr großes Modell bezahlbar.">Mixture-of-Experts</button><span class="lex-pop" popover id="lex-mixture-of-experts"><strong>Mixture-of-Experts</strong> Bauweise, bei der ein Modell aus vielen Teil-Netzen besteht und pro Anfrage nur wenige davon rechnen. So bleibt ein sehr großes Modell bezahlbar. <a href="lexikon.html#mixture-of-experts">Im Lexikon</a></span></strong> ist der wichtigste Hebel: Statt alle Gewichte für jedes Token zu nutzen, aktiviert das Modell nur einen Teil. DeepSeek-V3 hält <strong>671 Mrd. <button type="button" class="lex" popovertarget="lex-parameter-2" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter-2"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span></strong> bereit, rechnet pro <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span> aber nur <strong>37 Mrd.</strong> – rund 5,5 % – und erreichte damit laut eigenem Bericht <strong>88,5 auf dem MMLU-Benchmark</strong> (<a href="https://arxiv.org/abs/2412.19437">arXiv:2412.19437</a>). Bezahlt wurde das mit 2,79 Mio. GPU-Stunden, umgerechnet rund <strong>5,6 Mio. Dollar</strong> Mietkosten – zwei Größenordnungen unter den Schätzungen für die vorherige Modellgeneration, wobei dieser Vergleich hinkt: DeepSeeks Zahl enthält nur die reine Mietzeit, nicht Forschung, Daten und Fehlversuche.</p>
+<p><strong><button type="button" class="lex" popovertarget="lex-quantisierung" data-tip="Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit.">Quantisierung</button><span class="lex-pop" popover id="lex-quantisierung"><strong>Quantisierung</strong> Ein Modell wird mit weniger Bits pro Wert gespeichert, etwa vier statt sechzehn. Das spart Speicher, kostet aber etwas Genauigkeit. <a href="lexikon.html#quantisierung">Im Lexikon</a></span></strong> presst Gewichte in weniger Bits: GPTQ schafft 3–4 Bit bei „vernachlässigbarem&quot; Qualitätsverlust (<a href="https://arxiv.org/abs/2210.17323">arXiv:2210.17323</a>), AWQ schützt die wichtigsten 1 % der Gewichte und läuft dadurch auf Grafikkarten im Laptop mehr als <strong>3× schneller</strong> (<a href="https://arxiv.org/abs/2306.00978">arXiv:2306.00978</a>), und AQLM quetscht Llama-2-7B auf <strong>2 Bit</strong> – mit spürbarem Preis: 6,93 statt 5,12 Perplexität (<a href="https://arxiv.org/abs/2401.06118">arXiv:2401.06118</a>). Bei <button type="button" class="lex" popovertarget="lex-pruning" data-tip="Beschneiden eines Modells: Unwichtige Verbindungen werden entfernt, damit es weniger Speicher und Rechenzeit braucht.">Pruning</button><span class="lex-pop" popover id="lex-pruning"><strong>Pruning</strong> Beschneiden eines Modells: Unwichtige Verbindungen werden entfernt, damit es weniger Speicher und Rechenzeit braucht. <a href="lexikon.html#pruning">Im Lexikon</a></span>, also dem Beschneiden unnötiger Verbindungen, halbiert man die Gewichte und zahlt mit etwa 1,5 Perplexitäts-Punkten (<a href="https://arxiv.org/abs/2301.00774">SparseGPT</a>).</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 205" width="100%" height="auto" role="img" class="chart-svg">
+  <title>DeepSeek-V3: gerechnet wird nur ein Bruchteil der Parameter</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">DeepSeek-V3: gerechnet wird</tspan><tspan x="68" y="48">nur ein Bruchteil der Parameter</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % der Parameter</text>
+  <text x="68" y="117" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="700" fill="#0075de">5,5 %</text>
+  <text x="163" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#555555">der 671 Mrd. Parameter werden pro Token tatsächlich gerechnet (37 Mrd.)</text>
+  <rect x="68" y="135" width="544" height="24" rx="6" fill="#eef2f6" />
+  <rect x="68" y="135" width="29.9" height="24" rx="6" fill="#0075de" />
+  <text x="68" y="175" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#888888">0 %</text>
+  <text x="612" y="175" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#888888">100 %</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://arxiv.org/abs/2412.19437" target="_blank" rel="noopener">DeepSeek-V3 Technical Report, arXiv:2412.19437</a></span>
+  <span class="chart-note">Mixture-of-Experts: 37 von 671 Mrd. Parametern pro Token</span>
+</figcaption>
+</figure>
+<p><strong><button type="button" class="lex" popovertarget="lex-destillation" data-tip="Ein großes Modell bringt einem kleinen bei: Das kleine lernt aus den Antworten des großen und wird dadurch deutlich besser, als es allein wäre.">Destillation</button><span class="lex-pop" popover id="lex-destillation"><strong>Destillation</strong> Ein großes Modell bringt einem kleinen bei: Das kleine lernt aus den Antworten des großen und wird dadurch deutlich besser, als es allein wäre. <a href="lexikon.html#destillation">Im Lexikon</a></span></strong> schließlich ist der Trick, Wissen aus einem Riesen in einen Zwerg zu gießen: DeepSeek-R1 (671 Mrd.) erzeugt Lösungswege, aus denen ein 32-Mrd.-Modell lernt – es erreicht auf AIME 72,6 % gegenüber 79,8 % des Lehrers (<a href="https://arxiv.org/abs/2501.12948">arXiv:2501.12948</a>). Und die Kleinen holen auf: Qwen3 baut sechs dichte Modelle zwischen <strong>0,6 und 32 Mrd. Parametern</strong>, von denen laut Hersteller „selbst ein winziges Qwen3-4B mit Qwen2.5-72B mithalten&quot; kann (<a href="https://qwenlm.github.io/blog/qwen3/">Qwen</a>, Herstellerangabe, Fremdmessungen liegen teils niedriger). Gemma 3 startet bei <strong>270 Mio. Parametern</strong> für Geräte ohne Netz (<a href="https://developers.googleblog.com/en/introducing-gemma-3-270m/">Google</a>). Die API-Preise fielen im selben Zeitraum um <strong>Faktor 200</strong>: von 30 Dollar pro Million Eingabe-Token (GPT-4, März 2023) auf 0,15 Dollar beim Nachfolger für kleine Aufgaben (<a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">OpenAI</a>).</p>
+<h2>Agenten: Intelligenz aus dem Ablauf statt aus den Gewichten</h2>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Agenten-Benchmarks: Mensch gegen bestes Modell</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Agenten-Benchmarks: Mensch gegen bestes Modell</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in % gelöste Aufgaben</text>
+  <rect x="439.5" y="42.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="455.5" y="52.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Mensch</text>
+  <rect x="518.5" y="42.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="534.5" y="52.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">bestes Modell</text>
+  <line x1="68" y1="320.0" x2="650" y2="320.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="324.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="258.8" x2="650" y2="258.8" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="262.8" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">25</text>
+  <line x1="68" y1="197.5" x2="650" y2="197.5" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">50</text>
+  <line x1="68" y1="136.2" x2="650" y2="136.2" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="140.2" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">75</text>
+  <line x1="68" y1="75.0" x2="650" y2="75.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="79.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">100</text>
+  <line x1="68" y1="320" x2="650" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="120.0" y="94.6" width="43.5" height="225.4" rx="2" fill="#0075de" />
+  <text x="141.8" y="89.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">92</text>
+  <rect x="166.5" y="283.2" width="43.5" height="36.8" rx="2" fill="#e05638" />
+  <text x="188.2" y="278.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">15</text>
+  <text x="165.0" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">GAIA (Recherche)</text>
+  <rect x="314.0" y="142.7" width="43.5" height="177.3" rx="2" fill="#0075de" />
+  <text x="335.8" y="137.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">72,36</text>
+  <rect x="360.5" y="290.0" width="43.5" height="30.0" rx="2" fill="#e05638" />
+  <text x="382.2" y="285.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">12,24</text>
+  <text x="359.0" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">OSWorld (Computerbedienung)</text>
+  <rect x="508.0" y="128.3" width="43.5" height="191.7" rx="2" fill="#0075de" />
+  <text x="529.8" y="123.3" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">78,24</text>
+  <rect x="554.5" y="284.7" width="43.5" height="35.3" rx="2" fill="#e05638" />
+  <text x="576.2" y="279.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">14,41</text>
+  <text x="553.0" y="340.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">WebArena (Webaufgaben)</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://arxiv.org/abs/2311.12983" target="_blank" rel="noopener">Mialon et al., GAIA (2023); Xie et al., OSWorld (2024); Zhou et al., WebArena (2023)</a></span>
+  <span class="chart-note">Stand der Erstveröffentlichung</span>
+</figcaption>
+</figure>
+<p>Die zweite große Verschiebung betrifft nicht das Modell, sondern das Drumherum. GAIA, ein <button type="button" class="lex" popovertarget="lex-benchmark" data-tip="Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen.">Benchmark</button><span class="lex-pop" popover id="lex-benchmark"><strong>Benchmark</strong> Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen. <a href="lexikon.html#benchmark">Im Lexikon</a></span> für mehrstufige Rechercheaufgaben, war für GPT-4 mit Plugins bei <strong>15 %</strong> – Menschen lagen bei <strong>92 %</strong> (<a href="https://arxiv.org/abs/2311.12983">Mialon et al.</a>). Auf OSWorld, dem Benchmark für Computerbedienung, lagen die besten Modelle bei <strong>12,24 %</strong> gegen <strong>72,36 %</strong> beim Menschen (<a href="https://arxiv.org/abs/2404.07972">Xie et al.</a>). Diese Lücke ist zu einem großen Teil keine Frage der Modellgröße, sondern der Werkzeuge: Allein eine bessere Schnittstelle hob SWE-agent von 1,96 auf <strong>12,5 %</strong> bei echten GitHub-Problemen (<a href="https://arxiv.org/abs/2310.06770">SWE-bench</a>), und simples Wiederholen hob ein mittleres Modell auf SWE-bench Lite von 15,9 auf <strong>56 %</strong> (<a href="https://arxiv.org/abs/2407.21787"><em>Large Language Monkeys</em></a>).</p>
+<p>Die Ökonomie dahinter ist belegt: Modell-Kaskaden, die erst das billige und nur bei Zweifel das teure Modell fragen, erreichten GPT-4-Qualität mit <strong>bis zu 98 % weniger Kosten</strong> (<a href="https://arxiv.org/abs/2305.05176">FrugalGPT</a>); RouteLLM senkte die Kosten um <strong>85 %</strong> bei 95 % der GPT-4-Qualität (<a href="https://arxiv.org/abs/2406.18665">arXiv:2406.18665</a>). Und Anthropic zeigt, wie sich Leistung verschieben lässt, ohne ein größeres Modell zu trainieren: Ein System aus Leitmodell und mehreren Unteragenten übertraf den Einzelagenten um <strong>90,2 %</strong> – wobei allein die Zahl der verbrauchten Token <strong>80 %</strong> der Leistungsvarianz erklärte. Bezahlt wird das mit Rechenzeit: Ein <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span> verbraucht typisch <strong>4×</strong>, ein Multi-Agenten-System etwa <strong>15×</strong> so viele Token wie ein Chat (<a href="https://www.anthropic.com/engineering/multi-agent-research-system">Anthropic</a>).</p>
+<p>Drei Einschränkungen gehören dazu. Erstens ist <button type="button" class="lex" popovertarget="lex-scaffolding" data-tip="Die Hülle um ein Modell: Werkzeuge, Regeln und Zwischenschritte, mit denen es eine Aufgabe mehrstufig löst, statt sofort zu antworten.">Scaffolding</button><span class="lex-pop" popover id="lex-scaffolding"><strong>Scaffolding</strong> Die Hülle um ein Modell: Werkzeuge, Regeln und Zwischenschritte, mit denen es eine Aufgabe mehrstufig löst, statt sofort zu antworten. <a href="lexikon.html#scaffolding">Im Lexikon</a></span> kein Freifahrtschein: Eine Untersuchung von 2025 fand über sieben Agenten-Systeme hinweg Fehlerraten zwischen <strong>41 % und 86,7 %</strong> (<a href="https://arxiv.org/abs/2503.13657">MAST</a>). Zweitens sind Modelle schlechte Prüfer ihrer selbst – ohne externen <button type="button" class="lex" popovertarget="lex-verifier" data-tip="Eine Prüfinstanz, die Antworten automatisch bewertet – etwa ein Testprogramm, das generierten Code ausführt, oder ein zweites Modell als Prüfer.">Verifier</button><span class="lex-pop" popover id="lex-verifier"><strong>Verifier</strong> Eine Prüfinstanz, die Antworten automatisch bewertet – etwa ein Testprogramm, das generierten Code ausführt, oder ein zweites Modell als Prüfer. <a href="lexikon.html#verifier">Im Lexikon</a></span> wird die Antwort nach Selbstkorrektur oft schlechter, nicht besser (<a href="https://arxiv.org/abs/2507.14417">arXiv:2507.14417</a>-Umfeld und <a href="https://arxiv.org/abs/2310.01798">Huang et al. 2024</a>). Drittens: In einer Microsoft- und Hugging-Face-Studie von 2026 scheiterte der Großteil der Agentenläufe nicht am Denken, sondern an Werkzeugen und Zustandsfehlern – und <strong>67 %</strong> dieser Fehlschläge sahen nach außen hin „sauber&quot; aus (<a href="https://huggingface.co/blog/microsoft/thinkingbox">ThinkingBox</a>). Wer Agenten als Effizienz-Wunder verkauft, verschweigt die Rechenzeit, die für Prüfschritte und Wiederholungen draufgeht.</p>
+<h2>Was als Nächstes kommt</h2>
+<ul>
+  <li><strong>Modell-Architektur:</strong> State-Space-Modelle wie Mamba und hybride Varianten laufen 2026 produktionsreif und brauchen für lange Eingaben weniger Rechenzeit als reine Transformer (<a href="https://arxiv.org/abs/2502.07864">Mamba-3</a>). Weltmodelle à la JEPA bleiben Forschung.</li>
+  <li><strong>Daten:</strong> Synthetische Daten wandern von der Notlösung zur Werkstatt – erzeugte Aufgaben plus automatische Prüfer, wie im ServiceNow-Ansatz, der Agenten-Aufgaben samt Verifier produziert (<a href="https://huggingface.co/blog/ServiceNow-AI/autosynthdata">Hugging Face</a>).</li>
+  <li><strong>Hardware:</strong> Google nennt für seine TPU-Generation Ironwood <strong>3,7× bessere Kohlenstoffeffizienz</strong> (<a href="https://cloud.google.com/blog/topics/systems/ironwood-tpus-deliver-37x-carbon-efficiency-gains">Google Cloud</a>); NVIDIA nennt für seine aktuelle GB200-Plattform den 30-fachen Durchsatz bei der Sprachmodell-Inferenz gegenüber dem Vorgänger (<a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/">NVIDIA</a>, Herstellerangabe). Und BitNet zeigt, was mit Gewichten aus nur drei Werten möglich ist: <strong>~7× weniger Speicher</strong> bei nahezu unveränderter Qualität oberhalb von 3 Mrd. Parametern (<a href="https://arxiv.org/abs/2402.17764">arXiv:2402.17764</a>).</li>
+  <li><strong>Effizienz als Gesetz:</strong> Das „Densing Law&quot; beschreibt die Fähigkeit <strong>pro Parameter</strong> als exponentiell wachsend mit einer Verdopplung etwa alle drei Monate (<a href="https://nature.com/articles/s42256-025-01137-0.pdf">Nature Machine Intelligence 2025</a>) – eine Aussage über Dichte, nicht über Nutzen.</li>
+  <li><strong>Regulierung:</strong> Die EU-Kommission arbeitet an Pflichtangaben zum Energieverbrauch von KI-Modellen (<a href="https://digital-strategy.ec.europa.eu/en/consultations/targeted-consultation-measuring-energy-consumption-and-emissions-ai-models">Konsultation 2026</a>), der EU AI Act verlangt solche Angaben für große Modelle bereits. Transparenz ist der billigste Effizienzhebel, den es gibt.</li>
+</ul>
+<h2>Was heißt das praktisch?</h2>
+<p>Drei Regeln, die sich aus dem Material ableiten lassen:</p>
+<ol>
+  <li><strong>Miss pro Aufgabe, nicht pro Modell.</strong> „Unsere KI ist sparsamer&quot; ist ohne Angabe, wofür, wertlos – zwischen einer kurzen Anfrage (0,31 Wh) und langem Nachdenken (3,91 Wh) liegt mehr als Faktor 12.</li>
+  <li><strong>Erwarte nicht, dass Effizienz die Rechnung senkt.</strong> Sie senkt den Preis pro Einheit und erhöht die Menge. Wer wissen will, was KI kostet, muss auf Kraftwerke und Netze schauen, nicht auf Watt pro Prompt.</li>
+  <li><strong>Der nächste Intelligenz-Sprung kommt wahrscheinlich aus Verbindung, nicht aus Größe.</strong> Kleine Modelle mit Werkzeugen, Prüfern und mehreren Versuchen schlagen größere ohne – vorausgesetzt, jemand bezahlt die Rechenzeit und baut Prüfungen, die nicht vom Modell selbst kommen. Es endet nicht die Skalierung; es endet die Vorstellung, dass Skalierung bequem ist.</li>
+</ol>
+<h2>Quellen</h2>
+<p>Primärquellen (Auswahl, Stand der Recherche: 4. Oktober 2026):</p>
+<ol>
+  <li>IEA, <em>Energy and AI</em> (10.04.2025) – <a href="https://www.iea.org/reports/energy-and-ai/executive-summary">Executive Summary</a></li>
+  <li>IEA, <em>Key Questions on Energy and AI</em> (16.04.2026) – <a href="https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions">Meldung zur Stromnutzung 2025</a></li>
+  <li>LBNL für das US-DOE, <em>2024 United States Data Center Energy Usage Report</em> (20.12.2024) – <a href="https://eta-publications.lbl.gov/sites/default/files/2024-12/lbnl-2024-united-states-data-center-energy-usage-report.pdf">PDF</a></li>
+  <li>LBNL, <em>Queued Up: 2025 Edition</em> (15.12.2025) – <a href="https://emp.lbl.gov/sites/default/files/2025-12/Queued%20Up%202025%20Edition%20-%2012.15.2025.pdf">PDF</a></li>
+  <li>ERCOT, <em>Interconnection and Grid Analysis Update</em> (April 2026) – <a href="https://www.ercot.com/files/docs/2026/04/13/9-Interconnection-and-Grid-Analysis-Update.pdf">PDF</a></li>
+  <li>GE Vernova, Quartalsbericht Q3 2025 – <a href="https://www.gevernova.com/news/press-releases/ge-vernova-reports-third-quarter-2025-financial">Pressemitteilung</a>; Siemens Energy, Q4-GJ-2025 – <a href="https://assets.siemens-energy.com/dam/8b35c13c-396b-4623-8590-b3950053f94c/6--SE-Press-Release-EN-pdf_Original%20file.pdf">Pressemitteilung</a></li>
+  <li>Constellation Energy, Neustart Three Mile Island (20.09.2024) – <a href="https://www.constellationenergy.com/newsroom/2024/Constellation-to-Launch-Crane-Clean-Energy-Center-Restoring-Jobs-and-Carbon-Free-Power-to-The-Grid.html">Meldung</a>; Kairos Power, Baubeginn Hermes 2 – <a href="https://www.kairospower.com/updates/kairos-power-breaks-ground-on-hermes-2-demonstration-plant">Meldung</a>; Talen Energy/Amazon – <a href="https://ir.talenenergy.com/node/8671/pdf">Meldung</a></li>
+  <li>Google, <em>Measuring the environmental impact of delivering AI at Google Scale</em> (21.08.2025) – <a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference">Blog</a>, <a href="https://arxiv.org/abs/2508.15734">Paper</a></li>
+  <li>Epoch AI, Energie pro ChatGPT-Anfrage – <a href="https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use">Analyse</a></li>
+  <li>Kaplan et al., <em>Scaling Laws for Neural Language Models</em> (2020) – <a href="https://arxiv.org/abs/2001.08361">arXiv:2001.08361</a>; Hoffmann et al., <em>Chinchilla</em> (2022) – <a href="https://arxiv.org/abs/2203.15556">arXiv:2203.15556</a></li>
+  <li>Villalobos et al. / Epoch AI, <em>Will we run out of data?</em> – <a href="https://arxiv.org/abs/2211.04325">arXiv:2211.04325</a>, <a href="https://epoch.ai/publications/will-we-run-out-of-ml-data-evidence-from-projecting-dataset">Projektionsseite</a></li>
+  <li>Epoch AI, <em>Training compute of frontier AI models grows by 4–5x per year</em> (2024) – <a href="https://epochai.org/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year">Blog</a>; Schaeffer et al., <em>Are Emergent Abilities a Mirage?</em> (NeurIPS 2023) – <a href="https://arxiv.org/abs/2304.15004">arXiv:2304.15004</a></li>
+  <li>Snell et al., <em>Scaling LLM Test-Time Compute</em> (2024) – <a href="https://arxiv.org/abs/2408.03314">arXiv:2408.03314</a>; OpenAI, <em>Learning to reason with LLMs</em> (12.09.2024) – <a href="https://openai.com/index/learning-to-reason-with-llms">Blog</a></li>
+  <li>ARC Prize, o3-Ergebnisse und Kosten – <a href="https://arcprize.org/blog/oai-o3-pub-breakthrough">Blog</a>; <em>Inverse Scaling in Test-Time Compute</em> – <a href="https://arxiv.org/abs/2507.14417">arXiv:2507.14417</a></li>
+  <li>DeepSeek-V3 Technical Report – <a href="https://arxiv.org/abs/2412.19437">arXiv:2412.19437</a>; DeepSeek-R1 – <a href="https://arxiv.org/abs/2501.12948">arXiv:2501.12948</a></li>
+  <li>Quantisierung: <a href="https://arxiv.org/abs/2210.17323">GPTQ</a> · <a href="https://arxiv.org/abs/2306.00978">AWQ</a> · <a href="https://arxiv.org/abs/2401.06118">AQLM</a>; Pruning: <a href="https://arxiv.org/abs/2301.00774">SparseGPT</a></li>
+  <li>Qwen3 – <a href="https://qwenlm.github.io/blog/qwen3/">Blog</a>; Gemma 3 270M – <a href="https://developers.googleblog.com/en/introducing-gemma-3-270m/">Google Developers Blog</a></li>
+  <li>Agenten: <a href="https://arxiv.org/abs/2311.12983">GAIA</a> · <a href="https://arxiv.org/abs/2404.07972">OSWorld</a> · <a href="https://arxiv.org/abs/2310.06770">SWE-bench</a> · <a href="https://arxiv.org/abs/2407.21787">Large Language Monkeys</a> · <a href="https://arxiv.org/abs/2305.05176">FrugalGPT</a> · <a href="https://arxiv.org/abs/2406.18665">RouteLLM</a> · <a href="https://arxiv.org/abs/2503.13657">MAST</a> · <a href="https://www.anthropic.com/engineering/multi-agent-research-system">Anthropic, Multi-Agent Research System</a></li>
+  <li>Rebound/Jevons: <em>From Efficiency Gains to Rebound Effects</em> (FAccT 2025) – <a href="https://arxiv.org/abs/2501.16548">arXiv:2501.16548</a></li>
+  <li>BitNet b1.58 – <a href="https://arxiv.org/abs/2402.17764">arXiv:2402.17764</a>; Densing Law – <a href="https://nature.com/articles/s42256-025-01137-0.pdf">Nature Machine Intelligence 2025</a>; TPU Ironwood – <a href="https://cloud.google.com/blog/topics/systems/ironwood-tpus-deliver-37x-carbon-efficiency-gains">Google Cloud</a></li>
+</ol>
+<p><em>Hinweis zur Methode: Alle Kernzahlen wurden gegen die hier verlinkten Primärquellen geprüft. Angaben von Herstellern (Google, DeepSeek, Qwen, NVIDIA, Siemens Energy, GE Vernova) sind als solche gekennzeichnet; bei ihnen fehlt eine unabhängige Nachprüfung. Wo Quellen sich widersprechen — etwa bei der Definition „KI-Rechenzentrum&quot; zwischen IEA und einer Nature-Studie (118 TWh 2024 für rein KI-spezifische Anlagen) — steht das im Text.</em></p>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

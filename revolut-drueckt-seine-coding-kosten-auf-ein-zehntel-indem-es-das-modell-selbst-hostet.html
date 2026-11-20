@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revolut drückt seine Coding-Kosten auf ein Zehntel, indem es das Modell selbst hostet – Hermies Blog</title>
+  <meta name="description" content="Revolut hat im April 2026 rund 2.000 Entwickler von Claude Code und Codex auf ein selbst gehostetes GLM-Modell umgestellt. Der gemischte Preis liegt nach Angaben von Infrastruktur-Leiter David Abitbol bei 30 Cent pro Million Token, die Rechnung bei einem Zehntel der früheren; 56 Nvidia B200 reichen für die Mannschaft. In der Stichprobe fiel die Coding-Zeit um 60 und die Lead-Zeit um 70 Prozent, Gemini hatte zuvor 20 und 10 Prozent gebracht. Alle Zahlen sind selbst berichtet, und der Vortrag vom 13. Oktober wurde erst am 3. November breit aufgegriffen.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Revolut drückt seine Coding-Kosten auf ein Zehntel, indem es das Modell selbst hostet</h1>
+    <p class="meta"><time datetime="2026-11-03">03.11.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/open-weights.html">#open-weights</a> <a class="tag" href="tag/modelle.html">#modelle</a></span> · <a class="source" href="https://ai.engineer/nyc/2026/talks/revolut">David Abitbol, Revolut (AI Engineer New York)</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>6:09 Minuten</strong> (KI-Stimme) – <a href="audio/revolut-drueckt-seine-coding-kosten-auf-ein-zehntel-indem-es-das-modell-selbst-hostet.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,8 MB)</span></p>
+    <audio controls preload="none" src="audio/revolut-drueckt-seine-coding-kosten-auf-ein-zehntel-indem-es-das-modell-selbst-hostet.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Die britische Digitalbank Revolut hat im April 2026 rund 2.000 Entwickler von Claude Code und Codex auf ein selbst gehostetes GLM-Modell umgestellt. Der gemischte Preis liegt nach Angaben von Infrastruktur-Leiter David Abitbol bei 30 Cent pro Million <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span>, die Rechnung bei einem Zehntel der früheren.</li>
+  <li>56 Nvidia B200 reichen für diese Mannschaft. Die Coding-Zeit fiel um 60 Prozent, die Lead-Zeit um 70 Prozent. Googles Gemini hatte zuvor 20 und 10 Prozent gebracht.</li>
+  <li>Der Betrieb lief anfangs schlecht: 3 Anfragen pro Sekunde, über 10 Sekunden bis zum ersten Token. Bis August wurden daraus über 7 Anfragen und 1,6 Sekunden.</li>
+  <li>Alle Zahlen sind selbst berichtet. Chips, Personal und Betrieb stecken nicht im Tokenpreis, und die Vergleichsbasis war durch Budgetgrenzen gedrosselt.</li>
+  <li>Der Vortrag stammt vom 13. Oktober, breit aufgegriffen wurde er am 3. November.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>David Abitbol verantwortet bei Revolut den Betrieb der KI-Infrastruktur. Am 13. Oktober hat er auf der Konferenz AI Engineer in New York in einer Viertelstunde vorgerechnet, was es kostet, die eigenen Entwickler mit einem eigenen Modell arbeiten zu lassen. Breit aufgegriffen wurde die Rechnung erst am 3. November, unter anderem von <a href="https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345">The Register</a> und <a href="https://dealroom.co/news/169124-revolut-moves-2-000-engineers-onto-self-hosted-ai-cutting-coding-costs-9">Dealroom</a>. Das <a href="https://ai.engineer/nyc/2026/talks/revolut">Transkript des Vortrags</a> steht vollständig online und ist die Grundlage für alles Folgende.</p>
+<p>Revolut hat 80 Millionen Kunden in 45 Märkten und ist nach eigenen Angaben seit Juli Europas größtes privates Unternehmen. Die Zahlen stammen aus einer Stichprobe von 2.000 Entwicklern, deren Arbeitszeit über ein Jahr mitgeschrieben wurde: Coding-Zeit in Stunden, Lead-Zeit in Tagen. Lead-Zeit heißt, von der Übernahme einer Aufgabe bis zum gemergten, auslieferbaren Code.</p>
+<p>Die Vorgeschichte beginnt im Januar 2025 mit Gemini. Es brachte 20 Prozent kürzere Coding-Zeit und 10 Prozent kürzere Lead-Zeit. Claude Code kam im Februar 2025 zum Ausprobieren und später im großen Stil; der Effekt blieb nach Abitbols Darstellung klein, die Kosten nicht. Einzelne Entwickler kamen auf 1.000 bis 10.000 Dollar im Monat, ohne entsprechenden Gegenwert. Revolut setzte harte Monatsbudgets durch, und damit begann das eigentliche Problem. Wer <button type="button" class="lex" popovertarget="lex-token-2" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token-2"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span> zugeteilt bekommt wie Urlaubstage, spart sie für die schwerste Aufgabe auf. Für die Arbeit ringsum, Tickets, Dokumentation, Suche im Postfach, blieb nichts übrig.</p>
+<p>Im April 2026 begann Revolut, ein offenes Modell selbst zu betreiben: GLM von Z.ai, zuerst Version 5.1, inzwischen 5.3. Für 2.000 Entwickler braucht die Bank nach Abitbols Angaben 56 Nvidia B200. Der gemischte Preis liegt bei 30 Cent pro Million Token, die Monatsrechnung bei einem Zehntel dessen, was vorher an Anthropic und OpenAI ging. Abitbol sagt es so: Die Abrechnung ist flach, es gibt keinen Schock am Monatsende, und die Spitzenmodelle bleiben die Ausnahme.</p>
+<p>Die Wirkung in der Stichprobe: 60 Prozent kürzere Coding-Zeit, 70 Prozent kürzere Lead-Zeit. Der größere Sprung liegt dort, wo nicht programmiert wird. Abitbol nennt Postfach, Jira und Confluence als die eigentlichen Bremsen. Weil Token nichts mehr kosten, delegieren Entwickler inzwischen auch die Arbeit drumherum. Aufgaben laufen parallel, niemand sieht mehr dem Strom der Denk-Token zu.</p>
+<figure class="widget widget-zahlen">
+<p class="widget-title">Revoluts Selbsthosting in vier Zahlen</p>
+<div class="stats stats-4">
+<div class="stat">
+  <span class="stat-value">0,30 $</span>
+  <span class="stat-label">pro Million Token</span>
+  <span class="stat-detail">gemischter Preis für Eingabe und Ausgabe im eigenen Betrieb</span>
+</div>
+<div class="stat">
+  <span class="stat-value">1/10</span>
+  <span class="stat-label">der früheren Rechnung</span>
+  <span class="stat-detail">verglichen mit Claude Code und Codex</span>
+</div>
+<div class="stat">
+  <span class="stat-value">56</span>
+  <span class="stat-label">Nvidia B200</span>
+  <span class="stat-detail">für rund 2.000 Entwickler, Modell GLM 5.3</span>
+</div>
+<div class="stat">
+  <span class="stat-value">60 / 70 %</span>
+  <span class="stat-label">kürzere Coding- und Lead-Zeit</span>
+  <span class="stat-detail">in einer Stichprobe von 2.000 Entwicklern über ein Jahr</span>
+</div>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://ai.engineer/nyc/2026/talks/revolut" target="_blank" rel="noopener">David Abitbol, Revolut: Shipping like a startup, regulated like a bank, AI Engineer New York, 13.10.2026</a></span>
+  <span class="chart-note">Selbst berichtete Zahlen aus dem Vortrag, nicht unabhängig geprüft. Chips, Personal und Betrieb sind im Tokenpreis nicht enthalten.</span>
+</figcaption>
+</figure>
+<h2>Warum zählt es</h2>
+<p>Der interessante Teil des Vortrags ist nicht der Preis, sondern der Betrieb. Abitbol nennt eine Zielmarke von unter drei Sekunden bis zum ersten Token. Ab fünf Sekunden, sagt er, laufe ihm das Postfach voll. Im April lag Revolut bei 3 Anfragen pro Sekunde und über 10 Sekunden Wartezeit. Bis August stiegen die Anfragen auf über 7 pro Sekunde, die Wartezeit fiel auf 1,6 Sekunden. Das sind 88 Prozent bessere Latenz bei 76 Prozent mehr Last, und sein Fazit lautet: erst die Parameter tunen, dann über mehr Chips nachdenken.</p>
+<p>Seine Parameterliste ist ungewöhnlich konkret. Auf Blackwell-Chips rät er von allem über FP4 ab und beziffert den Sprung von FP4 auf FP8 mit 40 Prozent mehr Speicherbedarf ohne Genauigkeitsgewinn. Lange <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> hält er für ein Verkaufsargument: Eine Million Token ließen sich bedienen, gebraucht würden 256. Statt vier Chips nimmt er acht, weil sonst der Zwischenspeicher für den Kontext nicht reicht. Die Trefferquote des <button type="button" class="lex" popovertarget="lex-prompt-cache" data-tip="Zwischenspeicher für Text, den das Modell schon einmal verarbeitet hat. Beginnt eine neue Anfrage mit demselben Text, liest das System ihn aus dem Speicher statt ihn neu zu durchrechnen - das ist schneller und viel billiger als frische Eingabe.">Prompt-Cache</button><span class="lex-pop" popover id="lex-prompt-cache"><strong>Prompt-Cache</strong> Zwischenspeicher für Text, den das Modell schon einmal verarbeitet hat. Beginnt eine neue Anfrage mit demselben Text, liest das System ihn aus dem Speicher statt ihn neu zu durchrechnen - das ist schneller und viel billiger als frische Eingabe. <a href="lexikon.html#prompt-cache">Im Lexikon</a></span> muss über 90 Prozent liegen, sonst zahlt man jeden Aufruf neu. Wer nach fünf Uhr abends anfängt, bekommt 800 Token pro Sekunde statt 200, weil dann niemand sonst rechnet.</p>
+<p>Der Grund, warum die Zahlen über Revolut hinaus interessieren: Sie sind der bisher konkreteste Fall, in dem ein reguliertes Unternehmen <button type="button" class="lex" popovertarget="lex-offene-gewichte" data-tip="Ein Modell, dessen trainierte Zahlenwerte zum Herunterladen veröffentlicht werden. Man kann es dann selbst betreiben und verändern - im Unterschied zu Modellen, die nur über eine fremde Schnittstelle nutzbar sind.">Offene Gewichte</button><span class="lex-pop" popover id="lex-offene-gewichte"><strong>Offene Gewichte</strong> Ein Modell, dessen trainierte Zahlenwerte zum Herunterladen veröffentlicht werden. Man kann es dann selbst betreiben und verändern - im Unterschied zu Modellen, die nur über eine fremde Schnittstelle nutzbar sind. <a href="lexikon.html#offene-gewichte">Im Lexikon</a></span> gegen die Programmierschnittstellen von Anthropic und OpenAI tauscht. Revolut ist eine Bank unter der strengsten Aufsicht, die Europa kennt, und betreibt trotzdem ein chinesisches Modell. Abitbol begegnet dem naheliegenden Einwand im Vortrag selbst. Man nutze keine <button type="button" class="lex" popovertarget="lex-inferenz" data-tip="Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training.">Inferenz</button><span class="lex-pop" popover id="lex-inferenz"><strong>Inferenz</strong> Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training. <a href="lexikon.html#inferenz">Im Lexikon</a></span>, die nach China gehe, man hole die Gewichte und lege sie auf Chips in einem Land mit Angemessenheitsbeschluss, also USA, EU, Großbritannien oder Israel. Die Codier-Aufgaben seien zudem keine autonomen Agenten; eine <button type="button" class="lex" popovertarget="lex-sandbox" data-tip="Eine abgeschottete Spielumgebung: Programme laufen darin ohne Zugriff auf echte Dateien oder das Netz. Behauptet ein Text, die Antwort lande nur in so einer Testumgebung, kann das das Verhalten eines Modells ändern.">Sandbox</button><span class="lex-pop" popover id="lex-sandbox"><strong>Sandbox</strong> Eine abgeschottete Spielumgebung: Programme laufen darin ohne Zugriff auf echte Dateien oder das Netz. Behauptet ein Text, die Antwort lande nur in so einer Testumgebung, kann das das Verhalten eines Modells ändern. <a href="lexikon.html#sandbox">Im Lexikon</a></span> mit Freigabelisten halte den Menschen in der Schleife, was der Aufsicht reiche.</p>
+<div class="box box-warnung">
+<p class="box-title">Der Haken</p>
+<div class="box-body">
+<p><strong>Was in der Rechnung fehlt</strong> 30 Cent pro Million Token sind reine Inferenzkosten. Die 56 B200, das Team, das sie betreibt, Vernetzung und Überwachung rechnet Revolut nicht ein. Die Analysefirma StartupHub weist laut <a href="https://www.trendingtopics.eu/revolut-glm-open-weight-coding-costs">Trending Topics</a> darauf hin, dass die 90 Prozent Ersparnis genau diese Posten ausklammern und kleinere Teams mit derselben Konfiguration deutlich schlechter fahren. Dazu kommt ein methodischer Punkt: Die Vergleichsbasis war gedrosselt. Wenn ein Teil des Effekts daher kommt, dass die Budgetgrenzen weggefallen sind, ist das keine Leistung des Modells. Alle Zahlen sind selbst erhoben, keine davon ist unabhängig geprüft.</p>
+
+</div>
+</div>
+<figure class="widget widget-tabelle">
+<p class="widget-title">Drei Stufen, drei Messungen an derselben Stichprobe</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Stufe</th><th>Coding-Zeit</th><th class="col-emphasis">Lead-Zeit</th><th>Kosten</th></tr></thead>
+<tbody>
+<tr><th>Gemini, ab Januar 2025</th><td>20 % kürzer</td><td class="col-emphasis">10 % kürzer</td><td>Abo pro Nutzer</td></tr>
+<tr><th>Claude Code, ab Februar 2025</th><td>kaum messbar</td><td class="col-emphasis">kaum messbar</td><td>1.000 bis 10.000 $ pro Entwickler und Monat</td></tr>
+<tr><th>GLM 5.1 selbst gehostet, ab April 2026</th><td>60 % kürzer</td><td class="col-emphasis">70 % kürzer</td><td>0,30 $ pro Million Token</td></tr>
+</tbody>
+</table>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://ai.engineer/nyc/2026/talks/revolut" target="_blank" rel="noopener">David Abitbol, Revolut, AI Engineer New York, 13.10.2026</a></span>
+  <span class="chart-note">Coding-Zeit misst in Stunden, Lead-Zeit in Tagen vom Aufgreifen einer Aufgabe bis zum gemergten Code. Die Prozentwerte sind Revoluts eigene Auswertung.</span>
+</figcaption>
+</figure>
+<h2>Was heißt das praktisch</h2>
+<p>Die Bedingung für diese Rechnung ist Auslastung. 56 Chips für 2.000 Entwickler sind ein Verhältnis, das kleine Firmen nicht erreichen. Wer 50 Programmierer versorgt, bekommt dieselben Fixkosten auf ein Fünfzigstel der Nutzung verteilt, und dann kippt die Rechnung. Selbst hosten lohnt sich ab einer Größe, bei der die Hardware tagsüber ausgelastet ist und die Wartung von jemandem gemacht wird, der sie ohnehin bezahlt.</p>
+<p>Zweitens zeigt der Vortrag, wo die Arbeit liegt. Ein Modell herunterzuladen und auf Chips zu legen, reicht nicht, und Abitbol sagt das deutlich: Wer nur die Gewichte hochlädt und loslegt, bekommt schlechte Leistung. Der Gewinn kam aus Quantisierung, Aufteilung über acht Chips, Cache-Treffern und spekulativer Dekodierung, also aus derselben Kleinarbeit, die auch ein Anbieter leistet, nur eben im eigenen Haus.</p>
+<p>Drittens bleibt ein Modell mit Lücken. GLM verarbeitet nur Text; für Bilder schickt Revolut die Anfrage über einen Router an Gemini oder GPT Luna und lässt den Code bei GLM. Das ist keine vollständige Ablösung, sondern eine Arbeitsteilung mit dem Spitzenmodell als Ausnahme, und genau so beschreibt Abitbol sie auch.</p>
+<p>Ob sich der Befund überträgt, ist offen. Ein einzelner Vortrag eines einzelnen Unternehmens ist ein Datenpunkt, und die Lead-Zeit ist eine Größe, die sich mit Prozessen, Werkzeugen und Vorgaben ebenso verschiebt wie mit dem Modell. Nachprüfen lässt sich nur, was Revolut selbst veröffentlicht. Wer den Vortrag heute liest, bekommt eine belastbare Größenordnung für die Kosten eines eigenen Modells und einen guten Katalog an Stellschrauben. Einen Beweis, dass Selbsthosting für jedes Unternehmen billiger ist, liefert er nicht.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>David Abitbol, Revolut: <a href="https://ai.engineer/nyc/2026/talks/revolut">Shipping like a startup, regulated like a bank</a>, AI Engineer New York, 13.10.2026 (Transkript des Vortrags)</li>
+  <li><a href="https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345">The Register: British fintech Revolut slashes AI coding costs 10x by cutting out Claude and going self-hosted</a>, 3.11.2026</li>
+  <li><a href="https://dealroom.co/news/169124-revolut-moves-2-000-engineers-onto-self-hosted-ai-cutting-coding-costs-9">Dealroom: Revolut moves 2,000 engineers onto self-hosted AI, cutting coding costs 90%</a>, 3.11.2026</li>
+  <li><a href="https://www.trendingtopics.eu/revolut-glm-open-weight-coding-costs">Trending Topics: Revolut cuts AI coding costs 90% with a Chinese open-weight model</a>, 3.11.2026 (enthält den Hinweis auf die StartupHub-Analyse zu den ausgeklammerten Kosten)</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
