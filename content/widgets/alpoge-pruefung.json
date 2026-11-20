@@ -1,0 +1,12 @@
+{
+  "typ": "schritte",
+  "titel": "Was eine Lean-Prüfung klären muss",
+  "schritte": [
+    {"titel": "Aussage", "text": "Ist der Satz, der bewiesen wird, die Riemannsche Vermutung?"},
+    {"titel": "Definitionen", "text": "Stehen Zeta-Funktion, Nullstellen und kritische Gerade so da wie in der Literatur?"},
+    {"titel": "Annahmen", "text": "Steckt ein Sorry-Platzhalter oder ein eigenes Axiom im Projekt?"},
+    {"titel": "Build", "text": "Laufen alle 175.187 Dateien gegen die festgeschriebene Mathlib-Version durch?"}
+  ],
+  "quelle": "Eigene Zusammenstellung nach Alpöge, Remark, und den Spiegel-READMEs",
+  "quelle_url": "https://alpo.ge/remark.pdf"
+}

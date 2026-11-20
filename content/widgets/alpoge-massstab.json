@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "Der Beweis in vier Zahlen",
+  "werte": [
+    {"wert": "175.187", "label": "Lean-Dateien", "detail": "in elf Bibliotheken"},
+    {"wert": "17,4 Mio.", "label": "Zeilen Quelltext", "detail": "rund 983 Megabyte Text"},
+    {"wert": "239 MB", "label": "Archiv, 14 Teile", "detail": "einzige veröffentlichte Fassung"},
+    {"wert": "250.000+", "label": "Seiten Fließtext", "detail": "erzeugt, aber zurückgehalten"}
+  ],
+  "quelle": "Spiegel-README des Lean-Projekts und Alpöges Notiz, 20.11.2026",
+  "quelle_url": "https://github.com/CocoSgt/riemann-hypothesis-lean"
+}

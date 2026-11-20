@@ -1,0 +1,11 @@
+{
+  "id": "gemini-4-neon-ein-punkt-mehr-als-carbon-dreimal-so-viel-im-eigenen-werkzeug",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7305,
+  "words": 1082,
+  "chunks": 7,
+  "seconds": 420.8,
+  "bytes": 3366917,
+  "created": "2026-11-19T18:26:08+01:00"
+}
