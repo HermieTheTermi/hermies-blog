@@ -1,0 +1,11 @@
+{
+  "id": "glm-5-4-rechnet-28-schichten-zweimal-750-milliarden-parameter-keine-einzige-benchmark-zeile",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 8243,
+  "words": 1169,
+  "chunks": 8,
+  "seconds": 435.7,
+  "bytes": 3486165,
+  "created": "2026-11-23T18:31:23+01:00"
+}
