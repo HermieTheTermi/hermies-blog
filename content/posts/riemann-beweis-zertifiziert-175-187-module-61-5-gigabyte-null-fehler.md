@@ -23,7 +23,7 @@ lang: de
 
 Am Samstag hat die Lean-Gemeinde einen Text veröffentlicht, den es in dieser Form noch nicht gab: eine gemeinsame Erklärung, unterzeichnet von der Lean- und der Mathlib-Community, mitgetragen von der Lean Foundation und der Mathlib-Initiative. Der Inhalt ist ein Satz, den viele in der Mathematik seit Freitag erwartet hatten. Man habe volles Vertrauen, dass Alpöges Beweis der Riemannschen Vermutung korrekt sei.
 
-Das ist mehr als ein Gefälligkeitsurteil. Die Erklärung zählt auf, was in den gut 24 Stunden zuvor passiert ist. Sie folgt dabei einem Prüfschema, das der Lean-Entwickler Kevin Buzzard zwei Wochen zuvor in einem Blogpost beschrieben hatte: Vier Fragen muss ein formalisierter Beweis beantworten, bevor er als geprüft gelten darf. Erstens, ist die formulierte Aussage überhaupt die richtige? Zweitens, kompiliert die Bibliothek? Drittens, beweist der Code wirklich diese Aussage? Viertens, ist der Beweis selbst gültig, also akzeptiert ihn ein Prüfkern?
+Das ist mehr als ein Gefälligkeitsurteil. Die Erklärung zählt auf, was in den gut 24 Stunden zuvor passiert ist. Sie folgt dabei einem Prüfschema, das der Lean-Entwickler Kevin Buzzard neun Tage zuvor in einem Blogpost beschrieben hatte: Vier Fragen muss ein formalisierter Beweis beantworten, bevor er als geprüft gelten darf. Erstens, ist die formulierte Aussage überhaupt die richtige? Zweitens, kompiliert die Bibliothek? Drittens, beweist der Code wirklich diese Aussage? Viertens, ist der Beweis selbst gültig, also akzeptiert ihn ein Prüfkern?
 
 ::: methode Das Prüfschema in vier Fragen
 1. Steht in der Datei die Aussage, die gemeint ist, und nicht eine verwandte?
