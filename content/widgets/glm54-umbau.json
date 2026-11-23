@@ -1,0 +1,11 @@
+{
+  "typ": "schritte",
+  "titel": "Drei Eingriffe, damit die Schleife in 750 Milliarden skaliert",
+  "schritte": [
+    {"titel": "Tore pro Durchgang", "text": "Jeder Durchgang schreibt seine Änderung über ein eigenes, pro Token gelerntes Tor in den Hauptstrom zurück. Der erste Durchgang hält das Tor klein und sammelt Kontext, der zweite öffnet es."},
+    {"titel": "Geteilter KV-Cache", "text": "Der zweite Durchlauf erbt den im ersten Durchlauf ausgewählten Speicherbereich und hält nur die neuen Einträge in einem eigenen Fenster. Ein zusätzlicher Durchlauf kostet damit ein Fenster statt eines vollen Kontexts."},
+    {"titel": "Wiederverwendete Indizes", "text": "Die Indizes der dünn besetzten Aufmerksamkeit aus dem ersten Durchgang werden im zweiten erneut benutzt. Laut Z.ai kostet das praktisch nichts und liefert fast dasselbe Ergebnis wie eine Neuberechnung."}
+  ],
+  "quelle": "Z.ai, Startbeitrag GLM-5.4, 23.11.2026",
+  "quelle_url": "https://z.ai/blog/glm-5.4"
+}

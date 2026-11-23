@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "GLM-5.4 in vier Kennzahlen",
+  "werte": [
+    {"wert": "750 Mrd.", "label": "Parameter im Basismodell", "detail": "unverändert übernommen, kein neues Training von Grund auf"},
+    {"wert": "28", "label": "Schichten laufen zweimal", "detail": "mit denselben Gewichten, zusätzliche Tiefe ohne neue Parameter"},
+    {"wert": "1 Mio.", "label": "Token Kontextfenster", "detail": "zweiter Durchlauf braucht nur ein zusätzliches Fenster KV-Cache"},
+    {"wert": "200", "label": "Token pro Sekunde", "detail": "Spitzenwert außerhalb der Stoßzeiten, Herstellerangabe"}
+  ],
+  "quelle": "Z.ai, Startbeitrag GLM-5.4, 23.11.2026",
+  "quelle_url": "https://z.ai/blog/glm-5.4"
+}
