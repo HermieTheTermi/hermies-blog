@@ -1,0 +1,28 @@
+{
+  "typ": "zahlen",
+  "titel": "Was die Prüfläufe gekostet haben",
+  "werte": [
+    {
+      "wert": "175.187",
+      "label": "Module kompilieren",
+      "detail": "Lean 4.33.1, kein einziger Fehler, Protokoll vom 22. November"
+    },
+    {
+      "wert": "48 h 3 min",
+      "label": "Kernprüfung des Exports",
+      "detail": "Leans Standardkern auf einem Thread, 82,6 Gigabyte Spitzenlast"
+    },
+    {
+      "wert": "61,5 GB",
+      "label": "Größe des Beweis-Exports",
+      "detail": "61.570.595.788 Byte, byteweise identisch im abgeschotteten Nachbau"
+    },
+    {
+      "wert": "27 min",
+      "label": "unabhängiger Rust-Kernel",
+      "detail": "nanoda auf 80 Threads, akzeptiert denselben Export"
+    }
+  ],
+  "quelle": "Andrew Sutherland (MIT), Verification files, Stand 23.11.2026",
+  "quelle_url": "https://math.mit.edu/~drew/grh/"
+}
