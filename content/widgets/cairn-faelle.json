@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "Vier Zahlen aus dem Cairn-Fall",
+  "werte": [
+    {"wert": "11 Min.", "label": "von der API-Karte zur Schreibrechte", "detail": "beim Ziel mit MONAI Label"},
+    {"wert": "48 Std.", "label": "Dauer der Kampagne", "detail": "gegen Universitäten in Ostasien"},
+    {"wert": "148", "label": "Schritte gegen einen Redis-Server", "detail": "über rund 16 Stunden, ohne Erfolg"},
+    {"wert": "30.000", "label": "Passwortkombinationen", "detail": "gegen etwa 80 recherchierte Benutzernamen"}
+  ],
+  "quelle": "Amazon Threat Intelligence, 20. November 2026",
+  "quelle_url": "https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/"
+}

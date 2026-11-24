@@ -1,0 +1,22 @@
+{
+  "typ": "vergleich",
+  "titel": "Zwei Lager in derselben Debatte",
+  "links": {
+    "titel": "Lager A: nachbessern",
+    "punkte": [
+      "Kontrollprobleme gelten als technisch lösbar",
+      "Sicherheitsprüfung vor jedem Stufenwechsel",
+      "langsamere Veröffentlichung statt Verzicht"
+    ]
+  },
+  "rechts": {
+    "titel": "Lager B: anhalten",
+    "punkte": [
+      "Für die stärksten Modelle fehlt eine Lösung",
+      "Auch der interne Betrieb gilt als Risiko",
+      "Das Training selbst steht in Frage"
+    ]
+  },
+  "quelle": "Axios, 24. November 2026",
+  "quelle_url": "https://www.axios.com/2026/11/24/anthropic-openai-unreleased-ai-safety-risks"
+}

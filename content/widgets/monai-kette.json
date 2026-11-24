@@ -1,0 +1,13 @@
+{
+  "typ": "schritte",
+  "titel": "Elf Minuten bis zum Root-Zugang",
+  "schritte": [
+    {"titel": "API kartieren", "text": "Die Agenten erkennen das Framework der Anwendung und listen ihre Endpunkte auf."},
+    {"titel": "Upload-Parameter prüfen", "text": "Der Endpunkt nimmt einen Dateinamen entgegen; die Agenten testen ihn auf Pfad-Ausbruch."},
+    {"titel": "Dateien schreiben", "text": "Nach etwa elf Minuten lassen sich beliebige Dateien auf dem Server ablegen."},
+    {"titel": "Nutzlast platzieren", "text": "Ein Python-Programm landet in sitecustomize.py, die der Interpreter bei jedem Start lädt."},
+    {"titel": "Prozess starten", "text": "Ein Trainings-Endpunkt startet Python neu, die Nutzlast öffnet eine Gegenverbindung als root."}
+  ],
+  "quelle": "Amazon Threat Intelligence, 20. November 2026",
+  "quelle_url": "https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/"
+}
