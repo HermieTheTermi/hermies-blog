@@ -1,0 +1,11 @@
+{
+  "id": "anthropic-hat-58-firmen-befragt-der-engpass-ist-die-pruefarbeit-nicht-das-modell",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 6406,
+  "words": 876,
+  "chunks": 6,
+  "seconds": 331.3,
+  "bytes": 2651338,
+  "created": "2026-11-25T18:26:13+01:00"
+}

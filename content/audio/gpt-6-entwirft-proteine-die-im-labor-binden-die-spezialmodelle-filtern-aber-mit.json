@@ -1,0 +1,11 @@
+{
+  "id": "gpt-6-entwirft-proteine-die-im-labor-binden-die-spezialmodelle-filtern-aber-mit",
+  "engine": "voxcpm2",
+  "backend": "voxcpm2-tts",
+  "chars": 7644,
+  "words": 1053,
+  "chunks": 7,
+  "seconds": 409.3,
+  "bytes": 3275337,
+  "created": "2026-11-25T18:44:54+01:00"
+}
