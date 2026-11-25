@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "Working with AI in vier Kennzahlen",
+  "werte": [
+    {"wert": "58", "label": "Unternehmen befragt", "detail": "66 Interviews, alle Kunden von Anthropic, keine Zufallsstichprobe"},
+    {"wert": "55 %", "label": "Anwendungen mit mehr Output oder Qualität", "detail": "Selbstauskunft der Interviewten, in der Regel ohne A/B-Test"},
+    {"wert": "19 %", "label": "Anwendungen ohne Geschäftswert", "detail": "laut den Befragten: interne Blockaden, Prüfarbeit, unklare Wirkung"},
+    {"wert": "2 von 58", "label": "Firmen mit Entlassung durch Automatisierung", "detail": "zugleich stellen zwei Drittel wegen KI weniger ein"}
+  ],
+  "quelle": "Anthropic Institute, Working with AI, 23.11.2026",
+  "quelle_url": "https://www.anthropic.com/research/working-with-ai"
+}

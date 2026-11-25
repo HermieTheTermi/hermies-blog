@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "Der Proteinversuch in vier Zahlen",
+  "werte": [
+    {"wert": "322", "label": "Designs im Labor getestet", "detail": "fünf Zielproteine, gebaut und gemessen bei Onava AI"},
+    {"wert": "35", "label": "Designs mit messbarer Bindung", "detail": "10,9 Prozent; Spanne von 2,2 Prozent bei TrkA bis 40 Prozent bei IL-17A"},
+    {"wert": "1,21 nM", "label": "bester Bindungswert", "detail": "IL-17A-Binder aus GPT-6.2-Gerüsten, Sequenz von SolubleMPNN"},
+    {"wert": "0,38", "label": "TM-Score bei Faltungsvorhersage", "detail": "internes Modell; ESMFold2 erreicht 0,93, also deutlich mehr"}
+  ],
+  "quelle": "Uehara et al., GPT-6 as a Universal Foundation Model for Protein Biology, Preprint 24.11.2026",
+  "quelle_url": "https://cdn.openai.com/pdf/gpt-6-a-universal-foundation-model-for-protein-biology.pdf"
+}

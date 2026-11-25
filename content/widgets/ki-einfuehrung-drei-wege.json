@@ -1,0 +1,14 @@
+{
+  "typ": "tabelle",
+  "titel": "Drei Wege zur KI-Einführung und was sie kosten",
+  "spalten": ["Weg", "Wie es läuft", "Was typisch schiefgeht", "Was es bringt"],
+  "zeilen": [
+    ["Oben verordnet", "Ein Ablauf wird ausgewählt und automatisiert, oft von einem Anbieter gebaut", "Systeme veralten mit dem nächsten Modell, Fachleute bremsen, Beschäftigte fürchten Kontrolle", "Schnelle Einsparung bei klar umrissenen Aufgaben, etwa Vertragsprüfung oder Backoffice"],
+    ["Unten gewachsen", "Werkzeuge werden verteilt, einzelne Beschäftigte bauen sich ihre Lösung", "Einzelstücke ohne Wartung, Prüfung und Anbindung; Nutzen bleibt in Silos", "Hohe Zufriedenheit bei Fachleuten, kleine bis mittlere Entlastung"],
+    ["Umbau der Organisation", "Rollen werden breiter, Beschäftigte wandern an die Engpässe, Daten werden geteilt", "Braucht Führung und Zeit, ist nicht als Software zu kaufen", "Der höchste im Bericht berichtete Nutzen, ohne dass Stellen wegfallen müssen"]
+  ],
+  "betont": 2,
+  "quelle": "Anthropic Institute, Working with AI, 23.11.2026",
+  "quelle_url": "https://www.anthropic.com/research/working-with-ai",
+  "hinweis": "Die Zeilen sind Muster aus 66 Interviews, keine gemessenen Erfolgsquoten. Der Bericht ordnet selbst den höchsten Nutzen dem dritten Weg zu, ohne dafür eine Vergleichszahl zu nennen."
+}

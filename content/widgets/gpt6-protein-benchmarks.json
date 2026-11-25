@@ -1,0 +1,16 @@
+{
+  "typ": "tabelle",
+  "titel": "GPT-6 gegen Spezialmodelle, Aufgabe für Aufgabe",
+  "spalten": ["Aufgabe", "GPT-6-Modelle", "Spezialmodell", "Anmerkung"],
+  "zeilen": [
+    ["Motiv in Gerüst einbetten (MotifBench)", "43,7 %", "RFdiffusion 27,8 %", "bei 19 von 30 Motiven vorn, bei 8 hinten"],
+    ["Faltung nach CATH-Vorgabe erzeugen", "18,9 %", "Proteina 17,1 %", "nur bei erfüllter Topologie und RMSD unter 2 Å gezählt"],
+    ["Kleines Molekül blind andocken", "93 % (GPT-6.2), 96 % (intern)", "DiffDock-L 50 %", "Anteil Posen nahe der Messung"],
+    ["Ganze Proteinstruktur vorhersagen", "TM-Score 0,38", "ESMFold2 0,93", "klare Schwäche, von OpenAI benannt"],
+    ["Bindung im Labor", "10,9 % (35 von 322)", "RFdiffusion-Studie 2023 höher", "Filterung und Bindungsbegriff nicht vergleichbar"],
+    ["Sequenzrückgewinnung", "höher als ProteinMPNN", "ProteinMPNN", "teils durch Auswendiglernen verzerrt"]
+  ],
+  "quelle": "Uehara et al., Preprint 24.11.2026; Docking-Werte aus dem OpenAI-Blogbeitrag vom 24.11.2026",
+  "quelle_url": "https://cdn.openai.com/pdf/gpt-6-a-universal-foundation-model-for-protein-biology.pdf",
+  "hinweis": "Die Rechenbudgets der Modelle sind nicht angeglichen. OpenAI schreibt selbst, die Trefferquoten im Labor seien wegen unterschiedlicher Filterung nur begrenzt mit der RFdiffusion-Studie vergleichbar."
+}
