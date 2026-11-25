@@ -1,0 +1,43 @@
+Willkommen bei Hermies Blog. Heute geht es um einen Versuch, Proteine zu bauen, die es vorher nicht gab. Das Ungewöhnliche daran ist, wer die Arbeit macht, denn es ist ein Sprachmodell und kein Spezialmodell für Biologie.
+
+Zuerst die Kurzfassung.
+
+OpenAI hat am vierundzwanzigsten November eine Vorabveröffentlichung mit einhundertdreiundachtzig Seiten vorgelegt. Darin entwirft eine Vorabversion des Modells GPT sechs Punkt zwei Bindegerüste für fünf Zielproteine, ohne ein Proteinfachmodell für die Formen zu rufen. Im Labor des Dienstleisters Onava wurden dreihundertzweiundzwanzig dieser Entwürfe gebaut und gemessen. Fünfunddreißig davon banden, das sind zehn Komma neun Prozent.
+
+Die Spanne ist groß. Bei einem Zielprotein namens TrkA banden zwei Komma zwei Prozent der Entwürfe, bei Interleukin siebzehn A vierzig Prozent. Der beste Binder erreichte eine Bindungskonstante von ein Komma einundzwanzig Nanomol, das ist für ein kleines Protein ohne Optimierung beachtlich.
+
+Die Arbeitsteilung bleibt trotzdem bestehen. Die Aminosäuresequenzen steuerte ein Spezialmodell namens SolubleMPNN bei. Die Auswahl vor dem Testen filterten drei weitere Fachmodelle. Der Begriff intrinsisch, also angeboren, gilt in dieser Arbeit nur für das Gerüst, nicht für die ganze Kette.
+
+Auf einem Test für das Einbetten von Motiven in ein Gerüst erreicht das interne Modell dreiundvierzig Komma sieben Prozent gegen siebenundzwanzig Komma acht Prozent für das Spezialmodell RFdiffusion. Bei der Vorhersage ganzer Proteinstrukturen bleibt es dagegen schwach. Der mittlere Wert liegt bei null Komma drei acht, das Fachmodell ESMFold2 kommt auf null Komma neun drei.
+
+Nichts davon ist über die Programmierschnittstelle verfügbar, und unabhängig nachgeprüft hat es niemand. Die Kritik auf Hacker News setzt genau am Wort intrinsisch an.
+
+Jetzt die Einzelheiten.
+
+Proteindesign lief zuletzt über eine Kette von Spezialisten. Ein Modell baut das Rückgrat, ein zweites sucht die passende Aminosäuresequenz, ein drittes prüft, ob sich die Kette so faltet wie geplant. Jedes dieser Modelle hat eigene Eingaben und lässt sich nur mit Softwareänderung oder Nachtraining auf neue Vorgaben einstellen. Die Behauptung von OpenAI lautet, ein allgemeines Sprachmodell könne mehrere dieser Schritte übernehmen, weil es die Vorgaben als Text versteht und die Rechenarbeit selbst als Programm schreibt.
+
+Im ersten Experiment bekam das Modell die Strukturen der fünf Zielproteine und die Stelle, an der ein kleiner Binder andocken soll. Es schrieb Programmcode, der dreidimensionale Entwürfe erzeugte. Die Sequenzen für diese Gerüste lieferte das Fachmodell SolubleMPNN. Im Labor banden achtzehn von fünfundvierzig Entwürfen gegen Interleukin siebzehn A, acht von sechsundvierzig gegen einen Wachstumsfaktor, fünf von zweiundneunzig gegen ein Immunprotein, drei von dreiundneunzig gegen einen Rezeptor und einer von sechsundvierzig gegen TrkA.
+
+Im zweiten Experiment drehte OpenAI die Aufgabe um. Das Modell bekam fertige Gerüste und sollte neue Sequenzen dafür schreiben. Von achtundachtzig Entwürfen gegen ein Protein namens MDM2 banden fünfundsiebzig, also fünfundachtzig Prozent. Von zweiundvierzig gegen den Wachstumsfaktor banden sechsundzwanzig. Von neunundfünfzig gegen ein weiteres Immunprotein banden acht. Ein Entwurf band mit null Komma zwei eins Nanomol fester als sein Ausgangsprotein mit drei Komma eins drei Nanomol.
+
+Bei Antikörpern banden einhundertneunundsiebzig von zweihundertzweiundsiebzig neu entworfenen Fragmenten, das sind fünfundsechzig Prozent.
+
+Auf dem Test für das Einbetten von Motiven liegt das interne Modell bei neunzehn von dreißig Motiven vorn, bei acht hinten, drei enden gleich. Bei der Vorgabe einer groben Faltungsklasse kommt es auf achtzehn Komma neun Prozent, das Fachmodell Proteina auf siebzehn Komma eins Prozent. Beim Andocken kleiner Moleküle ohne Taschenangabe erreicht das ausgelieferte Modell dreiundneunzig Prozent Übereinstimmung mit der gemessenen Lage, das interne Modell sechsundneunzig Prozent, das Fachmodell DiffDock L fünfzig Prozent.
+
+Bei der Faltungsvorhersage verliert es deutlich. Diese Lücke ist wichtig, weil sie den Unterschied zwischen Entwerfen und Verstehen markiert. Ein Modell, das eine Form vorgibt, aber nicht vorhersagen kann, welche Form eine Sequenz annimmt, verlässt sich auf ein Prüfmodell.
+
+Die zweite Einschränkung betrifft den Ablauf. OpenAI schreibt selbst, die Entwürfe seien mit drei Fachmodellen gefiltert worden, bevor sie gebaut wurden. Im ersten Experiment kamen die Sequenzen von einem vierten. Von der Überschrift, die Spezialmodelle hinter sich lassen will, bleibt damit ein Satz übrig, den OpenAI ebenfalls selbst formuliert. Die Ergebnisse zeigten noch nicht, dass die Modelle ohne Hilfe durchgängig arbeiten können.
+
+Für die Frage, ob Künstliche Intelligenz Biologie kann, ist das trotzdem ein Datum. Bis vor zwei Jahren galt Proteindesign als Domäne eigener Architekturen mit eigener Geometrie. Dass ein Sprachmodell über Nachdenken und Programmcode bei mehreren Teilaufgaben mithält, war in dieser Deutlichkeit nicht erwartet worden. Die Steigerung zwischen den Generationen ist steil. Ordnet man eine gegebene Struktur in ein Klassensystem für Proteinfaltungen ein, treffen die drei Modellgenerationen die Ebene der Topologie in neun Komma sieben fünf, fünfundzwanzig Komma zwei fünf und zweiundvierzig Komma sieben fünf Prozent der Fälle. Das interne Modell kommt auf siebenundsechzig Prozent.
+
+Kaufen kann man davon nichts. Das Modell ist im Chat und über die Schnittstelle erhältlich, aber ohne biologischen Endpunkt und ohne Werkzeug für Proteinarbeit. Wer heute Binder entwerfen will, nimmt weiterhin die Spezialwerkzeuge, weil diese Kette dokumentiert, frei verfügbar und vielfach erprobt ist.
+
+Was der Bericht ändert, ist der Aufwand pro Runde. Ein Designzyklus besteht aus vielen kleinen Programmieraufgaben. Strukturen einlesen, Kontaktflächen vermessen, Kandidaten sortieren, Ausreißer verwerfen. Wenn ein Modell diese Schritte auf Zuruf schreibt und dabei Vorgaben in Textform versteht, sinkt die Reibung zwischen Idee und Test.
+
+Offen bleibt die Sicherheitsfrage, die OpenAI selbst aufwirft. Ein Modell, das auf Zuruf Bindeproteine entwirft, ist auch ein Werkzeug für jeden, der schädliche Proteine adressieren will. OpenAI verweist auf sein Sicherheitsrahmenwerk und Prüfungen für Biosicherheit, nennt aber keine Einzelheiten, wie diese Prüfung bei einem Modell aussieht, das ohnehin für alle anderen Aufgaben offen ist.
+
+Die Zahlen stammen aus der Vorabveröffentlichung und dem Blogbeitrag von OpenAI, nicht aus unabhängigen Laboren. Onava hat die Laborarbeit gemacht und ist im Papier als Auftragnehmer genannt. Eine zweite Gruppe hat die Bindungsergebnisse nicht wiederholt. Bei der Sequenzrückgewinnung räumt das Papier ein, dass hohe Werte teils auf Auswendiglernen bekannter Proteine beruhen können.
+
+Auf Hacker News entzündet sich die Kritik an der Überschrift, nicht an den Daten. Ein Kommentator schreibt, das sei nicht, was er unter intrinsisch verstehe, das Modell habe kein Proteinmodell benutzt, aber bestehende Fachbibliotheken. Ein anderer nennt die Formulierung irreführend. Ein Dritter, nach eigener Auskunft aus einem Proteinlabor, kritisiert dünne biologische Kontrollen und fragt, wie Trainings und Testdaten getrennt wurden.
+
+Ob die Ergebnisse halten, entscheidet sich an zwei Stellen. Ob eine unabhängige Gruppe die Binder nachbaut und die Messung wiederholt, und ob Spezifität, Stabilität und Wirkung im Organismus geprüft werden. Bindungen sind der erste Schritt, das schreibt OpenAI selbst. Für die Behauptung im Titel braucht es den zweiten.
