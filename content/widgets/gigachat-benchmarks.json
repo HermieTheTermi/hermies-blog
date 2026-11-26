@@ -1,0 +1,17 @@
+{
+  "typ": "tabelle",
+  "titel": "GigaChat 4 gegen die Modelle, mit denen Sber sich vergleicht",
+  "spalten": ["Test", "GigaChat 4 708B", "DeepSeek V4 Flash 0731", "GLM-5.3", "DeepSeek 4.1 1017"],
+  "zeilen": [
+    ["Terminal-Bench 2.0, Reasoning", "71,26 %", "55,01 %", "71,67 %", "61,80 %"],
+    ["Terminal-Bench 2.1, Reasoning", "69,66 %", "78,65 %", "88,70 %", "87,64 %"],
+    ["SWE-bench Verified", "80,89 %", "81,80 %", "86,67 %", "79,40 %"],
+    ["GPQA Diamond", "82,83 %", "91,00 %", "90,40 %", "90,91 %"],
+    ["Humanity's Last Exam, ohne Werkzeuge", "23,91 %", "37,80 %", "39,62 %", "43,42 %"],
+    ["DeepSWE", "35,40 %", "53,10 %", "67,26 %", "74,34 %"]
+  ],
+  "betont": 0,
+  "quelle": "Modellkarte GigaChat 4 708B-A41B, Abschnitt Evaluation Results (Reasoning), abgerufen 26.11.2026",
+  "quelle_url": "https://huggingface.co/ai-sage/GigaChat4-708B-A41B",
+  "hinweis": "Alle Werte sind Herstellerangaben. Die Vergleichszahlen der anderen Modelle hat Sber in dieselbe Tabelle übernommen, es sind keine eigenen Messungen an fremden Modellen. Höher ist besser. Bei den agentischen Tests nennt die Karte ein Zeitlimit von sieben Stunden."
+}

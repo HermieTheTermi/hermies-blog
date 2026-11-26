@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "Fünf Fälle, vier Erfolge",
+  "werte": [
+    {"wert": "5", "label": "bestätigte Angriffe mit KI-Agenten", "detail": "alle in den Tagen vor dem 26. November gemeldet"},
+    {"wert": "4", "label": "davon mit kompromittierten Systemen", "detail": "die Medienmitteilung des BACS formuliert strenger: in allen bekannten Fällen sei die Kompromittierung gelungen"},
+    {"wert": "3", "label": "Ziele aus kritischer Infrastruktur", "detail": "laut SRF und Reuters unter anderem Strom-, Wasser- und Telekomversorgung"},
+    {"wert": "2", "label": "betroffene Sektoren, mindestens", "detail": "das BACS nennt keine Namen, die Betroffenen dürfen selbst kommunizieren"}
+  ],
+  "quelle": "Bundesamt für Cybersicherheit, Medienmitteilung 24.11.2026; SRF-Interview mit BACS-Direktor Florian Schütz, 26.11.2026",
+  "quelle_url": "https://www.bacs.admin.ch/de/26-ki-agenten-1-de"
+}

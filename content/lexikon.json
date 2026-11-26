@@ -59,6 +59,7 @@
   "LLM": "Large Language Model, ein Sprachmodell: ein KI-Modell, das aus sehr viel Text gelernt hat, wie Sprache weitergeht. Es sagt Wortstück für Wortstück voraus, was als Nächstes kommt.",
   "Loop-Transformer": "Ein Sprachmodell, dessen mittlere Schichten pro Token mehrfach durchlaufen werden, wobei alle Durchgänge dieselben Gewichte benutzen. Das Modell rechnet tiefer, ohne mehr Parameter zu bekommen.",
   "Mathlib": "Die gemeinsame Mathematikbibliothek für Lean. Sie sammelt formalisierte Definitionen und Sätze von Analysis bis Zahlentheorie und dient anderen Projekten als Grundlage.",
+  "Mehr-Faktor-Authentisierung": "Anmeldung mit zwei Nachweisen: einem Wissen wie ein Passwort und einem Besitz wie ein Smartphone oder ein Sicherheitsschlüssel. Wer das Passwort stiehlt, kommt damit allein nicht weiter. Passkeys sind dieselbe Idee ohne Passwort.",
   "Millennium-Preisprobleme": "Sieben besonders schwere offene Aufgaben der Mathematik, für deren Lösung das Clay-Institut im Jahr 2000 je eine Million Dollar ausgesetzt hat. Gelöst ist bisher nur eine davon, die Poincaré-Vermutung.",
   "Minibinder": "Ein künstlich entworfenes kleines Protein, das an eine bestimmte Stelle eines Zielproteins andockt und dort blockiert oder vermittelt. Kleiner und billiger herzustellen als ein Antikörper.",
   "Mixture-of-Experts": "Bauweise, bei der ein Modell aus vielen Teil-Netzen besteht und pro Anfrage nur wenige davon rechnen. So bleibt ein sehr großes Modell bezahlbar.",

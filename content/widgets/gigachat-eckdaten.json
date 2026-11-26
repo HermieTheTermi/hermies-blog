@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "GigaChat 4 in vier Zahlen",
+  "werte": [
+    {"wert": "708B / 41B", "label": "Parameter gesamt und aktiv", "detail": "256 geroutete Experten, acht pro Token plus ein gemeinsamer; die kleine Variante hat 37B gesamt und 4B aktiv"},
+    {"wert": "1.048.576", "label": "Token Kontext", "detail": "in Stufen von 32.000 über 128.000 auf die volle Länge erweitert"},
+    {"wert": "15,35 Billionen", "label": "Token im Vortraining", "detail": "das Ziel lag bei 20 Billionen; 57 Prozent Webtext, 17 Prozent Code"},
+    {"wert": "16", "label": "H100 für den FP8-Betrieb", "detail": "zwei Knoten mit je acht Beschleunigern, so steht es in der Modellkarte; BF16 braucht rund 1,4 Terabyte für die Gewichte"}
+  ],
+  "quelle": "GigaChat 4 Technical Report und Modellkarte, 26.11.2026",
+  "quelle_url": "https://huggingface.co/ai-sage/GigaChat4-708B-A41B"
+}
