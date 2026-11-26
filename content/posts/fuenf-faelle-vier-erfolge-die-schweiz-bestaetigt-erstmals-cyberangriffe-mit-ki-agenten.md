@@ -16,7 +16,7 @@ lang: de
 - Das Bundesamt für Cybersicherheit (BACS) hat am 24. November erstmals Fälle gemeldet, in denen Angreifer in der Schweiz mit KI-Agenten in Firmennetze eingedrungen sind.
 - Am Donnerstag nannte BACS-Direktor Florian Schütz gegenüber SRF die Zahl: fünf bestätigte Fälle, in vier davon wurden Systeme kompromittiert.
 - Drei der fünf Ziele sind Betreiberinnen kritischer Infrastruktur, betroffen sind mindestens zwei Sektoren. Zu grösseren Ausfällen kam es laut BACS nicht.
-- Die eingesetzten Werkzeuge heissen ARTEX und CyberStrikeAI. Ihre Zahl im Netz hat sich seit Oktober 2026 nach Angaben des Amts fast verdoppelt.
+- Die eingesetzten Werkzeuge gehören zur Klasse der «Agentic Offensive Frameworks». Als Beispiele nennt das Amt ARTEX und CyberStrikeAI; die Zahl der im Netz erreichbaren KI-Agenten dieser Art hat sich seit Oktober 2026 fast verdoppelt.
 - Die Empfehlungen sind unspektakulär: weniger Systeme am offenen Internet, kritische {{Patch}}es binnen 24 Stunden, Mehr-Faktor-Authentisierung ohne Ausnahme.
 
 ## Was ist passiert
@@ -29,7 +29,7 @@ Zwei Tage später wurde die Zahl konkret. Am Donnerstagmorgen sagte BACS-Direkto
 
 Namen nannte das Amt nicht. «Die Betroffenen haben das Recht, selbst zu kommunizieren», sagte Schütz. Auch zur Herkunft der Angreifer machte er keine Angabe. Grössere Ausfälle habe es nicht gegeben.
 
-Technisch beschreibt das BACS den Vorgang als Einsatz von «Agentic Offensive Frameworks». Gemeint sind {{Agent}}en, die selbstständig nach Schwachstellen suchen, passende Angriffswerkzeuge auswählen, die Ausgabe auswerten und daraus die nächsten Schritte planen. Das Amt nennt zwei dieser Werkzeuge beim Namen: ARTEX und CyberStrikeAI. Beide sind im offenen Internet erreichbar, und ihre Zahl hat sich seit Oktober 2026 nach Einschätzung des BACS nahezu verdoppelt.
+Technisch beschreibt das BACS den Vorgang als Einsatz von «Agentic Offensive Frameworks». Gemeint sind {{Agent}}en, die selbstständig nach Schwachstellen suchen, passende Angriffswerkzeuge auswählen, die Ausgabe auswerten und daraus die nächsten Schritte planen. Als Beispiele nennt das Amt ARTEX und CyberStrikeAI. Beide sind im offenen Internet erreichbar, und die Zahl solcher KI-Agenten hat sich seit Oktober 2026 nach Einschätzung des BACS nahezu verdoppelt.
 
 Der Einstieg lief in den bekannten Fällen über bekannte Muster: Standard- oder leicht erratbare Passwörter, nicht geschlossene Lücken in Software, die direkt am Internet hängt. Neu ist das Tempo. Ein KI-Agent brauche oft nur einen Bruchteil der Zeit, die ein Mensch für dieselbe Suche aufwenden müsste, schreibt das BACS. Und er wechsle die Methode, wenn eine Tür zu ist.
 
