@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GLM-5.4 rechnet 28 Schichten zweimal: 750 Milliarden Parameter, keine einzige Benchmark-Zeile – Hermies Blog</title>
+  <meta name="description" content="Z.ai hat GLM-5.4 veröffentlicht, das erste Flaggschiff auf einem Loop-Transformer: 28 Schichten laufen pro Token zweimal, der Kontext reicht über eine Million Token. Der Startbeitrag nennt ein Niveau von Zwei- bis Drei-Billionen-Modellen, druckt aber keine einzige Benchmark-Zeile ab, und die Gewichte bleiben vorerst unter Verschluss.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>GLM-5.4 rechnet 28 Schichten zweimal: 750 Milliarden Parameter, keine einzige Benchmark-Zeile</h1>
+    <p class="meta"><time datetime="2026-11-23">23.11.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/benchmark.html">#benchmark</a></span> · <a class="source" href="https://z.ai/blog/glm-5.4">Z.ai</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:16 Minuten</strong> (KI-Stimme) – <a href="audio/glm-5-4-rechnet-28-schichten-zweimal-750-milliarden-parameter-keine-einzige-benchmark-zeile.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,3 MB)</span></p>
+    <audio controls preload="none" src="audio/glm-5-4-rechnet-28-schichten-zweimal-750-milliarden-parameter-keine-einzige-benchmark-zeile.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Z.ai hat am Montag GLM-5.4 veröffentlicht, das erste Flaggschiff auf einem <button type="button" class="lex" popovertarget="lex-loop-transformer" data-tip="Ein Sprachmodell, dessen mittlere Schichten pro Token mehrfach durchlaufen werden, wobei alle Durchgänge dieselben Gewichte benutzen. Das Modell rechnet tiefer, ohne mehr Parameter zu bekommen.">Loop-Transformer</button><span class="lex-pop" popover id="lex-loop-transformer"><strong>Loop-Transformer</strong> Ein Sprachmodell, dessen mittlere Schichten pro Token mehrfach durchlaufen werden, wobei alle Durchgänge dieselben Gewichte benutzen. Das Modell rechnet tiefer, ohne mehr Parameter zu bekommen. <a href="lexikon.html#loop-transformer">Im Lexikon</a></span>. 28 Schichten des Basismodells laufen pro Token zweimal, das Modell hat 750 Milliarden <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>.</li>
+  <li>Der Hersteller schreibt ihm ein Niveau &quot;vergleichbar mit Zwei- bis Drei-Billionen-Parametern&quot; zu. Belegt wird das mit einem Kontrolltest an einem 30-Milliarden-Modell, absolute Benchmark-Werte fehlen.</li>
+  <li>Eine Ergebnistabelle steht nicht im Startbeitrag. Beim Vorgänger GLM-5.3 waren es im August sechzehn Zeilen, von Terminal Bench 3.0 bis ExploitBench.</li>
+  <li>Die Gewichte sind nicht veröffentlicht. Z.ai verspricht sie nach einer &quot;Sicherheits-Härtung&quot;, ohne Datum. Bei GLM-5.3 lagen sie elf Tage nach dem Start auf Hugging Face.</li>
+  <li>Zugegebenes Problem: lange Denkschleifen, die Z.ai selbst &quot;marathon thinking&quot; nennt. Sie kosten Zeit und sollen zugleich die Genauigkeit über die Parametergröße hinausheben.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Der Startbeitrag von Z.ai beschreibt keine neue Datenmenge und kein neues Trainingsverfahren, sondern eine Änderung am Netz selbst. In einem gewöhnlichen <button type="button" class="lex" popovertarget="lex-transformer" data-tip="Die neuronale Netzarchitektur hinter fast allen heutigen Sprachmodellen. Kernstück ist die Aufmerksamkeit (Attention): Das Modell gewichtet, welche Teile der Eingabe füreinander wichtig sind.">Transformer</button><span class="lex-pop" popover id="lex-transformer"><strong>Transformer</strong> Die neuronale Netzarchitektur hinter fast allen heutigen Sprachmodellen. Kernstück ist die Aufmerksamkeit (Attention): Das Modell gewichtet, welche Teile der Eingabe füreinander wichtig sind. <a href="lexikon.html#transformer">Im Lexikon</a></span> läuft jede Schicht einmal pro Token. In GLM-5.4 laufen 28 Schichten des Basismodells zweimal, wobei beide Durchgänge dieselben Gewichte benutzen. Aus einem 750-Milliarden-Modell wird so rechnerisch ein tieferes Netz, ohne dass ein einziges Gewicht dazukommt.</p>
+<p>Die Idee ist alt. Der Universal Transformer von 2018 hat geteilte Tiefe vorgeschlagen, und in den vergangenen zwei Jahren sind mehrere Arbeiten zu rekurrenten Sprachmodellen erschienen. Z.ai nennt auch den Haken dieser Arbeiten: Von Grund auf trainiert bleiben geschleifte Modelle bei gleichem Rechenbudget hinter normalen zurück. Deshalb haben die Autoren nicht neu trainiert, sondern ein fertiges Basismodell per Weitertraining umgebaut. Der Blogpost sagt offen, dass sie in den vergangenen drei Monaten Schleifentiefe und Modellgröße parallel hochgezogen haben.</p>
+<figure class="widget widget-zahlen">
+<p class="widget-title">GLM-5.4 in vier Kennzahlen</p>
+<div class="stats stats-4">
+<div class="stat">
+  <span class="stat-value">750 Mrd.</span>
+  <span class="stat-label">Parameter im Basismodell</span>
+  <span class="stat-detail">unverändert übernommen, kein neues Training von Grund auf</span>
+</div>
+<div class="stat">
+  <span class="stat-value">28</span>
+  <span class="stat-label">Schichten laufen zweimal</span>
+  <span class="stat-detail">mit denselben Gewichten, zusätzliche Tiefe ohne neue Parameter</span>
+</div>
+<div class="stat">
+  <span class="stat-value">1 Mio.</span>
+  <span class="stat-label">Token Kontextfenster</span>
+  <span class="stat-detail">zweiter Durchlauf braucht nur ein zusätzliches Fenster KV-Cache</span>
+</div>
+<div class="stat">
+  <span class="stat-value">200</span>
+  <span class="stat-label">Token pro Sekunde</span>
+  <span class="stat-detail">Spitzenwert außerhalb der Stoßzeiten, Herstellerangabe</span>
+</div>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://z.ai/blog/glm-5.4" target="_blank" rel="noopener">Z.ai, Startbeitrag GLM-5.4, 23.11.2026</a></span>
+</figcaption>
+</figure>
+<p>Drei Eingriffe waren nötig, damit das in dieser Größe funktioniert.</p>
+<figure class="widget widget-schritte">
+<p class="widget-title">Drei Eingriffe, damit die Schleife in 750 Milliarden skaliert</p>
+<ol class="steps">
+<li>
+  <span class="step-num" aria-hidden="true">1</span>
+  <div class="step-body">
+    <h3>Tore pro Durchgang</h3>
+    <p>Jeder Durchgang schreibt seine Änderung über ein eigenes, pro Token gelerntes Tor in den Hauptstrom zurück. Der erste Durchgang hält das Tor klein und sammelt Kontext, der zweite öffnet es.</p>
+  </div>
+</li>
+<li>
+  <span class="step-num" aria-hidden="true">2</span>
+  <div class="step-body">
+    <h3>Geteilter KV-Cache</h3>
+    <p>Der zweite Durchlauf erbt den im ersten Durchlauf ausgewählten Speicherbereich und hält nur die neuen Einträge in einem eigenen Fenster. Ein zusätzlicher Durchlauf kostet damit ein Fenster statt eines vollen Kontexts.</p>
+  </div>
+</li>
+<li>
+  <span class="step-num" aria-hidden="true">3</span>
+  <div class="step-body">
+    <h3>Wiederverwendete Indizes</h3>
+    <p>Die Indizes der dünn besetzten Aufmerksamkeit aus dem ersten Durchgang werden im zweiten erneut benutzt. Laut Z.ai kostet das praktisch nichts und liefert fast dasselbe Ergebnis wie eine Neuberechnung.</p>
+  </div>
+</li>
+</ol>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://z.ai/blog/glm-5.4" target="_blank" rel="noopener">Z.ai, Startbeitrag GLM-5.4, 23.11.2026</a></span>
+</figcaption>
+</figure>
+<p>Der erste Eingriff betrifft die Stabilität. Wer die mittleren Schichten eines fertigen Modells einfach ein zweites Mal durchlaufen lässt, bekommt explodierende Aktivierungswerte, weil die folgenden Schichten Eingaben außerhalb ihrer gewohnten Größenordnung sehen. GLM-5.4 setzt deshalb pro Token und pro Durchgang ein eigenes Tor, das dosiert, wie viel der neuen Berechnung in den Hauptstrom zurückgeschrieben wird. Nach dem Training zeigt sich eine Arbeitsteilung: Der erste Durchgang baut Kontext auf und schreibt vorsichtig, der zweite öffnet das Tor. Auf schwierigen Tokens schreibt schon der erste Durchgang mehr.</p>
+<p>Der zweite Eingriff spart Speicher. Ein zweiter Durchlauf bräuchte naiv einen zweiten, vollständigen <button type="button" class="lex" popovertarget="lex-kv-cache" data-tip="Der Zwischenspeicher für den schon gelesenen Text. Ein Modell legt pro Token und Schicht ab, worauf es sich später beziehen muss; bei langen Unterhaltungen wächst dieser Speicher und wird zum Flaschenhals.">KV-Cache</button><span class="lex-pop" popover id="lex-kv-cache"><strong>KV-Cache</strong> Der Zwischenspeicher für den schon gelesenen Text. Ein Modell legt pro Token und Schicht ab, worauf es sich später beziehen muss; bei langen Unterhaltungen wächst dieser Speicher und wird zum Flaschenhals. <a href="lexikon.html#kv-cache">Im Lexikon</a></span>, was bei einer Million Token Kontext die Kosten verdoppelt. Z.ai lässt den zweiten Durchgang stattdessen den im ersten Durchgang ausgewählten Ausschnitt wiederverwenden und nur die neu entstandenen Einträge in einem eigenen, kleinen Fenster halten. Jeder weitere Durchlauf kostet damit ein Fenster statt eines ganzen Kontexts.</p>
+<h2>Warum zählt es</h2>
+<p>Für die Frage, wohin die Modellentwicklung geht, ist das der interessantere Punkt als jede Punktzahl. Bisher hieß Skalierung vor allem: mehr Parameter, mehr Speicher, mehr Beschleuniger. Beim Ableiten eines Tokens muss das Modell die Gewichte jeder Schicht durch den Speicher in den Rechenkern schieben, und dieser Transport ist seit Jahren der Engpass, nicht die Rechenleistung selbst. Ein geschleiftes Modell holt sich Tiefe, ohne mehr Gewichte zu bewegen. Genau deshalb steht die Technik inzwischen bei mehreren Anbietern auf dem Plan.</p>
+<p>OpenAI betreibt sie laut Recherchen von The Information längst produktiv, intern unter dem Namen &quot;Recurrent Depth&quot;. Sie trägt demnach das aktuelle Spitzenmodell Astra und auch das kommende Flaggschiff. Bekannt wurde die Verwendung durch einen Fehler bei Microsoft: Eine technische Beschreibung des günstigeren GPT-6.1 Sol, die inzwischen gelöscht ist, nannte &quot;looping inference&quot; und den Satz, Sol benutze dieselben Gewichte wie GPT-6 Sol, aber zwei Durchläufe statt drei. OpenAI hat die Schleifenzahl bei Astra laut diesem Bericht bewusst gedeckelt, damit die ausgeschriebene Gedankenkette lesbar bleibt.</p>
+<p>Dass diese Debatte auch eine Sicherheitsdebatte ist, liegt an der Architektur. Rechnen im verborgenen Zustand hinterlässt keine Sätze, an denen eine Prüfung ansetzen könnte. Sebastian Raschka hat dem im September widersprochen: Schichten wiederzuverwenden unterdrücke für sich genommen keine sichtbare Gedankenkette, es füge lediglich Rechenarbeit vor dem nächsten Token hinzu. Für Z.ai ist der Punkt praktisch relevant, weil das Unternehmen zuletzt mit genau der Fähigkeit auffiel, die Aufsicht am meisten beschäftigt: GLM-5.3 erreichte im August auf dem Exploit-Benchmark 54,4 Punkte und auf CyberGym 84,5.</p>
+<div class="box box-warnung">
+<p class="box-title">Was der Startbeitrag nicht liefert</p>
+<div class="box-body">
+<p>Der Satz von den Zwei- bis Drei-Billionen-Parametern steht ohne Messung da. Z.ai zeigt einen Vergleich auf einem 30-Milliarden-Modell und schreibt zum Speicherbedarf bei einer Million Token Kontext nur, er bleibe &quot;gut unter Kontrolle&quot;, ohne Zahl. Auch die 200 Token pro Sekunde sind eine Herstellerangabe. Wer das Modell einordnen will, braucht unabhängige Läufe.</p>
+
+</div>
+</div>
+<h2>Was heißt das praktisch</h2>
+<p>Nutzen lässt sich GLM-5.4 ab sofort im Chat unter chat.z.ai, im Coding-Abo von Z.ai und in der eigenen Entwicklungsumgebung ZCode. Die Schnittstelle für Anwendungen ist laut Blogpost angekündigt, aber noch nicht offen. Z.ai nennt bis zu 200 Token pro Sekunde außerhalb der Stoßzeiten und 70 bis 80 Token pro Sekunde bei Last. Beides sind Herstellerangaben ohne unabhängige Messung.</p>
+<p>Wer das Modell selbst betreiben will, bekommt vorerst nichts. Z.ai schreibt, man wolle die Gewichte &quot;verantwortungsvoll&quot; veröffentlichen, sobald die nötige Sicherheits-Härtung abgeschlossen ist, und nennt kein Datum. Beim Vorgänger lief es anders: GLM-5.3 erschien am 14. August mit der Ankündigung, die Gewichte in zwei Wochen nachzureichen, und lag am 25. August auf Hugging Face. Ob die Härtung nur Waffenwissen entfernt oder das Modell spürbar beschneidet, ist offen; in der Diskussion auf Hacker News wird vermutet, dass die spätere offene Fassung nicht dieselbe ist wie die über die Schnittstelle.</p>
+<p>Was die Größenordnung angeht, hilft ein Blick auf die 30-Milliarden-Zwischenstufe. Dort hat Z.ai bei gleicher Parameterzahl und rund zehn Prozent mehr Trainingsrechenzeit verglichen und veröffentlicht dafür ein Kurvendiagramm. Der geschleifte Aufbau gewinnt vor allem bei Mathematik, wissenschaftlichem Schließen und langem Kontext. Gleichzeitig sinkt die Länge der ausgegebenen Antworten um 10 bis 14 Prozent, weil ein Teil des Nachdenkens in die zusätzliche Tiefe wandert statt in Text.</p>
+<p>Für den Vergleich mit dem Vorgänger bleibt nur der Blick auf das, was GLM-5.3 im August vorlegte: Terminal Bench 3.0 mit 28,3 Punkten, DeepSWE v1.1 mit 66,9, Humanitäts letzte Prüfung mit Werkzeugen bei 62,5. Ob GLM-5.4 diese Werte schlägt, lässt sich am Montag nicht sagen. In der Rangliste von Artificial Analysis, die Modelle mit einem eigenen Prüfaufbau vermisst, stehen GLM-5.1, 5.2 und 5.3. Eine Zeile für 5.4 fehlte am Abend.</p>
+<p>Die Rückmeldungen aus der Praxis sind gemischt. Der Thread auf Hacker News kommt auf über 700 Punkte, und die meistgelesenen Kommentare fragen nach den fehlenden Zahlen. Ein anderer Strang mit vielen Antworten beschreibt das, was Z.ai selbst als Schwäche einräumt: Das Modell zweifelt an einfachen Aufgaben so lange, bis die Fertigstellung deutlich länger dauert als bei Konkurrenzmodellen. Auf Reddit steht neben dem Startfaden ein eigener mit gut 200 Punkten, Titel: hervorragend im Code, unbrauchbar im Schreiben. Die Begründung dort ist strukturell und nicht auf Z.ai gemünzt: Für Code gibt es prüfbare Belohnungen, für Prosa nicht, also optimiert jedes Training mit <button type="button" class="lex" popovertarget="lex-reinforcement-learning" data-tip="Lernverfahren durch Ausprobieren: Das System erhält Belohnung für gute Ergebnisse und verbessert sein Verhalten dadurch selbst.">Reinforcement Learning</button><span class="lex-pop" popover id="lex-reinforcement-learning"><strong>Reinforcement Learning</strong> Lernverfahren durch Ausprobieren: Das System erhält Belohnung für gute Ergebnisse und verbessert sein Verhalten dadurch selbst. <a href="lexikon.html#reinforcement-learning">Im Lexikon</a></span> in Richtung Code.</p>
+<div class="box box-methode">
+<p class="box-title">Wie geprüft wurde</p>
+<div class="box-body">
+<p>Startbeitrag am 23. November vollständig gelesen: keine Ergebnistabelle, keine Modellkarte, kein Link zu Gewichten. Die sechzehn Zeilen für GLM-5.3 stammen aus dessen Startbeitrag vom 14. August und wurden einzeln mitgezählt. Auf Hugging Face ist das jüngste Modell der Organisation zai-org GLM-5.3-BF16 vom 25. August; ein Eintrag zu 5.4 existiert dort nicht. Die Rangliste von Artificial Analysis führt am Abend des 23. November Zeilen für GLM-5.1, 5.2 und 5.3, keine für 5.4. Die Reaktionen stammen aus dem Hacker-News-Faden mit über 700 Punkten und zwei Reddit-Fäden in r/LocalLLaMA.</p>
+
+</div>
+</div>
+<h2>Quellen</h2>
+<ul>
+  <li>Z.ai, &quot;GLM-5.4: Toward Generalized Coding with Our First Loop Transformer&quot;, 23. November 2026: https://z.ai/blog/glm-5.4</li>
+  <li>Z.ai, &quot;GLM-5.3: Frontier Coding with Emergent Cyber Capabilities&quot;, 14. August 2026, mit Ergebnistabelle: https://z.ai/blog/glm-5.3</li>
+  <li>Hugging Face, Profil zai-org, neueste Veröffentlichung GLM-5.3-BF16 vom 25. August 2026: https://huggingface.co/zai-org</li>
+  <li>Artificial Analysis, Modellrangliste, abgerufen am 23. November 2026: https://artificialanalysis.ai/leaderboards/models</li>
+  <li>The Decoder, &quot;OpenAI will reportedly ship at least one model this year but its flagship still needs alignment work&quot;, Oktober 2026: https://the-decoder.com/openai-will-reportedly-ship-at-least-one-model-this-year-but-its-flagship-still-needs-alignment-work/</li>
+  <li>Sebastian Raschka, &quot;OpenAI Astra and Looped Transformers&quot;, September 2026: https://sebastianraschka.com/blog/2026/openai-astra-looped-transformers.html</li>
+  <li>Hacker News, Diskussion zu GLM-5.4, 23. November 2026: https://news.ycombinator.com/item?id=50609685</li>
+  <li>r/LocalLLaMA, Startfaden zu GLM-5.4: https://reddit.com/comments/1y3enps und Kritikfaden &quot;great at coding, garbage at writing&quot;: https://reddit.com/comments/1y3lqu3</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

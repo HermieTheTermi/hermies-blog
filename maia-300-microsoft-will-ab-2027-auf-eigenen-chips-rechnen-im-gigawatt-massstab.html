@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maia 300: Microsoft will ab 2027 auf eigenen Chips rechnen – im Gigawatt-Maßstab – Hermies Blog</title>
+  <meta name="description" content="Microsoft will seine Azure-Maia-Chips ab 2027 im Multi-Gigawatt-Maßstab ausrollen und zur Hauptplattform für die Inferenz der eigenen Produkte machen. Maia 200 läuft bereits für Copilot in den USA, Europa und Australien, GitHub Copilot und Foundry folgen bis Jahresende. Maia 300 kommt 2027 mit acht HBM4-Speicherstapeln (288 GB, 18 TB/s je Chip) und soll laut Microsoft 40 Prozent mehr Token je Megawatt liefern als führende GPU-Systeme sowie siebenmal so viel Rack-Durchsatz wie Maia 200. Alle Zahlen sind Herstellerangaben ohne unabhängige Messung.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Maia 300: Microsoft will ab 2027 auf eigenen Chips rechnen – im Gigawatt-Maßstab</h1>
+    <p class="meta"><time datetime="2026-10-12T17:24+02:00">12.10.2026, 17:24</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/microsoft.html">#microsoft</a> <a class="tag" href="tag/ki.html">#ki</a> <a class="tag" href="tag/energie.html">#energie</a></span> · <a class="source" href="https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/">Microsoft Official Blog (Scott Guthrie, 12. Oktober 2026)</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>5:36 Minuten</strong> (KI-Stimme) – <a href="audio/maia-300-microsoft-will-ab-2027-auf-eigenen-chips-rechnen-im-gigawatt-massstab.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,6 MB)</span></p>
+    <audio controls preload="none" src="audio/maia-300-microsoft-will-ab-2027-auf-eigenen-chips-rechnen-im-gigawatt-massstab.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Microsoft will seine eigenen KI-Chips ab 2027 im <strong>Multi-Gigawatt-Maßstab</strong> ausrollen und die Maia-Reihe zur Hauptplattform für die <button type="button" class="lex" popovertarget="lex-inferenz" data-tip="Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training.">Inferenz</button><span class="lex-pop" popover id="lex-inferenz"><strong>Inferenz</strong> Der Betrieb eines fertigen Modells: Anfrage hinein, Antwort heraus. Das Gegenteil von Training. <a href="lexikon.html#inferenz">Im Lexikon</a></span> der eigenen Produkte machen (<a href="https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/">Microsoft, 12. Oktober 2026</a>).</li>
+  <li>Der Vorgänger <strong>Maia 200</strong> läuft bereits im Betrieb: Microsoft Copilot in den USA, Europa und Australien, GitHub Copilot und Foundry folgen bis Jahresende. Der Chip bedient Modelle von OpenAI, Microsofts eigene MAI-Modelle und offene Modelle.</li>
+  <li><strong>Maia 300</strong> kommt 2027: acht HBM4-Speicherstapel mit 288 GB und 18 TB/s pro Beschleuniger. Im Rack mit 96 Chips soll er laut Microsoft bis zu <strong>siebenmal</strong> so viel Durchsatz liefern wie ein Maia-200-Rack.</li>
+  <li>Das Verkaufsargument ist der Strom: <strong>40 Prozent mehr <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span> je Megawatt</strong> als führende GPU-Systeme – eine Erwartung, keine Messung. Maia 200 liefert laut Microsoft bis zu <strong>1,7-mal mehr Token je Watt</strong> bei den eingebauten KI-Funktionen in Teams und Copilot.</li>
+  <li>Alle Zahlen sind Herstellerangaben. Eine unabhängige Nachprüfung fehlt, und Microsoft nennt weder eine absolute Gigawatt-Zahl noch Preise, Stückzahlen oder Kunden.</li>
+  <li>Satya Nadella nennt die Ankündigung auf <a href="https://x.com/satyanadella/status/2109631106404487523">X</a> „our biggest bet yet on our own silicon&quot; – die bisher größte Wette auf eigene Chips.</li>
+</ul>
+<h2>Maia 200 läuft, Maia 300 kommt</h2>
+<p>Der Blogbeitrag kommt von Scott Guthrie, dem Microsoft-Manager für Cloud und KI. Die Kernaussage: Die Maia-Reihe werde „der primäre Inferenz-Beschleuniger für Microsofts Produkte und Dienste&quot;, und ab 2027 werde man sie „im Multi-Gigawatt-Maßstab&quot; ausrollen. Ein Gigawatt ist die Größenordnung der Dauerleistung eines großen Kraftwerksblocks – Strom, der dann nicht für einige Wochen Training, sondern dauerhaft für den laufenden Betrieb fließt.</p>
+<p>Maia 200 ist demnach kein Prototyp mehr. Der Chip bedient Microsoft Copilot produktiv in den USA, Europa und Australien, unterstützt das eigene Modellteam und soll bis Jahresende auch GitHub Copilot und Microsoft Foundry bedienen. Microsoft betont, dass auf derselben Hardware Modelle von OpenAI, die eigenen MAI-Modelle und „führende offene Modellfamilien&quot; laufen. Der Vorteil, den die Firma nennt, ist kein Benchmark, sondern die eigene Rolle als Betreiber: Weil Microsoft die Arbeitslasten selbst fährt, könne man Chip und Software gemeinsam auf den tatsächlichen Gebrauch zuschneiden.</p>
+<p>Maia 300, die dritte Generation, ist für drei Dinge gebaut, die alle in dieselbe Richtung zeigen: lange Eingaben, gesprächsnahe Antworten mit kurzer Wartezeit und mehrstufige Agenten-Aufgaben, die minuten- oder stundenlang laufen. Genau diese Läufe sind die teuerste neue Last im Rechenzentrum: Statt einer Anfrage und einer Antwort fallen viele Zwischenschritte mit großem Kontext an, und ein <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span> muss sie alle durchlaufen.</p>
+<h2>Die Zahlen und was sie wert sind</h2>
+<p>Der technische Detailbeitrag auf dem Azure-Blog nennt die Ausstattung. Pro Beschleuniger acht <button type="button" class="lex" popovertarget="lex-hbm" data-tip="High Bandwidth Memory: Speicherbausteine, die direkt neben dem Rechenchip sitzen und Daten viel schneller liefern als gewöhnlicher Arbeitsspeicher. Mehrere Bausteine werden dabei zu einem Stapel geschichtet.">HBM</button><span class="lex-pop" popover id="lex-hbm"><strong>HBM</strong> High Bandwidth Memory: Speicherbausteine, die direkt neben dem Rechenchip sitzen und Daten viel schneller liefern als gewöhnlicher Arbeitsspeicher. Mehrere Bausteine werden dabei zu einem Stapel geschichtet. <a href="lexikon.html#hbm">Im Lexikon</a></span>4-Speicherstapel mit zusammen 288 GB und 18 TB/s Bandbreite. Im Vergleich zu Maia 200 ergibt das 2,5-fache Speicherbandbreite, 33 Prozent mehr Kapazität und rund die doppelte Bandbreite pro Watt. Das Rechen-<button type="button" class="lex" popovertarget="lex-chiplet" data-tip="Ein Chip, der aus mehreren kleinen Silizium-Bausteinen besteht statt aus einem großen. Jeder Baustein übernimmt eine Aufgabe, etwa Rechnen oder Speicheransteuerung; das lässt sich leichter fertigen und besser kühlen.">Chiplet</button><span class="lex-pop" popover id="lex-chiplet"><strong>Chiplet</strong> Ein Chip, der aus mehreren kleinen Silizium-Bausteinen besteht statt aus einem großen. Jeder Baustein übernimmt eine Aufgabe, etwa Rechnen oder Speicheransteuerung; das lässt sich leichter fertigen und besser kühlen. <a href="lexikon.html#chiplet">Im Lexikon</a></span> wird bei TSMC im N2P-Verfahren gefertigt, Speicheransteuerung und Ein- und Ausgabe sitzen laut Microsoft auf getrennten Chips – der Datenverkehr soll dadurch lokal bleiben. Ein Rechenverbund soll bis zu 12.288 Beschleuniger umfassen.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 390" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Maia 300 gegen Maia 200: Angaben von Microsoft</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111">Maia 300 gegen Maia 200: Angaben von Microsoft</text>
+  <text x="68" y="52" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Faktor gegenüber Maia 200</text>
+  <line x1="245.0" y1="75" x2="245.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="245.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="336.2" y1="75" x2="336.2" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="336.2" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">2</text>
+  <line x1="427.5" y1="75" x2="427.5" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="427.5" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">4</text>
+  <line x1="518.8" y1="75" x2="518.8" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="518.8" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">6</text>
+  <line x1="610.0" y1="75" x2="610.0" y2="320" stroke="#eeeeee" stroke-width="1" />
+  <text x="610.0" y="338" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">8</text>
+  <line x1="245" y1="75" x2="245" y2="320" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="245" y="86.0" width="319.4" height="27.0" rx="3" fill="#0075de" />
+  <text x="233" y="103.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Token-Durchsatz je Rack</text>
+  <text x="572.4" y="103.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">7</text>
+  <rect x="245" y="135.0" width="114.1" height="27.0" rx="3" fill="#0075de" />
+  <text x="233" y="152.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Leistung je Watt im Rack</text>
+  <text x="367.1" y="152.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">2,5</text>
+  <rect x="245" y="184.0" width="114.1" height="27.0" rx="3" fill="#0075de" />
+  <text x="233" y="201.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Speicherbandbreite je Chip</text>
+  <text x="367.1" y="201.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">2,5</text>
+  <rect x="245" y="233.0" width="91.2" height="27.0" rx="3" fill="#0075de" />
+  <text x="233" y="250.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Bandbreite je Watt im Speicher</text>
+  <text x="344.2" y="250.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">2</text>
+  <rect x="245" y="282.0" width="60.7" height="27.0" rx="3" fill="#0075de" />
+  <text x="233" y="299.5" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Speicherkapazität je Chip</text>
+  <text x="313.7" y="299.5" text-anchor="start" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">1,33</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://azure.microsoft.com/en-us/blog/deep-dive-into-azure-maia-300-architecture/" target="_blank" rel="noopener">Microsoft Azure Blog, Deep dive into Azure Maia 300 architecture (12. Oktober 2026)</a></span>
+  <span class="chart-note">Herstellerangaben ohne unabhängige Messung. Token-Durchsatz und Leistung je Watt gelten für ein Rack mit 96 Beschleunigern; Speicherkapazität 33 Prozent mehr als bei Maia 200.</span>
+</figcaption>
+</figure>
+<p>Für das Rack verspricht Microsoft bis zu 2,5-fach mehr Leistung pro Watt gegenüber Maia 200, und mit 96 Beschleunigern bis zu siebenfach mehr Token-Durchsatz. Beide Angaben beziehen sich auf das eigene Vormodell. Die Schlagzeilen-Zahlen dagegen vergleichen mit dem Wettbewerb: 40 Prozent mehr Token je Megawatt gegenüber „führenden GPU-Systemen&quot; – ausdrücklich als Erwartung formuliert („we expect&quot;). Für Maia 200 nennt Microsoft bereits gemessene bis zu 1,7-fach mehr Token je Watt bei den eingebauten KI-Funktionen in Teams, Copilot und Cowork, wiederum gegenüber „führender GPU-Infrastruktur&quot;.</p>
+<p>Genau hier liegt die Einschränkung. Microsoft schreibt nicht, welche GPUs die Vergleichsbasis sind, welche Aufgabe gemessen wurde und unter welchen Bedingungen. „Token je Watt&quot; ist eine Kennzahl, die stark von Modell, Kontextlänge, Stapelverarbeitung und Auslastung abhängt. Ohne unabhängige Messung bleibt es eine Herstellerangabe – wie bei allen Chip-Ankündigungen dieses Jahres. Mehr Details will Microsoft im November auf der eigenen Konferenz Ignite nachliefern.</p>
+<h2>Warum das zählt</h2>
+<p>Zum Ersten verschiebt sich das Geschäft. Training ist ein Projekt, Inferenz ist Dauerbetrieb. Wer den Betrieb auf eigener Hardware fährt, muss den Chip nicht mit Marge einkaufen, sondern nur bauen. Microsoft nennt keine Einsparungen und keinen Anteil, den Maia am Ende abdecken soll – aber dass NVIDIA-Karten im Dauerbetrieb das größte Kostenstück sind, ist der Grund, weshalb Microsoft, Google und Amazon alle an eigenen Beschleunigern arbeiten.</p>
+<p>Zum Zweiten geht es um Strom. Rechenzentren werden heute nicht mehr von der Zahl der Chips begrenzt, sondern von Anschlussleistung und Kühlung. Ein <a href="https://www.iea.org/reports/energy-and-ai/executive-summary">IEA-Bericht</a> von 2025 rechnet damit, dass der Stromverbrauch der Rechenzentren von rund 415 Terawattstunden im Jahr 2024 auf etwa 945 Terawattstunden im Jahr 2030 steigt; wie sich das gegen die Effizienzgewinne verhält, haben wir <a href="wo-soll-die-ki-skalierung-enden-ueber-kraftwerke-datenmauern-und-kluegere-rechenwege.html">an anderer Stelle ausgerechnet</a>. Ein Zuwachs von 40 Prozent beim Wirkungsgrad hilft nur, wenn die Nachfrage nicht schneller wächst – der alte <button type="button" class="lex" popovertarget="lex-rebound-effekt" data-tip="Wenn etwas effizienter und dadurch billiger wird, wird es häufiger genutzt – der Gesamtverbrauch kann trotz Sparsamkeit steigen. Auch Jevons-Paradox genannt.">Rebound-Effekt</button><span class="lex-pop" popover id="lex-rebound-effekt"><strong>Rebound-Effekt</strong> Wenn etwas effizienter und dadurch billiger wird, wird es häufiger genutzt – der Gesamtverbrauch kann trotz Sparsamkeit steigen. Auch Jevons-Paradox genannt. <a href="lexikon.html#rebound-effekt">Im Lexikon</a></span>: Was billiger wird, wird häufiger genutzt.</p>
+<p>Zum Dritten signalisiert der Zeitplan, wie lang das dauert. Microsoft schreibt selbst, Silizium-Entwicklung brauche Jahre. Wer 2027 Gigawatt-Mengen eigenes Silizium hochzieht, hat diese Entscheidung lange vor der aktuellen Debatte getroffen. Der Microsoft-Chef fordert in derselben Woche eine „Notbremse&quot; für KI-Systeme, also die Möglichkeit, ein Modell mitten in der Aufgabe zu stoppen (<a href="https://www.heise.de/news/Microsoft-Chef-will-Notbremse-fuer-kuenstliche-Intelligenz-11483617.html">heise</a>). Die Botschaft ist dieselbe: Kontrolle über die eigene Infrastruktur.</p>
+<h2>Was heißt das praktisch</h2>
+<ul>
+  <li><strong>Für Azure-Kunden:</strong> Wer Copilot, GitHub Copilot oder Foundry nutzt, rechnet künftig teilweise auf Maia-Hardware – ohne dass Microsoft Preise oder Leistungsversprechen dazu nennt. Was das für Abrechnung und Verfügbarkeit bedeutet, bleibt offen.</li>
+  <li><strong>Für Effizienzversprechen:</strong> Aussagen wie „40 Prozent mehr Token je Megawatt&quot; sind ohne genannte Vergleichsbasis nicht nachprüfbar. Wer solche Zahlen weiterverwenden will, sollte sie als Herstellerangaben kennzeichnen und die fehlende Messung dazusagen.</li>
+  <li><strong>Für den Energie-Diskurs:</strong> Wichtiger als der Wirkungsgrad einzelner Chips ist die Gesamtmenge. Ein Rechenzentrumsverbund, der um 40 Prozent sparsamer rechnet, aber dreimal so viel Arbeit verrichtet, verbraucht mehr Strom als vorher.</li>
+  <li><strong>Für den Markt:</strong> Eigene Chips für die Inferenz sind das Mittel, mit dem die großen Cloud-Anbieter ihre Kosten senken und ihre Abhängigkeit vom Zulieferer verringern. Ob Microsoft das gelingt, entscheidet sich 2027 im Betrieb – nicht in einer Folie.</li>
+</ul>
+<h2>Quellen</h2>
+<ul>
+  <li><a href="https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/">Microsoft: Microsoft to expand Azure Maia system to multi-gigawatt deployments</a> (Scott Guthrie, 12. Oktober 2026)</li>
+  <li><a href="https://azure.microsoft.com/en-us/blog/deep-dive-into-azure-maia-300-architecture/">Azure Blog: Deep dive into Azure Maia 300 architecture</a> (12. Oktober 2026)</li>
+  <li><a href="https://news.microsoft.com/maia-2026/">Microsoft News: Maia 300 – Bilder und Videos zur Ankündigung</a> (12. Oktober 2026)</li>
+  <li><a href="https://x.com/satyanadella/status/2109631106404487523">Satya Nadella auf X zur Maia-300-Ankündigung</a> (12. Oktober 2026)</li>
+  <li><a href="https://the-decoder.com/microsoft-plans-to-scale-its-own-maia-ai-chips-to-gigawatt-levels-by-2027/">The Decoder: Microsoft plans to scale its own Maia AI chips to gigawatt levels by 2027</a> (12. Oktober 2026)</li>
+  <li><a href="https://www.heise.de/news/Microsoft-Chef-will-Notbremse-fuer-kuenstliche-Intelligenz-11483617.html">heise: Microsoft-Chef will „Notbremse&quot; für künstliche Intelligenz</a> (12. Oktober 2026)</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

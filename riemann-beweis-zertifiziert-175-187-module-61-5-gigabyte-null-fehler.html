@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riemann-Beweis zertifiziert: 175.187 Module, 61,5 Gigabyte, null Fehler – Hermies Blog</title>
+  <meta name="description" content="Die Lean- und Mathlib-Gemeinde hat Alpöges Beweis der Riemannschen Vermutung geprüft und für korrekt erklärt: Aussage, Kompilierung, Abgleich mit einer unabhängigen Fassung und Läufe mehrerer Prüfkerne. Der Bericht der MIT-Prüfung protokolliert 175.187 fehlerfreie Module, einen 48-stündigen Kernel-Lauf und einen 61,5 Gigabyte großen Export. Offen bleiben der Clay-Preis, das mathematische Verständnis und ein zweiter Beweis auf Papier.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Riemann-Beweis zertifiziert: 175.187 Module, 61,5 Gigabyte, null Fehler</h1>
+    <p class="meta"><time datetime="2026-11-23T15:35+01:00">23.11.2026, 15:35</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/forschung.html">#forschung</a> <a class="tag" href="tag/ki.html">#ki</a></span> · <a class="source" href="https://leanprover-community.github.io/blog/posts/riemann-hypothesis/">Lean Community</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>5:17 Minuten</strong> (KI-Stimme) – <a href="audio/riemann-beweis-zertifiziert-175-187-module-61-5-gigabyte-null-fehler.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,4 MB)</span></p>
+    <audio controls preload="none" src="audio/riemann-beweis-zertifiziert-175-187-module-61-5-gigabyte-null-fehler.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Die Lean- und Mathlib-Gemeinde hat in einer gemeinsamen Erklärung bestätigt, dass Levent Alpöges Beweis der Riemannschen Vermutung korrekt ist. Die Erklärung ist vom Lean FRO und der Mathlib-Initiative mitgetragen.</li>
+  <li>Geprüft wurde nicht nur, ob der Code läuft: Die Aussage stammt aus Mathlib selbst, wurde mit zwei unabhängigen Werkzeugen gegen Alpöges Theorem abgeglichen, und der Beweis-Export wurde von mehreren Prüfern akzeptiert.</li>
+  <li>Die Zahlendichte ist beeindruckend: 175.187 Module kompilieren ohne Fehler, der vollständige Kernel-Lauf brauchte 48 Stunden auf einem Thread bei 82,6 Gigabyte Spitzenlast, der Export umfasst 61,5 Gigabyte.</li>
+  <li>Damit ist der Punkt beantwortet, den unser Artikel vom Freitag offen ließ: Damals hatte niemand das Projekt unabhängig gebaut.</li>
+  <li>Offen bleiben der Clay-Preis, die Frage nach dem mathematischen Verständnis und ein zweiter, 940 Seiten langer Beweis, den am selben Tag ein Mensch vorlegte.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Am Samstag hat die Lean-Gemeinde einen Text veröffentlicht, den es in dieser Form noch nicht gab: eine gemeinsame Erklärung, unterzeichnet von der Lean- und der Mathlib-Community, mitgetragen von der Lean Foundation und der Mathlib-Initiative. Der Inhalt ist ein Satz, den viele in der Mathematik seit Freitag erwartet hatten. Man habe volles Vertrauen, dass Alpöges Beweis der Riemannschen Vermutung korrekt sei.</p>
+<p>Das ist mehr als ein Gefälligkeitsurteil. Die Erklärung zählt auf, was in den gut 24 Stunden zuvor passiert ist. Sie folgt dabei einem Prüfschema, das der Lean-Entwickler Kevin Buzzard neun Tage zuvor in einem Blogpost beschrieben hatte: Vier Fragen muss ein formalisierter Beweis beantworten, bevor er als geprüft gelten darf. Erstens, ist die formulierte Aussage überhaupt die richtige? Zweitens, kompiliert die Bibliothek? Drittens, beweist der Code wirklich diese Aussage? Viertens, ist der Beweis selbst gültig, also akzeptiert ihn ein Prüfkern?</p>
+<div class="box box-methode">
+<p class="box-title">Das Prüfschema in vier Fragen</p>
+<div class="box-body">
+<ol>
+  <li>Steht in der Datei die Aussage, die gemeint ist, und nicht eine verwandte?</li>
+  <li>Kompiliert die Bibliothek ohne Fehler?</li>
+  <li>Beweist der Code genau diese Aussage, geprüft gegen eine unabhängige Fassung?</li>
+  <li>Akzeptiert ein Prüfkern den Beweis, und zwar einer, der nicht selbst kompromittiert sein kann?</li>
+</ol>
+<p>Aufgeschrieben hat das Kevin Buzzard am 12. November 2026, ausdrücklich mit Blick auf KI-erzeugte Lean-Bibliotheken.</p>
+
+</div>
+</div>
+<p>Für die erste Frage war die Antwort einfach, weil Alpöge gegen die Mathematikbibliothek Mathlib gebaut hat und die Riemannsche Vermutung dort seit Jahren als Definition steht. Sie ist nicht neu geschrieben worden, um sie passend zu machen. Für die dritte Frage hat die Gemeinde eine eigene Datei angelegt, die nur die Aussage enthält und sonst nichts aus Mathlib importiert, und diese mit zwei Werkzeugen gegen das Theorem aus Alpöges Bibliothek gehalten. Beide bestätigten, dass dort genau die Aussage von Mathlib bewiesen wird.</p>
+<p>Die vierte Frage ist die, an der sich die Spreu trennt, weil ein KI-generierter Beweis theoretisch den Prüfkern selbst ausnutzen könnte. Deshalb wurde nicht der Quelltext geprüft, sondern ein inerter Export, also eine Datenablage, die nur noch aus dem fertigen Beweis besteht und keinen ausführbaren Code mehr enthält. Diesen Export haben mehrere Programme akzeptiert: Leans eigener Kern, die beiden Prüfer con-leche und con-ron, die mit einem formalen Beweis dafür ausgestattet sind, dass sie keinen falschen Beweis annehmen können, dazu weitere Prüfer aus der Gemeinde in verschiedenen Programmiersprachen.</p>
+<h2>Warum zählt es</h2>
+<p>Die aussagekräftigsten Zahlen stehen nicht im Blogpost der Gemeinde. Sie stehen in einem Prüfbericht von Andrew Sutherland vom Massachusetts Institute of Technology, den er zuletzt am Montag um 14 Uhr 35 UTC aktualisiert hat. Dort ist jeder Lauf mit Uhrzeit, Bytezahl und Speicherverbrauch verzeichnet. 175.187 Module kompilieren in Lean 4.33.1 ohne einen einzigen Fehler. Ein Nachbau in einer abgeschotteten Umgebung ohne Netz auf einem anderen Rechner lief durch und erzeugte einen Export, der byteweise mit dem veröffentlichten übereinstimmte: 61.570.595.788 Byte. Der Kernel von Lean brauchte für die vollständige Prüfung dieses Exports 48 Stunden und 3 Minuten auf einem einzigen Thread, mit 82,6 Gigabyte Spitzenlast. Ein unabhängiger Rust-Kernel namens nanoda schaffte dasselbe in 27 Minuten und 42 Sekunden auf 80 Threads.</p>
+<figure class="widget widget-zahlen">
+<p class="widget-title">Was die Prüfläufe gekostet haben</p>
+<div class="stats stats-4">
+<div class="stat">
+  <span class="stat-value">175.187</span>
+  <span class="stat-label">Module kompilieren</span>
+  <span class="stat-detail">Lean 4.33.1, kein einziger Fehler, Protokoll vom 22. November</span>
+</div>
+<div class="stat">
+  <span class="stat-value">48 h 3 min</span>
+  <span class="stat-label">Kernprüfung des Exports</span>
+  <span class="stat-detail">Leans Standardkern auf einem Thread, 82,6 Gigabyte Spitzenlast</span>
+</div>
+<div class="stat">
+  <span class="stat-value">61,5 GB</span>
+  <span class="stat-label">Größe des Beweis-Exports</span>
+  <span class="stat-detail">61.570.595.788 Byte, byteweise identisch im abgeschotteten Nachbau</span>
+</div>
+<div class="stat">
+  <span class="stat-value">27 min</span>
+  <span class="stat-label">unabhängiger Rust-Kernel</span>
+  <span class="stat-detail">nanoda auf 80 Threads, akzeptiert denselben Export</span>
+</div>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://math.mit.edu/~drew/grh/" target="_blank" rel="noopener">Andrew Sutherland (MIT), Verification files, Stand 23.11.2026</a></span>
+</figcaption>
+</figure>
+<p>Bemerkenswert ist auch, was das über die Prüfbarkeit von KI-Mathematik sagt. Buzzards Text vom 12. November war ausdrücklich als Warnung formuliert: OpenAI hatte im Oktober 722 Arbeiten veröffentlicht, etwa 45 Prozent davon mit Lean-Code, und bei vielen war keine dieser vier Fragen beantwortet. Dass es hier binnen eines Tages gelang, liegt nicht an Lean allein, sondern an der Bereitschaft von Dutzenden Leuten, über ein Wochenende Rechenzeit, Werkzeuge und Gegenprüfungen beizusteuern. Die Gemeinde hat damit einen Präzedenzfall geschaffen, an dem sich künftige Behauptungen messen lassen müssen.</p>
+<p>Für unseren Artikel vom Freitag heißt das eine Korrektur. Dort stand als offener Punkt, niemand habe das Projekt unabhängig kompiliert. Das war am Freitagabend richtig und ist seit Samstag überholt. Was bleibt, ist die Einordnung: Ein Beweis, der als 17 Millionen Zeilen Code existiert, ist damit nicht automatisch verstanden. Auf Hacker News fragte der meistgelesene Kommentarstrang genau das, nämlich was von einem Beweis bleibt, den niemand im Kopf nachvollziehen kann. Ein anderer Strang hielt dagegen, das Risiko eines Fehlers sei inzwischen verschwindend klein, weil mehrere unabhängige Prüfkerne denselben Export akzeptieren müssten.</p>
+<div class="box box-warnung">
+<p class="box-title">Was die Zertifizierung nicht sagt</p>
+<div class="box-body">
+<p>Die Erklärung betrifft die Riemannsche Vermutung. Alpöge behauptet in seiner Notiz auch die verallgemeinerte Fassung; ob sie im gleichen Maß geprüft ist, sagt der Text der Gemeinde nicht. Der Clay-Preis ist ebenfalls nicht vergeben: Er verlangt eine Veröffentlichung in einer begutachteten Fachzeitschrift und zwei Jahre Wartezeit. Und Sutherland vermerkt selbst, dass zwei Prüfläufe am Montag noch liefen.</p>
+
+</div>
+</div>
+<h2>Was heißt das praktisch</h2>
+<p>Am selben Tag, an dem Alpöge seine Notiz veröffentlichte, erschien ein zweiter Beweisversuch. Alessandro Masullo legte ein von Hand geschriebenes Manuskript von 940 Seiten vor, das Ravi Vakil auf seinem Blog verlinkte. Zwei Beweise für dasselbe Problem an einem Tag hat es noch nicht gegeben. Der Unterschied könnte größer nicht sein: Auf der einen Seite ein menschlicher Text, der Monate der Begutachtung braucht, auf der anderen 17 Millionen Zeilen, die ein Wochenende Prüfung hinter sich haben.</p>
+<p>Wer den Fortgang verfolgen will, hat dafür zwei Adressen. Die Seite von Sutherland führt jeden Prüflauf mit Zeitstempel und wird nach eigener Angabe fortgeschrieben, solange Läufe offen sind. Der Blog der Lean-Gemeinde trägt die Erklärung selbst. Wer verstehen will, was geprüft wurde, liest am besten Buzzards vier Fragen zuerst und die Erklärung danach; dann wird klar, warum die Reihenfolge wichtig ist und warum ein kompilierender Beweis allein noch nichts bedeutet.</p>
+<p>Was in den nächsten Wochen zählt, ist nicht mehr die Frage, ob der Beweis hält. Es ist die Frage, ob jemand die Ideen daraus herausziehen und aufschreiben kann. Ein Beweis, den nur ein Prüfprogramm versteht, verändert die Mathematik nicht. Bis dahin bleibt der Satz aus der Erklärung der einzige belastbare Stand: Die Aussage ist die richtige, der Code beweist sie, und mehrere unabhängige Prüfer haben zugestimmt.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Lean- und Mathlib-Gemeinde, &quot;Lean verification of the Riemann Hypothesis&quot;, 21. November 2026: https://leanprover-community.github.io/blog/posts/riemann-hypothesis/</li>
+  <li>Andrew Sutherland (MIT), &quot;Verification files for the Lean proof of the Riemann Hypothesis&quot;, Stand 23. November 2026, 14:35 UTC: https://math.mit.edu/~drew/grh/</li>
+  <li>Kevin Buzzard, &quot;…and the proof is checked in Lean&quot;, 12. November 2026: https://xenaproject.wordpress.com/2026/11/12/and-the-proof-is-checked-in-lean/</li>
+  <li>John Baez, &quot;Masullo on the Riemann Hypothesis&quot;, 22. November 2026: https://johncarlosbaez.wordpress.com/2026/11/22/masullo-on-the-riemann-hypothesis/</li>
+  <li>Levent Alpöge, Notiz vom 20. November 2026: https://alpo.ge/remark.pdf</li>
+  <li>Hacker News, Diskussion zur Lean-Verifikation, 21. November 2026: https://news.ycombinator.com/item?id=50589618</li>
+  <li><a href="riemann-vermutung-ein-beweis-in-17-4-millionen-zeilen-lean-den-noch-niemand-gebaut-hat.html">Unser Artikel vom 20. November</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

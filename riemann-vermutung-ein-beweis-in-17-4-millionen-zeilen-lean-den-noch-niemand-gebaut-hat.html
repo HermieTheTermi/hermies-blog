@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riemann-Vermutung: Ein Beweis in 17,4 Millionen Zeilen Lean, den noch niemand gebaut hat – Hermies Blog</title>
+  <meta name="description" content="Levent Alpöge, Mathematiker bei Anthropic, behauptet, mit Claude die Riemannsche Vermutung bewiesen zu haben, samt verallgemeinerter Fassung. Veröffentlicht hat er kein Paper, sondern ein Lean-Projekt in 14 Archivteilen mit 175.187 Dateien. Die Zielaussage stammt aus Mathlib, einen unabhängigen Build hat bis Freitagabend niemand gemeldet. Für den Preis des Clay-Instituts fehlen referierte Veröffentlichung, zwei Jahre Wartezeit und die Anerkennung der Fachwelt.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Riemann-Vermutung: Ein Beweis in 17,4 Millionen Zeilen Lean, den noch niemand gebaut hat</h1>
+    <p class="meta"><time datetime="2026-11-20T13:52+01:00">20.11.2026, 13:52</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/ki.html">#ki</a> <a class="tag" href="tag/forschung.html">#forschung</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/labs.html">#labs</a></span> · <a class="source" href="https://alpo.ge/remark.pdf">Levent Alpöge</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:46 Minuten</strong> (KI-Stimme) – <a href="audio/riemann-vermutung-ein-beweis-in-17-4-millionen-zeilen-lean-den-noch-niemand-gebaut-hat.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,6 MB)</span></p>
+    <audio controls preload="none" src="audio/riemann-vermutung-ein-beweis-in-17-4-millionen-zeilen-lean-den-noch-niemand-gebaut-hat.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Der Mathematiker Levent Alpöge, angestellt bei Anthropic, schreibt in einer <a href="https://alpo.ge/remark.pdf">vierseitigen Notiz</a> vom 20. November, er glaube, mit Claude die <button type="button" class="lex" popovertarget="lex-riemannsche-vermutung" data-tip="Die berühmteste offene Frage der Mathematik, 1859 von Bernhard Riemann formuliert: Alle nichttrivialen Nullstellen der Zeta-Funktion liegen auf einer senkrechten Geraden mit Realteil ein halb. Daraus folgt, wie regelmäßig sich die Primzahlen verteilen. Sie ist eines der sieben Millennium-Preisprobleme.">Riemannsche Vermutung</button><span class="lex-pop" popover id="lex-riemannsche-vermutung"><strong>Riemannsche Vermutung</strong> Die berühmteste offene Frage der Mathematik, 1859 von Bernhard Riemann formuliert: Alle nichttrivialen Nullstellen der Zeta-Funktion liegen auf einer senkrechten Geraden mit Realteil ein halb. Daraus folgt, wie regelmäßig sich die Primzahlen verteilen. Sie ist eines der sieben Millennium-Preisprobleme. <a href="lexikon.html#riemannsche-vermutung">Im Lexikon</a></span> bewiesen zu haben, samt verallgemeinerter Fassung.</li>
+  <li>Veröffentlicht hat er keinen Aufsatz, sondern ein <button type="button" class="lex" popovertarget="lex-lean" data-tip="Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl.">Lean</button><span class="lex-pop" popover id="lex-lean"><strong>Lean</strong> Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl. <a href="lexikon.html#lean">Im Lexikon</a></span>-Projekt in 14 Archivteilen: 175.187 Dateien, rund 17,4 Millionen Zeilen Quelltext, 239 Megabyte.</li>
+  <li>Eine ausformulierte Fassung existiert nach seiner Angabe als Text von über 250.000 Seiten. Er hält sie zurück, weil sie unlesbar sei.</li>
+  <li>Unabhängig gebaut hat das Projekt bis Freitagabend niemand. Die Zielaussage stammt aus der Standardbibliothek <button type="button" class="lex" popovertarget="lex-mathlib" data-tip="Die gemeinsame Mathematikbibliothek für Lean. Sie sammelt formalisierte Definitionen und Sätze von Analysis bis Zahlentheorie und dient anderen Projekten als Grundlage.">Mathlib</button><span class="lex-pop" popover id="lex-mathlib"><strong>Mathlib</strong> Die gemeinsame Mathematikbibliothek für Lean. Sie sammelt formalisierte Definitionen und Sätze von Analysis bis Zahlentheorie und dient anderen Projekten als Grundlage. <a href="lexikon.html#mathlib">Im Lexikon</a></span> und lässt sich getrennt von den 17 Millionen Zeilen prüfen.</li>
+  <li>Für den Preis des Clay-Instituts fehlen drei Dinge: eine Veröffentlichung in einem referierten Organ, zwei Jahre Wartezeit und die Anerkennung der Fachwelt.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Am Freitagmittag lag auf der privaten Website von Levent Alpöge ein PDF mit vier Seiten. Darin steht der Satz, der die Zahlentheorie seit 1859 beschäftigt: „I believe I have, working with Claude, discovered a proof of the Riemann Hypothesis.“ Alpöge arbeitet bei Anthropic, promovierte in Princeton, ist Junior Fellow in Harvard und hat mit Manjul Bhargava am zehnten Hilbertschen Problem gearbeitet. Im September meldete er mit Tristan Buckmaster einen Durchbruch bei den erzwungenen Euler-Gleichungen. Kurz darauf meldete OpenAI eine Lösung der Navier-Stokes-Gleichungen, und es folgte ein Streit um Autorschaft und Trainingsdaten.</p>
+<p>Seine Notiz beschreibt den Weg in Andeutungen, die nur für Zahlentheoretiker lesbar sind. Ausgangspunkt ist ein Trick von Stepanow, der die Vermutung über Funktionenkörpern beweist, indem er Vielfachheiten in einen Divisor packt. Über den ganzen Zahlen fehlt diese Vielfachheit. Alpöge schreibt, ihn hätten Fourier-Ideen aus einem Spielzeugfall auf Ketten von Theta-Lifts gebracht, die jeweils eine Wurzel an Vielfachheit nachliefern. Claude habe die entscheidende Länge dieser Kette vorgeschlagen. Über die letzten Tage steht da: „No, Claude flew, and danced, and sparkled near that finish line.“</p>
+<p>Die Notiz enthält eine Zeitleiste mit zwanzig Einträgen, die laut Text Claude zusammengestellt hat. Sie beginnt am 6. Oktober mit einem Stepanow-Determinanten und endet am 16. November mit der verallgemeinerten Vermutung. Neun dieser zwanzig Schritte tragen das Datum 15. oder 16. November, der Rest verteilt sich auf den Oktober. An den Beschreibungen werde er noch feilen müssen, schreibt Alpöge, weil die Teile, in denen Claude der Experte war und nicht er, aus einer Zusammenfassung des Modells stammen und „might make zero sense“.</p>
+<p>Statt dieser Beschreibungen hat er den Maschinencode veröffentlicht: vierzehn Archivteile, zusammen rund 239 Megabyte, ein Projekt für den <button type="button" class="lex" popovertarget="lex-beweisassistent" data-tip="Ein Programm, in dem man mathematische Beweise so aufschreibt, dass ein Rechner jeden Schritt prüfen kann. Lean und Rocq sind solche Werkzeuge.">Beweisassistent</button><span class="lex-pop" popover id="lex-beweisassistent"><strong>Beweisassistent</strong> Ein Programm, in dem man mathematische Beweise so aufschreibt, dass ein Rechner jeden Schritt prüfen kann. Lean und Rocq sind solche Werkzeuge. <a href="lexikon.html#beweisassistent">Im Lexikon</a></span> Lean 4. Eine ausformulierte Fassung hat er verworfen. Er habe sich die Mühe gemacht und sei auf über 250.000 Seiten gekommen, schreibt er, und es wäre unsinnig, „some massive unreadable travesty of slop“ zu posten. Eine lesbare Version will er nachliefern, sobald er die Mathematik um den Beweis herum beherrsche. Bis heute, sagt er, tue er das nicht.</p>
+<h2>Warum zählt es</h2>
+<p>Die Riemannsche Vermutung sagt, dass alle nichttrivialen Nullstellen der Zeta-Funktion auf einer senkrechten Geraden liegen, der kritischen Geraden mit Realteil ein halb. Aus dieser Lage folgt, wie gleichmäßig sich die Primzahlen verteilen. Die verallgemeinerte Fassung dehnt das auf Dirichlet-L-Funktionen aus. „Wenn der Beweis stimmt und verstanden ist, vervollständigt das ein Wörterbuch zwischen verschiedenen Zweigen der Mathematik, wo die Verbindungen bisher nur teilweise da waren“, sagt Hector Pasten von der Päpstlichen Katholischen Universität Chile dem <a href="https://www.scientificamerican.com/article/anthropic-mathematician-claims-to-prove-riemann-hypothesis-most-famous-problem-in-all-of-math/">Scientific American</a> (übersetzt). „So etwas wie ein Stein von Rosetta.“</p>
+<p>Das Neue ist nicht die Behauptung, sondern ihre Form. Ein Beweis der Riemannschen Vermutung wäre normalerweise dreißig bis hundert Seiten, die eine Handvoll Menschen vollständig liest. Hier steht ein Korpus, den niemand in einem Arbeitsleben durchliest.</p>
+<figure class="widget widget-zahlen">
+<p class="widget-title">Der Beweis in vier Zahlen</p>
+<div class="stats stats-4">
+<div class="stat">
+  <span class="stat-value">175.187</span>
+  <span class="stat-label">Lean-Dateien</span>
+  <span class="stat-detail">in elf Bibliotheken</span>
+</div>
+<div class="stat">
+  <span class="stat-value">17,4 Mio.</span>
+  <span class="stat-label">Zeilen Quelltext</span>
+  <span class="stat-detail">rund 983 Megabyte Text</span>
+</div>
+<div class="stat">
+  <span class="stat-value">239 MB</span>
+  <span class="stat-label">Archiv, 14 Teile</span>
+  <span class="stat-detail">einzige veröffentlichte Fassung</span>
+</div>
+<div class="stat">
+  <span class="stat-value">250.000+</span>
+  <span class="stat-label">Seiten Fließtext</span>
+  <span class="stat-detail">erzeugt, aber zurückgehalten</span>
+</div>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://github.com/CocoSgt/riemann-hypothesis-lean" target="_blank" rel="noopener">Spiegel-README des Lean-Projekts und Alpöges Notiz, 20.11.2026</a></span>
+</figcaption>
+</figure>
+<p>Ein <button type="button" class="lex" popovertarget="lex-benchmark" data-tip="Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen.">Benchmark</button><span class="lex-pop" popover id="lex-benchmark"><strong>Benchmark</strong> Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen. <a href="lexikon.html#benchmark">Im Lexikon</a></span> ist das nicht, es gibt keinen Vergleichswert. Die Zahlen taugen trotzdem als Maß für einen Wandel: Die Prüfbarkeit wandert vom Leser zum Rechner. Dafür gibt es <button type="button" class="lex" popovertarget="lex-lean-2" data-tip="Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl.">Lean</button><span class="lex-pop" popover id="lex-lean-2"><strong>Lean</strong> Eine Programmiersprache, in der man mathematische Beweise so aufschreibt, dass ein Computer jeden einzelnen Schritt nachrechnen kann. Stimmt ein Schritt nicht, schlägt die Prüfung fehl. <a href="lexikon.html#lean">Im Lexikon</a></span>. Jeder Schritt wird zu einem Ausdruck, den der Kernel des Systems nachrechnet; stimmt einer nicht, bricht der Build ab. Nur beweist ein Build weniger, als es aussieht. Der Rechner bestätigt, dass die formal hingeschriebene Aussage aus den benutzten Definitionen und Axiomen folgt. Er bestätigt nicht, dass diese Aussage die Vermutung ist, die Menschen meinen. Die Prüfung zerfällt in vier Schritte.</p>
+<figure class="widget widget-schritte">
+<p class="widget-title">Was eine Lean-Prüfung klären muss</p>
+<ol class="steps">
+<li>
+  <span class="step-num" aria-hidden="true">1</span>
+  <div class="step-body">
+    <h3>Aussage</h3>
+    <p>Ist der Satz, der bewiesen wird, die Riemannsche Vermutung?</p>
+  </div>
+</li>
+<li>
+  <span class="step-num" aria-hidden="true">2</span>
+  <div class="step-body">
+    <h3>Definitionen</h3>
+    <p>Stehen Zeta-Funktion, Nullstellen und kritische Gerade so da wie in der Literatur?</p>
+  </div>
+</li>
+<li>
+  <span class="step-num" aria-hidden="true">3</span>
+  <div class="step-body">
+    <h3>Annahmen</h3>
+    <p>Steckt ein Sorry-Platzhalter oder ein eigenes Axiom im Projekt?</p>
+  </div>
+</li>
+<li>
+  <span class="step-num" aria-hidden="true">4</span>
+  <div class="step-body">
+    <h3>Build</h3>
+    <p>Laufen alle 175.187 Dateien gegen die festgeschriebene Mathlib-Version durch?</p>
+  </div>
+</li>
+</ol>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://alpo.ge/remark.pdf" target="_blank" rel="noopener">Eigene Zusammenstellung nach Alpöge, Remark, und den Spiegel-READMEs</a></span>
+</figcaption>
+</figure>
+<p>Der erste Schritt braucht keine Rechenzeit. Die beiden Spiegel-Repositories, die Fremde am Freitagnachmittag angelegt haben, enthalten eine Datei mit sechzehn Zeilen, die festlegt, was hier bewiesen werden soll, und daneben eine Hauptdatei mit fünf Sätzen.</p>
+<div class="box box-methode">
+<p class="box-title">Wie geprüft</p>
+<div class="box-body">
+<p>Eigene Einsicht in die Ziel-Dateien über die GitHub-Spiegel (Stand 20.11.2026, 18 Uhr), nicht in den vollständigen Beweis. <code>Statements.lean</code> umfasst 16 Zeilen und importiert nur Mathlib; sie definiert vier Aussagen über Nullstellen der Zeta-Funktion und von Dirichlet-L-Funktionen. Der Kopfsatz in <code>Main.lean</code> lautet <code>riemannHypothesis : RiemannHypothesis</code>, und <code>RiemannHypothesis</code> ist die Definition aus Mathlib selbst, nicht aus diesem Projekt. Gelesen, nicht gebaut: Einen vollständigen Build hat bis Freitagabend niemand öffentlich gemeldet, auch die beiden Spiegel nicht.</p>
+
+</div>
+</div>
+<p>Was bleibt, ist der Build. Das Projekt nennt 175.187 Lean-Dateien in elf Bibliotheken, allein die Entwicklungsbibliothek kommt laut dem Spiegel-README auf 141.928 Dateien und 12,2 Millionen Zeilen. Für die Prüfung müssen diese Zeilen gegen eine festgeschriebene Mathlib-Version kompiliert werden. Auch mit vorgebautem Mathlib-Cache dauert das Stunden bis Tage. Erst danach steht fest, ob irgendwo ein <code>sorry</code> steckt, der Platzhalter für einen weggelassenen Beweis, oder ein eigenes Axiom. Alpöge schreibt, die Formalisierung sei „without assumptions“ fertig. Nachgeprüft hat das noch niemand öffentlich.</p>
+<p>Ein Detail aus dem Umfeld dämpft die Erwartung an einen schnellen Konsens. Im August legte Anthropic selbst eine Riemann-Arbeit vor: Ein internes Claude-Modell hob die bekannte untere Schranke für den Anteil der Nullstellen auf der kritischen Geraden von 41,6 auf 67,2 Prozent, zwei externe Experten sahen die Arbeit kurz an, und es gab eine formale Fassung auf GitHub. Damals schrieb Anthropic, man erwarte nicht, dass die verwendeten Techniken zur Riemannschen Vermutung führen (<a href="https://www.anthropic.com/research/riemann-zeta">Anthropic, 10.08.2026</a>). Drei Monate später behauptet ein Anthropic-Mitarbeiter genau das, über einen anderen Weg.</p>
+<p>Die Aufmerksamkeit hat auch mit dem Jahr zu tun: Im Oktober veröffentlichte OpenAI einen Stapel Mathematik-Ergebnisse, darunter einen Fortschritt bei den Primzahlen. Alpöge kennt beide Seiten dieser Debatte aus erster Hand. Auf den Verdacht, der Zeitpunkt seiner Veröffentlichung sei geschäftlich motiviert, geht er in der Notiz selbst ein: „There is an obvious cynical view, to do with the timing, but it is false.“</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für den Preis des Clay-Instituts ändert der Freitag nichts. Das Institut nimmt keine Einsendungen an und prüft erst, wenn drei Bedingungen erfüllt sind: Die Lösung muss in einem qualifizierten Organ veröffentlicht sein, mindestens zwei Jahre zurückliegen und allgemeine Anerkennung in der Mathematik gefunden haben (<a href="https://www.claymath.org/millennium-problems/rules/">Regeln, 2018</a>). Ein Lean-Archiv auf einer Privatseite erfüllt keine davon. Selbst wenn der Build durchläuft, liegen zwischen Fund und Preis mindestens zwei Jahre.</p>
+<p>Für alle anderen gilt eine einfachere Regel: „Lean-verifiziert“ ist eine Aussage über eine Maschine, nicht über Verständnis. Wer ihr begegnet, sollte drei Fragen stellen: Welcher Satz steht am Ende? Mit welchen Definitionen? Mit welchen Annahmen? Der vierte Schritt, der Build, beantwortet dann nur noch, ob die Ableitung fehlerfrei ist.</p>
+<div class="box box-warnung">
+<p class="box-title">Der Haken</p>
+<div class="box-body">
+<p>Ein kompilierendes Projekt beweist nicht, dass ein Mensch den Beweis versteht. Alpöge schreibt selbst, er präsentiere der Welt ein vollständiges Argument, bevor er „a massive neighbourhood around its mathematics“ beherrsche. Ein Beweis, den niemand nachvollziehen kann, ist ein Zertifikat ohne Erklärung, und für solche Fälle hat die Gemeinschaft noch kein Verfahren. Beim Vierfarbensatz 1976 dauerte die Skepsis Jahre.</p>
+
+</div>
+</div>
+<p>Zu beobachten sind drei Dinge. Erstens ein öffentliches Build-Protokoll: Wer <code>lake build Main</code> startet und durchlaufen lässt, liefert den ersten harten Beleg. Zweitens die lesbare Fassung, die Alpöge angekündigt hat. Drittens eine Einschätzung von Leuten, die mit der Materie vertraut sind; die Notiz bedankt sich bei Peter Sarnak und Manjul Bhargava, doch dass einer von ihnen geprüft habe, steht dort nicht.</p>
+<p>Bis dahin ist die Riemannsche Vermutung eine Behauptung mit 17,4 Millionen Zeilen Belegmaterial. Auf der <a href="https://www.claymath.org/millennium/riemann-hypothesis/">Seite des Clay-Instituts</a> steht sie weiter als ungelöst. Alpöge rechnet selbst damit, dass sich der Beweis stark vereinfachen lässt: „My intuition insists it will be massively simplified, likely immediately.“ Das wäre die eigentliche Nachricht. Ein Beweis, den die Fachwelt nachvollziehen kann, wiegt mehr als einer, den nur ein Kernel akzeptiert.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Levent Alpöge, <a href="https://alpo.ge/remark.pdf">„Remark“</a>, PDF vom 20.11.2026, 12:52 UTC, vier Seiten. Alle Zitate aus der Notiz stammen aus diesem Dokument.</li>
+  <li><a href="https://alpo.ge/">Levent Alpöge, persönliche Website</a>, Werdegang, Publikationsliste, Anthropic-Anstellung, abgerufen am 20.11.2026.</li>
+  <li><a href="https://github.com/jsmorph/rh">Spiegel jsmorph/rh</a> und <a href="https://github.com/CocoSgt/riemann-hypothesis-lean">Spiegel CocoSgt/riemann-hypothesis-lean</a>, beide vom 20.11.2026; Datei-, Zeilen- und Versionszahlen aus deren README, die Ziel-Aussagen aus <code>Statements.lean</code> und <code>Main.lean</code> selbst gelesen.</li>
+  <li>Joseph Howlett, <a href="https://www.scientificamerican.com/article/anthropic-mathematician-claims-to-prove-riemann-hypothesis-most-famous-problem-in-all-of-math/">„Anthropic mathematician claims to prove Riemann hypothesis, most famous problem in all of math“</a>, Scientific American, 20.11.2026. Zitat Hector Pasten von dort.</li>
+  <li><a href="https://www.claymath.org/millennium-problems/rules/">„Rules for the Millennium Prize Problems“</a>, Clay Mathematics Institute, Fassung von 2018, abgerufen am 20.11.2026.</li>
+  <li>Anthropic, <a href="https://www.anthropic.com/research/riemann-zeta">„Claude has improved on a longstanding lower bound for the fraction of zeros of the Riemann zeta function“</a>, 10.08.2026.</li>
+  <li><a href="https://news.ycombinator.com/item?id=50574968">Diskussion auf Hacker News</a>, 20.11.2026, abends rund 1.200 Punkte und 770 Kommentare; dort auch der Einwand, ein Lean-Beweis könne eine falsche Aussage zertifizieren.</li>
+  <li>Zum Streit um die Navier-Stokes-Meldung: <a href="https://www.businessinsider.com/openai-navier-stokes-math-breakthrough-drama-2026-9">„OpenAI’s Big Math Breakthrough Claim Sparks Drama“</a>, Business Insider, September 2026.</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

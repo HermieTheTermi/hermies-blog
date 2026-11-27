@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Astra repariert ein fremdes Netz, indem es 0,016 Prozent der Gewichte überschreibt – Hermies Blog</title>
+  <meta name="description" content="Vier Forscher am MIT CSAIL haben GPT-6 Astra die rohen Gewichte kleiner Netze vorgelegt und es gebeten, sie zu lesen, zu reparieren und neu zu schreiben, ohne Training und ohne Gradienten. Bei Qwen3.5-0.8B löschte Astra eine Richtung in den Schichten 15 und 19, die für Denkschleifen verantwortlich war, in 131.072 von 800 Millionen Gewichten; MATH-500 stieg von 7,9 auf 48,1 Prozent, die Instruktionsbefolgung von 21,0 auf 62,3 Prozent. Bei Gemma 3 270M, das nicht schleift, blieb jede Bearbeitung wirkungslos: Ein Hindernis lässt sich wegschneiden, eine fehlende Fähigkeit nicht hinzufügen.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Astra repariert ein fremdes Netz, indem es 0,016 Prozent der Gewichte überschreibt</h1>
+    <p class="meta"><time datetime="2026-11-02">02.11.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/forschung.html">#forschung</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/modelle.html">#modelle</a></span> · <a class="source" href="https://rikiyat.github.io/blog/weight-space-programming/">MIT CSAIL (Takehi et al.)</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:19 Minuten</strong> (KI-Stimme) – <a href="audio/astra-repariert-ein-fremdes-netz-indem-es-0-016-prozent-der-gewichte-ueberschreibt.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,4 MB)</span></p>
+    <audio controls preload="none" src="audio/astra-repariert-ein-fremdes-netz-indem-es-0-016-prozent-der-gewichte-ueberschreibt.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Vier Forscher am MIT CSAIL haben GPT-6 Astra die rohen Gewichte kleiner Netze vorgelegt und es gebeten, sie zu lesen, zu reparieren und von Grund auf zu schreiben. Trainieren, Verlustfunktion und Gradienten waren nicht erlaubt.</li>
+  <li>In acht Experimenten erkannte Astra aus den Gewichten allein, welches Spiel ein Netz gelernt hatte, welche Form ein Diffusionsmodell zeichnet und auf welcher Sprache ein Sprachmodell trainiert war. Die Kopierköpfe, die es benannte, stimmten mit den gemessenen überein.</li>
+  <li>Bei Qwen3.5-0.8B fand es eine Richtung in den Gewichten der Schichten 15 und 19, die für die Denkschleifen verantwortlich war, und löschte sie in 131.072 von 800 Millionen Gewichten, also 0,016 Prozent. MATH-500 stieg von 7,9 auf 48,1 Prozent.</li>
+  <li>Die Grenze steht im selben Bericht: Bei Gemma 3 270M, das nicht schleift, blieb jede Bearbeitung wirkungslos. Ein Hindernis lässt sich wegschneiden, eine fehlende Fähigkeit nicht hinzufügen.</li>
+  <li>Getestet wurde ein einziges Modell, ohne unabhängige Wiederholung; einen Benchmark für die Fähigkeit bauen die Autoren erst noch.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Am 2. November haben Rikiya Takehi, Jayden Teoh, Alex Zhang und Omar Khattab vom MIT CSAIL einen <a href="https://rikiyat.github.io/blog/weight-space-programming/">Bericht</a> veröffentlicht, der eine ungewöhnliche Frage stellt: Kann ein Sprachmodell die Zahlen in einem fremden neuronalen Netz lesen wie Quelltext? Ihre Antwort ist ein vorsichtiges Ja, und sie haben der Methode einen Namen gegeben: Weight-Space Programming.</p>
+<p>Gewichte sind die Zahlen, die ein Netz beim Training lernt. Bei einem Modell mit 800 Millionen <button type="button" class="lex" popovertarget="lex-parameter" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>n sind das 800 Millionen einzelne Werte, verteilt über 24 Schichten. Normalerweise schreibt sie ein Optimierer wie Adam, der aus Fehlern ableitet, wohin jede Zahl wandern soll. Die vier Forscher haben stattdessen die rohen Werte als Text in das <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> von Astra gelegt und ihm Python gegeben. Eine Trainingsschleife durfte es nicht schreiben, Gradienten nicht sehen und das Netz in den meisten Experimenten nicht einmal ausführen.</p>
+<p>In acht Experimenten kommen drei Fähigkeiten zusammen: lesen, reparieren, schreiben.</p>
+<h2>Lesen</h2>
+<p>Das erste Experiment ist das schönste. Vier Netze wurden mit demselben Verfahren (PPO) auf vier verschiedene Spiele trainiert: Breakout, Pong, Pac-Man und Freeway, jeweils eine eigene 10×10-Version. Alle vier haben dieselbe Bauform, 500 Eingaben, zwei versteckte Schichten mit 32 Einheiten, fünf Ausgaben, zusammen 17.253 Gewichte. Von außen ist kein Unterschied zu sehen.</p>
+<p>Astra nannte trotzdem alle vier richtig, ohne die Liste der Spiele zu kennen. Die Begründung im Bericht ist konkret: Beim Breakout liegen die Gewichte des Agenten-Kanals in der unteren Zeile, weil dort der Schläger sitzt. Astra hatte die Geometrie des Spiels aus den Zahlen gelesen.</p>
+<p>Im zweiten Experiment ging es um Diffusionsmodelle, die 12×12-Bilder erzeugen, je 23.824 Gewichte für Kreise, Quadrate und Dreiecke. Astra erkannte alle drei. Interessanter als die Trefferquote ist ein Fehler: Es zeichnete die Formen als Umriss, obwohl die Modelle gefüllte Flächen erzeugen. Wer einen Vorwärtspass rechnet, macht diesen Fehler nicht.</p>
+<p>Das dritte Experiment ist das strengste. Drei Zeichenmodelle mit 7,16 Millionen Gewichten wurden auf Python-Code, englischer Wikipedia und japanischer Literatur in Lateinschrift trainiert. Die Forscher entfernten die Eingabe- und die Ausgabeschicht und gaben Astra nur die vier <button type="button" class="lex" popovertarget="lex-transformer" data-tip="Die neuronale Netzarchitektur hinter fast allen heutigen Sprachmodellen. Kernstück ist die Aufmerksamkeit (Attention): Das Modell gewichtet, welche Teile der Eingabe füreinander wichtig sind.">Transformer</button><span class="lex-pop" popover id="lex-transformer"><strong>Transformer</strong> Die neuronale Netzarchitektur hinter fast allen heutigen Sprachmodellen. Kernstück ist die Aufmerksamkeit (Attention): Das Modell gewichtet, welche Teile der Eingabe füreinander wichtig sind. <a href="lexikon.html#transformer">Im Lexikon</a></span>-Blöcke dazwischen. Ohne diese beiden Schichten sagt keine Zahl im Netz, welches Zeichen welches ist, und das Modell lässt sich auf keinem Text ausführen.</p>
+<p>Astra traf die Sprache in beiden Versuchen und benannte in allen drei Modellen genau die Kopierköpfe, die eine spätere Messung bestätigte: Schicht 2.1, 3.1 und 3.5 im Python-Modell, 3.3 im Japanischen, 3.1 im Englischen. Keinen anderen Kopf meldete es als Kopierkopf. Den Weg dorthin hat es sich selbst hergeleitet, mit einer veröffentlichten Methode von Elhage und Kollegen aus der Mechanistischen Interpretierbarkeit: ein Kopf, der ein Zeichen zurückschaut, dann Gewichtsmatrizen multiplizieren, um spätere Köpfe zu finden, die damit weiterarbeiten. Astra hatte diese Methode nicht genannt bekommen.</p>
+<p>Das siebte Experiment zeigt die Grenze desselben Ansatzes. Zwei Kopien von Gemma 3 270M wurden gleich feinjustiert, eine antwortet korrekt, die andere gibt immer die vom Nutzer vorgeschlagene Antwort. Aus den Gewichten allein fand Astra den Speichellecker nicht, in vier Versuchen nicht. Erst als es die Aufmerksamkeitsmuster auf selbst geschriebenen Texten sehen durfte, traf es alle drei Paare: In der ehrlichen Kopie schaut Kopf 10.2 zu 94,3 Prozent auf die Zahlen der Frage, in der speichelleckerischen zu 85,7 Prozent auf die Antwort des Nutzers.</p>
+<h2>Reparieren und schreiben</h2>
+<p>Im vierten Experiment ging es um ein Auto in einer Physiksimulation, das eine Rampe überspringen soll. Dafür muss es erst zurücksetzen, um Anlauf zu nehmen. Das mit PPO trainierte Netz fuhr stattdessen gerade auf die Rampe zu und blieb hängen, in 256 von 256 Läufen. Astra bekam die Gewichte, eine Beschreibung der Szene und eine aufgezeichnete Episode. Es änderte 3,5 Prozent der Gewichte und löste die Aufgabe in 1.024 von 1.024 Läufen. Der Bericht zeigt auch, wie: ein kleiner zusätzlicher Pfad durch wenige Einheiten pro Schicht, der Position und Geschwindigkeit liest und sich abschaltet, sobald das Rad den roten Streifen passiert hat.</p>
+<p>Noch einen Schritt weiter geht das fünfte Experiment. Drei MinAtar-Spiele, Netz mit 600 Eingaben und 32 Einheiten pro Schicht, alle Gewichte starten bei null. Keine Daten, keine Verlustfunktion, keine Gradienten, keine Werkzeuge, kein Ausprobieren im Spiel. Astra schrieb die Gewichte als Text in einer Antwort, und die Netze schlugen das mit PPO trainierte Vergleichsnetz in allen drei Spielen: Breakout 517,4 Punkte gegen 15,8 nach 100 Millionen Trainingsschritten, Seaquest 53,1 gegen 5,6, Asterix 53,2 gegen 25,8. Gegen die 500-Millionen-Version steht es 20-fach in Breakout, knapp in Asterix und bei 60 Prozent in Seaquest.</p>
+<p>Im sechsten Experiment ging es um Go auf 9×9 Feldern, 1,48 Millionen Gewichte. Die passen nicht in einen Prompt, deshalb bekam Astra eine Python-Sandbox ohne Go-Bibliothek und 50 Vorwärtspässe. Damit schlug sein Netz ein gleich großes PPO-Netz, das auf 20 Millionen Partien trainiert war.</p>
+<h2>Die 0,016 Prozent</h2>
+<p>Das achte Experiment ist das, über das gerade geredet wird. Qwen3.5-0.8B ist ein offenes Modell mit 800 Millionen <button type="button" class="lex" popovertarget="lex-parameter-2" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter-2"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>n, das vor dem Antworten nachdenkt. Seine <button type="button" class="lex" popovertarget="lex-modellkarte" data-tip="Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt.">Modellkarte</button><span class="lex-pop" popover id="lex-modellkarte"><strong>Modellkarte</strong> Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt. <a href="lexikon.html#modellkarte">Im Lexikon</a></span> warnt vor Denkschleifen, in denen das Modell denselben Text wiederholt, bis das <button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span>-Limit greift. In der Praxis betraf das fast jede Antwort: 85 der ersten 96 Übungsantworten liefen bis an die Grenze von 32.768 Token.</p>
+<p>Astra bekam die Gewichte in einer Python-Sitzung, 14.744 Übungsaufgaben aus GSM8K und MATH und ein Budget an Vorwärtspässen, also Läufen des Netzes ohne Gradienten. Es verfolgte die Schleife bis zu einer Richtung, die die MLPs der Schichten 15 und 19 schreiben, und zog diese Richtung von je 64 Ausgabespalten ab. 131.072 von 800 Millionen Gewichten, 0,016 Prozent.</p>
+<figure class="widget widget-tabelle">
+<p class="widget-title">Qwen3.5-0.8B nach Astras Eingriff in 0,016 Prozent der Gewichte</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Bearbeitung</th><th class="col-emphasis">MATH-500</th><th>GSM8K</th><th>IFEval</th><th>Antworten am Token-Limit</th></tr></thead>
+<tbody>
+<tr><th>Unbearbeitet</th><td class="col-emphasis">7,9 %</td><td>13,8 %</td><td>21,0 %</td><td>93,0 %</td></tr>
+<tr><th>10 Vorwärtspässe</th><td class="col-emphasis">12,3 %</td><td>25,7 %</td><td>49,0 %</td><td>87,2 %</td></tr>
+<tr><th>25 Vorwärtspässe</th><td class="col-emphasis">14,1 %</td><td>25,1 %</td><td>39,9 %</td><td>86,4 %</td></tr>
+<tr><th>50 Vorwärtspässe</th><td class="col-emphasis">48,1 %</td><td>67,1 %</td><td>62,3 %</td><td>33,1 %</td></tr>
+</tbody>
+</table>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://rikiyat.github.io/blog/weight-space-programming/" target="_blank" rel="noopener">MIT CSAIL: Sparks of Weight-Space Programming, 2.11.2026</a></span>
+  <span class="chart-note">Vorwärtspässe sind Läufe des Netzes ohne Gradienten, die Astra als Budget bekam. Je Aufgabe mehrere Stichproben, 16 auf AMC23, 4 auf MATH-500, 2 auf GSM8K und IFEval.</span>
+</figcaption>
+</figure>
+<p>Der Sprung kommt nicht von mehr Rechenzeit allein: Mit 10 und mit 25 Vorwärtspässen blieb MATH-500 bei 12,3 und 14,1 Prozent, der Anteil der Antworten am Token-Limit fiel kaum. Erst mit 50 Pässen brach die Schleife, und dann verbesserte sich auch die Instruktionsbefolgung von 21,0 auf 62,3 Prozent. Das passt zur Diagnose: Die Schleife war kein Mathematikproblem, sie traf jede Aufgabe.</p>
+<div class="box box-warnung">
+<p class="box-title">Der Gegenversuch</p>
+<div class="box-body">
+<p>Die Autoren haben den wichtigsten Einwand selbst geprüft. Gemma 3 270M, ein instruct-feinjustiertes Modell ohne Schleifenproblem (8,5 Prozent der Antworten am Token-Limit), ließ sich nicht verbessern: MATH-500 blieb bei 6,8 Prozent, nach Bearbeitungen bei 7,0, 7,6, 7,7 und wieder 7,0. Astra fand hier gewöhnliche Rechenfehler ohne eine einzelne Ursache. Ihr Fazit: Ein Eingriff in die Gewichte kann ein Hindernis entfernen, das eine Fähigkeit verdeckt. Er kann keine Fähigkeit hinzufügen, die nicht da ist.</p>
+
+</div>
+</div>
+<h2>Warum zählt es</h2>
+<p>Zwei Dinge sind neu. Bisher haben Modelle entweder Werkzeuge bedient, die für sie gebaut wurden, oder sie wurden eigens dafür trainiert, Gewichte zu lesen. Hier liest ein Allzweckmodell die Zahlen selbst, so gut, dass es die veröffentlichte Kopierkopf-Analyse ohne Anleitung nachvollzieht.</p>
+<p>Der zweite Punkt ist die Sparsamkeit des Eingriffs. 0,016 Prozent der Gewichte zu ändern lässt den Rest unangetastet. <button type="button" class="lex" popovertarget="lex-fine-tuning" data-tip="Ein fertiges Modell mit eigenen Beispieldaten weitertrainieren, damit es für einen bestimmten Zweck besser passt.">Fine-Tuning</button><span class="lex-pop" popover id="lex-fine-tuning"><strong>Fine-Tuning</strong> Ein fertiges Modell mit eigenen Beispieldaten weitertrainieren, damit es für einen bestimmten Zweck besser passt. <a href="lexikon.html#fine-tuning">Im Lexikon</a></span> auf neue Aufgaben verändert dagegen alle Gewichte und riskiert, dass das Modell Altes verlernt.</p>
+<p>Der Titel heißt „Sparks&quot;, Funken, und die Autoren meinen das so. Getestet wurde ein Modell eines Anbieters, auf Netzen bis 1,5 Millionen und einmal 800 Millionen Gewichte. Die Zahlen hängen am <button type="button" class="lex" popovertarget="lex-harness" data-tip="Das Programm um ein Sprachmodell herum: Es stellt Werkzeuge bereit, führt Befehle aus, verwaltet den Gesprächsverlauf und entscheidet, wann das Modell wieder drankommt. Dasselbe Modell kann in verschiedenen Harnessen sehr unterschiedlich gut arbeiten, weil viel Verhalten nicht im Modell, sondern in dieser Hülle steckt.">Harness</button><span class="lex-pop" popover id="lex-harness"><strong>Harness</strong> Das Programm um ein Sprachmodell herum: Es stellt Werkzeuge bereit, führt Befehle aus, verwaltet den Gesprächsverlauf und entscheidet, wann das Modell wieder drankommt. Dasselbe Modell kann in verschiedenen Harnessen sehr unterschiedlich gut arbeiten, weil viel Verhalten nicht im Modell, sondern in dieser Hülle steckt. <a href="lexikon.html#harness">Im Lexikon</a></span>: Bei Qwen springt MATH-500 je nach Zahl der erlaubten Vorwärtspässe von 12,3 auf 48,1 Prozent. Kontextlänge und Harness nennen die Autoren selbst als Engstelle. Einen standardisierten Test, der Modelle vergleichbar macht, gibt es noch nicht.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Für die Sicherheitsprüfung ist der Leseteil der interessantere. Wer ein Modell bekommt, ohne zu wissen, was beim Training hineingeraten ist, kann bisher nur auf Eingaben warten, die eine Hintertür auslösen. Gewichte lesen wäre der direkte Weg, vorausgesetzt, es klappt auch bei Milliarden <button type="button" class="lex" popovertarget="lex-parameter-3" data-tip="Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit.">Parameter</button><span class="lex-pop" popover id="lex-parameter-3"><strong>Parameter</strong> Die gelernten Einstellwerte eines KI-Modells. Mehr Parameter bedeuten mehr Fähigkeit, aber auch mehr Speicher und Rechenzeit. <a href="lexikon.html#parameter">Im Lexikon</a></span>n.</p>
+<p>Für die Reparatur ist die Grenze aus dem Gegenversuch die eigentliche Nachricht. Was ein Modell schon kann und nur nicht zeigt, lässt sich freilegen. Was es nicht kann, bleibt außer Reichweite.</p>
+<p>Eine Frage stellt der Bericht nicht: Dieselbe Fähigkeit, eine Schleife zu löschen, kann auch eine Sicherheitsschwelle verschieben. Bei offenen Gewichten ist ein Modell, das sich mit ein paar Zahlen umschreiben lässt, leichter zu verändern als eines, das neu trainiert werden muss.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Rikiya Takehi, Jayden Teoh, Alex Zhang, Omar Khattab: Sparks of Weight-Space Programming: LLMs can natively read &amp; write neural network weights, MIT CSAIL, 2.11.2026: <a href="https://rikiyat.github.io/blog/weight-space-programming/">rikiyat.github.io/blog/weight-space-programming</a></li>
+  <li>Vollständige Protokolle aller acht Experimente: <a href="https://github.com/RikiyaT/lm_understand-logs">github.com/RikiyaT/lm_understand-logs</a></li>
+  <li>Bearbeitetes Qwen3.5-0.8B, von Hugging Face aus den Protokollen nachgebaut und neu bewertet: <a href="https://huggingface.co/JonathanColetti/Qwen3.5-0.8B-Astra-WeightEdit">huggingface.co/JonathanColetti/Qwen3.5-0.8B-Astra-WeightEdit</a></li>
+  <li>Methode der Kopierköpfe, die Astra ohne Anleitung nachvollzog: Elhage et al., A Mathematical Framework for Transformer Circuits: <a href="https://transformer-circuits.pub/2021/framework/index.html">transformer-circuits.pub/2021/framework</a></li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

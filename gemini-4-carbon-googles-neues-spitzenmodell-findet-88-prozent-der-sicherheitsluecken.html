@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gemini 4 Carbon: Googles neues Spitzenmodell findet 88 Prozent der Sicherheitslücken – Hermies Blog</title>
+  <meta name="description" content="Google DeepMind hat Gemini 4 Carbon vorgestellt: laut Unternehmen das stärkste eigene Modell, gebaut für tagelange Programmieraufgaben und Cyber-Verteidigung. Google meldet 88,2 Prozent auf SEC-bench Pro, 54,8 auf ExploitGym und 71,0 auf CWE-bench und Platz 1 im Intelligence Index v5.0 mit 59 Punkten – unabhängig geprüft ist davon nichts, Carbon fehlt in der Tabelle von Artificial Analysis noch. Preis wie beim Vorgänger Argon: 2 und 10 Dollar je Million Token, danach 4 und 20. Zugang bekommen zuerst nur ausgewählte Cyber-Verteidiger.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Gemini 4 Carbon: Googles neues Spitzenmodell findet 88 Prozent der Sicherheitslücken</h1>
+    <p class="meta"><time datetime="2026-10-28T18:00+01:00">28.10.2026, 18:00</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/google.html">#google</a> <a class="tag" href="tag/deepmind.html">#deepmind</a> <a class="tag" href="tag/modelle.html">#modelle</a> <a class="tag" href="tag/llm.html">#llm</a> <a class="tag" href="tag/sicherheit.html">#sicherheit</a> <a class="tag" href="tag/benchmark.html">#benchmark</a></span> · <a class="source" href="https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/">Google DeepMind</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>7:27 Minuten</strong> (KI-Stimme) – <a href="audio/gemini-4-carbon-googles-neues-spitzenmodell-findet-88-prozent-der-sicherheitsluecken.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(3,4 MB)</span></p>
+    <audio controls preload="none" src="audio/gemini-4-carbon-googles-neues-spitzenmodell-findet-88-prozent-der-sicherheitsluecken.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Google DeepMind hat am Mittwoch <strong>Gemini 4 Carbon</strong> vorgestellt – laut Unternehmen sein stärkstes Modell, gebaut für zwei Dinge: sehr lange Aufgaben und Cyber-Verteidigung.</li>
+  <li>Google nennt drei Zahlen als Bestwerte: <strong>88,2 Prozent</strong> auf SEC-bench Pro (Sicherheitslücken finden), <strong>54,8 Prozent</strong> auf ExploitGym (Lücken ausnutzen) und <strong>71,0 Prozent</strong> auf CWE-bench (Lücken schließen). Das sind Herstellerangaben, unabhängig nachgeprüft sind sie nicht.</li>
+  <li>Auf dem Intelligence Index v5.0 von Artificial Analysis steht Carbon laut Google bei <strong>59 Punkten und damit auf Platz 1</strong>. Der Wert ist neu: Anbieter Anthropic führt die veröffentlichte Tabelle derzeit mit 58 Punkten an, Carbon ist dort noch nicht eingetragen.</li>
+  <li>Der Preis bleibt im Einführungszeitraum wie beim Vorgänger: <strong>2 Dollar</strong> je Million Eingabe-<button type="button" class="lex" popovertarget="lex-token" data-tip="Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen.">Token</button><span class="lex-pop" popover id="lex-token"><strong>Token</strong> Das Wortstück, in das ein Sprachmodell Text zerlegt. „Roboter“ kann in „Robot“ und „er“ zerfallen. Rechenaufwand und Kontextlänge werden in Token gemessen. <a href="lexikon.html#token">Im Lexikon</a></span> und <strong>10 Dollar</strong> je Million Ausgabe-Token. Danach gelten 4 und 20 Dollar – ein Enddatum nennt Google diesmal nicht.</li>
+  <li><strong>Die Haken:</strong> Carbon bekommt zunächst nur ausgewählte Cyber-Verteidiger, kein normaler Kunde kann es kaufen. Zum <button type="button" class="lex" popovertarget="lex-kontextfenster" data-tip="Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht.">Kontextfenster</button><span class="lex-pop" popover id="lex-kontextfenster"><strong>Kontextfenster</strong> Wie viel Text ein Modell auf einmal berücksichtigen kann, in Token gemessen. Was nicht hineinpasst, sieht das Modell nicht. <a href="lexikon.html#kontextfenster">Im Lexikon</a></span> sagt die Ankündigung nichts, eine eigene <button type="button" class="lex" popovertarget="lex-modellkarte" data-tip="Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt.">Modellkarte</button><span class="lex-pop" popover id="lex-modellkarte"><strong>Modellkarte</strong> Das Datenblatt eines KI-Modells: wer es gebaut hat, wann es erschien, was es kann, welche Tests es bestanden hat und wo es versagt. <a href="lexikon.html#modellkarte">Im Lexikon</a></span> veröffentlicht Google nicht.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Koray Kavukcuoglu, bei Google für DeepMind und die KI-Architektur zuständig, hat Gemini 4 Carbon am Mittwochabend im Google-Blog vorgestellt. Der Zeitpunkt ist bemerkenswert: Der Vorgänger Gemini 4 Argon ist erst zwei Wochen zu haben – seit dem 13. Oktober für alle zahlenden Kunden. Carbon setzt direkt darauf.</p>
+<p>Der Zuschnitt ist eng und erkennbar politisch. Carbon ist kein Allzweckmodell für den Chat, sondern ein Werkzeug für zwei Aufgaben, die Google als strategisch ansieht: Programmierarbeit, die über Stunden oder Tage läuft, und Abwehrarbeit in der IT-Sicherheit. Google schreibt, eigene Teams hätten Carbon „tagelang&quot; laufen lassen, um Fehler in großen Codebasen und in systemnaher Software zu finden und zu beheben.</p>
+<p>Die Zahlen, die Google nennt, kommen aus drei Tests der Kategorie <button type="button" class="lex" popovertarget="lex-benchmark" data-tip="Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen.">Benchmark</button><span class="lex-pop" popover id="lex-benchmark"><strong>Benchmark</strong> Ein standardisierter Test, mit dem sich Modelle vergleichen lassen, zum Beispiel Multiple-Choice-Aufgaben oder Programmierübungen. <a href="lexikon.html#benchmark">Im Lexikon</a></span> und einer Web-Arena:</p>
+<ul>
+  <li><strong>SEC-bench Pro: 88,2 Prozent.</strong> Der Test misst, ob ein Modell echte Schwachstellen in echter Software findet.</li>
+  <li><strong>ExploitGym: 54,8 Prozent.</strong> Hier geht es darum, eine gefundene Lücke tatsächlich auszunutzen – also den Angriff zu bauen, nicht nur das Loch zu sehen.</li>
+  <li><strong>CWE-bench: 71,0 Prozent.</strong> Dieser Test prüft das Gegenteil: ob das Modell eine Lücke korrekt schließt, ohne den Code zu zerstören. Argon kam bei der Vorgängerversion CWE-bench v1 auf 68 Prozent, wie Google in der Argon-Ankündigung schrieb.</li>
+  <li><strong>WebDev Arena: plus 89 Punkte, Platz 4 mit 1769 Elo.</strong> Die Arena lässt Menschen zwei Webseiten vergleichen, die zwei Modelle aus derselben Vorgabe gebaut haben; Elo ist die Punktezahl, mit der solche Duelle ausgewertet werden.</li>
+</ul>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Intelligenz-Index v5.0: Carbon vorn, offene Gewichte weit hinten</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Intelligenz-Index v5.0: Carbon</tspan><tspan x="68" y="48">vorn, offene Gewichte weit hinten</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Punkten</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="263.3" x2="650" y2="263.3" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="267.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="68" y1="181.7" x2="650" y2="181.7" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="185.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">60</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="86.7" y="104.1" width="45.7" height="240.9" rx="3" fill="#0075de" />
+  <text x="109.6" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">59</text>
+  <text x="109.6" y="363.0" transform="rotate(-30 109.6 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Gemini 4 Carbon</text>
+  <rect x="169.9" y="108.2" width="45.7" height="236.8" rx="3" fill="#0075de" />
+  <text x="192.7" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">58</text>
+  <text x="192.7" y="363.0" transform="rotate(-30 192.7 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Claude Opus 5.5</text>
+  <rect x="253.0" y="112.2" width="45.7" height="232.8" rx="3" fill="#0075de" />
+  <text x="275.9" y="112.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">57</text>
+  <text x="275.9" y="363.0" transform="rotate(-30 275.9 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GPT-6 Astra</text>
+  <rect x="336.1" y="120.4" width="45.7" height="224.6" rx="3" fill="#0075de" />
+  <text x="359.0" y="114.4" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">55</text>
+  <text x="359.0" y="363.0" transform="rotate(-30 359.0 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">GPT-6.1 Sol</text>
+  <rect x="419.3" y="140.8" width="45.7" height="204.2" rx="3" fill="#0075de" />
+  <text x="442.1" y="134.8" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">50</text>
+  <text x="442.1" y="363.0" transform="rotate(-30 442.1 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Gemini 4 Argon</text>
+  <rect x="502.4" y="157.2" width="45.7" height="187.8" rx="3" fill="#0075de" />
+  <text x="525.3" y="151.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">46</text>
+  <text x="525.3" y="363.0" transform="rotate(-30 525.3 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">Kimi K3.1 Pro</text>
+  <rect x="585.6" y="214.3" width="45.7" height="130.7" rx="3" fill="#0075de" />
+  <text x="608.4" y="208.3" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#111111">32</text>
+  <text x="608.4" y="363.0" transform="rotate(-30 608.4 363.0)" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#333333">DeepSeek V4.1 Flash</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5" target="_blank" rel="noopener">Artificial Analysis, Intelligence Index v5.0 (27.10.2026); Carbon-Wert: Google DeepMind (28.10.2026)</a></span>
+  <span class="chart-note">Carbon ist der von Google gemeldete Wert und steht noch nicht in der Tabelle von Artificial Analysis. Kimi K3.1 Pro führt die offenen Gewichte an, seine Gewichte sind aber noch nicht veröffentlicht.</span>
+</figcaption>
+</figure>
+<p>Diese Werte stammen ausnahmslos von Google selbst. Für ExploitGym und SEC-bench Pro nennt die Ankündigung keine Vergleichszahlen anderer Anbieter, ein unabhängiger Nachbau fehlt bislang.</p>
+<h2>Warum zählt es</h2>
+<p><strong>Erstens: Der Sicherheitstest ist der eigentliche Markttest.</strong> Google positioniert Carbon nicht gegen Googles eigenes Vorjahresmodell, sondern gegen Anthropics Claude Opus 5.5 und OpenAIs GPT-6-Familie. Der Punkt, an dem sich das entscheidet, ist der Intelligence Index von Artificial Analysis – ein gewichteter Mittelwert aus neun Prüfungen, den viele Einkaufsabteilungen als erste Orientierung nehmen. Diesen Index hat Artificial Analysis erst am 27. Oktober auf Version 5.0 umgestellt. Auf der neuen Skala führt Claude Opus 5.5 mit 58 Punkten, dahinter GPT-6 Astra mit 57 und GPT-6.1 Sol mit 55; Gemini 4 Argon steht bei 50.</p>
+<p>Google meldet für Carbon 59 – einen Punkt vor dem bisherigen Spitzenreiter. Das ist ein knapper Vorsprung und ein geschickt gewählter Moment: Die neue Skala ist zwei Tage alt, die Zahlen sind also frisch und für Leser noch nicht einordbar. In der öffentlich abrufbaren Tabelle von Artificial Analysis ist Carbon derzeit nicht eingetragen; dort steht als Spitze weiterhin Opus 5.5. Ob der Wert 59 nach derselben Prüfroutine entstanden ist, lässt sich von außen nicht kontrollieren.</p>
+<p><strong>Zweitens: Google traut sich etwas bei der Freigabe.</strong> Carbon geht zuerst an eine kleine Gruppe von Verteidigern in Unternehmen und Behörden, danach schrittweise an weitere Partner im eigenen Programm „Fairwind&quot;. Google schreibt ausdrücklich, man beteilige sich am freiwilligen Vorab-Testverfahren der US-Regierung. Für Entwickler, Firmen und Privatkunden gibt es keinen Termin – nur ein „so bald wie möglich&quot;. Das ist derselbe Weg, den Google bei Argon gegangen ist, und es ist der Grund, warum Carbon für die meisten Leser vorerst Theorie bleibt.</p>
+<p><strong>Drittens: Die Fähigkeit ist doppelt verwendbar.</strong> Ein Modell, das Lücken findet und ausnutzt, kann auch angegriffen werden. Google reagiert darauf mit zwei Schichten: Der Zugang ist begrenzt, und das Modell läuft bei Kunden mit Verteidigungsauftrag ohne die üblichen Cyber-<button type="button" class="lex" popovertarget="lex-guardrail" data-tip="Eine Schutzschicht um ein Modell, die unerwünschte Eingaben oder Antworten abfängt. Oft ist das ein separates Filterprogramm vor oder hinter dem Modell, nicht das Modell selbst.">Guardrail</button><span class="lex-pop" popover id="lex-guardrail"><strong>Guardrail</strong> Eine Schutzschicht um ein Modell, die unerwünschte Eingaben oder Antworten abfängt. Oft ist das ein separates Filterprogramm vor oder hinter dem Modell, nicht das Modell selbst. <a href="lexikon.html#guardrail">Im Lexikon</a></span>s, damit es überhaupt wirken kann. Das ist ein bewusstes Risiko, das Google mit der Prüfung durch Dritte abfedern will. Wie real die Gefahr ist, zeigte in dieser Woche ein anderer Fall: Ein Sicherheitsstartup drang nach eigener Darstellung mit KI-Agenten in Anthropics interne Systeme ein – über externe Geschäftssoftware und im Rahmen von Anthropics eigenem <button type="button" class="lex" popovertarget="lex-bug-bounty" data-tip="Ein Kopfgeld für gemeldete Sicherheitslücken: Wer eine Schwachstelle findet und verantwortungsvoll meldet, bekommt Geld. Firmen nutzen das als Ergänzung zu eigenen Sicherheitsteams.">Bug-Bounty</button><span class="lex-pop" popover id="lex-bug-bounty"><strong>Bug-Bounty</strong> Ein Kopfgeld für gemeldete Sicherheitslücken: Wer eine Schwachstelle findet und verantwortungsvoll meldet, bekommt Geld. Firmen nutzen das als Ergänzung zu eigenen Sicherheitsteams. <a href="lexikon.html#bug-bounty">Im Lexikon</a></span>-Programm. Diese Darstellung stammt aus einem Bericht der Washington Post, den The Decoder zusammengefasst hat; Anthropic bestätigt den Zugriff, bestreitet aber Umfang und Dauer.</p>
+<h2>Was heißt das praktisch</h2>
+<p><strong>Für Sicherheitsteams:</strong> Carbon ist derzeit kein Produkt, das man kaufen kann, sondern ein Bewerbungsverfahren. Wer im Fairwind-Programm ist, bekommt Zugang ohne Cyber-Guardrails. Für alle anderen bleibt Argon die verfügbare Spitze – mit 1 Million Token gemeinsames Ein- und Ausgabefenster und 68 Prozent auf CWE-bench v1.</p>
+<p><strong>Für Einkäufer:</strong> Der Preis ist der interessanteste Teil. Carbon startet bei 2 und 10 Dollar je Million Token, also auf dem Niveau von Argon und deutlich unter GPT-6 Astra, das bei Artificial Analysis mit 10 und 50 Dollar je Million Token geführt wird. Nach dem Einführungszeitraum gelten 4 und 20 Dollar – dasselbe Niveau wie Claude Opus 5.5. Bei Argon endet der Einführungszeitraum am 30. November 2026; für Carbon nennt die Ankündigung kein Datum. Gecachte Eingabe kostet 95 Prozent weniger, was bei Agenten zählt, die dieselbe Datei hundertmal lesen.</p>
+<figure class="chart-figure">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 415" width="100%" height="auto" role="img" class="chart-svg">
+  <title>Was eine Million Token kostet: Carbon gegen die Konkurrenz</title>
+  <rect width="100%" height="100%" fill="#ffffff" rx="8" />
+  <text x="68" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="#111111"><tspan x="68" y="26">Was eine Million Token kostet:</tspan><tspan x="68" y="48">Carbon gegen die Konkurrenz</tspan></text>
+  <text x="68" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#666666">in Dollar je Million Token</text>
+  <rect x="188.0" y="62.0" width="12" height="12" rx="2" fill="#0075de" />
+  <text x="204.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Carbon, Einführung</text>
+  <rect x="357.0" y="62.0" width="12" height="12" rx="2" fill="#e05638" />
+  <text x="373.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Carbon, danach</text>
+  <rect x="496.0" y="62.0" width="12" height="12" rx="2" fill="#059669" />
+  <text x="512.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">Claude Opus 5.5</text>
+  <rect x="642.5" y="62.0" width="12" height="12" rx="2" fill="#7c3aed" />
+  <text x="658.5" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">GPT-6 Astra</text>
+  <rect x="759.0" y="62.0" width="12" height="12" rx="2" fill="#d97706" />
+  <text x="775.0" y="72.0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#444444">GPT-6.1 Terra</text>
+  <line x1="68" y1="345.0" x2="650" y2="345.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="349.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">0</text>
+  <line x1="68" y1="263.3" x2="650" y2="263.3" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="267.3" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">20</text>
+  <line x1="68" y1="181.7" x2="650" y2="181.7" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="185.7" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">40</text>
+  <line x1="68" y1="100.0" x2="650" y2="100.0" stroke="#eeeeee" stroke-width="1" />
+  <text x="60" y="104.0" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#666666">60</text>
+  <line x1="68" y1="345" x2="650" y2="345" stroke="#cccccc" stroke-width="1.5" />
+  <rect x="104.4" y="336.8" width="41.2" height="8.2" rx="2" fill="#0075de" />
+  <text x="125.0" y="331.8" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">2</text>
+  <rect x="148.6" y="328.7" width="41.2" height="16.3" rx="2" fill="#e05638" />
+  <text x="169.2" y="323.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">4</text>
+  <rect x="192.9" y="328.7" width="41.2" height="16.3" rx="2" fill="#059669" />
+  <text x="213.5" y="323.7" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">4</text>
+  <rect x="237.1" y="304.2" width="41.2" height="40.8" rx="2" fill="#7c3aed" />
+  <text x="257.8" y="299.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">10</text>
+  <rect x="281.4" y="340.9" width="41.2" height="4.1" rx="2" fill="#d97706" />
+  <text x="302.0" y="335.9" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">1</text>
+  <text x="213.5" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Eingabe</text>
+  <rect x="395.4" y="304.2" width="41.2" height="40.8" rx="2" fill="#0075de" />
+  <text x="416.0" y="299.2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">10</text>
+  <rect x="439.6" y="263.3" width="41.2" height="81.7" rx="2" fill="#e05638" />
+  <text x="460.2" y="258.3" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">20</text>
+  <rect x="483.9" y="263.3" width="41.2" height="81.7" rx="2" fill="#059669" />
+  <text x="504.5" y="258.3" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">20</text>
+  <rect x="528.1" y="140.8" width="41.2" height="204.2" rx="2" fill="#7c3aed" />
+  <text x="548.8" y="135.8" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">50</text>
+  <rect x="572.4" y="324.6" width="41.2" height="20.4" rx="2" fill="#d97706" />
+  <text x="593.0" y="319.6" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#111111">5</text>
+  <text x="504.5" y="365.0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#333333">Ausgabe</text>
+</svg>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/" target="_blank" rel="noopener">Google DeepMind, Gemini 4 Carbon (28.10.2026); Artificial Analysis, Model Comparison (28.10.2026)</a></span>
+  <span class="chart-note">Listenpreise der API. Gecachte Eingabe kostet bei Carbon 95 Prozent weniger. Ein Enddatum für den Einführungspreis nennt Google nicht.</span>
+</figcaption>
+</figure>
+<p><strong>Für alle, die wissen wollen, ob es stimmt:</strong> Abwarten. Google hat für Carbon weder ein Kontextfenster noch eine eigene Modellkarte veröffentlicht; die Ankündigung verweist für die Sicherheitsprüfung auf den Bericht zu Argon. Wer heute einen Vergleich braucht, hat nur Googles eigene Zahlen und muss ihnen glauben. Ein unabhängiger Test von Carbon durch Artificial Analysis oder eine Universität steht aus.</p>
+<p><strong>Und die Sicherheitsseite in Zahlen:</strong> Google meldet, Carbon habe bei einer internen Prüfung 26 Prozent weniger Übergriffigkeit gezeigt (das Modell hält sich also besser an den Auftrag, statt eigenmächtig mehr zu tun) und 29 Prozent weniger Untererfüllung (es lässt Aufgaben seltener liegen). Beim Test gegen <button type="button" class="lex" popovertarget="lex-prompt-injection" data-tip="Ein Angriff über versteckte Anweisungen in Inhalten, die ein Agent liest – etwa in einer Webseite, einer Mail oder einem Dokument. Der Agent hält den eingeschmuggelten Text für einen Auftrag und führt ihn aus.">Prompt-Injection</button><span class="lex-pop" popover id="lex-prompt-injection"><strong>Prompt-Injection</strong> Ein Angriff über versteckte Anweisungen in Inhalten, die ein Agent liest – etwa in einer Webseite, einer Mail oder einem Dokument. Der Agent hält den eingeschmuggelten Text für einen Auftrag und führt ihn aus. <a href="lexikon.html#prompt-injection">Im Lexikon</a></span>, also dem Versuch, dem Modell über versteckte Anweisungen in Dokumenten oder Webseiten fremde Befehle unterzuschieben, lag Argon bei 0,7 Prozent erfolgreichen Angriffen auf dem Benchmark von Gray Swan. Carbon gibt Google mit 0,0 Prozent an – kein einziger der getesteten Angriffe sei durchgekommen.</p>
+<p>Das ist eine starke Zahl und eine, die man mit Vorsicht lesen sollte: Ein Benchmark ist eine feste Sammlung von Angriffen. Wer sie kennt, kann sie trainieren. Die <button type="button" class="lex" popovertarget="lex-attack-success-rate" data-tip="Der Anteil der Angriffsversuche, bei denen ein Modell die verbotene Antwort tatsächlich gibt. Die übliche Maßeinheit der Jailbreak-Forschung, kurz ASR.">Attack Success Rate</button><span class="lex-pop" popover id="lex-attack-success-rate"><strong>Attack Success Rate</strong> Der Anteil der Angriffsversuche, bei denen ein Modell die verbotene Antwort tatsächlich gibt. Die übliche Maßeinheit der Jailbreak-Forschung, kurz ASR. <a href="lexikon.html#attack-success-rate">Im Lexikon</a></span> von null sagt deshalb, dass Carbon die bekannten Muster abwehrt – nicht, dass es gegen neue immun ist.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Google DeepMind: <a href="https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/">Gemini 4 Carbon: our next frontier model</a>, 28.10.2026 – Ankündigung, Benchmark-Werte, Preis, Freigabeweg, Sicherheitsangaben</li>
+  <li>Google: <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/">Gemini 4 Argon: Built to solve your hardest problems</a>, 13.10.2026 – 1 Million Token, Kontextfenster, Ende des Einführungspreises am 30.11.2026</li>
+  <li>Google: <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/">Gemini 4 Argon: our next era of frontier intelligence</a>, 30.09.2026 – CWE-bench v1 mit 68 Prozent</li>
+  <li>Artificial Analysis: <a href="https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5">Announcing Artificial Analysis Intelligence Index v5</a>, 27.10.2026 – Index-Skala, Spitzenwerte 58/57/55/50, Abstand zu offenen Gewichten</li>
+  <li>Artificial Analysis: <a href="https://artificialanalysis.ai/models/comparisons">Model Comparison</a> – Preise je Million Token für Claude Opus 5.5 und GPT-6 Astra</li>
+  <li>The Decoder: <a href="https://the-decoder.com/ai-agents-hacked-anthropic-maker-of-arguably-the-most-capable-ai-models-for-cyberdefense/">AI agents hacked Anthropic</a>, 28.10.2026 – Bericht über den Zugriff auf Anthropics Systeme (Sekundärquelle, beruht auf Washington Post)</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>

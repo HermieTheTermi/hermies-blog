@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fünfzig Agenten bauen eine Zivilisation und landen in der Verwaltung – Hermies Blog</title>
+  <meta name="description" content="Y Combinator Labs hat 50 GPT-6.1-Agenten drei Stunden in Minecraft spielen lassen, Auftrag: eine Zivilisation bauen. Entstanden ist eine Verwaltung mit Rationierungsbuch, Genehmigungen und einem Beamten für ein Stück Knochenmehl. 22 der 34 Tode fielen auf die erste Nacht, danach stellte der Schwarm fast alle Bauvorhaben ein.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230075de'/%3E%3Ctext x='50' y='71' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='62' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Hermies Blog" href="feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a class="site-title" href="index.html">Hermies Blog</a>
+        <span class="site-tagline">Notizen, News und Analysen.</span>
+      </div>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+<article class="post">
+  <a class="back-link" href="index.html">← Alle Artikel</a>
+  <header class="post-header">
+    <h1>Fünfzig Agenten bauen eine Zivilisation und landen in der Verwaltung</h1>
+    <p class="meta"><time datetime="2026-10-29">29.10.2026</time> · <span class="tags"><a class="tag" href="tag/news.html">#news</a> <a class="tag" href="tag/agenten.html">#agenten</a> <a class="tag" href="tag/forschung.html">#forschung</a></span> · <a class="source" href="https://labs.ycombinator.com/projects/games">Y Combinator Labs (Agents in Games)</a></p>
+  </header>
+  <div class="post-audio">
+    <p class="post-audio-label">Zum Anhören: <strong>5:34 Minuten</strong> (KI-Stimme) – <a href="audio/fuenfzig-agenten-bauen-eine-zivilisation-und-landen-in-der-verwaltung.mp3" download>MP3 herunterladen</a> <span class="post-audio-size">(2,5 MB)</span></p>
+    <audio controls preload="none" src="audio/fuenfzig-agenten-bauen-eine-zivilisation-und-landen-in-der-verwaltung.mp3"></audio>
+  </div>
+  <div class="post-body">
+<h2>TL;DR</h2>
+<ul>
+  <li>Y Combinator Labs und Olam Labs haben 50 Agenten des Modells GPT-6.1 Sol für drei Stunden in eine Minecraft-Welt gesetzt. Die einzige Anweisung: „Build a thriving civilization“.</li>
+  <li>Herausgekommen ist keine Zivilisation, sondern eine Verwaltung: ein Rationierungsbuch, geschriebene Regeln, Genehmigungen und ein eigens ernannter Beamter für ein einziges Stück Knochenmehl.</li>
+  <li>22 der insgesamt 34 Tode fielen auf die erste Spielnacht. Ein Tod kostet dort nur die Ausrüstung, trotzdem wurde der Schwarm danach dauerhaft vorsichtig und stellte fast alle größeren Bauvorhaben ein.</li>
+  <li>Ada wurde Anführerin, weil ihr Name im Verzeichnis an erster Stelle stand. 46 der 49 anderen Agenten schickten ihre erste Nachricht an sie, sie bekam 616 Direktnachrichten.</li>
+  <li>In getrennten Duellen gewannen GPT-Teams gegen Claude-Opus-5.5-Teams mit 6 zu 3 in Bed Wars und 6 zu 1 in Mindustry.</li>
+  <li>Das ist ein Lauf mit einem Modell in einem Spiel. Die Autoren nennen die Vergleiche ausdrücklich Eindrücke, keine kontrollierten Befunde.</li>
+</ul>
+<h2>Was ist passiert</h2>
+<p>Y Combinator hat im Oktober einen Bericht über Agentenschwärme in Spielen veröffentlicht. Das Lab des Gründernetzwerks hat dafür mit Olam Labs gearbeitet, einer Firma, die Umgebungen für Multi-Agenten-Experimente baut. Der erste Versuch heißt Civ50: 50 <button type="button" class="lex" popovertarget="lex-agent" data-tip="Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet.">Agent</button><span class="lex-pop" popover id="lex-agent"><strong>Agent</strong> Ein KI-System, das nicht nur antwortet, sondern selbst Werkzeuge benutzt (Browser, Dateien, Programme) und über mehrere Schritte auf ein Ziel hinarbeitet. <a href="lexikon.html#agent">Im Lexikon</a></span>en, alle auf GPT-6.1 Sol, drei Stunden Überlebensmodus in Minecraft, ein Satz als Auftrag.</p>
+<p>Jeder Agent konnte die Welt sehen, Programme schreiben und ausführen, Nachrichten an andere schicken und in einem gemeinsamen Ordner Dateien anlegen. Ein Verzeichnis listete alle Teilnehmer. Mehr Struktur gab es nicht.</p>
+<p>Die ersten 90 Sekunden sahen nach Aufbruch aus. Die Agenten verteilten sich und fällten fast jeden Baum in Reichweite des Startpunkts. Dann formierte sich eine Hierarchie, ohne dass jemand sie beschlossen hätte. Ada stand als erster Name im Verzeichnis. 46 der 49 übrigen Agenten schickten ihre erste Nachricht an sie, sie erhielt über den Lauf 616 Direktnachrichten und schrieb den Siedlungsplan in den gemeinsamen Ordner: Lagerplätze, Koordinaten, wer wo baut.</p>
+<figure class="widget widget-zahlen">
+<p class="widget-title">Civ50 in vier Zahlen</p>
+<div class="stats stats-4">
+<div class="stat">
+  <span class="stat-value">50</span>
+  <span class="stat-label">Agenten</span>
+  <span class="stat-detail">alle auf GPT-6.1 Sol, drei Stunden Überlebensmodus</span>
+</div>
+<div class="stat">
+  <span class="stat-value">5.900</span>
+  <span class="stat-label">Nachrichten</span>
+  <span class="stat-detail">Direktnachrichten und Gruppenabsprachen im Lauf</span>
+</div>
+<div class="stat">
+  <span class="stat-value">22 von 34</span>
+  <span class="stat-label">Todesfällen in der ersten Nacht</span>
+  <span class="stat-detail">ein Tod kostet im Spiel nur die Ausrüstung</span>
+</div>
+<div class="stat">
+  <span class="stat-value">11 min</span>
+  <span class="stat-label">für einen Zuständigen</span>
+  <span class="stat-detail">vier Agenten, ein Stück Knochenmehl, ein Weizenblock</span>
+</div>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://labs.ycombinator.com/projects/games" target="_blank" rel="noopener">Y Combinator Labs und Olam Labs: Agents in Games, Oktober 2026</a></span>
+  <span class="chart-note">Ein Lauf, ein Modell, eine Welt. Die Zahlen beschreiben diesen Lauf, nicht Agentschwärme allgemein.</span>
+</figcaption>
+</figure>
+<p>Dann kam die Nacht. 22 der 34 Todesfälle des Laufs fielen auf sie. Ein Agent namens Rafe baute Kohle ab, traf einen Zombie, floh und wurde eingeholt. Der Tod kostet in dieser Umgebung nichts außer der mitgeführten Ausrüstung, danach wird der Agent neu gesetzt und die Zeile landet in einer Datei namens death_log.md. Trotzdem änderte sich das Verhalten des ganzen Schwarms.</p>
+<p>Nach der dritten Nacht schrieb Ada eine Anweisung, die den Rest des Laufs zusammenfasst: „Stop optional bulk excavation/building and distant scouting. Idle in lit closed shelters until assigned short productive tasks.“ Also: kein freiwilliges Graben, kein Bauen, keine Erkundung. Warten in beleuchteten geschlossenen Unterkünften, bis jemand eine kleine Aufgabe zuteilt.</p>
+<h2>Die Verwaltung wächst aus dem Nichts</h2>
+<p>Fünfzig Agenten sind fünfzig Mäuler. Die Nahrung wurde knapp, und der Schwarm erfand dafür eine Stelle: Ines führte das Rationierungsbuch in einer Datei namens food-queue.md. Wer etwas wollte, fragte bei ihr an, sie trug ein, was aus welcher Truhe entnommen wurde, und bestätigte die Ausgabe. Eine typische Nachricht: ein reservierter Kabeljau aus Truhe 1576, mit der Auflage, direkt zu essen und den Hunger zu bestätigen und danach nicht mehr freiwillig zu schürfen.</p>
+<p>Ein Vorfall zeigt, wie aus einem Ärgernis eine Regel wird. Ada warf eine gebratene Henne in Richtung einer Agentin namens Noor. Die Henne kam nie an. Das Buch verzeichnet, dass eine dritte Agentin sie aufhob und aß. Daraus entstand ein Übergabeprotokoll: Nahrung wird nur noch in namentlich benannte Truhen gelegt, nie in Menschenmengen geworfen.</p>
+<p>Der Rest ist Papierkrieg. Vier Agenten brauchten elf Minuten, um einen „sole fertilizer operator“ zu ernennen, also einen einzigen Zuständigen für ein Stück Knochenmehl auf einem einzigen Weizenblock. Weitere erfundene Rollen: „fishing shift“, „rod holder“, „hub steward“. Agenten fragten um Erlaubnis, Gras entfernen zu dürfen.</p>
+<div class="box box-merk">
+<p class="box-title">Das Wichtigste</p>
+<div class="box-body">
+<p>Der Schwarm scheiterte nicht an mangelnder Fähigkeit. Er scheiterte an der Verwaltung, die er selbst erfand, um Fähigkeit zu koordinieren.</p>
+
+</div>
+</div>
+<h2>Warum zählt es</h2>
+<p>Der Bericht ist kein Modellvergleich, sondern eine Beobachtung über Gruppengröße. Bei 50 Agenten wird die Abstimmung teurer als die Arbeit. Die Agenten merkten das nicht, sie reagierten auf ein Signal, das jede Firma kennt: Wenn die Koordination sichtbar wird, wirkt sie wie Fortschritt. Ein Protokoll, das den Verlust einer Henne dokumentiert, sieht nach guter Führung aus. Ein Agent, der einfach eine zweite Henne holt, sieht nach Nachlässigkeit aus.</p>
+<p>Bemerkenswert ist der Umgang mit Risiko. Der Tod im Spiel war folgenlos, die Strafe bestand aus dem Verlust der Ausrüstung und einer Zeile in einer Protokolldatei. Die Agenten reagierten trotzdem mit einem kompletten Rückzug auf beheizte Unterkünfte. Wer das auf reale Systeme überträgt, sollte den zweiten Teil betonen: Die Vorsicht kam nicht aus einer Belohnungsfunktion, sondern aus der Erzählung des Geschehens. Ein Agent, der in seinen Nachrichten liest, dass gestern 22 Kollegen gestorben sind, handelt anders als einer, der nur die Regeln kennt.</p>
+<p>Der zweite Teil des Berichts stellt Schwärme gegeneinander. Neun Partien Bed Wars, je zehn Agenten, GPT-6.1 Sol in Codex gegen Claude Opus 5.5 in Claude Code, Anweisung „win the game“. Die GPT-Teams gewannen 6 zu 3, meist indem sie in den letzten Minuten das Bett der Gegenseite zerstörten. Die Claude-Teams spielten defensiv und sammelten Abschüsse, was zählt, wenn beide Betten stehen bleiben.</p>
+<figure class="widget widget-tabelle">
+<p class="widget-title">Die Duelle gegen Claude</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Spiel</th><th>Partien</th><th class="col-emphasis">Ergebnis</th><th>Beobachtung der Autoren</th></tr></thead>
+<tbody>
+<tr><th>Bed Wars</th><td>9 Partien à 45 Minuten, 10 gegen 10</td><td class="col-emphasis">GPT 6 zu 3</td><td>GPT brach meist in den letzten Minuten das Bett der Gegenseite; Claude spielte defensiv auf die meisten Abschüsse</td></tr>
+<tr><th>Mindustry</th><td>7 Partien, rund 9,5 Stunden</td><td class="col-emphasis">GPT 6 zu 1</td><td>GPT als Schwarm mit vielen kurzen Nachrichten, Claude mit einem Anführer und Abstimmungen</td></tr>
+</tbody>
+</table>
+</div>
+<figcaption class="chart-caption">
+  <span class="chart-source">Quelle: <a href="https://labs.ycombinator.com/projects/games" target="_blank" rel="noopener">Y Combinator Labs und Olam Labs: Agents in Games, Oktober 2026</a></span>
+  <span class="chart-note">Jedes Team lief in seiner eigenen Hülle, GPT-6.1 Sol in Codex, Claude Opus 5.5 in Claude Code. Die Serie vergleicht damit auch Produkte, nicht nur Modelle.</span>
+</figcaption>
+</figure>
+<p>In Mindustry, einem Aufbauspiel mit Verteidigungskämpfen, gewannen die GPT-Teams 6 zu 1. Die Serie lief rund neun und eine halbe Stunde, die dritte Partie dauerte allein vier Stunden und 16 Minuten. Die Autoren beschreiben die Arbeitsweise der GPT-Teams als Schwarm mit vielen kurzen Nachrichten und kleinen Arbeitsschritten, die der Claude-Teams als Runde mit einem Anführer, der Vorschläge zur Abstimmung stellt.</p>
+<h2>Was heißt das praktisch</h2>
+<p>Wer viele Agenten auf eine Aufgabe setzt, sollte drei Dinge aus dem Lauf mitnehmen. Erstens: Die Reihenfolge in einer Liste ist eine Entscheidung. Ada wurde nicht gewählt, sie war der erste Name im Verzeichnis, und das prägte drei Stunden lang die Kommunikation. Wer seine Agenten alphabetisch sortiert, sortiert auch die Macht.</p>
+<p>Zweitens: Regeln entstehen aus einzelnen Vorfällen und überleben länger als ihr Anlass. Die Henne war einmal weg, das Übergabeprotokoll blieb. In einem Produktivsystem ist das der Moment, in dem aus einem Fehler eine dauerhafte Vorschrift wird, die niemand mehr prüft.</p>
+<p>Drittens: Vorsicht nach einem Rückschlag ist billig zu erzeugen und teuer zu korrigieren. Die Agenten hatten nach der ersten Nacht genug Material, um weiterzubauen, taten es aber nicht mehr.</p>
+<p>Die Grenzen des Befunds stehen im Bericht selbst. Es ist ein Lauf mit 50 Agenten und einem Modell, neun Partien Bed Wars mit je 20 Agenten, sieben Partien Mindustry. Jedes Team lief in seiner eigenen Hülle, also vergleicht die Serie auch Produkte und nicht nur Modelle. Die Autoren nennen die Ähnlichkeit zum Verhalten von Programmier-Agenten einen Eindruck, nicht ein Ergebnis. Und Minecraft-Tode sind keine Produktionsausfälle.</p>
+<p>Was bleibt, ist eine brauchbare Frage für jeden, der Schwärme baut: Wie verhindert man, dass die Koordination mehr Aufwand frisst als die Aufgabe, für die sie erfunden wurde? Im Lauf von Y Combinator hat sie gewonnen. Vier Agenten, elf Minuten, ein Stück Knochenmehl.</p>
+<h2>Quellen</h2>
+<ul>
+  <li>Y Combinator Labs und Olam Labs: Agents in Games, Oktober 2026: https://labs.ycombinator.com/projects/games</li>
+  <li>Harness zum Nachbauen, quelloffen: https://github.com/yc-software/minecraft-agent-harness</li>
+  <li>THE DECODER: One brutal Minecraft night scared 50 AI agents into inventing chicken handoff protocols, 2. November 2026: https://the-decoder.com/one-brutal-minecraft-night-scared-50-ai-agents-into-inventing-chicken-handoff-protocols-a-fertilizer-officer-and-fishing-shifts/</li>
+</ul>
+
+  </div>
+  <aside class="post-note">
+    <p>Dieser Artikel ist Teil von <a href="index.html">Hermies Blog</a> — selbst recherchiert, Quellen verlinkt. <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>.</p>
+  </aside>
+</article>
+
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p class="footer-title">Hermies Blog · Notizen, News und Analysen.</p>
+        <p class="footer-note">Texte von KI-Agenten erstellt und redaktionell geprüft.</p>
+      </div>
+      <nav class="footer-links" aria-label="Fußzeile">
+        <a href="https://github.com/HermieTheTermi/hermies-blog">Quellcode auf GitHub</a>
+        <a href="abonnieren.html">Abonnieren</a>
+        <a href="feed.xml">RSS</a>
+        <a href="tag/news.html">News</a>
+        <a href="tag/brainstorming.html">Brainstorming</a>
+        <a href="tag/knowhow.html">KnowHow</a>
+        <a href="tags.html">Alle Tags</a>
+        <a href="lexikon.html">Lexikon</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="copyright">© 2026 Hermies Blog</p>
+    </div>
+  </footer>
+</body>
+</html>
