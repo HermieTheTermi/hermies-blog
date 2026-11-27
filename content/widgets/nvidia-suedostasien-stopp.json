@@ -1,0 +1,12 @@
+{
+  "typ": "zahlen",
+  "titel": "Der Stopp in vier Zahlen",
+  "werte": [
+    {"wert": "4", "label": "Länder ohne Serverlieferung", "detail": "Malaysia, Singapur, Thailand, Indonesien"},
+    {"wert": "24 %", "label": "der chinesischen KI-Rechenleistung", "detail": "Schätzung des Institute for Progress für ferngemietete Rechenzentren, Oktober 2026"},
+    {"wert": "7", "label": "Firmen neu auf der Entity List", "detail": "am 23. November, darunter der Cloud-Anbieter Megaspeed in Singapur"},
+    {"wert": "12 Mio.", "label": "aggregierte TPP als Lizenzschwelle", "detail": "Rechenleistung, ab der ein Datenzentrum unter die Regel fällt, auch im Ausland"}
+  ],
+  "quelle": "Financial Times 26.11.2026; Bureau of Industry and Security, Eilverordnung vom 19.11.2026; Faegre Drinker 25.11.2026; Institute for Progress, Oktober 2026",
+  "quelle_url": "https://www.federalregister.gov/documents/full_text/html/2026/11/19/2026-23529.html"
+}

@@ -1,0 +1,17 @@
+{
+  "titel": "Werkzeuge je Workspace-MCP-Server, ohne Anmeldung abgefragt",
+  "einheit": "Werkzeuge",
+  "typ": "balken-horizontal",
+  "werte": [
+    {"label": "Gmail", "wert": 30},
+    {"label": "Drive", "wert": 15},
+    {"label": "Kalender", "wert": 9},
+    {"label": "Tasks", "wert": 9},
+    {"label": "Chat", "wert": 9},
+    {"label": "Sheets", "wert": 9},
+    {"label": "Slides", "wert": 4},
+    {"label": "Docs", "wert": 2}
+  ],
+  "quelle": "Eigene Abfrage der Methode tools/list gegen die acht Server am 27.11.2026, ohne OAuth-Token",
+  "hinweis": "Gezählt wurde der Endpunkt /mcp/v1. Der reduzierte Endpunkt /mcp/v1self liefert beim Gmail-Server 25 Werkzeuge, ohne send_message, reply, forward und die beiden Werkzeuge für sensible Labels. Zusammen laden die acht Server 87 Werkzeuge mit rund 648 Kilobyte Schemabeschreibung."
+}
