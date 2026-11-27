@@ -87,3 +87,4 @@ Administratoren finden die neuen Schalter in der Admin-Konsole unter Sicherheit 
 - Anthropic-Hilfeseite zum Workspace-Connector, Stand November 2026: https://support.claude.com/en/articles/10166901-use-google-workspace-connectors
 - Hacker-News-Thread mit 321 Kommentaren, 26.11.2026: https://news.ycombinator.com/item?id=50653477
 - Slack-Rate-Limits für Nicht-Marktplatz-Apps, 29.05.2025: https://docs.slack.dev/changelog/2025/05/29/rate-limit-changes-for-non-marketplace-apps
+- Google Workspace Developer Release Notes, 12.10.2026: Ab 11.11.2026 weisen die MCP-Server nicht als agentisch markierte OAuth-Clients ab: https://developers.google.com/workspace/release-notes
